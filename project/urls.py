@@ -1,0 +1,16 @@
+from django.contrib import admin
+from django.urls import path
+from app.views import OfferListCreate, OperatorListCreate, CityListCreate, PeriodListCreate, TypeListCreate, ContactListCreate, OfferDetailListCreate
+from frontend.views import main
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/offer/', OfferListCreate.as_view() ),
+    path('api/operator/', OperatorListCreate.as_view() ),
+    path('api/city/', CityListCreate.as_view() ),
+    path('api/period/', PeriodListCreate.as_view() ),
+    path('api/type/', TypeListCreate.as_view() ),
+    path('api/contact/<int:pk>/', ContactListCreate.as_view() ),
+    path('api/offerdetail/<int:pk>/', OfferDetailListCreate.as_view() ),
+    path('', main),
+]
