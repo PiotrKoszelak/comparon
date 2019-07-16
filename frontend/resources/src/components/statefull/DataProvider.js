@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Table from "../stateless/Table";
+import Offers from "../stateless/Offers";
 import { connect } from "react-redux";
 import { offerFetched } from "../actions";
 
@@ -24,7 +24,7 @@ export class DataProvider extends Component {
     const {loaded, placeholder} = this.state;
     const {offer, operator, city} = this.props;
     return(
-        <Table 
+        <Offers 
           loaded={loaded} 
           placeholder={placeholder}
           operator={operator}

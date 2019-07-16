@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
                 padding: 10,
                 borderRadius: 10,
                 position: 'relative',
-                top: 20,
+                top: 50,
                 left: '10vw',
         },
       }));

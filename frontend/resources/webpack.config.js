@@ -29,7 +29,14 @@ module.exports = {
                 loader: "html-loader"
               }
             ]
-          }
+          },
+          // img
+          {
+            test: /\.(png|jpg)$/,
+            use: {
+              loader: "url-loader",
+            },
+          },
         ]
       },
       resolve: {

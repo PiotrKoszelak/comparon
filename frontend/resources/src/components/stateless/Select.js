@@ -4,6 +4,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemText from '@material-ui/core/ListItemText';
 
 
 
@@ -16,20 +18,22 @@ if (loaded === false){
   <FormControl style={{width: 150,}}>
                 <InputLabel >{label}</InputLabel>
                 <Select
+                  multiple
                   value={value}
                   onChange= {handleChange}
-                  inputProps={{
-                    name: label,
-                    id: label,
-                  }}
+                  renderValue={selected => selected.join(', ')}
                 >
-                  <MenuItem value="">
-                    <em>Pomiń</em>
-                  </MenuItem>
                   {data.map(el => (
-                    <MenuItem value={el.value}>{el.value}</MenuItem>
+                    <MenuItem key={el.value} value={el.value}>
+                        <Checkbox checked={value.indexOf(el.value) > -1} />
+                        <ListItemText primary={el.value} />
+                    </MenuItem>
                   ))}
                 </Select>
+
+          
+
+
     </FormControl>
 )};
 
@@ -39,6 +43,6 @@ MySelect.propTypes = {
   label: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
   placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.array.isRequired,
 };
 export default MySelect;
