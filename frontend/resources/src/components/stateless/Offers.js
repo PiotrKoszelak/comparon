@@ -10,9 +10,12 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
   },
+  subtitle: {
+    fontFamily: 'Lato',
+  }
 });
 
-function Offers  ({ loaded, placeholder, data, operator, city}){
+function Offers  ({ loaded, placeholder, data, operator, city, period, type}){
 
   const classes = useStyles();
 
@@ -38,9 +41,10 @@ function Offers  ({ loaded, placeholder, data, operator, city}){
     }
   };
 
+    let setPeriod;
     return(
     <section>
-      <h2 className="subtitle">
+      <h2 className={classes.subtitle}>
         Znaleziono <strong>{dataNew.length} ofert</strong>
       </h2>
       <section className={classes.offer} >
@@ -49,7 +53,7 @@ function Offers  ({ loaded, placeholder, data, operator, city}){
                   id={el.id}
                   operator={el.operator}
                   operatorId={el.operator_id}
-                  period={el.period}
+                  period={setPeriod}
                   price={el.price}
                   speed={el.speed}
                   type={el.type}
@@ -66,5 +70,7 @@ Offers.propTypes = {
   placeholder: PropTypes.string.isRequired,
   operator: PropTypes.array.isRequired,
   city: PropTypes.array.isRequired,
+  period: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 export default Offers;

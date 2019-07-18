@@ -19,7 +19,7 @@ class Cities(models.Model):
 
 class Periods(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.IntegerField()
+    value = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'periods'
@@ -69,7 +69,7 @@ class Offers_view(models.Model):
     speed = models.IntegerField()
     operator = models.CharField(max_length=30)
     operator_id = models.IntegerField()
-    period = models.IntegerField()
+    period = models.CharField(max_length=30)
     type = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
 

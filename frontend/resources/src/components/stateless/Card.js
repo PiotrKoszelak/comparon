@@ -14,14 +14,40 @@ import PLAY_logo from '../img/PLAY.png';
 import PLUS_logo from '../img/PLUS.png';
 
 
+
 const useStyles = makeStyles({
   card: {
     width: 300,
     marginBottom: 30,
   },
   media: {
-    height: 140,
+    marginTop: 20,
+    marginLeft: 20,
+    height: 100,
+    width: 100,
+    float: 'left',
+    border: '1px solid black',
+    borderRadius: 10,
   },
+  content: {
+    padding: 0,
+    marginTop: 20,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
+  },
+  detail: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    fontFamily: 'Lato',
+    clear: 'both',
+  },
+  button: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  }
 });
 
 function MyCard ({id, operator, operatorId, period, price, speed, type}){
@@ -55,17 +81,24 @@ function MyCard ({id, operator, operatorId, period, price, speed, type}){
           image = {logo}
           title={operator}
         />
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant="h5" component="h2">
-            {operator}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            <p>Prędkość: {speed} MB/s </p>
-            <p>Cena: {price} zł </p>
+              {price} zł
           </Typography>
         </CardContent>
+        <CardContent className={classes.detail}>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Prędkość: {speed} MB/s
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Długość trwania umowy: {period} 
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Typ: {type} 
+            </Typography>
+        </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button  className={classes.button} size="small" color="primary">
           Szczegóły
         </Button>
       </CardActions>

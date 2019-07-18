@@ -22,7 +22,7 @@ export class DataProvider extends Component {
   
   render() {
     const {loaded, placeholder} = this.state;
-    const {offer, operator, city} = this.props;
+    const {offer, operator, city, period, type} = this.props;
     return(
         <Offers 
           loaded={loaded} 
@@ -30,6 +30,8 @@ export class DataProvider extends Component {
           operator={operator}
           city={city}
           data={offer} 
+          period={period}
+          type={type} 
         />
     );
   }
@@ -40,6 +42,8 @@ const mapStateToProps = (state) => {
     offer: state.offer,
     operator: state.operator,
     city: state.city,
+    period: state.period,
+    type: state.type,
   }
 };
 const mapDispatchToProps = { offerFetched };

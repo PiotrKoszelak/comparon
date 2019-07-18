@@ -32,7 +32,7 @@ class SelectCity extends React.Component {
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
-                label='City' 
+                label='Miasto' 
                 data={cities} 
                 value={city} 
                 handleChange={this.handleChange} 

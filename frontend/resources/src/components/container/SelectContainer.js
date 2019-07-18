@@ -1,6 +1,9 @@
 import React from "react";
 import {SelectOperatorComponent} from "../statefull/SelectOperator";
 import {SelectCityComponent} from "../statefull/SelectCity";
+import {SelectPeriodComponent} from "../statefull/SelectPeriod";
+import {SelectTypeComponent} from "../statefull/SelectType";
+import {SelectPriceComponent} from "../statefull/SelectPrice";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
@@ -27,6 +30,9 @@ function SelectContainer () {
                 <Paper className={classes.selects}>
                         <SelectOperatorComponent />
                         <SelectCityComponent />
+                        <SelectPeriodComponent />
+                        <SelectTypeComponent />
+                        <SelectPriceComponent />
                 </Paper>
         );
 };

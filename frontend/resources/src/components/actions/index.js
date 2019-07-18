@@ -17,6 +17,18 @@ export const citiesFetched = (cities) => ({
   cities
 });
 
+// fetch periods data
+export const periodsFetched = (periods) => ({
+  type: 'FETCH_PERIODS_SUCCESS',
+  periods
+});
+
+// fetch types data
+export const typesFetched = (types) => ({
+  type: 'FETCH_TYPES_SUCCESS',
+  types
+});
+
 // selected operator
 export const selectedOperator = (operator) => ({
   type: 'SELECTED_OPERATOR',
@@ -27,4 +39,22 @@ export const selectedOperator = (operator) => ({
 export const selectedCity = (city) => ({
   type: 'SELECTED_CITY',
   city
+});
+
+// selected period
+export const selectedPeriod = (period) => ({
+  type: 'SELECTED_PERIOD',
+  period
+});
+
+// selected type
+export const selectedType = (typ) => ({
+  type: 'SELECTED_TYPE',
+  typ
+});
+
+// selected price
+export const selectedPrice = (price) => ({
+  type: 'SELECTED_PRICE',
+  price
 });
