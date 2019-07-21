@@ -58,3 +58,57 @@ export const selectedPrice = (price) => ({
   type: 'SELECTED_PRICE',
   price
 });
+
+// selected offer
+export const selectedOffer = (selectedOffer) => ({
+  type: 'SELECTED_OFFER',
+  selectedOffer
+});
+
+// fetch offer detail
+export const offerDetailFetched = (offerDetail) => ({
+  type: 'FETCH_OFFER_DETAIL_SUCCESS',
+  offerDetail
+});
+
+// fetch contact
+export const contactFetched = (contact) => ({
+  type: 'FETCH_CONTACT_SUCCESS',
+  contact
+});
+
+// detail window
+export const isDetailWindowOpen = (isDetailOpen) => ({
+  type: 'IS_DETAIL_WINDOW_OPEN',
+  isDetailOpen
+});
+
+// offer price
+export const offerPriceSelected = (offerPrice) => ({
+  type: 'OFFER_PRICE',
+  offerPrice
+});
+
+// offer operator
+export const offerOperatorSelected = (offerOperator) => ({
+  type: 'OFFER_OPERATOR',
+  offerOperator
+});
+
+// offer period
+export const offerPeriodSelected = (offerPeriod) => ({
+  type: 'OFFER_PERIOD',
+  offerPeriod
+});
+
+// offer speed
+export const offerSpeedSelected = (offerSpeed) => ({
+  type: 'OFFER_SPEED',
+  offerSpeed
+});
+
+// offer type
+export const offerTypeSelected = (offerType) => ({
+  type: 'OFFER_TYPE',
+  offerType
+});

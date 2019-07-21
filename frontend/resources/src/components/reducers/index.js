@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import { offer } from "./offer";
+import { offer, selectedOffer, offerPrice, offerOperator, offerPeriod, offerSpeed, offerType} from "./offer";
 import { operators, operator } from "./operator";
 import { cities, city } from "./city";
 import { periods, period } from "./period";
 import { types, typ } from "./type";
 import { price } from "./price";
+import { isDetailOpen } from "./detail";
 
 export default combineReducers({
   offer,
@@ -17,4 +18,11 @@ export default combineReducers({
   types,
   typ,
   price,
+  selectedOffer,
+  isDetailOpen,
+  offerPrice,
+  offerOperator,
+  offerPeriod,
+  offerSpeed,
+  offerType
 });

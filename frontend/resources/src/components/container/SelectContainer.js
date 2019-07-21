@@ -32,7 +32,7 @@ function SelectContainer () {
                         <SelectCityComponent />
                         <SelectPeriodComponent />
                         <SelectTypeComponent />
-                        <SelectPriceComponent />
+                        
                 </Paper>
         );
 };

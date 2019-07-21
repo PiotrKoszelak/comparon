@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MyCard from "./Card";
+import { CardProviderComponent } from "../statefull/CardProvider";
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -49,11 +49,11 @@ function Offers  ({ loaded, placeholder, data, operator, city, period, type}){
       </h2>
       <section className={classes.offer} >
       {dataNew.map(el => (
-              < MyCard 
+              < CardProviderComponent 
                   id={el.id}
                   operator={el.operator}
                   operatorId={el.operator_id}
-                  period={setPeriod}
+                  period={el.period}
                   price={el.price}
                   speed={el.speed}
                   type={el.type}

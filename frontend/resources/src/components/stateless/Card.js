@@ -1,18 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import UPC_logo from '../img/UPC.png';
 import VECTRA_logo from '../img/VECTRA.png';
 import ORANGE_logo from '../img/ORANGE.png';
 import PLAY_logo from '../img/PLAY.png';
 import PLUS_logo from '../img/PLUS.png';
-
 
 
 const useStyles = makeStyles({
@@ -50,7 +49,8 @@ const useStyles = makeStyles({
   }
 });
 
-function MyCard ({id, operator, operatorId, period, price, speed, type}){
+
+function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer}){
 
   let logo;
   switch(operator) {
@@ -74,45 +74,36 @@ function MyCard ({id, operator, operatorId, period, price, speed, type}){
   }
 
   const classes = useStyles();
-    return(
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          image = {logo}
-          title={operator}
-        />
-        <CardContent className={classes.content}>
-          <Typography gutterBottom variant="h5" component="h2">
-              {price} zł
-          </Typography>
-        </CardContent>
-        <CardContent className={classes.detail}>
-            <Typography variant="body2" color="textSecondary" component="p">
-            Prędkość: {speed} MB/s
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-            Długość trwania umowy: {period} 
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-            Typ: {type} 
-            </Typography>
-        </CardContent>
-      <CardActions>
-        <Button  className={classes.button} size="small" color="primary">
-          Szczegóły
-        </Button>
-      </CardActions>
-    </Card>
-  )};
-
-  MyCard.propTypes = {
-    id: PropTypes.number.isRequired,
-    operator: PropTypes.string.isRequired,
-    operatorId: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    period: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    speed: PropTypes.number.isRequired,
-  };
+   
+  return(
+          <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                image = {logo}
+                title={operator}
+              />
+              <CardContent className={classes.content}>
+                <Typography gutterBottom variant="h5" component="h2">
+                    {price} zł
+                </Typography>
+              </CardContent>
+              <CardContent className={classes.detail}>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  Prędkość: {speed} MB/s
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  Długość trwania umowy: {period} 
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  Typ: {type} 
+                  </Typography>
+              </CardContent>
+            <CardActions>
+              <Button  className={classes.button} size="small" color="primary" onClick={() => selectOffer(id, operatorId, operator, period, price, speed, type)}>
+                Szczegóły
+              </Button>
+            </CardActions>
+          </Card>
+)};
 
 export default MyCard;

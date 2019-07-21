@@ -1,5 +1,6 @@
 import React from "react";
 import {DataProviderComponent} from "../statefull/DataProvider";
+import {DetailProviderComponent} from "../statefull/DetailProvider";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -19,9 +20,13 @@ function DataProviderContainer () {
         const classes = useStyles();
 
         return(
-                <section className={classes.data}>
-                        <DataProviderComponent />
-                </section>
+                <div>
+                        <section className={classes.data}>
+                                <DataProviderComponent />
+                        </section>
+                        <DetailProviderComponent />
+                </div>
+
         );
 };
 
