@@ -1,17 +1,21 @@
 import React from "react";
-import { selectedPrice } from "../actions";
+import { selectPrice } from "../actions";
 import { connect } from "react-redux";
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import PropTypes from "prop-types";
 
 class SelectPrice extends React.Component {
 
+  static propTypes = {
+    selectedPrice: PropTypes.array.isRequired,
+    selectPrice: PropTypes.func.isRequired,
+  }
+
   handleChange = (event) => {
     const price = event.target.value;
-    this.props.selectedPrice(price);
+    this.props.selectPrice(price);
   }
     render(){
-        const {price} = this.props;
+        const {selectedPrice} = this.props;
         return (
           <div>
         
@@ -22,9 +26,9 @@ class SelectPrice extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    price: state.price,
+    selectedPrice: state.selectedPrice,
   }
 };
-const mapDispatchToProps = { selectedPrice };
+const mapDispatchToProps = { selectPrice };
 
 export const SelectPriceComponent = connect(mapStateToProps, mapDispatchToProps)(SelectPrice);

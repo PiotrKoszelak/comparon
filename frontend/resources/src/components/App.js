@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import SelectContainer from "./container/SelectContainer";
-import DataProviderContainer from "./container/DataProviderContainer";
+import OffersContainer from "./container/OffersContainer";
 
 const App = () => (
         <Provider store={store}>
                 <SelectContainer />
-                <DataProviderContainer />
+                <OffersContainer />
         </Provider>
 );
 const wrapper = document.getElementById("app");

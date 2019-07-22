@@ -1,9 +1,18 @@
 import React from "react";
 import MySelect from "../stateless/Select";
-import { operatorsFetched, selectedOperator } from "../actions";
+import { operatorsFetched, selectOperator } from "../actions";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class SelectOperator extends React.Component {
+
+  static propTypes = {
+    operators: PropTypes.object.isRequired,
+    selectedOperator: PropTypes.array.isRequired,
+    operatorsFetched: PropTypes.func.isRequired,
+    selectOperator: PropTypes.func.isRequired,
+  }
+
     state = {
       loaded: false,
       placeholder: "Ładuję...",
@@ -11,7 +20,7 @@ class SelectOperator extends React.Component {
 
   handleChange = (event) => {
     const operator = event.target.value;
-    this.props.selectedOperator(operator);
+    this.props.selectOperator(operator);
   }
 
   componentDidMount() {
@@ -27,14 +36,14 @@ class SelectOperator extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {operators, operator} = this.props;
+        const {operators, selectedOperator} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
                 label='Operator' 
                 data={operators} 
-                value={operator} 
+                value={selectedOperator} 
                 handleChange={this.handleChange} 
               />
         );
@@ -44,9 +53,9 @@ class SelectOperator extends React.Component {
 const mapStateToProps = (state) => {
   return {
     operators: state.operators,
-    operator: state.operator,
+    selectedOperator: state.selectedOperator,
   }
 };
-const mapDispatchToProps = { operatorsFetched, selectedOperator };
+const mapDispatchToProps = { operatorsFetched, selectOperator };
 
 export const SelectOperatorComponent = connect(mapStateToProps, mapDispatchToProps)(SelectOperator);

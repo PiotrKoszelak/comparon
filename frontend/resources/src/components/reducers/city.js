@@ -12,10 +12,10 @@ export const cities = (state = [], action) => {
       }
 
 //selected city
-export const city = (state = [], action) => { 
+export const selectedCity = (state = [], action) => { 
   switch (action.type) { 
-    case 'SELECTED_CITY':
-      return action.city;
+    case 'SELECT_CITY':
+      return action.selectedCity;
       
     default:
       return state

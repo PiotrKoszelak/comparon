@@ -2,8 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isDetailWindowOpen } from "../actions";
 import Detail from '../stateless/Detail'
+import PropTypes from "prop-types";
 
 export class DetailProvider extends Component {
+
+  static propTypes = {
+    isDetailOpen: PropTypes.bool.isRequired,
+    selectedOffer: PropTypes.object.isRequired,
+    isDetailWindowOpen: PropTypes.func.isRequired,
+  }
 
 
   closeDetailWindow = () => {
@@ -11,15 +18,15 @@ export class DetailProvider extends Component {
   }
 
   render() {
-    const {isDetailOpen, offerPrice, offerOperator, offerPeriod, offerSpeed, offerType} = this.props;
+    const {isDetailOpen, selectedOffer} = this.props;
     if (isDetailOpen === true) {
         return(
           < Detail
-            offerPrice={offerPrice}
-            offerOperator={offerOperator}
-            offerPeriod={offerPeriod}
-            offerSpeed={offerSpeed}
-            offerType={offerType}
+            offerPrice={selectedOffer.price}
+            offerOperator={selectedOffer.operator}
+            offerPeriod={selectedOffer.period}
+            offerSpeed={selectedOffer.speed}
+            offerType={selectedOffer.type}
             closeDetailWindow={this.closeDetailWindow}
           />
         );
@@ -33,11 +40,7 @@ export class DetailProvider extends Component {
 const mapStateToProps = (state) => {
   return {
     isDetailOpen : state.isDetailOpen,
-    offerPrice : state.offerPrice,
-    offerOperator: state.offerOperator,
-    offerPeriod: state.offerPeriod,
-    offerSpeed: state.offerSpeed,
-    offerType: state.offerType,
+    selectedOffer : state.selectedOffer,
   }
 };
 const mapDispatchToProps = { isDetailWindowOpen };

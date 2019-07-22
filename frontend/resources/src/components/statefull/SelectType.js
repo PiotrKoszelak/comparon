@@ -1,9 +1,18 @@
 import React from "react";
 import MySelect from "../stateless/Select";
-import { typesFetched, selectedType } from "../actions";
+import { typesFetched, selectType } from "../actions";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class SelectType extends React.Component {
+
+  static propTypes = {
+    types: PropTypes.object.isRequired,
+    selectedType: PropTypes.array.isRequired,
+    typesFetched: PropTypes.func.isRequired,
+    selectType: PropTypes.func.isRequired,
+  }
+
     state = {
       loaded: false,
       placeholder: "Ładuję...",
@@ -11,7 +20,7 @@ class SelectType extends React.Component {
 
   handleChange = (event) => {
     const typ = event.target.value;
-    this.props.selectedType(typ);
+    this.props.selectType(typ);
   }
 
   componentDidMount() {
@@ -27,14 +36,14 @@ class SelectType extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {types, typ} = this.props;
+        const {types, selectedType} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
                 label='Typ' 
                 data={types} 
-                value={typ} 
+                value={selectedType} 
                 handleChange={this.handleChange} 
               />
         );
@@ -44,9 +53,9 @@ class SelectType extends React.Component {
 const mapStateToProps = (state) => {
   return {
     types: state.types,
-    typ: state.typ,
+    selectedType: state.selectedType,
   }
 };
-const mapDispatchToProps = { typesFetched, selectedType };
+const mapDispatchToProps = { typesFetched, selectType };
 
 export const SelectTypeComponent = connect(mapStateToProps, mapDispatchToProps)(SelectType);

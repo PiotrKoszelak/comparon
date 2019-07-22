@@ -12,10 +12,10 @@ export const types = (state = [], action) => {
       }
 
 //selected types
-export const typ = (state = [], action) => { 
+export const selectedType = (state = [], action) => { 
   switch (action.type) { 
-    case 'SELECTED_TYPE':
-        return action.typ;
+    case 'SELECT_TYPE':
+        return action.selectedType;
         
     default:
       return state

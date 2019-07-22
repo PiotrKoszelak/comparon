@@ -1,9 +1,18 @@
 import React from "react";
 import MySelect from "../stateless/Select";
-import { citiesFetched, selectedCity } from "../actions";
+import { citiesFetched, selectCity } from "../actions";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class SelectCity extends React.Component {
+
+  static propTypes = {
+    cities: PropTypes.object.isRequired,
+    selectedCity: PropTypes.array.isRequired,
+    citiesFetched: PropTypes.func.isRequired,
+    selectCity: PropTypes.func.isRequired,
+  }
+
     state = {
       loaded: false,
       placeholder: "Ładuję..."
@@ -11,7 +20,7 @@ class SelectCity extends React.Component {
 
   handleChange = (event) => {
     const city = event.target.value;
-    this.props.selectedCity(city);
+    this.props.selectCity(city);
   }
 
   componentDidMount() {
@@ -27,14 +36,14 @@ class SelectCity extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {cities, city} = this.props;
+        const {cities, selectedCity} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
                 label='Miasto' 
                 data={cities} 
-                value={city} 
+                value={selectedCity} 
                 handleChange={this.handleChange} 
               />
         );
@@ -44,9 +53,9 @@ class SelectCity extends React.Component {
 const mapStateToProps = (state) => {
   return {
     cities: state.cities,
-    city: state.city,
+    selectedCity: state.selectedCity,
   }
 };
-const mapDispatchToProps = { citiesFetched, selectedCity };
+const mapDispatchToProps = { citiesFetched, selectCity };
 
 export const SelectCityComponent = connect(mapStateToProps, mapDispatchToProps)(SelectCity);

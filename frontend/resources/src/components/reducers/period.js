@@ -12,10 +12,10 @@ export const periods = (state = [], action) => {
       }
 
 //selected period
-export const period = (state = [], action) => { 
+export const selectedPeriod = (state = [], action) => { 
   switch (action.type) { 
-    case 'SELECTED_PERIOD':
-        return action.period;
+    case 'SELECT_PERIOD':
+        return action.selectedPeriod;
         
     default:
       return state

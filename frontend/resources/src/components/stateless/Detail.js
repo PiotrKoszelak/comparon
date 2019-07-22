@@ -48,7 +48,7 @@ function Detail  ({closeDetailWindow, offerPrice, offerOperator, offerPeriod, of
             </DialogContent>
             <DialogActions>
               <Button onClick={closeDetailWindow} color="primary">
-                Close
+                Zamknij
               </Button>
             </DialogActions>
           </Dialog>

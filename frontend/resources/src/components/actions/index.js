@@ -1,8 +1,8 @@
 
 // fetch offers data
-export const offerFetched = (offer) => ({
-    type: 'FETCH_OFFER_SUCCESS',
-    offer
+export const offersFetched = (offers) => ({
+    type: 'FETCH_OFFERS_SUCCESS',
+    offers
   });
 
 // fetch operators data
@@ -30,38 +30,44 @@ export const typesFetched = (types) => ({
 });
 
 // selected operator
-export const selectedOperator = (operator) => ({
-  type: 'SELECTED_OPERATOR',
-  operator
+export const selectOperator = (selectedOperator) => ({
+  type: 'SELECT_OPERATOR',
+  selectedOperator
 });
 
 // selected city
-export const selectedCity = (city) => ({
-  type: 'SELECTED_CITY',
-  city
+export const selectCity = (selectedCity) => ({
+  type: 'SELECT_CITY',
+  selectedCity
 });
 
 // selected period
-export const selectedPeriod = (period) => ({
-  type: 'SELECTED_PERIOD',
-  period
+export const selectPeriod = (selectedPeriod) => ({
+  type: 'SELECT_PERIOD',
+  selectedPeriod
 });
 
 // selected type
-export const selectedType = (typ) => ({
-  type: 'SELECTED_TYPE',
-  typ
+export const selectType = (selectedType) => ({
+  type: 'SELECT_TYPE',
+  selectedType
 });
 
 // selected price
-export const selectedPrice = (price) => ({
-  type: 'SELECTED_PRICE',
-  price
+export const selectPrice = (selectedPrice) => ({
+  type: 'SELECT_PRICE',
+  selectedPrice
+});
+
+// selected speed
+export const selectSpeed = (selectedSpeed) => ({
+  type: 'SELECT_SPEED',
+  selectedSpeed
 });
 
 // selected offer
-export const selectedOffer = (selectedOffer) => ({
-  type: 'SELECTED_OFFER',
+export const selectOffer = (selectedOffer) => ({
+  type: 'SELECT_OFFER',
   selectedOffer
 });
 
@@ -81,34 +87,4 @@ export const contactFetched = (contact) => ({
 export const isDetailWindowOpen = (isDetailOpen) => ({
   type: 'IS_DETAIL_WINDOW_OPEN',
   isDetailOpen
-});
-
-// offer price
-export const offerPriceSelected = (offerPrice) => ({
-  type: 'OFFER_PRICE',
-  offerPrice
-});
-
-// offer operator
-export const offerOperatorSelected = (offerOperator) => ({
-  type: 'OFFER_OPERATOR',
-  offerOperator
-});
-
-// offer period
-export const offerPeriodSelected = (offerPeriod) => ({
-  type: 'OFFER_PERIOD',
-  offerPeriod
-});
-
-// offer speed
-export const offerSpeedSelected = (offerSpeed) => ({
-  type: 'OFFER_SPEED',
-  offerSpeed
-});
-
-// offer type
-export const offerTypeSelected = (offerType) => ({
-  type: 'OFFER_TYPE',
-  offerType
 });

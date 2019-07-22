@@ -1,13 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { selectedOffer, 
-         isDetailWindowOpen, 
-         offerPriceSelected, 
-         offerOperatorSelected, 
-         offerPeriodSelected, 
-         offerSpeedSelected, 
-         offerTypeSelected } from "../actions";
+import { selectOffer, 
+         isDetailWindowOpen } from "../actions";
 import MyCard from '../stateless/Card';
 
 
@@ -21,18 +16,20 @@ class CardProvider extends React.Component {
         period: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
         speed: PropTypes.number.isRequired,
-        classes: PropTypes.object.isRequired,
+        selectOffer: PropTypes.func.isRequired,
+        isDetailWindowOpen: PropTypes.func.isRequired,
   }
 
   selectOffer = (id, operatorId, operator, period, price, speed, type) => {
-    let offer = [id, operatorId];
-    this.props.selectedOffer(offer);
+    let offer = {'id' : id,
+                 'operatorId' : operatorId,
+                 'operator' : operator,
+                 'period' : period,
+                 'price' : price,
+                 'speed' : speed,
+                 'type' : type };
+    this.props.selectOffer(offer);
     this.props.isDetailWindowOpen(true);
-    this.props.offerOperatorSelected(operator);
-    this.props.offerPeriodSelected(period);
-    this.props.offerPriceSelected(price);
-    this.props.offerSpeedSelected(speed);
-    this.props.offerTypeSelected(type);
   }
 
     render(){
@@ -60,12 +57,8 @@ const mapStateToProps = (state) => {
   }
 };
 const mapDispatchToProps = {
-  selectedOffer, 
+  selectOffer, 
   isDetailWindowOpen, 
-  offerPriceSelected,
-  offerOperatorSelected,
-  offerPeriodSelected,
-  offerSpeedSelected,
-  offerTypeSelected};
+ };
 
 export const CardProviderComponent = connect(mapStateToProps, mapDispatchToProps)(CardProvider);

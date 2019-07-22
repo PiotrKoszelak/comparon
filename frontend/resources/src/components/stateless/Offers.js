@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Offers  ({ loaded, placeholder, data, operator, city, period, type}){
+function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, selectedPeriod, selectedType}){
 
   const classes = useStyles();
 
@@ -29,19 +29,18 @@ function Offers  ({ loaded, placeholder, data, operator, city, period, type}){
   // filtering
   let dataNew = [];
   for (let i=0; i<data.length; i++) {
-    if (operator.length == 0 && city.length == 0) dataNew.push(data[i]);
-    if (operator.length == 0 && city.length != 0){
-       city.includes(data[i].city) ? dataNew.push(data[i]) : {};
+    if (selectedOperator.length == 0 && selectedCity.length == 0) dataNew.push(data[i]);
+    if (selectedOperator.length == 0 && selectedCity.length != 0){
+      selectedCity.includes(data[i].city) ? dataNew.push(data[i]) : {};
     }
-    if (operator.length != 0 && city.length == 0){
-      operator.includes(data[i].operator) ? dataNew.push(data[i]) : {};
+    if (selectedOperator.length != 0 && selectedCity.length == 0){
+      selectedOperator.includes(data[i].operator) ? dataNew.push(data[i]) : {};
     }
-    if (operator.length != 0 && city.length != 0){
-      (city.includes(data[i].city) && operator.includes(data[i].operator)) ? dataNew.push(data[i]) : {};
+    if (selectedOperator.length != 0 && selectedCity.length != 0){
+      (selectedCity.includes(data[i].city) && selectedOperator.includes(data[i].operator)) ? dataNew.push(data[i]) : {};
     }
   };
-
-    let setPeriod;
+  
     return(
     <section>
       <h2 className={classes.subtitle}>
@@ -68,9 +67,9 @@ Offers.propTypes = {
   data: PropTypes.array.isRequired,
   loaded: PropTypes.bool.isRequired,
   placeholder: PropTypes.string.isRequired,
-  operator: PropTypes.array.isRequired,
-  city: PropTypes.array.isRequired,
-  period: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  selectedOperator: PropTypes.array.isRequired,
+  selectedCity: PropTypes.array.isRequired,
+  selectedPeriod: PropTypes.string.isRequired,
+  selectedType: PropTypes.string.isRequired,
 };
 export default Offers;

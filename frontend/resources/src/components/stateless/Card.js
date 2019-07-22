@@ -106,4 +106,15 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
           </Card>
 )};
 
+MyCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  operator: PropTypes.string.isRequired,
+  operatorId: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  period: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  speed: PropTypes.number.isRequired,
+  selectOffer: PropTypes.func.isRequired,
+};
+
 export default MyCard;

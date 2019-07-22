@@ -1,9 +1,18 @@
 import React from "react";
 import MySelect from "../stateless/Select";
-import { periodsFetched, selectedPeriod } from "../actions";
+import { periodsFetched, selectPeriod } from "../actions";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class SelectPeriod extends React.Component {
+
+  static propTypes = {
+    periods: PropTypes.object.isRequired,
+    selectedPeriod: PropTypes.array.isRequired,
+    periodsFetched: PropTypes.func.isRequired,
+    selectPeriod: PropTypes.func.isRequired,
+  }
+
     state = {
       loaded: false,
       placeholder: "Ładuję...",
@@ -11,7 +20,7 @@ class SelectPeriod extends React.Component {
 
   handleChange = (event) => {
     const period = event.target.value;
-    this.props.selectedPeriod(period);
+    this.props.selectPeriod(period);
   }
 
   componentDidMount() {
@@ -27,14 +36,14 @@ class SelectPeriod extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {periods, period} = this.props;
+        const {periods, selectedPeriod} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
                 label='Okres' 
                 data={periods} 
-                value={period} 
+                value={selectedPeriod} 
                 handleChange={this.handleChange} 
               />
         );
@@ -44,9 +53,9 @@ class SelectPeriod extends React.Component {
 const mapStateToProps = (state) => {
   return {
     periods: state.periods,
-    period: state.period,
+    selectedPeriod: state.selectedPeriod,
   }
 };
-const mapDispatchToProps = { periodsFetched, selectedPeriod };
+const mapDispatchToProps = { periodsFetched, selectPeriod };
 
 export const SelectPeriodComponent = connect(mapStateToProps, mapDispatchToProps)(SelectPeriod);

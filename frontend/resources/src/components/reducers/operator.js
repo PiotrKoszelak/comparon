@@ -12,10 +12,10 @@ export const operators = (state = [], action) => {
       }
 
 //selected operator
-export const operator = (state = [], action) => { 
+export const selectedOperator = (state = [], action) => { 
   switch (action.type) { 
-    case 'SELECTED_OPERATOR':
-        return action.operator;
+    case 'SELECT_OPERATOR':
+        return action.selectedOperator;
         
     default:
       return state
