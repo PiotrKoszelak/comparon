@@ -2,6 +2,9 @@ import React from "react";
 import { selectPrice } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import MySlider from "../stateless/Slider";
+
+const maxPrice=300;
 
 class SelectPrice extends React.Component {
 
@@ -12,14 +15,25 @@ class SelectPrice extends React.Component {
 
   handleChange = (event) => {
     const price = event.target.value;
-    this.props.selectPrice(price);
+    price<0 ? this.props.selectPrice(0) : price>maxPrice ? this.props.selectPrice(maxPrice) : this.props.selectPrice(price);
   }
+
+  handleSliderChange = (val) => {
+    this.props.selectPrice(val);
+  }
+
+
     render(){
         const {selectedPrice} = this.props;
         return (
-          <div>
-        
-          </div>
+          <MySlider 
+            title={'Cena'}
+            handleChange={this.handleChange}
+            value={selectedPrice}
+            maxValue={maxPrice}
+            handleSliderChange={this.handleSliderChange}
+          
+          />
         );
     }
 }

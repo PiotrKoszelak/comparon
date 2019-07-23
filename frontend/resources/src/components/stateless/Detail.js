@@ -24,7 +24,18 @@ const useStyles = makeStyles({
   }
 });
 
-function Detail  ({closeDetailWindow, offerPrice, offerOperator, offerPeriod, offerSpeed, offerType}){
+function Detail  ({loadedDetail, 
+                  placeholderDetail, 
+                  details, 
+                  loadedContact, 
+                  placeholderContact, 
+                  contact, 
+                  closeDetailWindow, 
+                  offerPrice, 
+                  offerOperator, 
+                  offerPeriod, 
+                  offerSpeed, 
+                  offerType}){
 
   const classes = useStyles();
 
@@ -44,6 +55,8 @@ function Detail  ({closeDetailWindow, offerPrice, offerOperator, offerPeriod, of
                 <p>Okres trwania umowy: {offerPeriod}</p>
                 <p>Prędkość: {offerSpeed}</p>
                 <p>Typ internetu: {offerType}</p>
+                {loadedDetail===true ? <div><p>Czas podłączenia:{details.delivery_time}</p><p>Koszt podłączenia:{details.delivery_cost}</p></div>  : <p>{placeholderDetail}</p>}
+                {loadedContact===true ? <p>Numer: {contact}</p>  : <p>{placeholderContact}</p>}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -61,5 +74,11 @@ Detail.propTypes = {
   offerPeriod: PropTypes.string.isRequired,
   offerSpeed: PropTypes.number.isRequired,
   offerType: PropTypes.string.isRequired,
+  detail: PropTypes.object.isRequired,
+  loadedDetail: PropTypes.string.isRequired,
+  placeholderDetail: PropTypes.string.isRequired,
+  contact: PropTypes.string.isRequired,
+  loadedContact: PropTypes.string.isRequired,
+  placeholderContact: PropTypes.string.isRequired,
 };
 export default Detail;

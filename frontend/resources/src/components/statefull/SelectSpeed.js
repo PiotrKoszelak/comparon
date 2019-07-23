@@ -2,6 +2,10 @@ import React from "react";
 import { selectSpeed } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import MySlider from "../stateless/Slider";
+
+
+const maxSpeed=1000;
 
 class SelectSpeed extends React.Component {
 
@@ -12,14 +16,23 @@ class SelectSpeed extends React.Component {
 
   handleChange = (event) => {
     const speed = event.target.value;
-    this.props.selectSpeed(speed);
+    speed<0 ? this.props.selectSpeed(0) : speed>maxSpeed ? this.props.selectSpeed(maxSpeed) : this.props.selectSpeed(speed);
   }
+
+  handleSliderChange = (val) => {
+    this.props.selectSpeed(val);
+  }
+
     render(){
         const {selectedSpeed} = this.props;
         return (
-          <div>
-        
-          </div>
+          <MySlider 
+            title={'Prędkość MB/s'}
+            handleChange={this.handleChange}
+            value={selectedSpeed}
+            maxValue={maxSpeed}
+            handleSliderChange={this.handleSliderChange}
+          />
         );
     }
 }

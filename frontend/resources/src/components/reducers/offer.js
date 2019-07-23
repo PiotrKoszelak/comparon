@@ -12,7 +12,7 @@ export const offers = (state = [], action) => {
       }
 
 //selected offer id
-export const selectedOffer = (state = {}, action) => { 
+export const selectedOffer = (state = {id: 0}, action) => { 
   switch (action.type) { 
     case 'SELECT_OFFER':
       return action.selectedOffer;

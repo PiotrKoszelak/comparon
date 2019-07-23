@@ -4,8 +4,10 @@ import { operators, selectedOperator } from "./operator";
 import { cities, selectedCity } from "./city";
 import { periods, selectedPeriod } from "./period";
 import { types, selectedType } from "./type";
-import { price, selectedPrice} from "./price";
-import { isDetailOpen } from "./detail";
+import { selectedPrice} from "./price";
+import { selectedSpeed } from "./speed";
+import { isDetailOpen, details } from "./detail";
+import { contact } from "./contact";
 
 export default combineReducers({
   offers,
@@ -17,8 +19,10 @@ export default combineReducers({
   selectedPeriod,
   types,
   selectedType,
-  price,
   selectedPrice,
+  selectedSpeed,
   selectedOffer,
   isDetailOpen,
+  details,
+  contact
 });

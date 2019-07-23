@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, selectedPeriod, selectedType}){
+function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed}){
 
   const classes = useStyles();
 
@@ -28,18 +28,78 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
 
   // filtering
   let dataNew = [];
-  for (let i=0; i<data.length; i++) {
-    if (selectedOperator.length == 0 && selectedCity.length == 0) dataNew.push(data[i]);
-    if (selectedOperator.length == 0 && selectedCity.length != 0){
-      selectedCity.includes(data[i].city) ? dataNew.push(data[i]) : {};
-    }
-    if (selectedOperator.length != 0 && selectedCity.length == 0){
-      selectedOperator.includes(data[i].operator) ? dataNew.push(data[i]) : {};
-    }
-    if (selectedOperator.length != 0 && selectedCity.length != 0){
-      (selectedCity.includes(data[i].city) && selectedOperator.includes(data[i].operator)) ? dataNew.push(data[i]) : {};
-    }
+  // if empty then show all offers
+  if (selectedOperator.length == 0 && 
+    selectedCity.length == 0 && 
+    selectedType.length == 0 && 
+    selectedPeriod.length == 0 &&
+    selectedPrice==0 &&
+    selectedSpeed==0 ) {dataNew = [...data]}
+  else{
+    let withOperator;
+    let withCity;
+    let withPeriod;
+    let withType;
+    let withSpeed;
+    let withPrice;
+    // operator filtering
+     if (selectedOperator.length != 0){
+      withOperator = data.filter(function(el) {
+            return selectedOperator.includes(el.operator)
+        })
+      }
+      else{
+        withOperator = [...data];
+      };
+    // city filtering
+     if (selectedCity.length != 0){
+      withCity = withOperator.filter(function(el) {
+            return selectedCity.includes(el.city)
+        })
+      }
+      else{
+        withCity = [...withOperator];
+      };
+      // period filtering
+     if (selectedPeriod.length != 0){
+      withPeriod = withCity.filter(function(el) {
+            return selectedPeriod.includes(el.period)
+        })
+      }
+      else{
+        withPeriod = [...withCity];
+      };
+      // type filtering
+     if (selectedType.length != 0){
+      withType = withPeriod.filter(function(el) {
+            return selectedType.includes(el.type)
+        })
+      }
+      else{
+        withType = [...withPeriod];
+      };
+      // price filtering
+     if (selectedPrice != 0){
+      withPrice = withType.filter(function(el) {
+            return el.price <= selectedPrice
+        })
+      }
+      else{
+        withPrice = [...withType];
+      };
+      // speed filtering
+     if (selectedSpeed != 0){
+      withSpeed = withPrice.filter(function(el) {
+            return el.speed <= selectedSpeed
+        })
+      }
+      else{
+        withSpeed = [...withPrice];
+      };
+
+      dataNew = [...withSpeed]
   };
+
   
     return(
     <section>

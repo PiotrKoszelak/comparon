@@ -12,6 +12,8 @@ class OffersProvider extends Component {
     selectedCity: PropTypes.array.isRequired,
     selectedPeriod: PropTypes.array.isRequired,
     selectedType: PropTypes.array.isRequired,
+    selectedPrice: PropTypes.number.isRequired,
+    selectedSpeed: PropTypes.number.isRequired,
     offersFetched: PropTypes.func.isRequired,
   }
 
@@ -33,7 +35,7 @@ class OffersProvider extends Component {
   
   render() {
     const {loaded, placeholder} = this.state;
-    const {offers, selectedOperator, selectedCity, selectedPeriod, selectedType} = this.props;
+    const {offers, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed} = this.props;
     return(
         <Offers 
           loaded={loaded} 
@@ -43,6 +45,8 @@ class OffersProvider extends Component {
           data={offers} 
           selectedPeriod={selectedPeriod}
           selectedType={selectedType} 
+          selectedSpeed={selectedSpeed}
+          selectedPrice={selectedPrice}
         />
     );
   }
@@ -55,6 +59,8 @@ const mapStateToProps = (state) => {
     selectedCity: state.selectedCity,
     selectedPeriod: state.selectedPeriod,
     selectedType: state.selectedType,
+    selectedPrice: state.selectedPrice,
+    selectedSpeed: state.selectedSpeed,
   }
 };
 const mapDispatchToProps = { offersFetched };

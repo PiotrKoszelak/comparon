@@ -5,12 +5,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
         data: {
-                width: '80vw',
-                padding: 10,
+                width: '77vw',
                 borderRadius: 10,
                 position: 'relative',
-                top: 50,
-                left: '10vw',
+                top: 'calc(5vh - 10px)',
+                left: '5vw',
+                float: 'left',
+                position: 'relative',
         },
       }));
 
