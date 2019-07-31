@@ -88,3 +88,15 @@ export const isDetailWindowOpen = (isDetailOpen) => ({
   type: 'IS_DETAIL_WINDOW_OPEN',
   isDetailOpen
 });
+
+// number of selected offers
+export const setNumberSelectedOffers = (numberSelectedOffers) => ({
+  type: 'SET_NUMBER_SELECTED_OFFERS',
+  numberSelectedOffers
+});
+
+// number of offers to compare
+export const setNumberOffersToComapre= (numberOffersToComapre) => ({
+  type: 'SET_NUMBER_OFFERS_TO_COMPARE',
+  numberOffersToComapre
+});

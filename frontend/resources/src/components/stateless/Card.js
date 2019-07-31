@@ -12,6 +12,9 @@ import VECTRA_logo from '../img/VECTRA.png';
 import ORANGE_logo from '../img/ORANGE.png';
 import PLAY_logo from '../img/PLAY.png';
 import PLUS_logo from '../img/PLUS.png';
+import { Checkbox } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 
 
 const useStyles = makeStyles({
@@ -20,7 +23,6 @@ const useStyles = makeStyles({
     marginBottom: 30,
   },
   media: {
-    marginTop: 20,
     marginLeft: 20,
     height: 100,
     width: 100,
@@ -46,11 +48,14 @@ const useStyles = makeStyles({
   button: {
     marginLeft: 'auto',
     marginRight: 'auto',
-  }
+  },
+  compare: {
+    marginLeft: '60%',
+  },
 });
 
 
-function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer}){
+function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare}){
 
   let logo;
   switch(operator) {
@@ -77,6 +82,14 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
    
   return(
           <Card className={classes.card}>
+              <FormGroup onChange={() =>selectToCompare(id)} row >
+                  <FormControlLabel
+                      className={classes.compare}
+                      control={<Checkbox color="primary" />}
+                      label="Porównaj"
+                      labelPlacement="start"
+                  />
+              </FormGroup>
               <CardMedia
                 className={classes.media}
                 image = {logo}

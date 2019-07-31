@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { offers, selectedOffer} from "./offer";
+import { offers, selectedOffer, numberSelectedOffers, numberOffersToComapre} from "./offer";
 import { operators, selectedOperator } from "./operator";
 import { cities, selectedCity } from "./city";
 import { periods, selectedPeriod } from "./period";
@@ -24,5 +24,7 @@ export default combineReducers({
   selectedOffer,
   isDetailOpen,
   details,
-  contact
+  contact,
+  numberSelectedOffers,
+  numberOffersToComapre
 });

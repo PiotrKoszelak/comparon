@@ -4,18 +4,19 @@ import { CardProviderComponent } from "../statefull/CardProvider";
 import { makeStyles } from '@material-ui/core/styles';
 
 
+
 const useStyles = makeStyles({
   offer: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    position: 'relative',
+    top: 100,
+    width: '81vw',
   },
-  subtitle: {
-    fontFamily: 'Lato',
-  }
 });
 
-function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed}){
+function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed, setNumberSelectedOffers}){
 
   const classes = useStyles();
 
@@ -100,27 +101,23 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
       dataNew = [...withSpeed]
   };
 
+  setNumberSelectedOffers(JSON.stringify(dataNew.length));
+
   
     return(
-    <section>
-      <h2 className={classes.subtitle}>
-        Znaleziono <strong>{dataNew.length} ofert</strong>
-      </h2>
-      <section className={classes.offer} >
-      {dataNew.map(el => (
-              < CardProviderComponent 
-                  id={el.id}
-                  operator={el.operator}
-                  operatorId={el.operator_id}
-                  period={el.period}
-                  price={el.price}
-                  speed={el.speed}
-                  type={el.type}
-              />
-          ))}
-      </section>
-
-    </section>
+        <section className={classes.offer} >
+        {dataNew.map(el => (
+                < CardProviderComponent 
+                    id={el.id}
+                    operator={el.operator}
+                    operatorId={el.operator_id}
+                    period={el.period}
+                    price={el.price}
+                    speed={el.speed}
+                    type={el.type}
+                />
+            ))}
+        </section>
   )};
 
 Offers.propTypes = {

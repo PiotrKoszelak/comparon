@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Offers from "../stateless/Offers";
 import { connect } from "react-redux";
-import { offersFetched } from "../actions";
+import { offersFetched, setNumberSelectedOffers} from "../actions";
 import PropTypes from "prop-types";
 
 class OffersProvider extends Component {
@@ -15,6 +15,8 @@ class OffersProvider extends Component {
     selectedPrice: PropTypes.number.isRequired,
     selectedSpeed: PropTypes.number.isRequired,
     offersFetched: PropTypes.func.isRequired,
+    setNumberSelectedOffers: PropTypes.func.isRequired,
+    numberSelectedOffers: PropTypes.string.isRequired,
   }
 
   state = {
@@ -35,7 +37,7 @@ class OffersProvider extends Component {
   
   render() {
     const {loaded, placeholder} = this.state;
-    const {offers, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed} = this.props;
+    const {offers, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed, setNumberSelectedOffers} = this.props;
     return(
         <Offers 
           loaded={loaded} 
@@ -47,6 +49,8 @@ class OffersProvider extends Component {
           selectedType={selectedType} 
           selectedSpeed={selectedSpeed}
           selectedPrice={selectedPrice}
+          setNumberSelectedOffers={setNumberSelectedOffers}
+          
         />
     );
   }
@@ -61,8 +65,9 @@ const mapStateToProps = (state) => {
     selectedType: state.selectedType,
     selectedPrice: state.selectedPrice,
     selectedSpeed: state.selectedSpeed,
+    numberSelectedOffers: state.numberSelectedOffers,
   }
 };
-const mapDispatchToProps = { offersFetched };
+const mapDispatchToProps = { offersFetched, setNumberSelectedOffers };
 
 export const OffersProviderComponent = connect(mapStateToProps, mapDispatchToProps)(OffersProvider);

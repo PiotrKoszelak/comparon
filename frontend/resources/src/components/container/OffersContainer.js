@@ -5,13 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
         data: {
-                width: '77vw',
-                borderRadius: 10,
+                width: 'calc(81vw - 40px)',
                 position: 'relative',
-                top: 'calc(5vh - 10px)',
-                left: '5vw',
-                float: 'left',
-                position: 'relative',
+                left: '16vw',
+                top: 50,
         },
       }));
 
@@ -21,12 +18,12 @@ function OffersContainer () {
         const classes = useStyles();
 
         return(
-                <div>
-                        <section className={classes.data}>
-                                <OffersProviderComponent />
-                        </section>
+                
+                <section className={classes.data}>
+                        <OffersProviderComponent />
                         <DetailProviderComponent />
-                </div>
+                </section>
+
 
         );
 };

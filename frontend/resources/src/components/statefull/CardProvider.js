@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { selectOffer, 
-         isDetailWindowOpen } from "../actions";
+import { selectOffer, isDetailWindowOpen, setNumberOffersToComapre } from "../actions";
 import MyCard from '../stateless/Card';
 
 
@@ -32,10 +31,20 @@ class CardProvider extends React.Component {
     this.props.isDetailWindowOpen(true);
   }
 
+  selectToCompare = (id) => {
+    let newTable = [...this.props.numberOffersToComapre];
+    if (newTable.includes(id)){
+        newTable.splice(newTable.indexOf(id), 1);
+    }
+    else{
+      newTable.push(id);
+    }
+    this.props.setNumberOffersToComapre(newTable);
+  }
+
     render(){
         
-        const {id, operator, operatorId, period, price, speed, type} = this.props;
-
+        const {id, operator, operatorId, period, price, speed, type, numberOffersToComapre} = this.props;
         return (
           <MyCard
               id={id}
@@ -46,6 +55,7 @@ class CardProvider extends React.Component {
               speed={speed}
               type={type}
               selectOffer={this.selectOffer}
+              selectToCompare={this.selectToCompare}
           />
         );
     }
@@ -53,12 +63,13 @@ class CardProvider extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    numberOffersToComapre: state.numberOffersToComapre,
   }
 };
 const mapDispatchToProps = {
   selectOffer, 
   isDetailWindowOpen, 
+  setNumberOffersToComapre
  };
 
 export const CardProviderComponent = connect(mapStateToProps, mapDispatchToProps)(CardProvider);

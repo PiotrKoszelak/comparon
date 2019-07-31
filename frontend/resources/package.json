@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@material-ui/core": "^4.2.1",
+    "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.20",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
