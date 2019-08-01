@@ -8,16 +8,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const useStyles = makeStyles({
-  offer: {
+  title: {
+    width: 400,
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
   subtitle: {
     fontFamily: 'Lato',
@@ -47,16 +51,45 @@ function Detail  ({loadedDetail,
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle id="alert-dialog-slide-title">{"Szczegóły oferty"}</DialogTitle>
+            <DialogTitle className={classes.title} id="alert-dialog-slide-title">{"Szczegóły oferty"}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
-                <p>Koszt miesięczny: {offerPrice}</p>
-                <p>Operator: {offerOperator}</p>
-                <p>Okres trwania umowy: {offerPeriod}</p>
-                <p>Prędkość: {offerSpeed}</p>
-                <p>Typ internetu: {offerType}</p>
-                {loadedDetail===true ? <div><p>Czas podłączenia:{details.delivery_time}</p><p>Koszt podłączenia:{details.delivery_cost}</p></div>  : <p>{placeholderDetail}</p>}
-                {loadedContact===true ? <p>Numer: {contact}</p>  : <p>{placeholderContact}</p>}
+                <Table>
+                  <TableBody>
+                        <TableRow>
+                          <TableCell component="th" scope="row">Koszt miesięczny</TableCell>
+                          <TableCell align="right"> {offerPrice} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell component="th" scope="row">Operator</TableCell>
+                          <TableCell align="right"> {offerOperator} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell component="th" scope="row">Okres trwania umowy</TableCell>
+                          <TableCell align="right"> {offerPeriod} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell component="th" scope="row">Prędkość</TableCell>
+                          <TableCell align="right"> {offerSpeed} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell component="th" scope="row">Typ internetu</TableCell>
+                          <TableCell align="right"> {offerType} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row">Czas podłączenia</TableCell>
+                            <TableCell align="right"> {loadedDetail===true ? details.delivery_time : placeholderDetail} </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row">Koszt podłączenia</TableCell>
+                            <TableCell align="right"> {loadedDetail===true ? details.delivery_cost : placeholderDetail}  </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell component="th" scope="row"><b>Numer kontaktowy</b></TableCell>
+                            <TableCell align="right"><b>{loadedContact===true ? contact : placeholderContact }</b></TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
               </DialogContentText>
             </DialogContent>
             <DialogActions>

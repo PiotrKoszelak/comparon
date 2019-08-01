@@ -16,7 +16,7 @@ class ButtonComparison extends React.Component {
 
         return (
           <MyButton 
-              number={numberOffersToComapre.length}
+              numberToShow={numberOffersToComapre.length}
           />
         );
     }

@@ -85,7 +85,7 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
               <FormGroup onChange={() =>selectToCompare(id)} row >
                   <FormControlLabel
                       className={classes.compare}
-                      control={<Checkbox color="primary" />}
+                      control={<Checkbox color="secondary" />}
                       label="Porównaj"
                       labelPlacement="start"
                   />

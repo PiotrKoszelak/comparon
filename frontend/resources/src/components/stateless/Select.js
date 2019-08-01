@@ -6,38 +6,61 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+  formControl: {
+    width: 150,
+  },
+  formControlBig: {
+    width: 300,
+    marginTop: -10,
+  },
+});
 
 
 function MySelect ({label, value, handleChange, data, loaded, placeholder}){
+
+  const classes = useStyles();
   
   if (loaded === false){
     return(<p>{placeholder}</p>)
   }  
 
-  return(
-  <FormControl style={{width: 150,}}>
-                <InputLabel >{label}</InputLabel>
-                <Select
-                  multiple
-                  value={value}
-                  onChange= {handleChange}
-                  renderValue={selected => selected.join(', ')}
-                >
-                  {data.map(el => (
+  if (label !=='Sortuj wg'){
+      return ( <FormControl className={classes.formControl}>
+                      <InputLabel >{label}</InputLabel>
+                      <Select
+                        multiple
+                        value={value}
+                        onChange= {handleChange}
+                        renderValue={selected => selected.join(', ')}
+                      >
+                        {data.map(el => (
+                          <MenuItem key={el.value} value={el.value}>
+                              <Checkbox checked={value.indexOf(el.value) > -1} />
+                              <ListItemText primary={el.value} />
+                          </MenuItem>
+                        ))}
+                      </Select>     
+          </FormControl> )}
+    else {
+      return ( 
+      <FormControl className={classes.formControlBig}>
+        <InputLabel >{label}</InputLabel>
+        <Select
+          value={value}
+          onChange= {handleChange}
+        >
+          {data.map(el => (
+            <MenuItem key={el.value} value={el.value}>
+                <ListItemText primary={el.value} />
+            </MenuItem>
+          ))}
+        </Select>     
+      </FormControl> )}
 
-                    <MenuItem key={el.value} value={el.value}>
-                        <Checkbox checked={value.indexOf(el.value) > -1} />
-                        <ListItemText primary={el.value} />
-                    </MenuItem>
-                  ))}
-                </Select>
-
-          
-
-
-    </FormControl>
-)};
+};
 
 MySelect.propTypes = {
   data: PropTypes.array.isRequired,

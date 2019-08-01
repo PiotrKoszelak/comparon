@@ -13,18 +13,18 @@ const useStyles = makeStyles({
   },
 });
 
-function MyButton({number}) {
+function MyButton({numberToShow}) {
   const classes = useStyles();
 
   return (
-    <Fab variant="extended" className={classes.button}>
+    <Fab variant="extended" size="small" className={classes.button}>
           <NavigationIcon />
-          Porównaj ({number})
+          Porównaj ({numberToShow})
     </Fab>  
   );
 }
 
 MyButton.propTypes = {
-  number: PropTypes.number.isRequired,
+  numberToShow: PropTypes.number.isRequired,
 };
 export default MyButton;

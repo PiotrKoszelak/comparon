@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginLeft: '70%',
-                width: '30%',
+                marginLeft: '50%',
+                width: '50%',
         }
       }));
 
@@ -42,8 +42,8 @@ function Header () {
                                 <NumberOfOffersComponent />
                         </div>
                         <div className={classes.items} >
-                                <ButtonComparisonComponent />
                                 <SelectSortTypeComponent  />
+                                <ButtonComparisonComponent />
                         </div>
                 </Paper>
         );

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 class SelectSortType extends React.Component {
 
   state = {
-    selectedSortType : [],
+    selectedSortType : '',
   }
 
 
@@ -18,7 +18,7 @@ class SelectSortType extends React.Component {
     
     render(){
         const {selectedSortType} = this.state;
-        const types = [{value: 'Cena od najmniejszej'},{value: 'Cena od największej'},{value: 'Szybkość od najmniejszej'},{value: 'Szybkość od największej'}]
+        const types = [{value: 'Brak'},{value: 'Cena od najmniejszej'},{value: 'Cena od największej'},{value: 'Szybkość od najmniejszej'},{value: 'Szybkość od największej'}]
         return (
               <MySelect 
                 loaded={true} 
