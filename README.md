@@ -1,6 +1,6 @@
 # Project title
 
-The project is under development.
+The project is under development. 
 
 ## Documentation
 
@@ -8,8 +8,8 @@ The documentation is under development.
 
 ## Features
 
-* Python Django
 * ReactJS
+* Python Django
 * PostgreSQL
 
 
