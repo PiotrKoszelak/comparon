@@ -62,6 +62,15 @@ class Offer_details(models.Model):
     class Meta:
         db_table = 'offer_details'
 
+class Parameters(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=30)
+    value = models.CharField(max_length=30)
+    description = models.CharField(max_length=50)
+
+    class Meta:
+        db_table = 'parameters'
+
 # ___________________________________________________________________________________________offer view
 class Offers_view(models.Model):
     id = models.AutoField(primary_key=True)

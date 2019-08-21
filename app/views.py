@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from app.models import Offers_view, Operators, Cities, Periods, Types, Contacts, Offer_details
-from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer
+from app.models import Offers_view, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters
+from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer, ParametersSerializer
 from rest_framework import generics
 
 # list of offers
@@ -47,3 +47,8 @@ class ContactListCreate(generics.RetrieveUpdateDestroyAPIView):
 class OfferDetailListCreate(generics.RetrieveUpdateDestroyAPIView):
     queryset = Offer_details.objects.all()
     serializer_class = OfferDetailSerializer
+
+# Parameters
+class ParametersListCreate(generics.ListCreateAPIView):
+    queryset = Parameters.objects.all()
+    serializer_class = ParametersSerializer

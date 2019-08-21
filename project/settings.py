@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('C:\Users\Admin\Desktop\PK\Key/secret_key.txt') as f:
+with open('C:/Users/Admin/Desktop/PK/Key/secret_key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-with open('C:\Users\Admin\Desktop\PK\Key/password.txt') as pas:
+with open('C:/Users/Admin/Desktop/PK/Key/password.txt') as pas:
     PASSWORD = pas.read().strip()
 
 DATABASES = {
