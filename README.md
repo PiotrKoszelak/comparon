@@ -27,4 +27,5 @@ This project is released under the MIT Licence.
 
 ## Author
 
-Piotr Koszelak
+Piotr Koszelak 
+> koszelak.piotr@gmail.com
