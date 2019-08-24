@@ -7,11 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import UPC_logo from '../img/UPC.png';
-import VECTRA_logo from '../img/VECTRA.png';
-import ORANGE_logo from '../img/ORANGE.png';
-import PLAY_logo from '../img/PLAY.png';
-import PLUS_logo from '../img/PLUS.png';
 import { Checkbox } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -57,27 +52,6 @@ const useStyles = makeStyles({
 
 function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare}){
 
-  let logo;
-  switch(operator) {
-    case 'UPC':
-      logo = UPC_logo;
-      break;
-    case 'Orange':
-      logo = ORANGE_logo;
-      break;
-    case 'Vectra':
-        logo = VECTRA_logo;
-        break;
-    case 'Plus':
-      logo = PLUS_logo;
-      break;
-    case 'Play':
-      logo = PLAY_logo;
-      break;
-    default:
-      // code block
-  }
-
   const classes = useStyles();
    
   return(
@@ -92,7 +66,7 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
               </FormGroup>
               <CardMedia
                 className={classes.media}
-                image = {logo}
+                image =  {require(`../img/${operator}.png`)}
                 title={operator}
               />
               <CardContent className={classes.content}>

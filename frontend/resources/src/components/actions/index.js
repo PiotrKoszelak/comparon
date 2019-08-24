@@ -29,6 +29,12 @@ export const typesFetched = (types) => ({
   types
 });
 
+// fetch maxParameters data
+export const maxParamFetched = (maxParam) => ({
+  type: 'FETCH_MAX_PARAM_SUCCESS',
+  maxParam
+});
+
 // selected operator
 export const selectOperator = (selectedOperator) => ({
   type: 'SELECT_OPERATOR',

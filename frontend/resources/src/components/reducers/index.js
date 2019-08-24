@@ -8,6 +8,7 @@ import { selectedPrice} from "./price";
 import { selectedSpeed } from "./speed";
 import { isDetailOpen, details } from "./detail";
 import { contact } from "./contact";
+import { maxParam } from "./maxParam";
 
 export default combineReducers({
   offers,
@@ -26,5 +27,6 @@ export default combineReducers({
   details,
   contact,
   numberSelectedOffers,
-  numberOffersToComapre
+  numberOffersToComapre,
+  maxParam
 });
