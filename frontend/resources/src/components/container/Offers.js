@@ -7,12 +7,12 @@ import Menu from "./menu/Menu";
 
 function Offers () {
         return(
-                <div>
-                        <Menu />
+                <section>
+                        <Menu title={'Offers'} />
                         <Header />
                         <SelectContainer />
                         <OffersContainer />
-                </div>
+                </section>
         );
 };
 

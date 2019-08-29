@@ -13,8 +13,7 @@ const useStyles = makeStyles({
     width: 150,
   },
   formControlBig: {
-    width: 300,
-    marginTop: -10,
+    width: 150,
   },
 });
 

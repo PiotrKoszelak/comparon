@@ -6,10 +6,14 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { NumberOfOffersToCompareComponent } from "../../statefull/NumberOfOffersToCompare"; 
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+  },
+  appBar: {
+    heigt: 80,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -19,20 +23,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Menu() {
+function Menu({title}) {
 
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            {title}
           </Typography>
+          <Button color="inherit">{`Compare (`}<NumberOfOffersToCompareComponent />{`)`}</Button>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>

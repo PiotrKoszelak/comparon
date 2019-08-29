@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import MyButton from '../stateless/Button';
 
 
-class ButtonComparison extends React.Component {
+class NumberOfOffersToCompare extends React.Component {
 
   static propTypes = {
     numberOffersToComapre: PropTypes.array.isRequired,
@@ -15,9 +14,9 @@ class ButtonComparison extends React.Component {
         const {numberOffersToComapre} = this.props;
 
         return (
-          <MyButton 
-              numberToShow={numberOffersToComapre.length}
-          />
+          <span>
+              {numberOffersToComapre.length}
+          </span> 
         );
     }
 }
@@ -30,4 +29,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
  };
 
-export const ButtonComparisonComponent = connect(mapStateToProps, mapDispatchToProps)(ButtonComparison);
+export const NumberOfOffersToCompareComponent = connect(mapStateToProps, mapDispatchToProps)(NumberOfOffersToCompare);

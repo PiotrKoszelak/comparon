@@ -1,4 +1,5 @@
 import React from "react";
+import { SelectSortTypeComponent } from "../../statefull/SelectSortType";
 import {SelectOperatorComponent} from "../../statefull/SelectOperator";
 import {SelectCityComponent} from "../../statefull/SelectCity";
 import {SelectPeriodComponent} from "../../statefull/SelectPeriod";
@@ -11,21 +12,19 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
         selects: {
-                width: '10vw',
                 padding: 20,
                 borderRadius: 10,
                 display: 'flex',
                 flexDirection: 'column',
-                top: 'calc(5vh - 10px)',
-                height: 'calc(90vh - 40px)',
-                left: '2vw',
+                top: 80,
                 position: 'fixed',
                 alignItems: 'center',
                 float: 'left',
                 justifyContent: 'space-around',
+                height: 'calc(100% - 160px)',
+                zIndex: 3,
         },
       }));
-
 
 
 function SelectContainer () {
@@ -33,6 +32,7 @@ function SelectContainer () {
         return(
                 <Paper className={classes.selects}>
                         <OtherDataComponent />
+                        <SelectSortTypeComponent />
                         <SelectOperatorComponent />
                         <SelectCityComponent />
                         <SelectPeriodComponent />
