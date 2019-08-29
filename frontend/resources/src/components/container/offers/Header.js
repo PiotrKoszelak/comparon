@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { SelectSortTypeComponent } from "../statefull/SelectSortType";
-import { NumberOfOffersComponent } from "../statefull/NumberOfOffers";
-import { ButtonComparisonComponent } from "../statefull/ButtonComparison";
+import { SelectSortTypeComponent } from "../../statefull/SelectSortType";
+import { NumberOfOffersComponent } from "../../statefull/NumberOfOffers";
+import { ButtonComparisonComponent } from "../../statefull/ButtonComparison";
 
 const useStyles = makeStyles(theme => ({
         bar: {

@@ -1,11 +1,11 @@
 import React from "react";
-import {SelectOperatorComponent} from "../statefull/SelectOperator";
-import {SelectCityComponent} from "../statefull/SelectCity";
-import {SelectPeriodComponent} from "../statefull/SelectPeriod";
-import {SelectTypeComponent} from "../statefull/SelectType";
-import {SelectPriceComponent} from "../statefull/SelectPrice";
-import {SelectSpeedComponent} from "../statefull/SelectSpeed";
-import {OtherDataComponent} from "../statefull/FetchOtherData"
+import {SelectOperatorComponent} from "../../statefull/SelectOperator";
+import {SelectCityComponent} from "../../statefull/SelectCity";
+import {SelectPeriodComponent} from "../../statefull/SelectPeriod";
+import {SelectTypeComponent} from "../../statefull/SelectType";
+import {SelectPriceComponent} from "../../statefull/SelectPrice";
+import {SelectSpeedComponent} from "../../statefull/SelectSpeed";
+import {OtherDataComponent} from "../../statefull/FetchOtherData"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 

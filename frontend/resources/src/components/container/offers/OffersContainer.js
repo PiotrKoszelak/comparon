@@ -1,6 +1,6 @@
 import React from "react";
-import {OffersProviderComponent} from "../statefull/OffersProvider";
-import {DetailProviderComponent} from "../statefull/DetailProvider";
+import {OffersProviderComponent} from "../../statefull/OffersProvider";
+import {DetailProviderComponent} from "../../statefull/DetailProvider";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
