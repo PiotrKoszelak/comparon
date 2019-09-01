@@ -8,15 +8,22 @@ const useStyles = makeStyles(theme => ({
                 fontFamily: 'Lato',
                 height: 50,
                 position: 'fixed',
-                left: '80%',
+                left: 'auto',
+                right: 0,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '20%',
                 top: 80,
                 borderTopRightRadius: 0,
                 borderBottomRightRadius: 0,
                 zIndex: 3,
+                paddingRight: 20,
+                paddingLeft: 20,
+                '@media (max-width:600px)' : {
+                        fontSize: 12,
+                        paddingRight: 10,
+                        paddingLeft: 10,
+                }
         },
       }));
 

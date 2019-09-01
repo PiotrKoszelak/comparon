@@ -16,6 +16,11 @@ const useStyles = makeStyles({
   card: {
     width: 300,
     marginBottom: 30,
+    marginLeft: 10,
+    marginRight: 10,
+    '@media (max-width:400px)' : {
+      width: '90%',
+    }
   },
   media: {
     marginLeft: 20,
@@ -55,7 +60,7 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
   const classes = useStyles();
    
   return(
-          <Card className={classes.card}>
+          <Card className={classes.card + ' col-sm-3'}>
               <FormGroup onChange={() =>selectToCompare(id)} row >
                   <FormControlLabel
                       className={classes.compare}

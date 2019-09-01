@@ -21,6 +21,11 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  button: {
+    '@media (max-width:600px)' : {
+      fontSize: 12,
+}
+  }
 }));
 
 function Menu({title}) {
@@ -37,8 +42,8 @@ function Menu({title}) {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          <Button color="inherit">{`Compare (`}<NumberOfOffersToCompareComponent />{`)`}</Button>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" className={classes.button} >{`Compare (`}<NumberOfOffersToCompareComponent />{`)`}</Button>
+          <Button color="inherit" className={classes.button} >Login</Button>
         </Toolbar>
       </AppBar>
     </div>
