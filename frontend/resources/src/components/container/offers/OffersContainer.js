@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
                 left: '5vw',
                 display: 'flex',
                 justifyContent: 'center',
-                top: 60,
+                marginTop: 70,
                 zIndex: 1,
         },
       }));

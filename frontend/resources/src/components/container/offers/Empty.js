@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
         empty: {
-                height: 150,
+                marginTop: -10,
+                height: 100,
                 position: 'fixed',
                 zIndex: 2,
                 width: '100vw',
@@ -18,7 +19,7 @@ function Empty () {
         const classes = useStyles();
 
         return(
-                <div className={classes.empty}>
+                <div className={classes.empty} >
 
                 </div>
         );
