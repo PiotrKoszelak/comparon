@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models import Offers_view, Operators, Cities, Periods, Types, Contacts, Offer_details
+from app.models import Offers_view, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters
 
 # offers
 class OfferSerializer(serializers.ModelSerializer):
@@ -43,4 +43,9 @@ class OfferDetailSerializer(serializers.ModelSerializer):
         model = Offer_details
         fields = '__all__'
 
+# parameters
+class ParametersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Parameters
+        fields = '__all__'
 

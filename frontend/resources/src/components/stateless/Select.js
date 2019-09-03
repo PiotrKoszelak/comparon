@@ -10,11 +10,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   formControl: {
-    width: 150,
+    width: '90%',
   },
   formControlBig: {
-    width: 300,
-    marginTop: -10,
+    width: '90%',
   },
 });
 

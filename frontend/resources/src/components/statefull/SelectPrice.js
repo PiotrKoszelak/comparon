@@ -4,14 +4,15 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MySlider from "../stateless/Slider";
 
-const maxPrice=300;
 
 class SelectPrice extends React.Component {
 
   static propTypes = {
     selectedPrice: PropTypes.array.isRequired,
+    maxParam: PropTypes.array.isRequired,
     selectPrice: PropTypes.func.isRequired,
   }
+
 
   handleChange = (event) => {
     const price = event.target.value;
@@ -24,23 +25,33 @@ class SelectPrice extends React.Component {
 
 
     render(){
-        const {selectedPrice} = this.props;
-        return (
-          <MySlider 
-            title={'Cena'}
-            handleChange={this.handleChange}
-            value={selectedPrice}
-            maxValue={maxPrice}
-            handleSliderChange={this.handleSliderChange}
-          
-          />
-        );
+        const {selectedPrice, maxParam} = this.props;
+        if (maxParam.length !== 0){
+              const maxPrice = Object.assign({}, maxParam.find(function(el) {
+                return el.name === 'max_price'
+              }));
+            
+              return (
+                <MySlider 
+                  title={'Cena'}
+                  handleChange={this.handleChange}
+                  value={selectedPrice}
+                  maxValue={maxPrice.value}
+                  handleSliderChange={this.handleSliderChange}
+                
+                />
+              );
+        }
+        else{
+          return (null)
+        }
     }
 }
 
 const mapStateToProps = (state) => {
   return {
     selectedPrice: state.selectedPrice,
+    maxParam: state.maxParam,
   }
 };
 const mapDispatchToProps = { selectPrice };

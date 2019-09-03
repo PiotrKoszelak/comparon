@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
-import { offers, selectedOffer, numberSelectedOffers, numberOffersToComapre} from "./offer";
-import { operators, selectedOperator } from "./operator";
-import { cities, selectedCity } from "./city";
-import { periods, selectedPeriod } from "./period";
-import { types, selectedType } from "./type";
-import { selectedPrice} from "./price";
-import { selectedSpeed } from "./speed";
-import { isDetailOpen, details } from "./detail";
-import { contact } from "./contact";
+import { offers, selectedOffer, numberSelectedOffers, numberOffersToComapre} from "./offers/offer";
+import { operators, selectedOperator } from "./offers/operator";
+import { cities, selectedCity } from "./offers/city";
+import { periods, selectedPeriod } from "./offers/period";
+import { types, selectedType } from "./offers/type";
+import { selectedPrice} from "./offers/price";
+import { selectedSpeed } from "./offers/speed";
+import { isDetailOpen, details } from "./offers/detail";
+import { contact } from "./offers/contact";
+import { maxParam } from "./offers/maxParam";
 
 export default combineReducers({
   offers,
@@ -26,5 +27,6 @@ export default combineReducers({
   details,
   contact,
   numberSelectedOffers,
-  numberOffersToComapre
+  numberOffersToComapre,
+  maxParam
 });

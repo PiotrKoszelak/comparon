@@ -105,7 +105,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
 
   
     return(
-        <section className={classes.offer} >
+        <section className={classes.offer + ' row'} >
         {dataNew.map(el => (
                 < CardProviderComponent 
                     id={el.id}

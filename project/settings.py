@@ -20,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%i=jq834s+h^cq(x4qixq-g7*6_iehi7=^g6c2&xvj2z0k#+w9'
+with open('C:/Users/Admin/Desktop/PK/Key/secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,13 +78,15 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+with open('C:/Users/Admin/Desktop/PK/Key/password.txt') as pas:
+    PASSWORD = pas.read().strip()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'theinternet',
+        'NAME': 'comparon',
         'USER': 'postgres',
-        'PASSWORD': 'postgres1',
+        'PASSWORD': PASSWORD,
         'HOST': 'localhost',
         'PORT': '5432',
     }
