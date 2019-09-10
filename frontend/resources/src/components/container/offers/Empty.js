@@ -20,7 +20,6 @@ function Empty () {
 
         return(
                 <div className={classes.empty} >
-
                 </div>
         );
 };

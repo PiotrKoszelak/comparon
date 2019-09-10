@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { NumberOfOffersToCompareComponent } from "../../statefull/NumberOfOffersToCompare"; 
+import NumberOfOffersToCompare from "../../statefull/NumberOfOffersToCompare"; 
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
@@ -42,9 +42,6 @@ const useStyles = makeStyles(theme => ({
 function ScrollTop(props) {
   const { children, window } = props;
   const classes = useStyles();
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 100,
@@ -52,13 +49,9 @@ function ScrollTop(props) {
 
   const handleClick = event => {
     const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
-    console.log(anchor);
 
     if (anchor) {
       anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    else{
-      console.log('aa');
     }
   };
 
@@ -86,7 +79,7 @@ function Menu(props) {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          <Button color="inherit" className={classes.button} >{`Compare (`}<NumberOfOffersToCompareComponent />{`)`}</Button>
+          <Button color="inherit" className={classes.button} >{`Compare (`}<NumberOfOffersToCompare />{`)`}</Button>
           <Button color="inherit" className={classes.button} >Login</Button>
         </Toolbar>
       </AppBar>

@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import Select from "../stateless/Select";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -20,7 +20,7 @@ class SelectSortType extends React.Component {
         const {selectedSortType} = this.state;
         const types = [{value: 'Brak'},{value: 'Cena od najmniejszej'},{value: 'Cena od największej'},{value: 'Szybkość od najmniejszej'},{value: 'Szybkość od największej'}]
         return (
-              <MySelect 
+              <Select 
                 loaded={true} 
                 placeholder={'ok'}
                 label='Sortuj wg' 
@@ -39,4 +39,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {};
 
-export const SelectSortTypeComponent = connect(mapStateToProps, mapDispatchToProps)(SelectSortType);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectSortType);

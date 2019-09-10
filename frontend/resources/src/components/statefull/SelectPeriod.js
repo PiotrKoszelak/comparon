@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import Select from "../stateless/Select";
 import { periodsFetched, selectPeriod } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -38,7 +38,7 @@ class SelectPeriod extends React.Component {
         const {loaded, placeholder} = this.state;
         const {periods, selectedPeriod} = this.props;
         return (
-              <MySelect 
+              <Select 
                 loaded={loaded} 
                 placeholder={placeholder}
                 label='Okres' 
@@ -58,4 +58,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { periodsFetched, selectPeriod };
 
-export const SelectPeriodComponent = connect(mapStateToProps, mapDispatchToProps)(SelectPeriod);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPeriod);

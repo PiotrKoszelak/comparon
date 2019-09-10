@@ -2,7 +2,7 @@ import React from "react";
 import { selectPrice } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import MySlider from "../stateless/Slider";
+import Slider from "../stateless/Slider";
 
 
 class SelectPrice extends React.Component {
@@ -32,7 +32,7 @@ class SelectPrice extends React.Component {
               }));
             
               return (
-                <MySlider 
+                <Slider 
                   title={'Cena'}
                   handleChange={this.handleChange}
                   value={selectedPrice}
@@ -56,4 +56,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { selectPrice };
 
-export const SelectPriceComponent = connect(mapStateToProps, mapDispatchToProps)(SelectPrice);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPrice);

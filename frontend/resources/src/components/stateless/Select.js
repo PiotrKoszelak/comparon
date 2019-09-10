@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 });
 
 
-function MySelect ({label, value, handleChange, data, loaded, placeholder}){
+function Select ({label, value, handleChange, data, loaded, placeholder}){
 
   const classes = useStyles();
   
@@ -61,7 +61,7 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder}){
 
 };
 
-MySelect.propTypes = {
+Select.propTypes = {
   data: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
@@ -69,4 +69,4 @@ MySelect.propTypes = {
   placeholder: PropTypes.string.isRequired,
   value: PropTypes.array.isRequired,
 };
-export default MySelect;
+export default Select;

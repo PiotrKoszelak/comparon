@@ -8,6 +8,7 @@ import { periodsFetched,  selectPeriod} from "./offers/period";
 import { selectPrice} from "./offers/price";
 import { selectSpeed} from "./offers/speed";
 import { typesFetched,  selectType} from "./offers/type";
+import { setLanguage } from "./general/language";
 
 export {
   citiesFetched, 
@@ -27,5 +28,6 @@ export {
   selectPrice,
   selectSpeed,
   selectType,
-  typesFetched
+  typesFetched,
+  setLanguage
 };

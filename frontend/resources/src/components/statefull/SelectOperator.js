@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import Select from "../stateless/Select";
 import { operatorsFetched, selectOperator } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -38,7 +38,7 @@ class SelectOperator extends React.Component {
         const {loaded, placeholder} = this.state;
         const {operators, selectedOperator} = this.props;
         return (
-              <MySelect 
+              <Select 
                 loaded={loaded} 
                 placeholder={placeholder}
                 label='Operator' 
@@ -58,4 +58,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { operatorsFetched, selectOperator };
 
-export const SelectOperatorComponent = connect(mapStateToProps, mapDispatchToProps)(SelectOperator);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectOperator);

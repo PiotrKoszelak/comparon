@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { selectOffer, isDetailWindowOpen, setNumberOffersToComapre } from "../actions";
-import MyCard from '../stateless/Card';
+import Card from '../stateless/Card';
 
 
 class CardProvider extends React.Component {
@@ -46,7 +46,7 @@ class CardProvider extends React.Component {
         
         const {id, operator, operatorId, period, price, speed, type, numberOffersToComapre} = this.props;
         return (
-          <MyCard
+          <Card
               id={id}
               operatorId={operatorId}
               operator={operator}
@@ -72,4 +72,4 @@ const mapDispatchToProps = {
   setNumberOffersToComapre
  };
 
-export const CardProviderComponent = connect(mapStateToProps, mapDispatchToProps)(CardProvider);
+export default connect(mapStateToProps, mapDispatchToProps)(CardProvider);

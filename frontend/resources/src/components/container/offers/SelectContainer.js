@@ -1,12 +1,12 @@
 import React from "react";
-import { SelectSortTypeComponent } from "../../statefull/SelectSortType";
-import {SelectOperatorComponent} from "../../statefull/SelectOperator";
-import {SelectCityComponent} from "../../statefull/SelectCity";
-import {SelectPeriodComponent} from "../../statefull/SelectPeriod";
-import {SelectTypeComponent} from "../../statefull/SelectType";
-import {SelectPriceComponent} from "../../statefull/SelectPrice";
-import {SelectSpeedComponent} from "../../statefull/SelectSpeed";
-import {OtherDataComponent} from "../../statefull/FetchOtherData"
+import SelectSortType from "../../statefull/SelectSortType";
+import SelectOperator from "../../statefull/SelectOperator";
+import SelectCity from "../../statefull/SelectCity";
+import SelectPeriod from "../../statefull/SelectPeriod";
+import SelectType from "../../statefull/SelectType";
+import SelectPrice from "../../statefull/SelectPrice";
+import SelectSpeed from "../../statefull/SelectSpeed";
+import OtherData from "../../statefull/FetchOtherData"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
@@ -77,14 +77,14 @@ function SelectContainer () {
                         </ThemeProvider>
                         <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
                                 <Paper className={classes.selects}>
-                                        <SelectSortTypeComponent />
-                                        <SelectOperatorComponent />
-                                        <SelectCityComponent />
-                                        <SelectPeriodComponent />
-                                        <SelectTypeComponent />
-                                        <SelectPriceComponent />
-                                        <SelectSpeedComponent />
-                                        <OtherDataComponent />
+                                        <SelectSortType />
+                                        <SelectOperator />
+                                        <SelectCity />
+                                        <SelectPeriod />
+                                        <SelectType />
+                                        <SelectPrice />
+                                        <SelectSpeed />
+                                        <OtherData />
                                 </Paper>
                         </Slide>
                 </div>
