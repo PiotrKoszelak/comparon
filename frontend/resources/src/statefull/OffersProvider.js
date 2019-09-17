@@ -3,6 +3,7 @@ import Offers from "../stateless/Offers";
 import { connect } from "react-redux";
 import { offersFetched, setNumberSelectedOffers} from "../actions";
 import PropTypes from "prop-types";
+import url from '../config.js'
 
 class OffersProvider extends Component {
 
@@ -25,7 +26,7 @@ class OffersProvider extends Component {
   };
 
   componentDidMount() {
-    fetch('api/offer')
+    fetch(`${url}/api/offer/`)
       .then(response => {
         if (response.status !== 200) {
         return this.setState({ placeholder: "Błąd pobierania" });

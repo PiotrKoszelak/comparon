@@ -6,13 +6,13 @@ import PropTypes from "prop-types";
 class SelectSortType extends React.Component {
 
   state = {
-    selectedSortType : '',
+    selectedSortType : [],
   }
 
 
   handleChange = (event) => {
     const sortType = event.target.value;
-    this.setState({selectedSortType : sortType})
+    this.setState({selectedSortType : [sortType]})
   }
 
     

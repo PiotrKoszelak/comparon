@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { isDetailWindowOpen, offerDetailFetched, contactFetched } from "../actions";
 import Detail from '../stateless/Detail'
 import PropTypes from "prop-types";
+import url from '../config.js'
 
 export class DetailProvider extends Component {
 
@@ -25,7 +26,7 @@ export class DetailProvider extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.selectedOffer !== prevProps.selectedOffer) {
-        fetch(`api/offerdetail/${this.props.selectedOffer.id}`)
+        fetch(`${url}/api/offerdetail/${this.props.selectedOffer.id}`)
           .then(response => {
             if (response.status !== 200) {
             return this.setState({ placeholderDetail: "Błąd pobierania szczegółów" });

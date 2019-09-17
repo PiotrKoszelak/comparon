@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 function MySelect ({label, value, handleChange, data, loaded, placeholder}){
 
   const classes = useStyles();
-  
+
   if (loaded === false){
     return(<p>{placeholder}</p>)
   }  

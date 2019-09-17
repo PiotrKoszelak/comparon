@@ -3,6 +3,7 @@ import MySelect from "../stateless/Select";
 import { citiesFetched, selectCity } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import url from '../config.js'
 
 class SelectCity extends React.Component {
 
@@ -24,7 +25,7 @@ class SelectCity extends React.Component {
   }
 
   componentDidMount() {
-    fetch("api/city")
+    fetch(`${url}/api/city/`)
       .then(response => {
         if (response.status !== 200) {
           return this.setState({ placeholder: "Błąd pobierania" });

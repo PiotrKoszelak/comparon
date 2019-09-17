@@ -3,6 +3,8 @@ import MySelect from "../stateless/Select";
 import { operatorsFetched, selectOperator } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import url from '../config.js'
+
 
 class SelectOperator extends React.Component {
 
@@ -24,7 +26,7 @@ class SelectOperator extends React.Component {
   }
 
   componentDidMount() {
-    fetch("api/operator")
+    fetch(`${url}/api/operator/`)
       .then(response => {
         if (response.status !== 200) {
           return this.setState({ placeholder: "Błąd pobierania" });

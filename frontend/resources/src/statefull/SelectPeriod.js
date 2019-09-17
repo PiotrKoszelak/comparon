@@ -3,6 +3,7 @@ import MySelect from "../stateless/Select";
 import { periodsFetched, selectPeriod } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import url from '../config.js'
 
 class SelectPeriod extends React.Component {
 
@@ -24,7 +25,7 @@ class SelectPeriod extends React.Component {
   }
 
   componentDidMount() {
-    fetch("api/period")
+    fetch(`${url}/api/period/`)
       .then(response => {
         if (response.status !== 200) {
           return this.setState({ placeholder: "Błąd pobierania" });
