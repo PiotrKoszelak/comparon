@@ -33,4 +33,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { maxParamFetched };
 
-export const OtherDataComponent = connect(mapStateToProps, mapDispatchToProps)(OtherData);
+export default connect(mapStateToProps, mapDispatchToProps)(OtherData);

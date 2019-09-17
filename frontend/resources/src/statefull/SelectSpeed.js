@@ -2,7 +2,7 @@ import React from "react";
 import { selectSpeed } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import MySlider from "../stateless/Slider";
+import Slider from "../stateless/Slider";
 
 
 class SelectSpeed extends React.Component {
@@ -44,7 +44,7 @@ class SelectSpeed extends React.Component {
         const {maxSpeed} = this.state;
       
         return (
-          <MySlider 
+          <Slider 
             title={'Prędkość MB/s'}
             handleChange={this.handleChange}
             value={selectedSpeed}
@@ -64,4 +64,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { selectSpeed };
 
-export const SelectSpeedComponent = connect(mapStateToProps, mapDispatchToProps)(SelectSpeed);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectSpeed);

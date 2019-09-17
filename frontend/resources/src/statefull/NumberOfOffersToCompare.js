@@ -29,4 +29,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
  };
 
-export const NumberOfOffersToCompareComponent = connect(mapStateToProps, mapDispatchToProps)(NumberOfOffersToCompare);
+export default connect(mapStateToProps, mapDispatchToProps)(NumberOfOffersToCompare);

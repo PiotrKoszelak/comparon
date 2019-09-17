@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { NumberOfOffersComponent } from "../../statefull/NumberOfOffers";
+import NumberOfOffers from "../../statefull/NumberOfOffers";
 
 const useStyles = makeStyles(theme => ({
         subtitle: {
@@ -34,7 +34,7 @@ function Header () {
 
         return(
                 <Paper className={classes.subtitle}>
-                        <NumberOfOffersComponent />
+                        <NumberOfOffers />
                 </Paper>
         );
 };
