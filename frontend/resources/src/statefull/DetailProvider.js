@@ -88,4 +88,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { isDetailWindowOpen, offerDetailFetched, contactFetched };
 
-export const DetailProviderComponent = connect(mapStateToProps, mapDispatchToProps)(DetailProvider);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailProvider);

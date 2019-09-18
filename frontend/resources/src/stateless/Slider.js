@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Slider({title, value, handleChange, maxValue, handleSliderChange}) {
+function MySlider({title, value, handleChange, maxValue, handleSliderChange}) {
   const classes = useStyles();
 
   const handlerChangeSlider = (event, newValue) => {
@@ -62,4 +62,4 @@ Slider.propTypes = {
   maxValue: PropTypes.number.isRequired,
   handleSliderChange: PropTypes.func.isRequired,
 };
-export default Slider;
+export default MySlider;

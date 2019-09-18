@@ -59,4 +59,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { typesFetched, selectType };
 
-export const SelectTypeComponent = connect(mapStateToProps, mapDispatchToProps)(SelectType);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectType);

@@ -2,6 +2,7 @@ import React from "react";
 import MySelect from "../stateless/Select";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import translation from "../translation"
 
 class SelectSortType extends React.Component {
 
@@ -17,13 +18,14 @@ class SelectSortType extends React.Component {
 
     
     render(){
+        const {language} = this.props;
         const {selectedSortType} = this.state;
         const types = [{value: 'Brak'},{value: 'Cena od najmniejszej'},{value: 'Cena od największej'},{value: 'Szybkość od najmniejszej'},{value: 'Szybkość od największej'}]
         return (
               <MySelect 
                 loaded={true} 
                 placeholder={'ok'}
-                label='Sortuj wg' 
+                label= {translation.SORT_BY[language]}
                 data={types} 
                 value={selectedSortType} 
                 handleChange={this.handleChange} 
@@ -34,9 +36,9 @@ class SelectSortType extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
- 
+    language: state.language,
   }
 };
 const mapDispatchToProps = {};
 
-export const SelectSortTypeComponent = connect(mapStateToProps, mapDispatchToProps)(SelectSortType);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectSortType);

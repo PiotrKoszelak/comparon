@@ -56,4 +56,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { selectPrice };
 
-export const SelectPriceComponent = connect(mapStateToProps, mapDispatchToProps)(SelectPrice);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPrice);

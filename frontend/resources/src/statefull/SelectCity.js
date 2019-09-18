@@ -59,4 +59,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { citiesFetched, selectCity };
 
-export const SelectCityComponent = connect(mapStateToProps, mapDispatchToProps)(SelectCity);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectCity);

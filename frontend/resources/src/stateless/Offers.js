@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CardProviderComponent } from "../statefull/CardProvider";
+import CardProvider from "../statefull/CardProvider";
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -107,7 +107,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
     return(
         <section className={classes.offer + ' row'} >
         {dataNew.map(el => (
-                < CardProviderComponent 
+                < CardProvider
                     id={el.id}
                     operator={el.operator}
                     operatorId={el.operator_id}

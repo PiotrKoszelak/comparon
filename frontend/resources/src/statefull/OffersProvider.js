@@ -71,4 +71,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { offersFetched, setNumberSelectedOffers };
 
-export const OffersProviderComponent = connect(mapStateToProps, mapDispatchToProps)(OffersProvider);
+export default connect(mapStateToProps, mapDispatchToProps)(OffersProvider);

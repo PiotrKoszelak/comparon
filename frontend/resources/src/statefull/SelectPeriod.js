@@ -59,4 +59,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { periodsFetched, selectPeriod };
 
-export const SelectPeriodComponent = connect(mapStateToProps, mapDispatchToProps)(SelectPeriod);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectPeriod);

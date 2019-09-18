@@ -55,7 +55,7 @@ const useStyles = makeStyles({
 });
 
 
-function Card ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare}){
+function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare}){
 
   const classes = useStyles();
    
@@ -109,4 +109,4 @@ Card.propTypes = {
   selectOffer: PropTypes.func.isRequired,
 };
 
-export default Card;
+export default MyCard;

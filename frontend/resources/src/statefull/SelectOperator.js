@@ -60,4 +60,4 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = { operatorsFetched, selectOperator };
 
-export const SelectOperatorComponent = connect(mapStateToProps, mapDispatchToProps)(SelectOperator);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectOperator);
