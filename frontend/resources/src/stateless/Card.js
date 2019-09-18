@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { Checkbox } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import translation from "../translation"
 
 
 const useStyles = makeStyles({
@@ -55,7 +56,7 @@ const useStyles = makeStyles({
 });
 
 
-function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare}){
+function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare, language}){
 
   const classes = useStyles();
    
@@ -65,7 +66,7 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
                   <FormControlLabel
                       className={classes.compare}
                       control={<Checkbox color="secondary" />}
-                      label="Porównaj"
+                      label={translation.COMPARE[language]}
                       labelPlacement="start"
                   />
               </FormGroup>
@@ -76,23 +77,23 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
               />
               <CardContent className={classes.content}>
                 <Typography gutterBottom variant="h5" component="h2">
-                    {price} zł
+                    {`${price} ${translation.ZLOTY[language]}`}
                 </Typography>
               </CardContent>
               <CardContent className={classes.detail}>
                   <Typography variant="body2" color="textSecondary" component="p">
-                  Prędkość: {speed} MB/s
+                  {`${translation.SPEED[language]} ${speed} MB/s`}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                  Długość trwania umowy: {period} 
+                  {`${translation.PERIOD[language]} ${period}`}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                  Typ: {type} 
+                  {`${translation.TYPE[language]} ${type}`} 
                   </Typography>
               </CardContent>
             <CardActions>
               <Button  className={classes.button} size="small" color="primary" onClick={() => selectOffer(id, operatorId, operator, period, price, speed, type)}>
-                Szczegóły
+                  {translation.OFFER_DETAILS[language]}
               </Button>
             </CardActions>
           </Card>
@@ -107,6 +108,7 @@ Card.propTypes = {
   price: PropTypes.number,
   speed: PropTypes.number,
   selectOffer: PropTypes.func,
+  language: PropTypes.string,
 };
 
 export default MyCard;

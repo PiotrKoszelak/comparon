@@ -17,6 +17,7 @@ class CardProvider extends React.Component {
         speed: PropTypes.number.isRequired,
         selectOffer: PropTypes.func.isRequired,
         isDetailWindowOpen: PropTypes.func.isRequired,
+        language: PropTypes.string.isRequired,
   }
 
   selectOffer = (id, operatorId, operator, period, price, speed, type) => {
@@ -44,7 +45,7 @@ class CardProvider extends React.Component {
 
     render(){
         
-        const {id, operator, operatorId, period, price, speed, type, numberOffersToComapre} = this.props;
+        const {id, operator, operatorId, period, price, speed, type, language} = this.props;
         return (
           <Card
               id={id}
@@ -56,6 +57,7 @@ class CardProvider extends React.Component {
               type={type}
               selectOffer={this.selectOffer}
               selectToCompare={this.selectToCompare}
+              language={language}
           />
         );
     }
@@ -63,7 +65,7 @@ class CardProvider extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    numberOffersToComapre: state.numberOffersToComapre,
+    language: state.language,
   }
 };
 const mapDispatchToProps = {

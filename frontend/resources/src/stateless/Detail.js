@@ -12,6 +12,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import translation from "../translation"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -39,7 +40,8 @@ function Detail  ({loadedDetail,
                   offerOperator, 
                   offerPeriod, 
                   offerSpeed, 
-                  offerType}){
+                  offerType,
+                  language}){
 
   const classes = useStyles();
 
@@ -51,41 +53,41 @@ function Detail  ({loadedDetail,
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle className={classes.title} id="alert-dialog-slide-title">{"Szczegóły oferty"}</DialogTitle>
+            <DialogTitle className={classes.title} id="alert-dialog-slide-title">{translation.OFFER_DETAILS[language]}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
                 <Table>
                   <TableBody>
                         <TableRow>
-                          <TableCell component="th" scope="row">Koszt miesięczny</TableCell>
+                          <TableCell component="th" scope="row">translation.MONTH_COST[language]</TableCell>
                           <TableCell align="right"> {offerPrice} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">Operator</TableCell>
+                          <TableCell component="th" scope="row">translation.OPERATORT[language]</TableCell>
                           <TableCell align="right"> {offerOperator} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">Okres trwania umowy</TableCell>
+                          <TableCell component="th" scope="row">translation.PERIOD[language]</TableCell>
                           <TableCell align="right"> {offerPeriod} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">Prędkość</TableCell>
+                          <TableCell component="th" scope="row">translation.SPEED[language]</TableCell>
                           <TableCell align="right"> {offerSpeed} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">Typ internetu</TableCell>
+                          <TableCell component="th" scope="row">translation.TYPE[language]</TableCell>
                           <TableCell align="right"> {offerType} </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row">Czas podłączenia</TableCell>
+                            <TableCell component="th" scope="row">translation.DELIVERY_TIME[language]</TableCell>
                             <TableCell align="right"> {loadedDetail===true ? details.delivery_time : placeholderDetail} </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row">Koszt podłączenia</TableCell>
+                            <TableCell component="th" scope="row">translation.DELIVERY_COST[language]</TableCell>
                             <TableCell align="right"> {loadedDetail===true ? details.delivery_cost : placeholderDetail}  </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row"><b>Numer kontaktowy</b></TableCell>
+                            <TableCell component="th" scope="row"><b>translation.CONTACT_NUMBER[language]</b></TableCell>
                             <TableCell align="right"><b>{loadedContact===true ? contact : placeholderContact }</b></TableCell>
                         </TableRow>
                     </TableBody>
@@ -94,24 +96,24 @@ function Detail  ({loadedDetail,
             </DialogContent>
             <DialogActions>
               <Button onClick={closeDetailWindow} color="primary">
-                Zamknij
+                  translation.CLOSE[language]
               </Button>
             </DialogActions>
           </Dialog>
   )};
 
 Detail.propTypes = {
-  closeDetailWindow : PropTypes.func.isRequired,
-  offerPrice: PropTypes.number.isRequired,
-  offerOperator: PropTypes.string.isRequired,
-  offerPeriod: PropTypes.string.isRequired,
-  offerSpeed: PropTypes.number.isRequired,
-  offerType: PropTypes.string.isRequired,
-  detail: PropTypes.object.isRequired,
-  loadedDetail: PropTypes.string.isRequired,
-  placeholderDetail: PropTypes.string.isRequired,
-  contact: PropTypes.string.isRequired,
-  loadedContact: PropTypes.string.isRequired,
-  placeholderContact: PropTypes.string.isRequired,
+  closeDetailWindow : PropTypes.func,
+  offerPrice: PropTypes.number,
+  offerOperator: PropTypes.string,
+  offerPeriod: PropTypes.string,
+  offerSpeed: PropTypes.number,
+  offerType: PropTypes.string,
+  detail: PropTypes.object,
+  loadedDetail: PropTypes.bool,
+  placeholderDetail: PropTypes.string,
+  contact: PropTypes.string,
+  loadedContact: PropTypes.bool,
+  placeholderContact: PropTypes.string,
 };
 export default Detail;

@@ -15,13 +15,14 @@ export class DetailProvider extends Component {
     details: PropTypes.object.isRequired,
     contactFetched: PropTypes.func.isRequired,
     contact: PropTypes.object.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
   state = {
     loadedDetail: false,
-    placeholderDetail: "Ładuję szczegóły...",
+    placeholderDetail: "",
     loadedContact: false,
-    placeholderContact: "Ładuję numer kontaktowy...",
+    placeholderContact: "",
   };
 
   componentDidUpdate(prevProps) {
@@ -52,7 +53,7 @@ export class DetailProvider extends Component {
   }
 
   render() {
-    const {isDetailOpen, selectedOffer, details, contact} = this.props;
+    const {isDetailOpen, selectedOffer, details, contact, language} = this.props;
     const {loadedDetail, placeholderDetail, loadedContact, placeholderContact} = this.state;
     if (isDetailOpen === true) {
         return(
@@ -69,6 +70,7 @@ export class DetailProvider extends Component {
             offerSpeed={selectedOffer.speed}
             offerType={selectedOffer.type}
             closeDetailWindow={this.closeDetailWindow}
+            language={language}
           />
         );
       }
@@ -84,6 +86,7 @@ const mapStateToProps = (state) => {
     selectedOffer : state.selectedOffer,
     details: state.details,
     contact: state.contact,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { isDetailWindowOpen, offerDetailFetched, contactFetched };
