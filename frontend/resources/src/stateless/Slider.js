@@ -56,10 +56,10 @@ function MySlider({title, value, handleChange, maxValue, handleSliderChange}) {
 }
 
 Slider.propTypes = {
-  title: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  value: PropTypes.number.isRequired,
-  maxValue: PropTypes.number.isRequired,
-  handleSliderChange: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  handleChange: PropTypes.func,
+  value: PropTypes.number,
+  maxValue: PropTypes.number,
+  handleSliderChange: PropTypes.func,
 };
 export default MySlider;

@@ -9,7 +9,7 @@ import url from '../config.js'
 class SelectOperator extends React.Component {
 
   static propTypes = {
-    operators: PropTypes.object.isRequired,
+    operators: PropTypes.array.isRequired,
     selectedOperator: PropTypes.array.isRequired,
     operatorsFetched: PropTypes.func.isRequired,
     selectOperator: PropTypes.func.isRequired,

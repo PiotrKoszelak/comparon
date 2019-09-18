@@ -1,7 +1,6 @@
 import React from "react";
 import MySelect from "../stateless/Select";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import translation from "../translation"
 
 class SelectSortType extends React.Component {

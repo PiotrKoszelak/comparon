@@ -8,7 +8,7 @@ import url from '../config.js'
 class SelectCity extends React.Component {
 
   static propTypes = {
-    cities: PropTypes.object.isRequired,
+    cities: PropTypes.array.isRequired,
     selectedCity: PropTypes.array.isRequired,
     citiesFetched: PropTypes.func.isRequired,
     selectCity: PropTypes.func.isRequired,

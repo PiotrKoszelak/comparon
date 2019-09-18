@@ -99,14 +99,14 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
 )};
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
-  operator: PropTypes.string.isRequired,
-  operatorId: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  period: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  speed: PropTypes.number.isRequired,
-  selectOffer: PropTypes.func.isRequired,
+  id: PropTypes.number,
+  operator: PropTypes.string,
+  operatorId: PropTypes.number,
+  type: PropTypes.string,
+  period: PropTypes.number,
+  price: PropTypes.number,
+  speed: PropTypes.number,
+  selectOffer: PropTypes.func,
 };
 
 export default MyCard;

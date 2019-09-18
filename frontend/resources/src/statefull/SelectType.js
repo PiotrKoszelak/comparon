@@ -8,7 +8,7 @@ import url from '../config.js'
 class SelectType extends React.Component {
 
   static propTypes = {
-    types: PropTypes.object.isRequired,
+    types: PropTypes.array.isRequired,
     selectedType: PropTypes.array.isRequired,
     typesFetched: PropTypes.func.isRequired,
     selectType: PropTypes.func.isRequired,

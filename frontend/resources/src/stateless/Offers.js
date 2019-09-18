@@ -23,19 +23,19 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
   if (loaded === false){
     return(<p>{placeholder}</p>)
   }  
-  if (data.length == false){
+  if (data.length === false){
     return (<p>Brak ofert</p>)
   }
 
   // filtering
   let dataNew = [];
   // if empty then show all offers
-  if (selectedOperator.length == 0 && 
-    selectedCity.length == 0 && 
-    selectedType.length == 0 && 
-    selectedPeriod.length == 0 &&
-    selectedPrice==0 &&
-    selectedSpeed==0 ) {dataNew = [...data]}
+  if (selectedOperator.length === 0 && 
+    selectedCity.length === 0 && 
+    selectedType.length === 0 && 
+    selectedPeriod.length === 0 &&
+    selectedPrice===0 &&
+    selectedSpeed===0 ) {dataNew = [...data]}
   else{
     let withOperator;
     let withCity;
@@ -44,7 +44,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
     let withSpeed;
     let withPrice;
     // operator filtering
-     if (selectedOperator.length != 0){
+     if (selectedOperator.length !== 0){
       withOperator = data.filter(function(el) {
             return selectedOperator.includes(el.operator)
         })
@@ -53,7 +53,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
         withOperator = [...data];
       };
     // city filtering
-     if (selectedCity.length != 0){
+     if (selectedCity.length !== 0){
       withCity = withOperator.filter(function(el) {
             return selectedCity.includes(el.city)
         })
@@ -62,7 +62,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
         withCity = [...withOperator];
       };
       // period filtering
-     if (selectedPeriod.length != 0){
+     if (selectedPeriod.length !== 0){
       withPeriod = withCity.filter(function(el) {
             return selectedPeriod.includes(el.period)
         })
@@ -71,7 +71,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
         withPeriod = [...withCity];
       };
       // type filtering
-     if (selectedType.length != 0){
+     if (selectedType.length !== 0){
       withType = withPeriod.filter(function(el) {
             return selectedType.includes(el.type)
         })
@@ -80,7 +80,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
         withType = [...withPeriod];
       };
       // price filtering
-     if (selectedPrice != 0){
+     if (selectedPrice !== 0){
       withPrice = withType.filter(function(el) {
             return el.price <= selectedPrice
         })
@@ -89,7 +89,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
         withPrice = [...withType];
       };
       // speed filtering
-     if (selectedSpeed != 0){
+     if (selectedSpeed !== 0){
       withSpeed = withPrice.filter(function(el) {
             return el.speed <= selectedSpeed
         })
@@ -108,6 +108,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
         <section className={classes.offer + ' row'} >
         {dataNew.map(el => (
                 < CardProvider
+                    key={el.id}
                     id={el.id}
                     operator={el.operator}
                     operatorId={el.operator_id}
@@ -126,7 +127,7 @@ Offers.propTypes = {
   placeholder: PropTypes.string.isRequired,
   selectedOperator: PropTypes.array.isRequired,
   selectedCity: PropTypes.array.isRequired,
-  selectedPeriod: PropTypes.string.isRequired,
-  selectedType: PropTypes.string.isRequired,
+  selectedPeriod: PropTypes.array.isRequired,
+  selectedType: PropTypes.array.isRequired,
 };
 export default Offers;

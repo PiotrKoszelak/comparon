@@ -8,7 +8,7 @@ import Slider from "../stateless/Slider";
 class SelectSpeed extends React.Component {
 
   static propTypes = {
-    selectedSpeed: PropTypes.array.isRequired,
+    selectedSpeed: PropTypes.number.isRequired,
     selectSpeed: PropTypes.func.isRequired,
     maxParam: PropTypes.array.isRequired,
   }

@@ -8,7 +8,7 @@ import MySlider from "../stateless/Slider";
 class SelectPrice extends React.Component {
 
   static propTypes = {
-    selectedPrice: PropTypes.array.isRequired,
+    selectedPrice: PropTypes.number.isRequired,
     maxParam: PropTypes.array.isRequired,
     selectPrice: PropTypes.func.isRequired,
   }

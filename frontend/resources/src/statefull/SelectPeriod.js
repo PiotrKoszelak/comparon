@@ -8,7 +8,7 @@ import url from '../config.js'
 class SelectPeriod extends React.Component {
 
   static propTypes = {
-    periods: PropTypes.object.isRequired,
+    periods: PropTypes.array.isRequired,
     selectedPeriod: PropTypes.array.isRequired,
     periodsFetched: PropTypes.func.isRequired,
     selectPeriod: PropTypes.func.isRequired,

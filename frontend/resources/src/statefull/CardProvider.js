@@ -12,7 +12,7 @@ class CardProvider extends React.Component {
         operator: PropTypes.string.isRequired,
         operatorId: PropTypes.number.isRequired,
         type: PropTypes.string.isRequired,
-        period: PropTypes.number.isRequired,
+        period: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         speed: PropTypes.number.isRequired,
         selectOffer: PropTypes.func.isRequired,

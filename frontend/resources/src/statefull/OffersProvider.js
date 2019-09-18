@@ -9,7 +9,7 @@ class OffersProvider extends Component {
 
   static propTypes = {
     selectedOperator: PropTypes.array.isRequired,
-    offers: PropTypes.object.isRequired,
+    offers: PropTypes.array.isRequired,
     selectedCity: PropTypes.array.isRequired,
     selectedPeriod: PropTypes.array.isRequired,
     selectedType: PropTypes.array.isRequired,
