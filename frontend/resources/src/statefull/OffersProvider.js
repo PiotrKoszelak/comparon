@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { offersFetched, setNumberSelectedOffers} from "../actions";
 import PropTypes from "prop-types";
 import url from '../config.js'
+import translation from "../translation"
 
 class OffersProvider extends Component {
 
@@ -18,18 +19,20 @@ class OffersProvider extends Component {
     offersFetched: PropTypes.func.isRequired,
     setNumberSelectedOffers: PropTypes.func.isRequired,
     numberSelectedOffers: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
   state = {
     loaded: false,
-    placeholder: "Ładuję...",
+    placeholder: "",
   };
 
   componentDidMount() {
+    const {language} = this.props;
     fetch(`${url}/api/offer/`)
       .then(response => {
         if (response.status !== 200) {
-        return this.setState({ placeholder: "Błąd pobierania" });
+        return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] });
       }
       return response.json()
     })
@@ -67,6 +70,7 @@ const mapStateToProps = (state) => {
     selectedPrice: state.selectedPrice,
     selectedSpeed: state.selectedSpeed,
     numberSelectedOffers: state.numberSelectedOffers,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { offersFetched, setNumberSelectedOffers };

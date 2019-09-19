@@ -4,6 +4,7 @@ import { isDetailWindowOpen, offerDetailFetched, contactFetched } from "../actio
 import Detail from '../stateless/Detail'
 import PropTypes from "prop-types";
 import url from '../config.js'
+import translation from "../translation"
 
 export class DetailProvider extends Component {
 
@@ -26,20 +27,21 @@ export class DetailProvider extends Component {
   };
 
   componentDidUpdate(prevProps) {
+    const {language} = this.props;
     if (this.props.selectedOffer !== prevProps.selectedOffer) {
         fetch(`${url}/api/offerdetail/${this.props.selectedOffer.id}`)
           .then(response => {
             if (response.status !== 200) {
-            return this.setState({ placeholderDetail: "Błąd pobierania szczegółów" });
+            return this.setState({ placeholderDetail: translation.DOWNLOAD_ERROR[language] });
           }
           return response.json()
         })
           .then(data => this.props.offerDetailFetched(data), this.setState({loadedDetail: true }));
 
-          fetch(`api/contact/${this.props.selectedOffer.operatorId}`)
+          fetch(`${url}/api/contact/${this.props.selectedOffer.operatorId}`)
           .then(response => {
             if (response.status !== 200) {
-            return this.setState({ placeholderContact: "Błąd pobierania numeru kontaktowego" });
+            return this.setState({ placeholderContact: translation.DOWNLOAD_ERROR[language] });
           }
           return response.json()
         })

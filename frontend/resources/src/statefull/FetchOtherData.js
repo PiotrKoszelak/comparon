@@ -2,6 +2,7 @@ import React from "react";
 import { maxParamFetched } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import url from '../config.js'
 
 class OtherData extends React.Component {
 
@@ -10,7 +11,7 @@ class OtherData extends React.Component {
   }
 
   componentDidMount() {
-    fetch("api/parameters")
+    fetch(`${url}/api/parameters`)
       .then(response => {
         if (response.status !== 200) {
           return null;

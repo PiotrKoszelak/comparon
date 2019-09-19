@@ -9,12 +9,11 @@ import SelectSpeed from "../../statefull/SelectSpeed";
 import OtherData from "../../statefull/FetchOtherData"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Switch from '@material-ui/core/Switch';
 import Slide from '@material-ui/core/Slide';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
+import { ShowCriteriaLabelComponent } from "../../statefull/Menu";
 
 const useStyles = makeStyles(theme => ({
         root:{
@@ -64,15 +63,7 @@ function SelectContainer () {
                 <div className={classes.root}>
                         <ThemeProvider theme={theme}>
                                 <Typography>
-                                <FormControlLabel
-                                        className={classes.label}
-                                        control={<Switch 
-                                                checked={checked} 
-                                                onChange={handleChange}
-                                                size="small"
-                                                />}
-                                        label="Pokaż kryteria"
-                                />
+                                <ShowCriteriaLabelComponent classes={classes} checked={checked} handleChange={handleChange} />
                                 </Typography>
                         </ThemeProvider>
                         <Slide direction="right" in={checked} mountOnEnter unmountOnExit>

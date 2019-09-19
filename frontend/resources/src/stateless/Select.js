@@ -7,6 +7,7 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
+import translation from "../translation"
 
 const useStyles = makeStyles({
   formControl: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 
-function MySelect ({label, value, handleChange, data, loaded, placeholder}){
+function MySelect ({label, value, handleChange, data, loaded, placeholder, language}){
 
   const classes = useStyles();
 
@@ -26,7 +27,7 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder}){
     return(<p>{placeholder}</p>)
   }  
 
-  if (label !=='Sortuj wg'){
+  if (label !== translation.SORT_BY[language]){
       return ( <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select

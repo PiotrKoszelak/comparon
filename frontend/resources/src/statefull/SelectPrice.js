@@ -3,6 +3,7 @@ import { selectPrice } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MySlider from "../stateless/Slider";
+import translation from "../translation"
 
 
 class SelectPrice extends React.Component {
@@ -11,6 +12,7 @@ class SelectPrice extends React.Component {
     selectedPrice: PropTypes.number.isRequired,
     maxParam: PropTypes.array.isRequired,
     selectPrice: PropTypes.func.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
 
@@ -25,7 +27,7 @@ class SelectPrice extends React.Component {
 
 
     render(){
-        const {selectedPrice, maxParam} = this.props;
+        const {selectedPrice, maxParam, language} = this.props;
         if (maxParam.length !== 0){
               const maxPrice = Object.assign({}, maxParam.find(function(el) {
                 return el.name === 'max_price'
@@ -33,7 +35,7 @@ class SelectPrice extends React.Component {
             
               return (
                 <MySlider 
-                  title={'Cena'}
+                  title={translation.PRICE[language]}
                   handleChange={(event) => this.handleChange(event, maxPrice)}
                   value={selectedPrice}
                   maxValue={maxPrice.value}
@@ -52,6 +54,7 @@ const mapStateToProps = (state) => {
   return {
     selectedPrice: state.selectedPrice,
     maxParam: state.maxParam,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { selectPrice };
