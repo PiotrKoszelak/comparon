@@ -28,6 +28,7 @@ class SelectSortType extends React.Component {
                 data={types} 
                 value={selectedSortType} 
                 handleChange={this.handleChange} 
+                language={language}
               />
         );
     }
