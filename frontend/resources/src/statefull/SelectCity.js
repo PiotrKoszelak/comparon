@@ -4,6 +4,7 @@ import { citiesFetched, selectCity } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import url from '../config.js'
+import translation from "../translation"
 
 class SelectCity extends React.Component {
 
@@ -12,11 +13,12 @@ class SelectCity extends React.Component {
     selectedCity: PropTypes.array.isRequired,
     citiesFetched: PropTypes.func.isRequired,
     selectCity: PropTypes.func.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
     state = {
       loaded: false,
-      placeholder: "Ładuję..."
+      placeholder: ""
     };
 
   handleChange = (event) => {
@@ -25,10 +27,11 @@ class SelectCity extends React.Component {
   }
 
   componentDidMount() {
+    const {language} = this.props;
     fetch(`${url}/api/city/`)
       .then(response => {
         if (response.status !== 200) {
-          return this.setState({ placeholder: "Błąd pobierania" });
+          return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] });
         }
         return response.json();
       })
@@ -37,12 +40,12 @@ class SelectCity extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {cities, selectedCity} = this.props;
+        const {cities, selectedCity, language} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
-                label='Miasto' 
+                label={translation.CITY[language]}
                 data={cities} 
                 value={selectedCity} 
                 handleChange={this.handleChange} 
@@ -55,6 +58,7 @@ const mapStateToProps = (state) => {
   return {
     cities: state.cities,
     selectedCity: state.selectedCity,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { citiesFetched, selectCity };

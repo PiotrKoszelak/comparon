@@ -4,6 +4,7 @@ import { periodsFetched, selectPeriod } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import url from '../config.js'
+import translation from "../translation"
 
 class SelectPeriod extends React.Component {
 
@@ -12,11 +13,12 @@ class SelectPeriod extends React.Component {
     selectedPeriod: PropTypes.array.isRequired,
     periodsFetched: PropTypes.func.isRequired,
     selectPeriod: PropTypes.func.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
     state = {
       loaded: false,
-      placeholder: "Ładuję...",
+      placeholder: "",
     };
 
   handleChange = (event) => {
@@ -25,10 +27,11 @@ class SelectPeriod extends React.Component {
   }
 
   componentDidMount() {
+    const {language} = this.props;
     fetch(`${url}/api/period/`)
       .then(response => {
         if (response.status !== 200) {
-          return this.setState({ placeholder: "Błąd pobierania" });
+          return this.setState({ placeholder:  translation.DOWNLOAD_ERROR[language] });
         }
         return response.json();
       })
@@ -37,12 +40,12 @@ class SelectPeriod extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {periods, selectedPeriod} = this.props;
+        const {periods, selectedPeriod, language} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
-                label='Okres' 
+                label={translation.PERIOD[language]} 
                 data={periods} 
                 value={selectedPeriod} 
                 handleChange={this.handleChange} 
@@ -55,6 +58,7 @@ const mapStateToProps = (state) => {
   return {
     periods: state.periods,
     selectedPeriod: state.selectedPeriod,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { periodsFetched, selectPeriod };

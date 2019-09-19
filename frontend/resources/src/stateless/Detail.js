@@ -59,35 +59,35 @@ function Detail  ({loadedDetail,
                 <Table>
                   <TableBody>
                         <TableRow>
-                          <TableCell component="th" scope="row">translation.MONTH_COST[language]</TableCell>
+                          <TableCell component="th" scope="row">{translation.MONTH_COST[language]}</TableCell>
                           <TableCell align="right"> {offerPrice} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">translation.OPERATORT[language]</TableCell>
+                          <TableCell component="th" scope="row">{translation.OPERATOR[language]}</TableCell>
                           <TableCell align="right"> {offerOperator} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">translation.PERIOD[language]</TableCell>
+                          <TableCell component="th" scope="row">{translation.PERIOD[language]}</TableCell>
                           <TableCell align="right"> {offerPeriod} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">translation.SPEED[language]</TableCell>
+                          <TableCell component="th" scope="row">{translation.SPEED[language]}</TableCell>
                           <TableCell align="right"> {offerSpeed} </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell component="th" scope="row">translation.TYPE[language]</TableCell>
+                          <TableCell component="th" scope="row">{translation.TYPE[language]}</TableCell>
                           <TableCell align="right"> {offerType} </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row">translation.DELIVERY_TIME[language]</TableCell>
+                            <TableCell component="th" scope="row">{translation.DELIVERY_TIME[language]}</TableCell>
                             <TableCell align="right"> {loadedDetail===true ? details.delivery_time : placeholderDetail} </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row">translation.DELIVERY_COST[language]</TableCell>
+                            <TableCell component="th" scope="row">{translation.DELIVERY_COST[language]}</TableCell>
                             <TableCell align="right"> {loadedDetail===true ? details.delivery_cost : placeholderDetail}  </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell component="th" scope="row"><b>translation.CONTACT_NUMBER[language]</b></TableCell>
+                            <TableCell component="th" scope="row"><b>{translation.CONTACT_NUMBER[language]}</b></TableCell>
                             <TableCell align="right"><b>{loadedContact===true ? contact : placeholderContact }</b></TableCell>
                         </TableRow>
                     </TableBody>
@@ -96,7 +96,7 @@ function Detail  ({loadedDetail,
             </DialogContent>
             <DialogActions>
               <Button onClick={closeDetailWindow} color="primary">
-                  translation.CLOSE[language]
+                  {translation.CLOSE[language]}
               </Button>
             </DialogActions>
           </Dialog>

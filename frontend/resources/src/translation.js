@@ -28,6 +28,10 @@ const translation = {
         pl: 'Typ',
         en: 'Type'
     },
+    PRICE : {
+        pl: 'Cena',
+        en: 'Price',
+    },
     DELIVERY_TIME : {
         pl: 'Czas podłączenia',
         en: 'Delivery time'
@@ -51,6 +55,66 @@ const translation = {
     COMPARE : {
         pl: 'Porównaj',
         en: 'Compare'
+    },
+    DOWNLOAD_ERROR : {
+        pl: 'Błąd pobierania',
+        en: 'Download error'
+    },
+    FOUND : {
+        pl: 'Znaleziono',
+        en: 'Found'
+    },
+    FOUND_OFFERS : {
+        pl: 'Znalezione oferty',
+        en: 'Found offers'
+    },
+    OFFERS : {
+        pl: 'Oferty',
+        en: 'Offers'
+    },
+    CITY : {
+        pl: 'Miasto',
+        en: 'City'
+    },
+    NONE : {
+        pl: 'Brak',
+        en: 'None'
+    },
+    PRICE_FROM_LOWEST : {
+        pl: 'Cena od najmniejszej',
+        en: 'Price from lowest'
+    },
+    PRICE_FROM_HIGHEST : {
+        pl: 'Cena od największej',
+        en: 'Price from highest'
+    },
+    SPEED_FROM_LOWEST : {
+        pl: 'Prędkość od najmniejszej',
+        en: 'Speed from lowest'
+    },
+    SPEED_FROM_HIGHEST : {
+        pl: 'Prędkość od największej',
+        en: 'Speed from highest'
+    },
+    POLICY_PRIVACY : {
+        pl: 'Polityka prywatności',
+        en: 'Policy privacy'
+    },
+    ABOUT : {
+        pl: 'O projekcie',
+        en: 'About project'
+    },
+    LOGIN : {
+        pl: 'Zaloguj',
+        en: 'Log in'
+    },
+    TERMS_OF_USE : {
+        pl: 'Regulamin',
+        en: 'Terms of use'
+    },
+    SHOW_CRITERIA : {
+        pl: 'Pokaż kryteria',
+        en: 'Show criteria'
     },
 };
 

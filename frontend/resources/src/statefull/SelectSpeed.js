@@ -3,6 +3,7 @@ import { selectSpeed } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Slider from "../stateless/Slider";
+import translation from "../translation"
 
 
 class SelectSpeed extends React.Component {
@@ -11,6 +12,7 @@ class SelectSpeed extends React.Component {
     selectedSpeed: PropTypes.number.isRequired,
     selectSpeed: PropTypes.func.isRequired,
     maxParam: PropTypes.array.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
   state = {
@@ -40,12 +42,12 @@ class SelectSpeed extends React.Component {
   }
 
     render(){
-        const {selectedSpeed} = this.props;
+        const {selectedSpeed, language} = this.props;
         const {maxSpeed} = this.state;
       
         return (
           <Slider 
-            title={'Prędkość MB/s'}
+            title={`${translation.SPEED[language]} MB/s`}
             handleChange={this.handleChange}
             value={selectedSpeed}
             maxValue={maxSpeed}
@@ -60,6 +62,7 @@ const mapStateToProps = (state) => {
   return {
     selectedSpeed: state.selectedSpeed,
     maxParam: state.maxParam,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { selectSpeed };

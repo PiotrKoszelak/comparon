@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import translation from "../translation"
 
 
 class NumberOfOffers extends React.Component {
@@ -11,11 +12,11 @@ class NumberOfOffers extends React.Component {
 
     render(){
         
-        const {numberSelectedOffers} = this.props;
+        const {numberSelectedOffers, language} = this.props;
 
         return (
           <span>
-              Znaleziono <strong> {numberSelectedOffers} ofert</strong>
+              {translation.FOUND_OFFERS[language]} : <strong>{numberSelectedOffers}</strong>
           </span>
         );
     }
@@ -24,6 +25,7 @@ class NumberOfOffers extends React.Component {
 const mapStateToProps = (state) => {
   return {
     numberSelectedOffers: state.numberSelectedOffers,
+    language: state.language,
   }
 };
 const mapDispatchToProps = {

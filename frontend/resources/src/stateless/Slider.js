@@ -22,7 +22,7 @@ function MySlider({title, value, handleChange, maxValue, handleSliderChange}) {
   const handlerChangeSlider = (event, newValue) => {
       handleSliderChange(newValue);
   }
-     
+
   return (
     <div className={classes.root}>
       <Typography id="input-slider" gutterBottom>
@@ -34,7 +34,7 @@ function MySlider({title, value, handleChange, maxValue, handleSliderChange}) {
             value={value}
             onChange={handlerChangeSlider}
             aria-labelledby="input-slider"
-            max={maxValue}
+            max={Number(maxValue)}
           />
         </Grid>
         <Grid item>

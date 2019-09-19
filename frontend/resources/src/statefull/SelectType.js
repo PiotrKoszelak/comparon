@@ -4,6 +4,7 @@ import { typesFetched, selectType } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import url from '../config.js'
+import translation from "../translation"
 
 class SelectType extends React.Component {
 
@@ -12,11 +13,12 @@ class SelectType extends React.Component {
     selectedType: PropTypes.array.isRequired,
     typesFetched: PropTypes.func.isRequired,
     selectType: PropTypes.func.isRequired,
+    language: PropTypes.string.isRequired,
   }
 
     state = {
       loaded: false,
-      placeholder: "Ładuję...",
+      placeholder: "",
     };
 
   handleChange = (event) => {
@@ -25,10 +27,11 @@ class SelectType extends React.Component {
   }
 
   componentDidMount() {
+    const {language} = this.props;
     fetch(`${url}/api/type/`)
       .then(response => {
         if (response.status !== 200) {
-          return this.setState({ placeholder: "Błąd pobierania" });
+          return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] });
         }
         return response.json();
       })
@@ -37,12 +40,12 @@ class SelectType extends React.Component {
     
     render(){
         const {loaded, placeholder} = this.state;
-        const {types, selectedType} = this.props;
+        const {types, selectedType, language} = this.props;
         return (
               <MySelect 
                 loaded={loaded} 
                 placeholder={placeholder}
-                label='Typ' 
+                label={translation.TYPE[language]} 
                 data={types} 
                 value={selectedType} 
                 handleChange={this.handleChange} 
@@ -55,6 +58,7 @@ const mapStateToProps = (state) => {
   return {
     types: state.types,
     selectedType: state.selectedType,
+    language: state.language,
   }
 };
 const mapDispatchToProps = { typesFetched, selectType };
