@@ -49,6 +49,7 @@ class SelectPeriod extends React.Component {
                 data={periods} 
                 value={selectedPeriod} 
                 handleChange={this.handleChange} 
+                language={language}
               />
         );
     }

@@ -3,7 +3,8 @@ from django.db import models
 
 class Operators(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=30)
+    value_pl = models.CharField(max_length=30)
+    value_en = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'operators'
@@ -11,7 +12,7 @@ class Operators(models.Model):
 
 class Cities(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=30)
+    value_pl = models.CharField(max_length=30)
     value_en = models.CharField(max_length=30)
 
     class Meta:
@@ -20,7 +21,7 @@ class Cities(models.Model):
 
 class Periods(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=30)
+    value_pl = models.CharField(max_length=30)
     value_en = models.CharField(max_length=30)
 
     class Meta:
@@ -28,7 +29,7 @@ class Periods(models.Model):
 
 class Types(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=50)
+    value_pl = models.CharField(max_length=50)
     value_en = models.CharField(max_length=50)
 
     class Meta:

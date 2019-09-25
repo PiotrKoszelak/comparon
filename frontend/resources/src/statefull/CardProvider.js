@@ -20,9 +20,8 @@ class CardProvider extends React.Component {
         language: PropTypes.string.isRequired,
   }
 
-  selectOffer = (id, operatorId, operator, period, price, speed, type) => {
+  selectOffer = (id, operator, period, price, speed, type) => {
     let offer = {'id' : id,
-                 'operatorId' : operatorId,
                  'operator' : operator,
                  'period' : period,
                  'price' : price,
@@ -45,11 +44,10 @@ class CardProvider extends React.Component {
 
     render(){
         
-        const {id, operator, operatorId, period, price, speed, type, language} = this.props;
+        const {id, operator, period, price, speed, type, language, operators, cities, periods, types} = this.props;
         return (
           <Card
               id={id}
-              operatorId={operatorId}
               operator={operator}
               period={period}
               price={price}
@@ -58,6 +56,10 @@ class CardProvider extends React.Component {
               selectOffer={this.selectOffer}
               selectToCompare={this.selectToCompare}
               language={language}
+              operators={operators}
+              cities={cities}
+              periods={periods}
+              types={types}
           />
         );
     }
@@ -66,6 +68,10 @@ class CardProvider extends React.Component {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
+    operators: state.operators,
+    cities: state.cities,
+    periods: state.periods,
+    types: state.types,
   }
 };
 const mapDispatchToProps = {

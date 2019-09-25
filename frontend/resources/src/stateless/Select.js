@@ -22,7 +22,10 @@ const useStyles = makeStyles({
 function MySelect ({label, value, handleChange, data, loaded, placeholder, language}){
 
   const classes = useStyles();
-
+  let selectedValue = [];
+  for (let el of (data.filter((el) => {return value.includes(el.id)}))){
+    selectedValue.push(el.id);
+  }
   if (loaded === false){
     return(<p>{placeholder}</p>)
   }  
@@ -32,14 +35,20 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder, langu
                       <InputLabel >{label}</InputLabel>
                       <Select
                         multiple
-                        value={value}
+                        value={selectedValue}
                         onChange= {handleChange}
-                        renderValue={selected => selected.join(', ')}
+                        renderValue={selected => {
+                          let selectedValue = [];
+                          for (let el of (data.filter((el) => {return selected.includes(el.id)}))){
+                            selectedValue.push(el[`value_${language}`]);
+                          };
+                          return selectedValue.join(', ');
+                        }}
                       >
                         {data.map(el => (
-                          <MenuItem key={el.value} value={el.value}>
-                              <Checkbox checked={value.indexOf(el.value) > -1} />
-                              <ListItemText primary={el.value} />
+                          <MenuItem key={el.id} value={el.id}>
+                              <Checkbox checked={value.indexOf(el.id) > -1} />
+                              <ListItemText primary={el[`value_${language}`]} />
                           </MenuItem>
                         ))}
                       </Select>     

@@ -56,9 +56,24 @@ const useStyles = makeStyles({
 });
 
 
-function MyCard ({operator, period, price, speed, type, id, operatorId, selectOffer, selectToCompare, language}){
+function MyCard ({ operator, 
+                   period, 
+                   price, 
+                   speed, 
+                   type, 
+                   id, 
+                   selectOffer, 
+                   selectToCompare, 
+                   language,  
+                   operators,
+                   cities,
+                   periods,
+                   types}){
 
   const classes = useStyles();
+  let operatorValue = operators.filter((el) => {return el.id===operator})[0][`value_${language}`];
+  let periodValue = periods.filter((el) => {return el.id===period})[0][`value_${language}`];
+  let typeValue = types.filter((el) => {return el.id===type})[0][`value_${language}`];
    
   return(
           <Card className={classes.card + ' col-sm-3'}>
@@ -72,8 +87,8 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
               </FormGroup>
               <CardMedia
                 className={classes.media}
-                image =  {require(`../img/${operator}.png`)}
-                title={operator}
+                image =  {require(`../img/${operatorValue}.png`)}
+                title={operatorValue}
               />
               <CardContent className={classes.content}>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -85,14 +100,14 @@ function MyCard ({operator, period, price, speed, type, id, operatorId, selectOf
                   {`${translation.SPEED[language]} ${speed} MB/s`}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                  {`${translation.PERIOD[language]} ${period}`}
+                  {`${translation.PERIOD[language]} ${periodValue}`}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                  {`${translation.TYPE[language]} ${type}`} 
+                  {`${translation.TYPE[language]} ${typeValue}`} 
                   </Typography>
               </CardContent>
             <CardActions>
-              <Button  className={classes.button} size="small" color="primary" onClick={() => selectOffer(id, operatorId, operator, period, price, speed, type)}>
+              <Button  className={classes.button} size="small" color="primary" onClick={() => selectOffer(id, operator, period, price, speed, type)}>
                   {translation.OFFER_DETAILS[language]}
               </Button>
             </CardActions>
