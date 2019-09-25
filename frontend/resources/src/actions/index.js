@@ -2,7 +2,7 @@ import { citiesFetched, selectCity } from "./offers/city";
 import { contactFetched } from "./offers/contact";
 import { offerDetailFetched,  isDetailWindowOpen} from "./offers/detail";
 import { maxParamFetched } from "./offers/maxParam";
-import { offersFetched,  selectOffer, setNumberSelectedOffers, setNumberOffersToComapre} from "./offers/offer";
+import { offersFetched,  selectOffer, setNumberSelectedOffers, setNumberOffersToCompare, setSortType} from "./offers/offer";
 import { operatorsFetched,  selectOperator} from "./offers/operator";
 import { periodsFetched,  selectPeriod} from "./offers/period";
 import { selectPrice} from "./offers/price";
@@ -20,7 +20,7 @@ export {
   offersFetched,
   selectOffer, 
   setNumberSelectedOffers,
-  setNumberOffersToComapre,
+  setNumberOffersToCompare,
   operatorsFetched,
   selectOperator,
   periodsFetched,
@@ -29,5 +29,6 @@ export {
   selectSpeed,
   selectType,
   typesFetched,
-  setLanguage
+  setLanguage,
+  setSortType
 };

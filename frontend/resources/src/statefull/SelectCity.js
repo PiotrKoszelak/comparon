@@ -49,6 +49,7 @@ class SelectCity extends React.Component {
                 data={cities} 
                 value={selectedCity} 
                 handleChange={this.handleChange} 
+                language={language}
               />
         );
     }

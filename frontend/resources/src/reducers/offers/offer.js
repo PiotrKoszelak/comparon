@@ -34,10 +34,21 @@ export const numberSelectedOffers = (state = '', action) => {
 }
 
 //number of offers to compare
-export const numberOffersToComapre = (state = [], action) => { 
+export const numberOffersToCompare = (state = [], action) => { 
   switch (action.type) { 
     case 'SET_NUMBER_OFFERS_TO_COMPARE':
-      return action.numberOffersToComapre;
+      return action.numberOffersToCompare;
+      
+    default:
+      return state
+  }
+}
+
+//selected sort type
+export const sortType = (state = 1, action) => { 
+  switch (action.type) { 
+    case 'SET_SORT_TYPE':
+      return action.sortType;
       
     default:
       return state

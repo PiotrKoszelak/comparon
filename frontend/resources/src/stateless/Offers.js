@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CardProvider from "../statefull/CardProvider";
 import { makeStyles } from '@material-ui/core/styles';
-
+import translation from "../translation"
 
 
 const useStyles = makeStyles({
@@ -16,7 +16,18 @@ const useStyles = makeStyles({
   },
 });
 
-function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed, setNumberSelectedOffers}){
+function Offers  ({ loaded, 
+                    placeholder, 
+                    data, 
+                    selectedOperator, 
+                    selectedCity, 
+                    selectedPeriod, 
+                    selectedType, 
+                    selectedPrice, 
+                    selectedSpeed, 
+                    setNumberSelectedOffers, 
+                    language,
+                    sortType }){
 
   const classes = useStyles();
 
@@ -24,9 +35,8 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
     return(<p>{placeholder}</p>)
   }  
   if (data.length === false){
-    return (<p>Brak ofert</p>)
+    return (<p>{translation.NONE[language]}</p>)
   }
-
   // filtering
   let dataNew = [];
   // if empty then show all offers
@@ -73,7 +83,7 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
       // type filtering
      if (selectedType.length !== 0){
       withType = withPeriod.filter(function(el) {
-            return selectedType.includes(el.type)
+            return selectedType.includes(el.types)
         })
       }
       else{
@@ -101,21 +111,39 @@ function Offers  ({ loaded, placeholder, data, selectedOperator, selectedCity, s
       dataNew = [...withSpeed]
   };
 
+  //sort
+  let dataNewSorted = [];
+  if (sortType===1)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return a.price - b.price
+  })
+  else if (sortType===2)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return b.price - a.price
+  })
+  else if (sortType===3)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return a.speed - b.speed
+  })
+  else if (sortType===4)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return b.speed - a.speed
+  })
+
   setNumberSelectedOffers(JSON.stringify(dataNew.length));
 
   
     return(
         <section className={classes.offer + ' row'} >
-        {dataNew.map(el => (
+        {dataNewSorted.map(el => (
                 < CardProvider
                     key={el.id}
                     id={el.id}
                     operator={el.operator}
-                    operatorId={el.operator_id}
                     period={el.period}
                     price={el.price}
                     speed={el.speed}
-                    type={el.type}
+                    type={el.types}
                 />
             ))}
         </section>

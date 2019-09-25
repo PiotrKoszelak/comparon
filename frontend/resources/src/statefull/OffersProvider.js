@@ -41,7 +41,16 @@ class OffersProvider extends Component {
   
   render() {
     const {loaded, placeholder} = this.state;
-    const {offers, selectedOperator, selectedCity, selectedPeriod, selectedType, selectedPrice, selectedSpeed, setNumberSelectedOffers} = this.props;
+    const { offers, 
+            selectedOperator, 
+            selectedCity, 
+            selectedPeriod, 
+            selectedType, 
+            selectedPrice, 
+            selectedSpeed, 
+            setNumberSelectedOffers, 
+            language,
+            sortType } = this.props;
     return(
         <Offers 
           loaded={loaded} 
@@ -54,7 +63,8 @@ class OffersProvider extends Component {
           selectedSpeed={selectedSpeed}
           selectedPrice={selectedPrice}
           setNumberSelectedOffers={setNumberSelectedOffers}
-          
+          language={language}
+          sortType={sortType}
         />
     );
   }
@@ -71,6 +81,7 @@ const mapStateToProps = (state) => {
     selectedSpeed: state.selectedSpeed,
     numberSelectedOffers: state.numberSelectedOffers,
     language: state.language,
+    sortType: state.sortType,
   }
 };
 const mapDispatchToProps = { offersFetched, setNumberSelectedOffers };

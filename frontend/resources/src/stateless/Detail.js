@@ -36,14 +36,17 @@ function Detail  ({loadedDetail,
                   placeholderContact, 
                   contact, 
                   closeDetailWindow, 
-                  offerPrice, 
-                  offerOperator, 
-                  offerPeriod, 
-                  offerSpeed, 
-                  offerType,
-                  language}){
+                  selectedOffer,
+                  language, 
+                  operators, 
+                  cities, 
+                  periods, 
+                  types}){
 
   const classes = useStyles();
+  let operatorValue = operators.filter((el) => {return el.id===selectedOffer.operator})[0][`value_${language}`];
+  let periodValue = periods.filter((el) => {return el.id===selectedOffer.period})[0][`value_${language}`];
+  let typeValue = types.filter((el) => {return el.id===selectedOffer.type})[0][`value_${language}`];
 
     return(
           <Dialog
@@ -60,23 +63,23 @@ function Detail  ({loadedDetail,
                   <TableBody>
                         <TableRow>
                           <TableCell component="th" scope="row">{translation.MONTH_COST[language]}</TableCell>
-                          <TableCell align="right"> {offerPrice} </TableCell>
+                          <TableCell align="right"> {selectedOffer.price} </TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell component="th" scope="row">{translation.OPERATOR[language]}</TableCell>
-                          <TableCell align="right"> {offerOperator} </TableCell>
+                          <TableCell align="right"> {operatorValue} </TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell component="th" scope="row">{translation.PERIOD[language]}</TableCell>
-                          <TableCell align="right"> {offerPeriod} </TableCell>
+                          <TableCell align="right"> {periodValue} </TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell component="th" scope="row">{translation.SPEED[language]}</TableCell>
-                          <TableCell align="right"> {offerSpeed} </TableCell>
+                          <TableCell align="right"> {selectedOffer.speed} </TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell component="th" scope="row">{translation.TYPE[language]}</TableCell>
-                          <TableCell align="right"> {offerType} </TableCell>
+                          <TableCell align="right"> {typeValue} </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell component="th" scope="row">{translation.DELIVERY_TIME[language]}</TableCell>

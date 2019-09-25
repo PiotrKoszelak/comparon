@@ -50,6 +50,7 @@ class SelectOperator extends React.Component {
                 data={operators} 
                 value={selectedOperator} 
                 handleChange={this.handleChange} 
+                language={language}
               />
         );
     }

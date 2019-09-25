@@ -38,7 +38,7 @@ export class DetailProvider extends Component {
         })
           .then(data => this.props.offerDetailFetched(data), this.setState({loadedDetail: true }));
 
-          fetch(`${url}/api/contact/${this.props.selectedOffer.operatorId}`)
+          fetch(`${url}/api/contact/${this.props.selectedOffer.operator}`)
           .then(response => {
             if (response.status !== 200) {
             return this.setState({ placeholderContact: translation.DOWNLOAD_ERROR[language] });
@@ -55,7 +55,7 @@ export class DetailProvider extends Component {
   }
 
   render() {
-    const {isDetailOpen, selectedOffer, details, contact, language} = this.props;
+    const {isDetailOpen, selectedOffer, details, contact, language, operators, cities, periods, types} = this.props;
     const {loadedDetail, placeholderDetail, loadedContact, placeholderContact} = this.state;
     if (isDetailOpen === true) {
         return(
@@ -66,13 +66,13 @@ export class DetailProvider extends Component {
             loadedContact={loadedContact} 
             placeholderContact={placeholderContact}
             contact={contact.phone}
-            offerPrice={selectedOffer.price}
-            offerOperator={selectedOffer.operator}
-            offerPeriod={selectedOffer.period}
-            offerSpeed={selectedOffer.speed}
-            offerType={selectedOffer.type}
+            selectedOffer={selectedOffer}
             closeDetailWindow={this.closeDetailWindow}
             language={language}
+            operators={operators}
+            cities={cities}
+            periods={periods}
+            types={types}
           />
         );
       }
@@ -89,6 +89,10 @@ const mapStateToProps = (state) => {
     details: state.details,
     contact: state.contact,
     language: state.language,
+    operators: state.operators,
+    cities: state.cities,
+    periods: state.periods,
+    types: state.types,
   }
 };
 const mapDispatchToProps = { isDetailWindowOpen, offerDetailFetched, contactFetched };

@@ -49,6 +49,7 @@ class SelectType extends React.Component {
                 data={types} 
                 value={selectedType} 
                 handleChange={this.handleChange} 
+                language={language}
               />
         );
     }

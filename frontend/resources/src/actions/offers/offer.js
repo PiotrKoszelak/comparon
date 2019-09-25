@@ -17,7 +17,13 @@ export const setNumberSelectedOffers = (numberSelectedOffers) => ({
 });
 
 // number of offers to compare
-export const setNumberOffersToComapre= (numberOffersToComapre) => ({
+export const setNumberOffersToCompare= (numberOffersToCompare) => ({
   type: 'SET_NUMBER_OFFERS_TO_COMPARE',
-  numberOffersToComapre
+  numberOffersToCompare
+});
+
+// selected sort type
+export const setSortType= (sortType) => ({
+  type: 'SET_SORT_TYPE',
+  sortType
 });
