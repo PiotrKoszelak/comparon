@@ -27,10 +27,7 @@ function Offers  ({ loaded,
                     selectedSpeed, 
                     setNumberSelectedOffers, 
                     language,
-                    operators,
-                    cities,
-                    periods,
-                    types }){
+                    sortType }){
 
   const classes = useStyles();
 
@@ -114,12 +111,31 @@ function Offers  ({ loaded,
       dataNew = [...withSpeed]
   };
 
+  //sort
+  let dataNewSorted = [];
+  if (sortType===1)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return a.price - b.price
+  })
+  else if (sortType===2)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return b.price - a.price
+  })
+  else if (sortType===3)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return a.speed - b.speed
+  })
+  else if (sortType===4)
+    dataNewSorted = dataNew.sort((a,b) => {
+      return b.speed - a.speed
+  })
+
   setNumberSelectedOffers(JSON.stringify(dataNew.length));
 
   
     return(
         <section className={classes.offer + ' row'} >
-        {dataNew.map(el => (
+        {dataNewSorted.map(el => (
                 < CardProvider
                     key={el.id}
                     id={el.id}

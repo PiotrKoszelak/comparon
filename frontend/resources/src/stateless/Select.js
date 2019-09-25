@@ -22,15 +22,15 @@ const useStyles = makeStyles({
 function MySelect ({label, value, handleChange, data, loaded, placeholder, language}){
 
   const classes = useStyles();
-  let selectedValue = [];
-  for (let el of (data.filter((el) => {return value.includes(el.id)}))){
-    selectedValue.push(el.id);
-  }
   if (loaded === false){
     return(<p>{placeholder}</p>)
   }  
 
   if (label !== translation.SORT_BY[language]){
+      let selectedValue = [];
+      for (let el of (data.filter((el) => {return value.includes(el.id)}))){
+        selectedValue.push(el.id);
+      }
       return ( <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select
@@ -62,7 +62,7 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder, langu
           onChange= {handleChange}
         >
           {data.map(el => (
-            <MenuItem key={el.value} value={el.value}>
+            <MenuItem key={el.id} value={el.id}>
                 <ListItemText primary={el.value} />
             </MenuItem>
           ))}

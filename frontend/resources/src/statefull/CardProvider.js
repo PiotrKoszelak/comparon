@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { selectOffer, isDetailWindowOpen, setNumberOffersToComapre } from "../actions";
+import { selectOffer, isDetailWindowOpen, setNumberOffersToCompare } from "../actions";
 import Card from '../stateless/Card';
 
 
@@ -9,10 +9,9 @@ class CardProvider extends React.Component {
 
   static propTypes = {
         id: PropTypes.number.isRequired,
-        operator: PropTypes.string.isRequired,
-        operatorId: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        period: PropTypes.string.isRequired,
+        operator: PropTypes.number.isRequired,
+        type: PropTypes.number.isRequired,
+        period: PropTypes.number.isRequired,
         price: PropTypes.number.isRequired,
         speed: PropTypes.number.isRequired,
         selectOffer: PropTypes.func.isRequired,
@@ -32,19 +31,19 @@ class CardProvider extends React.Component {
   }
 
   selectToCompare = (id) => {
-    let newTable = [...this.props.numberOffersToComapre];
+    let newTable = [...this.props.numberOffersToCompare];
     if (newTable.includes(id)){
         newTable.splice(newTable.indexOf(id), 1);
     }
     else{
       newTable.push(id);
     }
-    this.props.setNumberOffersToComapre(newTable);
+    this.props.setNumberOffersToCompare(newTable);
   }
 
     render(){
         
-        const {id, operator, period, price, speed, type, language, operators, cities, periods, types} = this.props;
+        const {id, operator, period, price, speed, type, language, operators, cities, periods, types, numberOffersToCompare} = this.props;
         return (
           <Card
               id={id}
@@ -60,6 +59,7 @@ class CardProvider extends React.Component {
               cities={cities}
               periods={periods}
               types={types}
+              numberOffersToCompare={numberOffersToCompare}
           />
         );
     }
@@ -72,12 +72,13 @@ const mapStateToProps = (state) => {
     cities: state.cities,
     periods: state.periods,
     types: state.types,
+    numberOffersToCompare: state.numberOffersToCompare,
   }
 };
 const mapDispatchToProps = {
   selectOffer, 
   isDetailWindowOpen, 
-  setNumberOffersToComapre
+  setNumberOffersToCompare
  };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardProvider);

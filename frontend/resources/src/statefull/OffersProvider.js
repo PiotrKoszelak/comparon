@@ -50,10 +50,7 @@ class OffersProvider extends Component {
             selectedSpeed, 
             setNumberSelectedOffers, 
             language,
-            operators,
-            cities,
-            periods,
-            types } = this.props;
+            sortType } = this.props;
     return(
         <Offers 
           loaded={loaded} 
@@ -67,10 +64,7 @@ class OffersProvider extends Component {
           selectedPrice={selectedPrice}
           setNumberSelectedOffers={setNumberSelectedOffers}
           language={language}
-          operators={operators}
-          cities={cities}
-          periods={periods}
-          types={types}
+          sortType={sortType}
         />
     );
   }
@@ -87,10 +81,7 @@ const mapStateToProps = (state) => {
     selectedSpeed: state.selectedSpeed,
     numberSelectedOffers: state.numberSelectedOffers,
     language: state.language,
-    operators: state.operators,
-    cities: state.cities,
-    periods: state.periods,
-    types: state.types,
+    sortType: state.sortType,
   }
 };
 const mapDispatchToProps = { offersFetched, setNumberSelectedOffers };

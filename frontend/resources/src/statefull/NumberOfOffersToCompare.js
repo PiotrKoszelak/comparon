@@ -6,16 +6,16 @@ import { connect } from "react-redux";
 class NumberOfOffersToCompare extends React.Component {
 
   static propTypes = {
-    numberOffersToComapre: PropTypes.array.isRequired,
+    numberOffersToCompare: PropTypes.array.isRequired,
   }
 
     render(){
         
-        const {numberOffersToComapre} = this.props;
+        const {numberOffersToCompare} = this.props;
 
         return (
           <span>
-              {numberOffersToComapre.length}
+              {numberOffersToCompare.length}
           </span> 
         );
     }
@@ -23,7 +23,7 @@ class NumberOfOffersToCompare extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    numberOffersToComapre: state.numberOffersToComapre,
+    numberOffersToCompare: state.numberOffersToCompare,
   }
 };
 const mapDispatchToProps = {

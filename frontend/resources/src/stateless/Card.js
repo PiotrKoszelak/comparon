@@ -68,19 +68,20 @@ function MyCard ({ operator,
                    operators,
                    cities,
                    periods,
-                   types}){
+                   types,
+                   numberOffersToCompare}){
 
   const classes = useStyles();
   let operatorValue = operators.filter((el) => {return el.id===operator})[0][`value_${language}`];
   let periodValue = periods.filter((el) => {return el.id===period})[0][`value_${language}`];
   let typeValue = types.filter((el) => {return el.id===type})[0][`value_${language}`];
-   
+  
   return(
           <Card className={classes.card + ' col-sm-3'}>
               <FormGroup onChange={() =>selectToCompare(id)} row >
                   <FormControlLabel
                       className={classes.compare}
-                      control={<Checkbox color="secondary" />}
+                      control={<Checkbox checked={numberOffersToCompare.includes(id) ? true : false} color="secondary" />}
                       label={translation.COMPARE[language]}
                       labelPlacement="start"
                   />
