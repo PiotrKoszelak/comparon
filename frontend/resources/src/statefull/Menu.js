@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import NumberOfOffersToCompare from "./NumberOfOffersToCompare"; 
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Fab from '@material-ui/core/Fab';
 
 class MenuBottomButtons extends Component {
   
@@ -64,17 +64,20 @@ class ShowCriteriaLabel extends Component {
   }
 
   render() {
-    const {classes, language, checked, handleChange} = this.props;
+    const {classes, language, handleClick} = this.props;
     return(
-      <FormControlLabel
-          className={classes.label}
-          control={<Switch 
-                  checked={checked} 
-                  onChange={handleChange}
-                  size="small"
-                  />}
-          label={translation.SHOW_CRITERIA[language]}
-      />
+      <Fab
+          variant="extended"
+          size="small"
+          color="primary"
+          aria-label="show"
+          className={classes.margin}
+          onClick={handleClick}
+          style={{fontSize:10, padding:5, paddingRight:10}}
+        >
+          <ChevronRightIcon className={classes.extendedIcon} />
+          {translation.SHOW_CRITERIA[language]}
+        </Fab>
     );
   }
 }

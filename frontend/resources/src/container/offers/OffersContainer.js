@@ -5,13 +5,17 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
         data: {
-                maxWidth: '90vw',
+                width: 'calc(100vw - 320px)',
                 position: 'relative',
-                left: '5vw',
+                left: 250,
                 display: 'flex',
                 justifyContent: 'center',
                 marginTop: 70,
                 zIndex: 1,
+                '@media (max-width:600px)' : {
+                        width: 'calc(100vw - 100px)',
+                        left: 50,
+                }
         },
       }));
 
