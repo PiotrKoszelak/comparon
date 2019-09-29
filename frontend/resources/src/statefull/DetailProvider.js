@@ -36,7 +36,8 @@ export class DetailProvider extends Component {
           }
           return response.json()
         })
-          .then(data => this.props.offerDetailFetched(data), this.setState({loadedDetail: true }));
+          .then(data => this.props.offerDetailFetched(data), this.setState({loadedDetail: true }))
+          .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
 
           fetch(`${url}/api/contact/${this.props.selectedOffer.operator}`)
           .then(response => {
@@ -45,7 +46,8 @@ export class DetailProvider extends Component {
           }
           return response.json()
         })
-          .then(data => this.props.contactFetched(data), this.setState({loadedContact: true }));
+          .then(data => this.props.contactFetched(data), this.setState({loadedContact: true }))
+          .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
       }
   }
 

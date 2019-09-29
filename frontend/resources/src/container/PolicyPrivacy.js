@@ -4,13 +4,13 @@ import MenuBottom from "./menu/MenuBottom";
 
 
 
-function About () {
+function PolicyPrivacy () {
         return(
                 <section>
-                        <Menu title={'About'} />
+                        <Menu title={'PolicyPrivacy'} />
                         <MenuBottom />
                 </section>
         );
 };
 
-export default About;
+export default PolicyPrivacy;

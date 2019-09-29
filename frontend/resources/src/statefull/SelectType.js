@@ -35,7 +35,8 @@ class SelectType extends React.Component {
         }
         return response.json();
       })
-      .then(data => this.props.typesFetched(data), this.setState({loaded: true }));
+      .then(data => this.props.typesFetched(data), this.setState({loaded: true }))
+      .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
   }
     
     render(){

@@ -39,6 +39,9 @@ class SelectSpeed extends React.Component {
       }));
       this.setState({maxSpeed : maxSpeedVal.value});
     }
+    else if (maxParam.length === 0){
+      this.setState({maxSpeed : 1000});
+    }
   }
 
     render(){
