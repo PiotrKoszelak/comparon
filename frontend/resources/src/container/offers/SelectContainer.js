@@ -45,20 +45,11 @@ const useStyles = makeStyles({
                         display: 'none'
                 }
         },
-        drawer: {
-                
-        },
-        selectsMobile: {
-                position: 'relative',
-                top: 50,
-                padding: 20,
-                height: 'calc(100vh - 250px)',
-                borderRadius: 10,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'space-around',
+        mobile: {
                 width: 200,
+                '@media (max-width:600px)' : {
+                        display: 'block'
+                }
         },
         switch : {
                 position:'relative',
@@ -70,8 +61,8 @@ const useStyles = makeStyles({
         },
         fab: {
                 position: 'absolute',
-                left: 210,
-                top: 0,
+                left: 190,
+                top: -40,
         }
       });
 
@@ -86,6 +77,8 @@ function SelectContainer () {
 
         return(
                 <div className={classes.root}>
+
+                        {/*} mobile */}
                         <div className={classes.switch}>
                                 <ShowCriteriaLabelComponent classes={classes}  handleClick={handleClick} />
                         </div>
@@ -94,7 +87,7 @@ function SelectContainer () {
                                 onClose={() => null}
                                 onOpen={() => null}
                         >
-                                <div className={classes.selectsMobile} >
+                                <div className={`${classes.mobile} ${classes.selects}`} >
                                         <SelectSortType />
                                         <SelectOperator />
                                         <SelectCity />
@@ -109,7 +102,7 @@ function SelectContainer () {
                                 </div>
                         </SwipeableDrawer>
 
-
+                        {/* web */}
                         <Paper className={classes.selects}>
                                 <SelectSortType />
                                 <SelectOperator />

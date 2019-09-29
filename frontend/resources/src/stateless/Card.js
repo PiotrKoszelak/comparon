@@ -72,9 +72,9 @@ function MyCard ({ operator,
                    numberOffersToCompare}){
 
   const classes = useStyles();
-  let operatorValue = operators.filter((el) => {return el.id===operator})[0][`value_${language}`];
-  let periodValue = periods.filter((el) => {return el.id===period})[0][`value_${language}`];
-  let typeValue = types.filter((el) => {return el.id===type})[0][`value_${language}`];
+  let operatorValue = operators ? operators.filter((el) => {return el.id===operator})[0] ? operators.filter((el) => {return el.id===operator})[0][`value_${language}`] : null : null;
+  let periodValue = periods ? periods.filter((el) => {return el.id===period})[0] ? periods.filter((el) => {return el.id===period})[0][`value_${language}`] : null : null;
+  let typeValue = types ? types.filter((el) => {return el.id===type})[0] ? types.filter((el) => {return el.id===type})[0][`value_${language}`] : null : null;
   
   return(
           <Card className={classes.card + ' col-sm-3'}>

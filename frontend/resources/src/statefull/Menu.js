@@ -69,8 +69,8 @@ class ShowCriteriaLabel extends Component {
       <Fab
           variant="extended"
           size="small"
-          color="primary"
-          aria-label="show"
+          color="secondary"
+          aria-label="add"
           className={classes.margin}
           onClick={handleClick}
           style={{fontSize:10, padding:5, paddingRight:10}}

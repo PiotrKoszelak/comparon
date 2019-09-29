@@ -18,7 +18,7 @@ class SelectPrice extends React.Component {
 
   handleChange = (event, maxPrice) => {
     const price = event.target.value;
-    price<0 ? this.props.selectPrice(0) : price>maxPrice ? this.props.selectPrice(maxPrice) : this.props.selectPrice(price);
+    price<0 ? this.props.selectPrice(0) : price>maxPrice ? this.props.selectPrice(maxPrice) : this.props.selectPrice(parseInt(price));
   }
 
   handleSliderChange = (val) => {
