@@ -13,8 +13,8 @@ const useStyles = makeStyles(theme => ({
                 marginTop: 70,
                 zIndex: 1,
                 '@media (max-width:600px)' : {
-                        width: 'calc(100vw - 120px)',
-                        left: 50,
+                        width: 'calc(100vw - 60px)',
+                        left: 30,
                 }
         },
       }));

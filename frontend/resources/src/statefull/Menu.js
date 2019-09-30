@@ -45,7 +45,7 @@ class Menu extends Component {
         <span className={classes.toolbar} >
             <span style={{display: 'flex', alignItems: 'center'}}>
                 <MenuList classes={classes} language={language} />
-                <Typography variant="h6" className={classes.title}>
+                <Typography variant="subtitle2" className={classes.title}>
                     {title==='Offers' ? translation.OFFERS[language] : null}
                     {title==='About' ? translation.ABOUT[language] : null}
                     {title==='Contact' ? translation.CONTACT[language] : null}

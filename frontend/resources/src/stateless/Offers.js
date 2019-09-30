@@ -137,7 +137,7 @@ function Offers  ({ loaded,
 
   
     return(
-        <section className={classes.offer + ' row'} >
+        <section className={classes.offer} >
         {dataNewSorted.map(el => (
                 < CardProvider
                     key={el.id}

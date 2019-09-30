@@ -17,9 +17,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
   },
   button: {
-    fontSize: 12,
+    fontSize: 10,
     '@media (max-width:600px)' : {
-      fontSize: 10,
+      fontSize: 8,
   },
 }
 }));
