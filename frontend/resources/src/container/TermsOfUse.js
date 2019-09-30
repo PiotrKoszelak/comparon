@@ -4,13 +4,13 @@ import MenuBottom from "./menu/MenuBottom";
 
 
 
-function About () {
+function TermsOfUse () {
         return(
                 <section>
-                        <Menu title={'About'} />
+                        <Menu title={'TermsOfUse'} />
                         <MenuBottom />
                 </section>
         );
 };
 
-export default About;
+export default TermsOfUse;

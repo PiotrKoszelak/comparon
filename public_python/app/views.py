@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import Offers_view, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters
+from app.models import Offers, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters
 from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer, ParametersSerializer
 from rest_framework import generics
 
@@ -10,7 +10,7 @@ class OfferListCreate(generics.ListCreateAPIView):
     def get_queryset(self):
         
         
-        queryset = Offers_view.objects.all()
+        queryset = Offers.objects.all()
         '''
         operator = self.request.query_params.get('operator', None)
         if operator is not None:

@@ -22,8 +22,9 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   button: {
+    fontSize: 12,
     '@media (max-width:600px)' : {
-      fontSize: 12,
+      fontSize: 10,
     },
   },
   toolbar: {

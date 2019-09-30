@@ -9,14 +9,14 @@ import Empty from "./offers/Empty";
 
 function Offers () {
         return(
-                <div>
+                <section>
                         <Menu title={'Offers'} />
                         <Empty />
                         <Header />
                         <SelectContainer />
                         <OffersContainer />
                         <MenuBottom />
-                </div>
+                </section>
         );
 };
 

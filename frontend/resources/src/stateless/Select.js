@@ -26,16 +26,13 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder, langu
     return(<p>{placeholder}</p>)
   }  
 
+  // multiple selection
   if (label !== translation.SORT_BY[language]){
-      let selectedValue = [];
-      for (let el of (data.filter((el) => {return value.includes(el.id)}))){
-        selectedValue.push(el.id);
-      }
       return ( <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select
                         multiple
-                        value={selectedValue}
+                        value={value}
                         onChange= {handleChange}
                         renderValue={selected => {
                           let selectedValue = [];
@@ -54,6 +51,7 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder, langu
                       </Select>     
           </FormControl> )}
     else {
+      // single selection
       return ( 
       <FormControl className={classes.formControlBig}>
         <InputLabel >{label}</InputLabel>

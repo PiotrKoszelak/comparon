@@ -116,6 +116,10 @@ const translation = {
         pl: 'Pokaż kryteria',
         en: 'Show criteria'
     },
+    CONTACT : {
+        pl: 'Kontakt',
+        en: 'Contact'
+    },
 };
 
 export default  translation;

@@ -16,4 +16,7 @@ urlpatterns = [
     path('api/offerdetail/<int:pk>/', OfferDetailListCreate.as_view() ),
     path('', main),
     path('about', main),
+    path('contact', main),
+    path('termsofuse', main),
+    path('policyprivacy', main),
 ]

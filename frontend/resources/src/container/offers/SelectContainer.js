@@ -9,13 +9,13 @@ import SelectSpeed from "../../statefull/SelectSpeed";
 import OtherData from "../../statefull/FetchOtherData"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import Typography from '@material-ui/core/Typography';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ShowCriteriaLabelComponent } from "../../statefull/Menu";
+import Fab from '@material-ui/core/Fab';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
         root:{
                 display: 'flex',
                 flexDirection: 'column',
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         },
         selects: {
                 position: 'relative',
-                top: 30,
+                top: 50,
                 padding: 20,
                 height: 'calc(100vh - 250px)',
                 borderRadius: 10,
@@ -41,33 +41,53 @@ const useStyles = makeStyles(theme => ({
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 width: '100%',
+                '@media (max-width:600px)' : {
+                        display: 'none'
+                }
         },
-      }));
-
-      let theme = createMuiTheme({
-        typography: {
-                fontSize: 12,
+        mobile: {
+                width: 200,
+                '@media (max-width:600px)' : {
+                        display: 'block'
+                }
         },
+        switch : {
+                position:'relative',
+                left: -30,
+                display: 'none',
+                '@media (max-width:600px)' : {
+                        display: 'block'
+                }
+        },
+        fab: {
+                position: 'absolute',
+                left: 190,
+                top: -40,
+        }
       });
 
 
 function SelectContainer () {
         const classes = useStyles();
-        const [checked, setChecked] = React.useState(true);
+        const [checked, setChecked] = React.useState(false);
 
-        function handleChange() {
+        function handleClick() {
         setChecked(prev => !prev);
         }
 
         return(
                 <div className={classes.root}>
-                        <ThemeProvider theme={theme}>
-                                <Typography>
-                                <ShowCriteriaLabelComponent classes={classes} checked={checked} handleChange={handleChange} />
-                                </Typography>
-                        </ThemeProvider>
-                        <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
-                                <Paper className={classes.selects}>
+
+                        {/*} mobile */}
+                        <div className={classes.switch}>
+                                <ShowCriteriaLabelComponent classes={classes}  handleClick={handleClick} />
+                        </div>
+                        <SwipeableDrawer
+                                open={checked}
+                                onClose={() => null}
+                                onOpen={() => null}
+                        >
+                                <div className={`${classes.mobile} ${classes.selects}`} >
                                         <SelectSortType />
                                         <SelectOperator />
                                         <SelectCity />
@@ -76,8 +96,24 @@ function SelectContainer () {
                                         <SelectPrice />
                                         <SelectSpeed />
                                         <OtherData />
-                                </Paper>
-                        </Slide>
+                                        <Fab size="small" color="secondary" aria-label="add" className={classes.fab} onClick={handleClick}>
+                                                <ChevronLeftIcon />
+                                        </Fab>
+                                </div>
+                        </SwipeableDrawer>
+
+                        {/* web */}
+                        <Paper className={classes.selects}>
+                                <SelectSortType />
+                                <SelectOperator />
+                                <SelectCity />
+                                <SelectPeriod />
+                                <SelectType />
+                                <SelectPrice />
+                                <SelectSpeed />
+                                <OtherData />
+                        </Paper>
+                        
                 </div>
         );
 };

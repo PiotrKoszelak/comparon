@@ -36,7 +36,8 @@ class OffersProvider extends Component {
       }
       return response.json()
     })
-      .then(data => this.props.offersFetched(data), this.setState({loaded: true }));
+      .then(data => this.props.offersFetched(data), this.setState({loaded: true }))
+      .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
   }
   
   render() {

@@ -18,7 +18,7 @@ class SelectPrice extends React.Component {
 
   handleChange = (event, maxPrice) => {
     const price = event.target.value;
-    price<0 ? this.props.selectPrice(0) : price>maxPrice ? this.props.selectPrice(maxPrice) : this.props.selectPrice(price);
+    price<0 ? this.props.selectPrice(0) : price>maxPrice ? this.props.selectPrice(maxPrice) : this.props.selectPrice(parseInt(price));
   }
 
   handleSliderChange = (val) => {
@@ -28,11 +28,15 @@ class SelectPrice extends React.Component {
 
     render(){
         const {selectedPrice, maxParam, language} = this.props;
+        let maxPrice = 0;
         if (maxParam.length !== 0){
-              const maxPrice = Object.assign({}, maxParam.find(function(el) {
+              maxPrice = Object.assign({}, maxParam.find(function(el) {
                 return el.name === 'max_price'
               }));
-            
+        }
+        else if (maxParam.length === 0){
+            maxPrice = 300;
+        }
               return (
                 <MySlider 
                   title={translation.PRICE[language]}
@@ -43,10 +47,7 @@ class SelectPrice extends React.Component {
                 
                 />
               );
-        }
-        else{
-          return (null)
-        }
+        
     }
 }
 

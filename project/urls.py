@@ -13,4 +13,10 @@ urlpatterns = [
     path('api/parameters/', ParametersListCreate.as_view() ),
     path('api/contact/<int:pk>/', ContactListCreate.as_view() ),
     path('api/offerdetail/<int:pk>/', OfferDetailListCreate.as_view() ),
+    # for production only
+    # path('', main),
+    # path('about', main),
+    # path('contact', main),
+    # path('termsofuse', main),
+    # path('policyprivacy', main),
 ]

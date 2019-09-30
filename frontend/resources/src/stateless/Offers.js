@@ -12,7 +12,10 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     position: 'relative',
     top: 100,
-    width: '81vw',
+    width: '100%',
+    '@media (max-width:600px)' : {
+        justifyContent: 'center',
+    }
   },
 });
 
@@ -134,7 +137,7 @@ function Offers  ({ loaded,
 
   
     return(
-        <section className={classes.offer + ' row'} >
+        <section className={classes.offer} >
         {dataNewSorted.map(el => (
                 < CardProvider
                     key={el.id}

@@ -3,7 +3,8 @@ from django.db import models
 
 class Operators(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=30)
+    value_pl = models.CharField(max_length=30)
+    value_en = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'operators'
@@ -11,7 +12,8 @@ class Operators(models.Model):
 
 class Cities(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=30)
+    value_pl = models.CharField(max_length=30)
+    value_en = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'cities'
@@ -19,14 +21,16 @@ class Cities(models.Model):
 
 class Periods(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=30)
+    value_pl = models.CharField(max_length=30)
+    value_en = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'periods'
 
 class Types(models.Model):
     id = models.AutoField(primary_key=True)
-    value = models.CharField(max_length=50)
+    value_pl = models.CharField(max_length=50)
+    value_en = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'types'
@@ -49,6 +53,7 @@ class Contacts(models.Model):
     id = models.AutoField(primary_key=True)
     operator = models.ForeignKey(Operators, on_delete=models.CASCADE)
     phone = models.CharField(max_length=30)
+    email = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'contacts'
@@ -70,18 +75,3 @@ class Parameters(models.Model):
 
     class Meta:
         db_table = 'parameters'
-
-# ___________________________________________________________________________________________offer view
-class Offers_view(models.Model):
-    id = models.AutoField(primary_key=True)
-    price = models.FloatField()
-    speed = models.IntegerField()
-    operator = models.CharField(max_length=30)
-    operator_id = models.IntegerField()
-    period = models.CharField(max_length=30)
-    type = models.CharField(max_length=50)
-    city = models.CharField(max_length=30)
-
-    class Meta:
-      managed = False
-      db_table = "v_offers"

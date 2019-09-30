@@ -4,13 +4,13 @@ import MenuBottom from "./menu/MenuBottom";
 
 
 
-function About () {
+function Contact () {
         return(
                 <section>
-                        <Menu title={'About'} />
+                        <Menu title={'Contact'} />
                         <MenuBottom />
                 </section>
         );
 };
 
-export default About;
+export default Contact;
