@@ -17,4 +17,6 @@ urlpatterns = [
     path('', main),
     path('about', main),
     path('contact', main),
+    path('termsofuse', main),
+    path('policyprivacy', main),
 ]
