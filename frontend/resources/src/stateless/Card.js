@@ -88,7 +88,6 @@ function MyCard ({ operator,
                    selectToCompare, 
                    language,  
                    operators,
-                   cities,
                    periods,
                    types,
                    numberOffersToCompare}){
@@ -141,7 +140,7 @@ function MyCard ({ operator,
                   </section>
               </CardContent>
             <CardActions>
-              <Button  className={classes.button} size="small" variant="contained" color="primary" onClick={() => selectOffer(id, operator, period, price, speed, type)}>
+              <Button  className={classes.button} size="small" variant="contained" color="primary" onClick={() => selectOffer(id)}>
                   {translation.OFFER_DETAILS[language]}
               </Button>
             </CardActions>

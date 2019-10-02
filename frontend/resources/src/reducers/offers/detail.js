@@ -8,14 +8,3 @@ export const isDetailOpen = (state = false, action) => {
       return state
   }
 }
-
-//offer
-export const details = (state = {}, action) => { 
-  switch (action.type) { 
-    case 'FETCH_OFFER_DETAIL_SUCCESS':
-      return action.offerDetail;
-      
-    default:
-      return state
-  }
-}

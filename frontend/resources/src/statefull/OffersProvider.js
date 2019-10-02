@@ -29,7 +29,7 @@ class OffersProvider extends Component {
 
   componentDidMount() {
     const {language} = this.props;
-    fetch(`${url}/api/offer/`)
+    fetch(`${url}/api/offers/`)
       .then(response => {
         if (response.status !== 200) {
         return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] });

@@ -6,8 +6,7 @@ import { periods, selectedPeriod } from "./offers/period";
 import { types, selectedType } from "./offers/type";
 import { selectedPrice} from "./offers/price";
 import { selectedSpeed } from "./offers/speed";
-import { isDetailOpen, details } from "./offers/detail";
-import { contact } from "./offers/contact";
+import { isDetailOpen } from "./offers/detail";
 import { maxParam } from "./offers/maxParam";
 import { language } from "./general/language";
 
@@ -25,8 +24,6 @@ export default combineReducers({
   selectedSpeed,
   selectedOffer,
   isDetailOpen,
-  details,
-  contact,
   numberSelectedOffers,
   numberOffersToCompare,
   maxParam,

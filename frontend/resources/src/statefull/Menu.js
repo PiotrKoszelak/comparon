@@ -51,10 +51,13 @@ class Menu extends Component {
                     {title==='Contact' ? translation.CONTACT[language] : null}
                     {title==='TermsOfUse' ? translation.TERMS_OF_USE[language] : null}
                     {title==='PolicyPrivacy' ? translation.POLICY_PRIVACY[language] : null}
+                    {title==='Compare' ? translation.COMPARE[language] : null}
                 </Typography>
             </span>
             <span>
-                <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]} (`}<NumberOfOffersToCompare />{`)`}</Button>
+                <Link to="/offers/compare" style={{textDecoration: 'none', color: 'white'}}>
+                    <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]} (`}<NumberOfOffersToCompare />{`)`}</Button>
+                </Link>
                 <Button color="inherit" className={classes.button} >{translation.LOGIN[language]}</Button>
             </span>
         </span>

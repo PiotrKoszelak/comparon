@@ -43,7 +43,7 @@ class CardProvider extends React.Component {
 
     render(){
         
-        const {id, operator, period, price, speed, type, language, operators, cities, periods, types, numberOffersToCompare} = this.props;
+        const {id, operator, period, price, speed, type, language, operators, periods, types, numberOffersToCompare} = this.props;
         return (
           <Card
               id={id}
@@ -56,7 +56,6 @@ class CardProvider extends React.Component {
               selectToCompare={this.selectToCompare}
               language={language}
               operators={operators}
-              cities={cities}
               periods={periods}
               types={types}
               numberOffersToCompare={numberOffersToCompare}
@@ -69,7 +68,6 @@ const mapStateToProps = (state) => {
   return {
     language: state.language,
     operators: state.operators,
-    cities: state.cities,
     periods: state.periods,
     types: state.types,
     numberOffersToCompare: state.numberOffersToCompare,

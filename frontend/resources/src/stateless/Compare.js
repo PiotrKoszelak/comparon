@@ -66,9 +66,8 @@ const useStyles = makeStyles({
   }
 });
 
-function Detail  ({
+function Compare  ({
                   details, 
-                  closeDetailWindow, 
                   offerInfo,
                   language, 
                   operators,
@@ -77,45 +76,21 @@ function Detail  ({
                   }){
 
   const classes = useStyles();
-  
-  
-
+  console.log(offerInfo);
+  console.log(details);
 
     return(
-          <Dialog
-            open={true}
-            TransitionComponent={Transition}
-            onClose={closeDetailWindow}
-            aria-labelledby="alert-dialog-slide-title"
-            aria-describedby="alert-dialog-slide-description"
-          >
-            <DialogTitle className={classes.title} >{translation.OFFER_DETAILS[language]}</DialogTitle>
-            <DialogContent>
-                <DetailTemplate
-                    details={details}
-                    offerInfo={offerInfo}
-                    language={language}
-                    operators={operators}
-                    periods={periods}
-                    types={types}
-                    classes={classes}
-                />
-            </DialogContent>
-            <DialogActions style={{display: 'flex', justifyContent: 'center'}}>
-              <Button onClick={closeDetailWindow} size="small" variant="contained" color="primary" className={classes.button}>
-                  {translation.CLOSE[language]}
-              </Button>
-            </DialogActions>
-          </Dialog>
+          
+                null
+            
   )};
 
-Detail.propTypes = {
-  closeDetailWindow : PropTypes.func,
-  offerInfo: PropTypes.object,
-  details: PropTypes.object,
+  Compare.propTypes = {
+  details: PropTypes.array,
+  offerInfo: PropTypes.array,
   language: PropTypes.string,
   operators: PropTypes.array,
   periods: PropTypes.array,
   types: PropTypes.array,
 };
-export default Detail;
+export default Compare;
