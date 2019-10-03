@@ -17,10 +17,15 @@ const useStyles = makeStyles({
         justifyContent: 'center',
     }
   },
+  error : {
+    position: 'relative',
+    top: 100,
+    width: '100%',
+    textAlign: 'center',
+  }
 });
 
 function Offers  ({ loaded, 
-                    placeholder, 
                     data, 
                     selectedOperator, 
                     selectedCity, 
@@ -35,10 +40,10 @@ function Offers  ({ loaded,
   const classes = useStyles();
 
   if (loaded === false){
-    return(<p>{placeholder}</p>)
+    return(<p className={classes.error}>{translation.DOWNLOAD_ERROR[language]}</p>)
   }  
   if (data.length === false){
-    return (<p>{translation.NONE[language]}</p>)
+    return (<p className={classes.error}>{translation.NONE[language]}</p>)
   }
   // filtering
   let dataNew = [];
@@ -155,7 +160,6 @@ function Offers  ({ loaded,
 Offers.propTypes = {
   data: PropTypes.array.isRequired,
   loaded: PropTypes.bool.isRequired,
-  placeholder: PropTypes.string.isRequired,
   selectedOperator: PropTypes.array.isRequired,
   selectedCity: PropTypes.array.isRequired,
   selectedPeriod: PropTypes.array.isRequired,

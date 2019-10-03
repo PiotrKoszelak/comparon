@@ -19,15 +19,24 @@ const useStyles = makeStyles({
 });
 
 
-function MySelect ({label, value, handleChange, data, loaded, placeholder, language}){
+function MySelect ({label, value, handleChange, data, loaded, language}){
 
   const classes = useStyles();
   if (loaded === false){
-    return(<p>{placeholder}</p>)
+    return(<FormControl className={classes.formControl}>
+              <InputLabel >{label}</InputLabel>
+              <Select
+              value={-1}
+              >
+                  <MenuItem key={-1} value={-1}>
+                      <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
+                  </MenuItem>
+              </Select>     
+          </FormControl>)
   }  
 
   // multiple selection
-  if (label !== translation.SORT_BY[language]){
+  else if (label !== translation.SORT_BY[language]){
       return ( <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select
@@ -74,7 +83,6 @@ MySelect.propTypes = {
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  value: PropTypes.array.isRequired,
+  value: PropTypes.array,
 };
 export default MySelect;

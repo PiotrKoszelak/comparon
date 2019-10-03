@@ -24,24 +24,24 @@ class OffersProvider extends Component {
 
   state = {
     loaded: false,
-    placeholder: "",
   };
 
   componentDidMount() {
-    const {language} = this.props;
     fetch(`${url}/api/offers/`)
-      .then(response => {
-        if (response.status !== 200) {
-        return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] });
+    .then(response => {
+      if (response.status === 200) {
+        this.setState({loaded: true });
+        return response.json();
       }
-      return response.json()
-    })
-      .then(data => this.props.offersFetched(data), this.setState({loaded: true }))
-      .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
+      else{
+        return []
+      }})
+    .then(data => this.props.offersFetched(data))
+    .catch();
   }
   
   render() {
-    const {loaded, placeholder} = this.state;
+    const {loaded} = this.state;
     const { offers, 
             selectedOperator, 
             selectedCity, 
@@ -55,7 +55,6 @@ class OffersProvider extends Component {
     return(
         <Offers 
           loaded={loaded} 
-          placeholder={placeholder}
           selectedOperator={selectedOperator}
           selectedCity={selectedCity}
           data={offers} 
