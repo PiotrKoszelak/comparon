@@ -9,6 +9,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fab from '@material-ui/core/Fab';
 import MenuList from '../stateless/MenuList';
 import { Link } from 'react-router-dom'
+import Badge from '@material-ui/core/Badge';
 
 class MenuBottomButtons extends Component {
   
@@ -55,9 +56,12 @@ class Menu extends Component {
                 </Typography>
             </span>
             <span>
-                <Link to="/offers/compare" style={{textDecoration: 'none', color: 'white'}}>
-                    <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]} (`}<NumberOfOffersToCompare />{`)`}</Button>
-                </Link>
+                <Badge color="secondary" style={{marginRight: 10}} badgeContent={<NumberOfOffersToCompare />} >
+                    <Link to="/offers/compare" style={{textDecoration: 'none', color: 'white'}}>
+                        <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]}`}</Button>
+                    </Link>
+                </Badge>
+                
                 <Button color="inherit" className={classes.button} >{translation.LOGIN[language]}</Button>
             </span>
         </span>

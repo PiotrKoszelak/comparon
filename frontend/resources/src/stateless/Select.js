@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 
-function MySelect ({label, value, handleChange, data, loaded, language}){
+export function MultipleSelect ({label, value, handleChange, data, loaded, language}){
 
   const classes = useStyles();
   if (loaded === false){
@@ -34,9 +34,7 @@ function MySelect ({label, value, handleChange, data, loaded, language}){
               </Select>     
           </FormControl>)
   }  
-
-  // multiple selection
-  else if (label !== translation.SORT_BY[language]){
+  else {
       return ( <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select
@@ -59,9 +57,26 @@ function MySelect ({label, value, handleChange, data, loaded, language}){
                         ))}
                       </Select>     
           </FormControl> )}
-    else {
-      // single selection
-      return ( 
+};
+
+
+export function SingleSelect ({label, value, handleChange, data, loaded, language}){
+
+  const classes = useStyles();
+  if (loaded === false){
+    return(<FormControl className={classes.formControl}>
+              <InputLabel >{label}</InputLabel>
+              <Select
+              value={-1}
+              >
+                  <MenuItem key={-1} value={-1}>
+                      <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
+                  </MenuItem>
+              </Select>     
+          </FormControl>)
+  }  
+  else {
+    return ( 
       <FormControl className={classes.formControlBig}>
         <InputLabel >{label}</InputLabel>
         <Select
@@ -75,14 +90,21 @@ function MySelect ({label, value, handleChange, data, loaded, language}){
           ))}
         </Select>     
       </FormControl> )}
-
 };
 
-MySelect.propTypes = {
+
+MultipleSelect.propTypes = {
   data: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
   value: PropTypes.array,
 };
-export default MySelect;
+
+SingleSelect.propTypes = {
+  data: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  value: PropTypes.array,
+};

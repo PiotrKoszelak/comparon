@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.4.1",
+    "notistack": "^0.9.2",
     "react": "^16.9.0",
     "react-browser-router": "^2.1.2",
     "react-dom": "^16.9.0",

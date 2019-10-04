@@ -3,14 +3,14 @@ import Offers from "../stateless/Offers";
 import { connect } from "react-redux";
 import { offersFetched, setNumberSelectedOffers} from "../actions";
 import PropTypes from "prop-types";
-import url from '../config.js'
-import translation from "../translation"
+import url from '../config.js';
+import DetailProvider from './DetailProvider';
 
 class OffersProvider extends Component {
 
   static propTypes = {
     selectedOperator: PropTypes.array.isRequired,
-    offers: PropTypes.array.isRequired,
+    offers: PropTypes.array,
     selectedCity: PropTypes.array.isRequired,
     selectedPeriod: PropTypes.array.isRequired,
     selectedType: PropTypes.array.isRequired,
@@ -24,16 +24,18 @@ class OffersProvider extends Component {
 
   state = {
     loaded: false,
+    loading: true,
   };
 
   componentDidMount() {
     fetch(`${url}/api/offers/`)
     .then(response => {
       if (response.status === 200) {
-        this.setState({loaded: true });
+        this.setState({loaded: true, loading: false});
         return response.json();
       }
       else{
+        this.setState({loading: false});
         return []
       }})
     .then(data => this.props.offersFetched(data))
@@ -41,7 +43,7 @@ class OffersProvider extends Component {
   }
   
   render() {
-    const {loaded} = this.state;
+    const {loaded, loading} = this.state;
     const { offers, 
             selectedOperator, 
             selectedCity, 
@@ -51,21 +53,26 @@ class OffersProvider extends Component {
             selectedSpeed, 
             setNumberSelectedOffers, 
             language,
-            sortType } = this.props;
+            sortType, 
+            isDetailOpen} = this.props;
     return(
-        <Offers 
-          loaded={loaded} 
-          selectedOperator={selectedOperator}
-          selectedCity={selectedCity}
-          data={offers} 
-          selectedPeriod={selectedPeriod}
-          selectedType={selectedType} 
-          selectedSpeed={selectedSpeed}
-          selectedPrice={selectedPrice}
-          setNumberSelectedOffers={setNumberSelectedOffers}
-          language={language}
-          sortType={sortType}
-        />
+        <div>
+            <Offers 
+              loaded={loaded} 
+              selectedOperator={selectedOperator}
+              selectedCity={selectedCity}
+              data={offers} 
+              selectedPeriod={selectedPeriod}
+              selectedType={selectedType} 
+              selectedSpeed={selectedSpeed}
+              selectedPrice={selectedPrice}
+              setNumberSelectedOffers={setNumberSelectedOffers}
+              language={language}
+              sortType={sortType}
+              loading={loading}
+            />
+            {isDetailOpen ? <DetailProvider /> : null}
+        </div>
     );
   }
 }
@@ -82,6 +89,7 @@ const mapStateToProps = (state) => {
     numberSelectedOffers: state.numberSelectedOffers,
     language: state.language,
     sortType: state.sortType,
+    isDetailOpen : state.isDetailOpen,
   }
 };
 const mapDispatchToProps = { offersFetched, setNumberSelectedOffers };

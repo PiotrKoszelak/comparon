@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import { MultipleSelect } from "../stateless/Select";
 import { periodsFetched, selectPeriod } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -43,7 +43,7 @@ class SelectPeriod extends React.Component {
         const {loaded} = this.state;
         const {periods, selectedPeriod, language} = this.props;
         return (
-              <MySelect 
+              <MultipleSelect 
                 loaded={loaded} 
                 label={translation.PERIOD[language]} 
                 data={periods} 

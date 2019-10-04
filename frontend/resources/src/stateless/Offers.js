@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import CardProvider from "../statefull/CardProvider";
 import { makeStyles } from '@material-ui/core/styles';
 import translation from "../translation"
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles({
@@ -20,12 +23,36 @@ const useStyles = makeStyles({
   error : {
     position: 'relative',
     top: 100,
-    width: '100%',
-    textAlign: 'center',
+    width: 150,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '@media (max-width:600px)' : {
+      width: 80,
+    }
+  },
+  icon : {
+    width: 50,
+    height: 50,
+    '@media (max-width:600px)' : {
+        width: 30,
+        height: 30,
+    }
+  },
+  text : {
+    fontSize: 20,
+    '@media (max-width:600px)' : {
+        fontSize: 15,
+    }
+  },
+  progress: {
+    position: 'relative',
+    top: 100,
   }
 });
 
 function Offers  ({ loaded, 
+                    loading,
                     data, 
                     selectedOperator, 
                     selectedCity, 
@@ -39,12 +66,18 @@ function Offers  ({ loaded,
 
   const classes = useStyles();
 
-  if (loaded === false){
-    return(<p className={classes.error}>{translation.DOWNLOAD_ERROR[language]}</p>)
-  }  
-  if (data.length === false){
-    return (<p className={classes.error}>{translation.NONE[language]}</p>)
+  if (loading===true){
+    return(
+      <CircularProgress className={classes.progress} color="secondary" disableShrink />)
   }
+  else if (loaded === false){
+    return(
+      <div className={classes.error}>
+          <ErrorOutlineIcon color='secondary' className={classes.icon} />
+          <span className={classes.text}>{translation.DOWNLOAD_ERROR[language]}</span>
+      </div>)
+  }  
+  else if (data) {
   // filtering
   let dataNew = [];
   // if empty then show all offers
@@ -140,7 +173,12 @@ function Offers  ({ loaded,
 
   setNumberSelectedOffers(JSON.stringify(dataNew.length));
 
-  
+  if (dataNew.length === 0){
+    return (<div className={classes.error} >
+          <LocalOfferIcon color='secondary' className={classes.icon} />
+          <span className={classes.text}>{translation.NONE[language]}</span>
+      </div>)
+  }
     return(
         <section className={classes.offer} >
         {dataNewSorted.map(el => (
@@ -155,11 +193,17 @@ function Offers  ({ loaded,
                 />
             ))}
         </section>
-  )};
+  )}
+  else {
+    return(
+      <CircularProgress className={classes.progress} color="secondary" disableShrink />)
+  }
+};
 
 Offers.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   loaded: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   selectedOperator: PropTypes.array.isRequired,
   selectedCity: PropTypes.array.isRequired,
   selectedPeriod: PropTypes.array.isRequired,

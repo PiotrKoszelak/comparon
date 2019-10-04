@@ -1,5 +1,5 @@
 import { citiesFetched, selectCity } from "./offers/city";
-import { isDetailWindowOpen} from "./offers/detail";
+import { setDetailWindowOpen} from "./offers/detail";
 import { maxParamFetched } from "./offers/maxParam";
 import { offersFetched,  selectOffer, setNumberSelectedOffers, setNumberOffersToCompare, setSortType} from "./offers/offer";
 import { operatorsFetched,  selectOperator} from "./offers/operator";
@@ -12,7 +12,7 @@ import { setLanguage } from "./general/language";
 export {
   citiesFetched, 
   selectCity,
-  isDetailWindowOpen,
+  setDetailWindowOpen,
   maxParamFetched,
   offersFetched,
   selectOffer, 

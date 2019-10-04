@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import { MultipleSelect } from "../stateless/Select";
 import { operatorsFetched, selectOperator } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -44,7 +44,7 @@ class SelectOperator extends React.Component {
         const {loaded} = this.state;
         const {operators, selectedOperator, language} = this.props;
         return (
-              <MySelect 
+              <MultipleSelect 
                 loaded={loaded} 
                 label={translation.OPERATOR[language]} 
                 data={operators} 

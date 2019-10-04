@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { isDetailWindowOpen } from "../actions";
 import Detail from '../stateless/Detail'
 import PropTypes from "prop-types";
 import url from '../config.js'
+import {setDetailWindowOpen} from "../actions";
+import Snackbar from '../stateless/Snackbar'
+import translation from '../translation'
 
 export class DetailProvider extends Component {
 
   static propTypes = {
-    isDetailOpen: PropTypes.bool.isRequired,
-    selectedOffer: PropTypes.object.isRequired,
-    isDetailWindowOpen: PropTypes.func.isRequired,
+    selectedOffer: PropTypes.number.isRequired,
+    setDetailWindowOpen: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
     operators: PropTypes.array.isRequired,
     periods: PropTypes.array.isRequired,
@@ -19,41 +20,48 @@ export class DetailProvider extends Component {
 
   state = {
     details : {},
-    loadedDetail: false,
+    loadedDetail: null,
     offerInfo : {},
-    loadedOfferInfo: false,
+    loadedOfferInfo: null,
   };
 
-  componentDidUpdate(prevProps) {
-    if (this.props.selectedOffer !== prevProps.selectedOffer) {
-        fetch(`${url}/api/offerdetail/${this.props.selectedOffer.id}`)
+  componentDidMount() {
+        fetch(`${url}/api/offerdetail/${this.props.selectedOffer}`)
           .then(response => {
-            return response.json()
+              if (response.ok) {
+                return response.json()
+              } else 
+              {
+                return Promise.reject()
+              }
           })
           .then(data => this.setState({loadedDetail: true, details: data}))
-          .catch(() => {return this.setState({loadedDetail: false})});
+          .catch(() => this.setState({loadedDetail: false}));
 
           
-        fetch(`${url}/api/offer/${this.props.selectedOffer.id}`)
+        fetch(`${url}/api/offer/${this.props.selectedOffer}`)
           .then(response => {
-            return response.json()
+                if (response.ok) {
+                  return response.json()
+                } else 
+                {
+                  return Promise.reject()
+                }
           })
           .then(data => this.setState({loadedOfferInfo: true, offerInfo: data}))
-          .catch(() => {return this.setState({ loadedOfferInfo: false })});
-          
-      }
+          .catch(() => this.setState({loadedOfferInfo: false}));
   }
 
 
   closeDetailWindow = () => {
-    this.props.isDetailWindowOpen(false);
+    this.props.setDetailWindowOpen(false);
   }
 
   render() {
-    const {isDetailOpen, language, operators, periods, types} = this.props;
+    const {language, operators, periods, types, selectedOffer} = this.props;
     const {loadedDetail, details, loadedOfferInfo, offerInfo} = this.state;
 
-    if (isDetailOpen === true && loadedDetail===true && loadedOfferInfo===true) {
+    if (loadedDetail===true && loadedOfferInfo===true){
         return(
           < Detail
             details={details}
@@ -65,23 +73,29 @@ export class DetailProvider extends Component {
             types={types}
           />
         );
-      }
-      else{
-        return ( null )
-      }
+    }
+    else if (loadedDetail===false || loadedOfferInfo===false){
+        return(
+          <Snackbar selectedOffer={selectedOffer} text={translation.DOWNLOAD_ERROR[language]}/>
+        )
+    }
+    else{
+      return(
+        null
+      )
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    isDetailOpen : state.isDetailOpen,
-    selectedOffer : state.selectedOffer,
     language: state.language,
     operators: state.operators,
     periods: state.periods,
     types: state.types,
+    selectedOffer: state.selectedOffer,
   }
 };
-const mapDispatchToProps = { isDetailWindowOpen };
+const mapDispatchToProps = { setDetailWindowOpen };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailProvider);

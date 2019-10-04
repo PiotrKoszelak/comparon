@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import { SingleSelect } from "../stateless/Select";
 import { connect } from "react-redux";
 import translation from "../translation"
 import { setSortType } from "../actions";
@@ -21,7 +21,7 @@ class SelectSortType extends React.Component {
                        {id: 4, value: translation.SPEED_FROM_HIGHEST[language]}
                       ]
         return (
-              <MySelect 
+              <SingleSelect 
                 loaded={true} 
                 placeholder={''}
                 label= {translation.SORT_BY[language]}

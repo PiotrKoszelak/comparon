@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import { MultipleSelect } from "../stateless/Select";
 import { typesFetched, selectType } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -43,7 +43,7 @@ class SelectType extends React.Component {
         const {loaded} = this.state;
         const {types, selectedType, language} = this.props;
         return (
-              <MySelect 
+              <MultipleSelect 
                 loaded={loaded} 
                 label={translation.TYPE[language]} 
                 data={types} 

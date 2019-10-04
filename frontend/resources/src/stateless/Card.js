@@ -102,7 +102,7 @@ function MyCard ({ operator,
               <section className={classes.cardTop}>
                 <CardMedia
                   className={classes.media}
-                  image =  {require(`../img/${operatorValue}.png`)}
+                  image =  {operatorValue ? require(`../img/${operatorValue}.png`) : require(`../img/default.png`)}
                   title={operatorValue}
                 />
                 <FormGroup onChange={() =>selectToCompare(id)} row >
