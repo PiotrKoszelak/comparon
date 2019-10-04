@@ -1,36 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import translation from "../translation"
 import DetailTemplate from './Detail_template';
+import SpeedIcon from '@material-ui/icons/Speed';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import RssFeedIcon from '@material-ui/icons/RssFeed';
+import Divider from '@material-ui/core/Divider';
+import PaymentIcon from '@material-ui/icons/Payment';
+import PersonIcon from '@material-ui/icons/Person';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const useStyles = makeStyles({
-  title: {
-    position: 'relative',
-    top: 15,
-    marginBottom: 15,
-    padding: 0,
-    width: 500,
+  root: {
     display: 'flex',
-    justifyContent: 'center',
-    '@media (max-width:600px)' : {
-            width: '70vw',   
-      }
+    height: '70vh',
+    top: '10vh',
+    position: 'relative',
+  },
+  rootContent : {
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '100%',
   },
   details: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'space-around'
   },
   detail : {
     height: 40,
@@ -41,7 +40,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     '@media (max-width:600px)' : {
-      height: 25,  
+      height: 20,  
     }
   },
   icon : {
@@ -76,13 +75,76 @@ function Compare  ({
                   }){
 
   const classes = useStyles();
-  console.log(offerInfo);
-  console.log(details);
-
+                
     return(
-          
-                null
-            
+      <section className={classes.root} >
+         <div className={classes.details}>
+                  <section className={classes.detail} >
+                        <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <PaymentIcon className={classes.icon} /> 
+                            <span className={classes.text}>{translation.MONTH_COST[language]}</span>
+                        </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+                  <section className={classes.detail} >
+                        <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <PersonIcon className={classes.icon} /> 
+                            <span className={classes.text}>{translation.OPERATOR[language]}</span>
+                        </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+                  <section className={classes.detail} >
+                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                                <EventNoteIcon className={classes.icon} />
+                                <span className={classes.text}>{translation.PERIOD[language]}</span>
+                            </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+                  <section className={classes.detail} >
+                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                                <SpeedIcon className={classes.icon} />
+                                <span className={classes.text}>{translation.SPEED[language]}</span>
+                            </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+                  <section className={classes.detail} >
+                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                                <RssFeedIcon className={classes.icon} />
+                                <span className={classes.text}>{translation.TYPE[language]}</span>
+                            </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+                  <section className={classes.detail} >
+                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                                <LocalShippingIcon className={classes.icon} />
+                                <span className={classes.text}>{translation.DELIVERY_TIME[language]}</span>
+                            </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+                  <section className={classes.detail} >
+                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                                <LocalShippingIcon className={classes.icon} />
+                                <span className={classes.text}>{translation.DELIVERY_COST[language]}</span>
+                            </div>
+                  </section>
+                  <Divider style={{width: '90%'}} />
+        </div>
+        <div className={classes.rootContent} >
+          {offerInfo.map((el, key) => (
+                  <DetailTemplate
+                      withoutIcon={true}
+                      details={details[key]}
+                      offerInfo={offerInfo[key]}
+                      language={language}
+                      operators={operators}
+                      periods={periods}
+                      types={types}
+                      classes={classes}
+                  />
+              ))}
+        </div>
+      </section>
+       
   )};
 
   Compare.propTypes = {
