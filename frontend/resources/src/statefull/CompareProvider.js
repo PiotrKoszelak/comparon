@@ -24,6 +24,7 @@ export class CompareProvider extends Component {
     offerInfo : [],
     loadedOfferInfo: false,
     loading: true,
+    isEmpty: false,
   };
 
   componentDidMount() {
@@ -32,67 +33,55 @@ export class CompareProvider extends Component {
       let detailsArray = [];
       let offersArray = [];
 
-      const loadDetails = () => {
-        return new Promise((resolve, reject) => {
-          for (let el of numberOffersToCompare){
-            fetch(`${url}/api/offerdetail/${el}`)
-              .then(response => {
-                return response.json()
-              })
+      if (numberOffersToCompare.length === 0){
+        this.setState({isEmpty: true, loading: false});
+      }
+      else{
+              async function loadDetails() {
+                  for (let el of numberOffersToCompare){
+                    const response  = await fetch(`${url}/api/offerdetail/${el}`)
+                    const json = await response.json();
+                    detailsArray.push(json);
+                    if (numberOffersToCompare.length===detailsArray.length){
+                      return detailsArray;
+                    }
+                  };
+              }
+
+              async function loadOffer() {
+                    for (let el of numberOffersToCompare){
+                      const response  = await fetch(`${url}/api/offer/${el}`)
+                      const json = await response.json();
+                      offersArray.push(json);
+                      if (numberOffersToCompare.length===offersArray.length){
+                        return offersArray;
+                      }
+                    };
+              }
+
+            const that = this;
+            function load() {
+              Promise.all([
+                  loadDetails(),
+                  loadOffer()
+              ])
               .then(data => {
-                detailsArray.push(data);
-                  if (numberOffersToCompare.length===detailsArray.length){
-                    resolve(detailsArray);
-                  }
+                  that.setState({details: data[0], offerInfo: data[1], loadedDetail: true, loadedOfferInfo: true, loading: false});
               })
-              .catch((error) => {reject(error)});
-          }
-        });
-    }
-
-    const loadOffers = () => {
-      return new Promise((resolve, reject) => {
-        for (let el of numberOffersToCompare){
-          fetch(`${url}/api/offer/${el}`)
-            .then(response => {
-              return response.json()
-            })
-            .then(data => {
-              offersArray.push(data);
-                if (numberOffersToCompare.length===offersArray.length){
-                  resolve(offersArray);
-                }
-            })
-            .catch((error) => {reject(error)});
-        }
-      });
-    }
-
-    loadOffers().then(
-      result => this.setState({loadedOfferInfo : true, offerInfo : result}),
-      error => null,
-    ).then(
-      loadDetails().then(
-        result => this.setState({loadedDetail : true, details : result}),
-        error => null,
-      )
-    ).then(
-      this.setState({loading : false})
-    )
+              .catch((error) => {
+                  that.setState({loading : false});
+              })
+            }
+            
+            load();
+            
+      }
 
   }
 
   render() {
-    const {language, operators, periods, types, numberOffersToCompare} = this.props;
-    const {loadedDetail, details, loadedOfferInfo, offerInfo, loading} = this.state;
-    if (loading===true){
-      return(
-          <CircularProgress style={{position: 'relative', top: 100, left:'calc(50vw - 20px)'}} color="secondary" disableShrink />
-      )
-    }
-
-
-    else if (loadedDetail===true && loadedOfferInfo===true && offerInfo.length!==0 && details.length!==0) {
+    const {language, operators, periods, types} = this.props;
+    const {loadedDetail, details, loadedOfferInfo, offerInfo, loading, isEmpty} = this.state;
         return(
           < Compare
             details={details}
@@ -101,84 +90,12 @@ export class CompareProvider extends Component {
             operators={operators}
             periods={periods}
             types={types}
+            loadedDetail={loadedDetail}
+            loadedOfferInfo={loadedOfferInfo}
+            loading={loading}
+            isEmpty={isEmpty}
           />
         );
-      }
-      else if (numberOffersToCompare.length===0 && offerInfo.length===0 && details.length===0) {
-        return(
-          <div 
-            style={{
-              position: 'relative',
-              top: 100,
-              width: 150,
-              left:'calc(50vw - 100px)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              '@media (maxWidth:600px)' : {
-                width: 60,
-              }
-          }}>
-          <LocalOfferIcon 
-            color='secondary' 
-            style={{width: 50,
-                  height: 50,
-                  '@media (maxWidth:600px)' : {
-                      width: 30,
-                      height: 30,
-                  }}} 
-          />
-          <span 
-            style={{fontSize: 20,
-            '@media (maxWidth:600px)' : {
-                fontSize: 15,
-            }}}
-          >
-              {translation.NONE[language]}
-          </span>
-      </div>
-        );
-      }
-      else if (numberOffersToCompare.length !== 0 && (loadedDetail===false || loadedOfferInfo===false) && loading===false){
-        return(
-          <div 
-            style={{
-              position: 'relative',
-              top: 100,
-              width: 200,
-              left:'calc(50vw - 100px)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              '@media (maxWidth:600px)' : {
-                width: 80,
-              }
-          }}>
-          <ErrorOutlineIcon 
-            color='secondary' 
-            style={{width: 50,
-                  height: 50,
-                  '@media (maxWidth:600px)' : {
-                      width: 30,
-                      height: 30,
-                  }}} 
-          />
-          <span 
-            style={{fontSize: 20,
-            '@media (maxWidth:600px)' : {
-                fontSize: 15,
-            }}}
-          >
-              {translation.DOWNLOAD_ERROR[language]}
-          </span>
-      </div>
-        )
-    }
-    else{
-      return(
-        null
-      )
-    }
   }
 }
 
