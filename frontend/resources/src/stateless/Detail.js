@@ -6,13 +6,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import translation from "../translation"
 import DetailTemplate from './Detail_template';
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const useStyles = makeStyles({
   title: {
@@ -31,6 +28,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    fontFamily: "Lato",
   },
   detail : {
     height: 40,
@@ -39,7 +37,7 @@ const useStyles = makeStyles({
     width: '90%',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     '@media (max-width:600px)' : {
       height: 25,  
     }
@@ -57,12 +55,31 @@ const useStyles = makeStyles({
   button: {
     backgroundColor: '#bda3f0',
     marginBottom: 20,
+    '@media (max-width:600px)' : {
+      fontSize: 9,  
+    }
   },
   text : {
     fontSize: 15,
     '@media (max-width:600px)' : {
         fontSize: 11,  
     }
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    '@media (max-width:600px)' : {
+      top: 5,
+      right: 5, 
+    }
+  },
+  divider: {
+    width: '90%',
+  },
+  description: {
+    display: 'flex', 
+    alignItems: 'center',
   }
 });
 
@@ -78,18 +95,17 @@ function Detail  ({
 
   const classes = useStyles();
   
-  
-
-
     return(
           <Dialog
             open={true}
-            TransitionComponent={Transition}
             onClose={closeDetailWindow}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle className={classes.title} >{translation.OFFER_DETAILS[language]}</DialogTitle>
+            <IconButton aria-label="close" color="secondary" className={classes.closeButton} onClick={closeDetailWindow}>
+                <CloseIcon />
+            </IconButton>
             <DialogContent>
                 <DetailTemplate
                     details={details}
@@ -99,11 +115,13 @@ function Detail  ({
                     periods={periods}
                     types={types}
                     classes={classes}
+                    withoutIcon={false}
+                    withoutText={false}
                 />
             </DialogContent>
             <DialogActions style={{display: 'flex', justifyContent: 'center'}}>
-              <Button onClick={closeDetailWindow} size="small" variant="contained" color="primary" className={classes.button}>
-                  {translation.CLOSE[language]}
+              <Button  size="small" variant="contained" color="primary" className={classes.button}>
+                  {translation.CHOOSE_OFFER[language]}
               </Button>
             </DialogActions>
           </Dialog>

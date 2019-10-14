@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import PaymentIcon from '@material-ui/icons/Payment';
 import PersonIcon from '@material-ui/icons/Person';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import Button from '@material-ui/core/Button';
 
 
 function DetailTemplate  ({
@@ -18,85 +19,116 @@ function DetailTemplate  ({
                   operators, 
                   periods, 
                   types,
-                  withoutIcon }){
+                  withoutIcon,
+                  withoutText }){
 
-  let operatorValue = operators.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
-  let periodValue = periods.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
-  let typeValue = types.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
+  let operatorValue, periodValue, typeValue;
+  if (details && offerInfo){
+        operatorValue = operators.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
+        periodValue = periods.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
+        typeValue = types.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
+  }
+  else{
+        operatorValue = null;
+        periodValue = null;
+        typeValue = null;
+  }
 
     return(
+            <div style={{height: '100%',}}>
                 <div className={classes.details}>
                   <section className={classes.detail} >
                     {withoutIcon ? null :
-                        <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                        <div className={classes.description} >
                             <PaymentIcon className={classes.icon} /> 
                             <span className={classes.text}>{translation.MONTH_COST[language]}</span>
                         </div>
                     }
-                    <span className={classes.text}>{`${offerInfo.price} zł`}</span>
+                    {withoutText ? null :
+                        <span className={classes.text}>{`${offerInfo.price} zł`}</span>
+                    }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                   <section className={classes.detail} >
                     {withoutIcon ? null :
-                        <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                        <div className={classes.description} >
                             <PersonIcon className={classes.icon} /> 
                             <span className={classes.text}>{translation.OPERATOR[language]}</span>
                         </div>
                     }
-                      <span className={classes.text}>{operatorValue}</span>
+                    {withoutText ? null :
+                        <span className={classes.text}>{operatorValue}</span>
+                    }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                   <section className={classes.detail} >
                         {withoutIcon ? null :
-                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <div className={classes.description} >
                                 <EventNoteIcon className={classes.icon} />
                                 <span className={classes.text}>{translation.PERIOD[language]}</span>
                             </div>
                         }
-                      <span className={classes.text}>{periodValue} </span>
+                        {withoutText ? null :
+                            <span className={classes.text}>{periodValue} </span>
+                        }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                   <section className={classes.detail} >
                         {withoutIcon ? null :
-                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <div className={classes.description} >
                                 <SpeedIcon className={classes.icon} />
                                 <span className={classes.text}>{translation.SPEED[language]}</span>
                             </div>
                         }
-                      <span className={classes.text}>{`${offerInfo.speed} MB/s`}</span>
+                        {withoutText ? null :
+                            <span className={classes.text}>{`${offerInfo.speed} MB/s`}</span>
+                        }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                   <section className={classes.detail} >
                         {withoutIcon ? null :
-                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <div className={classes.description} >
                                 <RssFeedIcon className={classes.icon} />
                                 <span className={classes.text}>{translation.TYPE[language]}</span>
                             </div>
                         }
-                      <span className={classes.text}>{typeValue}</span>
+                        {withoutText ? null :
+                            <span className={classes.text}>{typeValue}</span>
+                        }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                   <section className={classes.detail} >
                         {withoutIcon ? null :
-                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <div className={classes.description} >
                                 <LocalShippingIcon className={classes.icon} />
                                 <span className={classes.text}>{translation.DELIVERY_TIME[language]}</span>
                             </div>
                         }
-                      <span className={classes.text}>{`${details.delivery_time} h`}</span>
+                        {withoutText ? null :
+                            <span className={classes.text}>{`${details.delivery_time} h`}</span>
+                        }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                   <section className={classes.detail} >
                         {withoutIcon ? null :
-                            <div style={{display: 'flex', alignItems: 'flex-end'}}>
+                            <div className={classes.description} >
                                 <LocalShippingIcon className={classes.icon} />
                                 <span className={classes.text}>{translation.DELIVERY_COST[language]}</span>
                             </div>
                         }
-                      <span className={classes.text}>{`${details.delivery_cost} zł`} </span>
+                        {withoutText ? null :
+                            <span className={classes.text}>{`${details.delivery_cost} zł`} </span>
+                        }
                   </section>
-                  <Divider style={{width: '90%'}} />
+                  <Divider className={classes.divider} />
                 </div>
+                {withoutText ? null : withoutIcon ?
+                    <Button  size="small" variant="contained" color="primary" className={classes.button}>
+                            {translation.CHOOSE_OFFER[language]}
+                    </Button>
+                : null
+                }
+            </div>
   )};
 
 DetailTemplate.propTypes = {
@@ -108,5 +140,6 @@ DetailTemplate.propTypes = {
   periods: PropTypes.array,
   types: PropTypes.array,
   withoutIcon: PropTypes.bool,
+  withoutText: PropTypes.bool,
 };
 export default DetailTemplate;

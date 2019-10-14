@@ -8,21 +8,34 @@ import Contact from "./container/Contact";
 import TermsOfUse from "./container/TermsOfUse";
 import PolicyPrivacy from "./container/PolicyPrivacy";
 import Compare from "./container/Compare";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+const theme = createMuiTheme({
+        typography: {
+          fontFamily: [
+            "Lato",
+            'Roboto',
+          ].join(','),
+        },
+      });
 
 function App ()  {
         return(
                 <Provider store={store}>
-                        <BrowserRouter>
-                                <Switch>
-                                        <Route exact path='/' component={Offers}/>
-                                        <Route exact path='/about' component={About}/>
-                                        <Route exact path='/contact' component={Contact}/>
-                                        <Route exact path='/termsofuse' component={TermsOfUse}/>
-                                        <Route exact path='/policyprivacy' component={PolicyPrivacy}/>
-                                        <Route exact path='/offers/compare' component={Compare}/>
-                                        {/*<Route exact path='/offers/selectedoffer' component={PolicyPrivacy}/>*/}
-                                </Switch>
-                        </BrowserRouter>
+                        <ThemeProvider theme={theme}>
+                                <BrowserRouter>
+                                        <Switch>
+                                                <Route exact path='/' component={Offers}/>
+                                                <Route exact path='/about' component={About}/>
+                                                <Route exact path='/contact' component={Contact}/>
+                                                <Route exact path='/termsofuse' component={TermsOfUse}/>
+                                                <Route exact path='/policyprivacy' component={PolicyPrivacy}/>
+                                                <Route exact path='/offers/compare' component={Compare}/>
+                                                {/*<Route exact path='/offers/selectedoffer' component={PolicyPrivacy}/>*/}
+                                        </Switch>
+                                </BrowserRouter>
+                        </ThemeProvider>
                 </Provider>
         )
 };

@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     marginBottom: 30,
     marginLeft: 10,
     marginRight: 10,
+    fontFamily: 'Lato'
   },
   cardTop: {
     position: 'relative',

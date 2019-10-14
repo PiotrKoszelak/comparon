@@ -5,7 +5,7 @@ import NumberOfOffers from "../../statefull/NumberOfOffers";
 
 const useStyles = makeStyles(theme => ({
         subtitle: {
-                fontFamily: 'Lato',
+                fontFamily: "Lato",
                 height: 50,
                 position: 'fixed',
                 left: 'auto',
