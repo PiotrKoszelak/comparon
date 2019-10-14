@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   root: {
     display: 'flex',
     height: '80vh',
-    top: '10vh',
+    top: '15vh',
     left: '5vw',
     width: '90vw',
     position: 'relative',
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     '@media (max-width:600px)' : {
       height: 20,
-      width: 75,  
+      width: 90,  
     }
   },
   icon : {
@@ -57,8 +57,6 @@ const useStyles = makeStyles({
     marginTop: 20,
     backgroundColor: '#bda3f0',
     marginBottom: 20,
-    marginLeft: 'auto',
-    marginRight: 'auto',
     display: 'block',
     '@media (max-width:600px)' : {
       fontSize: 9,  
@@ -96,6 +94,20 @@ const useStyles = makeStyles({
   description: {
     display: 'flex', 
     alignItems: 'center',
+  },
+  closeButton: {
+    padding: 0,
+    width: 25,
+    height: 25,
+    '@media (max-width:600px)' : {
+      width: 10,
+      height: 10,
+    }
+  },
+  actions: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   }
 });
 
@@ -109,7 +121,9 @@ function Compare  ({
                   loadedDetail,
                   loadedOfferInfo,
                   loading,
-                  isEmpty
+                  isEmpty,
+                  handleDelete,
+                  handleDrag
                   }){
 
   const classes = useStyles();
@@ -160,6 +174,7 @@ function Compare  ({
               {offerInfo.map((el, key) => (
                       <DetailTemplate
                           key={key}
+                          enableDelete={true}
                           withoutIcon={true}
                           withoutText={false}
                           details={details[key]}
@@ -169,6 +184,8 @@ function Compare  ({
                           periods={periods}
                           types={types}
                           classes={classes}
+                          handleDelete={handleDelete}
+                          handleDrag={handleDrag}
                       />
                   ))}
             </div>
@@ -189,5 +206,7 @@ function Compare  ({
   loadedOfferInfo: PropTypes.bool,
   loading: PropTypes.bool,
   isEmpty: PropTypes.bool,
+  handleDelete: PropTypes.func,
+  handleDrag: PropTypes.func,
 };
 export default Compare;

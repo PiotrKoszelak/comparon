@@ -117,6 +117,7 @@ function Detail  ({
                     classes={classes}
                     withoutIcon={false}
                     withoutText={false}
+                    enableDelete={false}
                 />
             </DialogContent>
             <DialogActions style={{display: 'flex', justifyContent: 'center'}}>

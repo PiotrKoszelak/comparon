@@ -3,10 +3,7 @@ import { connect } from "react-redux";
 import Compare from '../stateless/Compare'
 import PropTypes from "prop-types";
 import url from '../config.js'
-import translation from '../translation'
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {setNumberOffersToCompare} from "../actions";
 
 export class CompareProvider extends Component {
 
@@ -29,10 +26,8 @@ export class CompareProvider extends Component {
 
   componentDidMount() {
       const {numberOffersToCompare} = this.props;
-
       let detailsArray = [];
       let offersArray = [];
-
       if (numberOffersToCompare.length === 0){
         this.setState({isEmpty: true, loading: false});
       }
@@ -47,7 +42,6 @@ export class CompareProvider extends Component {
                     }
                   };
               }
-
               async function loadOffer() {
                     for (let el of numberOffersToCompare){
                       const response  = await fetch(`${url}/api/offer/${el}`)
@@ -58,7 +52,6 @@ export class CompareProvider extends Component {
                       }
                     };
               }
-
             const that = this;
             function load() {
               Promise.all([
@@ -72,11 +65,22 @@ export class CompareProvider extends Component {
                   that.setState({loading : false});
               })
             }
-            
             load();
-            
       }
+  }
 
+  handleDelete = (id) => {
+    const {setNumberOffersToCompare, numberOffersToCompare} = this.props;
+    const {offerInfo, details} = this.state;
+    this.setState({offerInfo : offerInfo.filter(el => el.id != id), details : details.filter(el => el.id != id)});
+    const newNumberOffersToCompare = [...numberOffersToCompare].filter(el => el != id);
+    console.log(newNumberOffersToCompare);
+    setNumberOffersToCompare(newNumberOffersToCompare);
+  }
+
+  handleDrag = (newDrag) => {
+    const {setNumberOffersToCompare} = this.props;
+    setNumberOffersToCompare(newDrag);
   }
 
   render() {
@@ -94,6 +98,8 @@ export class CompareProvider extends Component {
             loadedOfferInfo={loadedOfferInfo}
             loading={loading}
             isEmpty={isEmpty}
+            handleDelete={this.handleDelete}
+            handleDrag={this.handleDrag}
           />
         );
   }
@@ -108,6 +114,6 @@ const mapStateToProps = (state) => {
     numberOffersToCompare: state.numberOffersToCompare,
   }
 };
-const mapDispatchToProps = { };
+const mapDispatchToProps = { setNumberOffersToCompare };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CompareProvider);

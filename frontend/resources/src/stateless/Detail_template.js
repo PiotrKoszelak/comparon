@@ -9,6 +9,8 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import PersonIcon from '@material-ui/icons/Person';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 function DetailTemplate  ({
@@ -20,7 +22,9 @@ function DetailTemplate  ({
                   periods, 
                   types,
                   withoutIcon,
-                  withoutText }){
+                  withoutText,
+                  enableDelete,
+                  handleDelete}){
 
   let operatorValue, periodValue, typeValue;
   if (details && offerInfo){
@@ -122,12 +126,19 @@ function DetailTemplate  ({
                   </section>
                   <Divider className={classes.divider} />
                 </div>
-                {withoutText ? null : withoutIcon ?
-                    <Button  size="small" variant="contained" color="primary" className={classes.button}>
-                            {translation.CHOOSE_OFFER[language]}
-                    </Button>
-                : null
-                }
+                <div className={classes.actions}>
+                    {withoutText ? null : withoutIcon ?
+                        <Button  size="small" variant="contained" color="primary" className={classes.button}>
+                                {translation.CHOOSE_OFFER[language]}
+                        </Button>
+                    : null
+                    }
+                    {enableDelete !== true ? null :
+                            <IconButton aria-label="close" color="secondary" className={classes.closeButton} onClick={() => handleDelete(offerInfo.id)}>
+                                    <CloseIcon />
+                            </IconButton>
+                    }
+                </div>
             </div>
   )};
 
@@ -141,5 +152,7 @@ DetailTemplate.propTypes = {
   types: PropTypes.array,
   withoutIcon: PropTypes.bool,
   withoutText: PropTypes.bool,
+  enableDelete: PropTypes.bool,
+  handleDelete: PropTypes.func,
 };
 export default DetailTemplate;
