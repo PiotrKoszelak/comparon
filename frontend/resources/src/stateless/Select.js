@@ -19,15 +19,22 @@ const useStyles = makeStyles({
 });
 
 
-function MySelect ({label, value, handleChange, data, loaded, placeholder, language}){
+export function MultipleSelect ({label, value, handleChange, data, loaded, language}){
 
   const classes = useStyles();
   if (loaded === false){
-    return(<p>{placeholder}</p>)
+    return(<FormControl className={classes.formControl}>
+              <InputLabel >{label}</InputLabel>
+              <Select
+              value={-1}
+              >
+                  <MenuItem key={-1} value={-1}>
+                      <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
+                  </MenuItem>
+              </Select>     
+          </FormControl>)
   }  
-
-  // multiple selection
-  if (label !== translation.SORT_BY[language]){
+  else {
       return ( <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select
@@ -50,9 +57,26 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder, langu
                         ))}
                       </Select>     
           </FormControl> )}
-    else {
-      // single selection
-      return ( 
+};
+
+
+export function SingleSelect ({label, value, handleChange, data, loaded, language}){
+
+  const classes = useStyles();
+  if (loaded === false){
+    return(<FormControl className={classes.formControl}>
+              <InputLabel >{label}</InputLabel>
+              <Select
+              value={-1}
+              >
+                  <MenuItem key={-1} value={-1}>
+                      <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
+                  </MenuItem>
+              </Select>     
+          </FormControl>)
+  }  
+  else {
+    return ( 
       <FormControl className={classes.formControlBig}>
         <InputLabel >{label}</InputLabel>
         <Select
@@ -66,15 +90,21 @@ function MySelect ({label, value, handleChange, data, loaded, placeholder, langu
           ))}
         </Select>     
       </FormControl> )}
-
 };
 
-MySelect.propTypes = {
+
+MultipleSelect.propTypes = {
   data: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  value: PropTypes.array.isRequired,
+  value: PropTypes.array,
 };
-export default MySelect;
+
+SingleSelect.propTypes = {
+  data: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  loaded: PropTypes.bool.isRequired,
+  value: PropTypes.array,
+};

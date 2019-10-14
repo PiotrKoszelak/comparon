@@ -39,14 +39,19 @@ class TypeListCreate(generics.ListCreateAPIView):
     serializer_class = TypeSerializer
 
 # contacts
-class ContactListCreate(generics.RetrieveUpdateDestroyAPIView):
+class Contact(generics.RetrieveUpdateDestroyAPIView):
     queryset = Contacts.objects.all()
     serializer_class = ContactSerializer
 
 # Offer detail
-class OfferDetailListCreate(generics.RetrieveUpdateDestroyAPIView):
+class OfferDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Offer_details.objects.all()
     serializer_class = OfferDetailSerializer
+
+# Simple offer
+class SimpleOffer(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Offers.objects.all()
+    serializer_class = OfferSerializer
 
 # Parameters
 class ParametersListCreate(generics.ListCreateAPIView):

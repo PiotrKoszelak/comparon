@@ -29,7 +29,7 @@ class SelectSpeed extends React.Component {
     this.props.selectSpeed(val);
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps) => {
     const {maxParam} = this.props;
     const {maxSpeed} = this.state;
 
@@ -39,7 +39,7 @@ class SelectSpeed extends React.Component {
       }));
       this.setState({maxSpeed : maxSpeedVal.value});
     }
-    else if (maxParam.length === 0){
+    else if (maxParam.length === 0 && maxParam !== prevProps.maxParam){
       this.setState({maxSpeed : 1000});
     }
   }

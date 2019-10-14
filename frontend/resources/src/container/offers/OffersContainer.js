@@ -1,6 +1,5 @@
 import React from "react";
 import OffersProvider from "../../statefull/OffersProvider";
-import DetailProvider from "../../statefull/DetailProvider";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +27,6 @@ function OffersContainer () {
                 
                 <section className={classes.data}>
                         <OffersProvider />
-                        <DetailProvider />
                 </section>
 
 

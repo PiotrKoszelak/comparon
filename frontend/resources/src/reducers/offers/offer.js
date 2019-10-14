@@ -1,6 +1,6 @@
 
 //offer
-export const offers = (state = [], action) => { 
+export const offers = (state = null, action) => { 
         switch (action.type) { 
           case 'FETCH_OFFERS_SUCCESS':
             return [
@@ -12,7 +12,7 @@ export const offers = (state = [], action) => {
       }
 
 //selected offer id
-export const selectedOffer = (state = {id: 0}, action) => { 
+export const selectedOffer = (state = -1, action) => { 
   switch (action.type) { 
     case 'SELECT_OFFER':
       return action.selectedOffer;

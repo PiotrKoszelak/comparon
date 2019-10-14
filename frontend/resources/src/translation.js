@@ -120,6 +120,10 @@ const translation = {
         pl: 'Kontakt',
         en: 'Contact'
     },
+    CHOOSE_OFFER : {
+        pl: 'Wybierz ofertę',
+        en: 'Choose the offer'
+    },
 };
 
 export default  translation;

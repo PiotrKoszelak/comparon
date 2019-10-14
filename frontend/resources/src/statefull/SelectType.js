@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import { MultipleSelect } from "../stateless/Select";
 import { typesFetched, selectType } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -18,7 +18,6 @@ class SelectType extends React.Component {
 
     state = {
       loaded: false,
-      placeholder: "",
     };
 
   handleChange = (event) => {
@@ -27,25 +26,25 @@ class SelectType extends React.Component {
   }
 
   componentDidMount() {
-    const {language} = this.props;
     fetch(`${url}/api/type/`)
       .then(response => {
-        if (response.status !== 200) {
-          return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] });
+        if (response.status === 200) {
+          this.setState({loaded: true });
+          return response.json();
         }
-        return response.json();
-      })
-      .then(data => this.props.typesFetched(data), this.setState({loaded: true }))
-      .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
+        else{
+          return []
+        }})
+      .then(data => this.props.typesFetched(data))
+      .catch();
   }
     
     render(){
-        const {loaded, placeholder} = this.state;
+        const {loaded} = this.state;
         const {types, selectedType, language} = this.props;
         return (
-              <MySelect 
+              <MultipleSelect 
                 loaded={loaded} 
-                placeholder={placeholder}
                 label={translation.TYPE[language]} 
                 data={types} 
                 value={selectedType} 

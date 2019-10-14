@@ -1,5 +1,5 @@
 import React from "react";
-import MySelect from "../stateless/Select";
+import { MultipleSelect } from "../stateless/Select";
 import { periodsFetched, selectPeriod } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -18,7 +18,6 @@ class SelectPeriod extends React.Component {
 
     state = {
       loaded: false,
-      placeholder: "",
     };
 
   handleChange = (event) => {
@@ -27,25 +26,25 @@ class SelectPeriod extends React.Component {
   }
 
   componentDidMount() {
-    const {language} = this.props;
     fetch(`${url}/api/period/`)
-      .then(response => {
-        if (response.status !== 200) {
-          return this.setState({ placeholder:  translation.DOWNLOAD_ERROR[language] });
-        }
+    .then(response => {
+      if (response.status === 200) {
+        this.setState({loaded: true });
         return response.json();
-      })
-      .then(data => this.props.periodsFetched(data), this.setState({loaded: true }))
-      .catch(() => {return this.setState({ placeholder: translation.DOWNLOAD_ERROR[language] })});
+      }
+      else{
+        return []
+      }})
+    .then(data => this.props.periodsFetched(data))
+    .catch();
   }
     
     render(){
-        const {loaded, placeholder} = this.state;
+        const {loaded} = this.state;
         const {periods, selectedPeriod, language} = this.props;
         return (
-              <MySelect 
+              <MultipleSelect 
                 loaded={loaded} 
-                placeholder={placeholder}
                 label={translation.PERIOD[language]} 
                 data={periods} 
                 value={selectedPeriod} 

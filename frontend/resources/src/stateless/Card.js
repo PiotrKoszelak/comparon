@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     marginBottom: 30,
     marginLeft: 10,
     marginRight: 10,
+    fontFamily: 'Lato'
   },
   cardTop: {
     position: 'relative',
@@ -88,7 +89,6 @@ function MyCard ({ operator,
                    selectToCompare, 
                    language,  
                    operators,
-                   cities,
                    periods,
                    types,
                    numberOffersToCompare}){
@@ -103,7 +103,7 @@ function MyCard ({ operator,
               <section className={classes.cardTop}>
                 <CardMedia
                   className={classes.media}
-                  image =  {require(`../img/${operatorValue}.png`)}
+                  image =  {operatorValue ? require(`../img/${operatorValue}.png`) : require(`../img/default.png`)}
                   title={operatorValue}
                 />
                 <FormGroup onChange={() =>selectToCompare(id)} row >
@@ -141,7 +141,7 @@ function MyCard ({ operator,
                   </section>
               </CardContent>
             <CardActions>
-              <Button  className={classes.button} size="small" variant="contained" color="primary" onClick={() => selectOffer(id, operator, period, price, speed, type)}>
+              <Button  className={classes.button} size="small" variant="contained" color="primary" onClick={() => selectOffer(id)}>
                   {translation.OFFER_DETAILS[language]}
               </Button>
             </CardActions>

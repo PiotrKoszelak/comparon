@@ -14,7 +14,7 @@ class OtherData extends React.Component {
     fetch(`${url}/api/parameters`)
       .then(response => {
         if (response.status !== 200) {
-          return null;
+          return [];
         }
         return response.json();
       })

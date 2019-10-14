@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { selectOffer, isDetailWindowOpen, setNumberOffersToCompare } from "../actions";
+import { selectOffer, setDetailWindowOpen, setNumberOffersToCompare } from "../actions";
 import Card from '../stateless/Card';
 
 
@@ -15,19 +15,13 @@ class CardProvider extends React.Component {
         price: PropTypes.number.isRequired,
         speed: PropTypes.number.isRequired,
         selectOffer: PropTypes.func.isRequired,
-        isDetailWindowOpen: PropTypes.func.isRequired,
+        setDetailWindowOpen: PropTypes.func.isRequired,
         language: PropTypes.string.isRequired,
   }
 
-  selectOffer = (id, operator, period, price, speed, type) => {
-    let offer = {'id' : id,
-                 'operator' : operator,
-                 'period' : period,
-                 'price' : price,
-                 'speed' : speed,
-                 'type' : type };
-    this.props.selectOffer(offer);
-    this.props.isDetailWindowOpen(true);
+  selectOffer = (id) => {
+    this.props.selectOffer(id);
+    this.props.setDetailWindowOpen(true);
   }
 
   selectToCompare = (id) => {
@@ -43,7 +37,7 @@ class CardProvider extends React.Component {
 
     render(){
         
-        const {id, operator, period, price, speed, type, language, operators, cities, periods, types, numberOffersToCompare} = this.props;
+        const {id, operator, period, price, speed, type, language, operators, periods, types, numberOffersToCompare} = this.props;
         return (
           <Card
               id={id}
@@ -56,7 +50,6 @@ class CardProvider extends React.Component {
               selectToCompare={this.selectToCompare}
               language={language}
               operators={operators}
-              cities={cities}
               periods={periods}
               types={types}
               numberOffersToCompare={numberOffersToCompare}
@@ -69,7 +62,6 @@ const mapStateToProps = (state) => {
   return {
     language: state.language,
     operators: state.operators,
-    cities: state.cities,
     periods: state.periods,
     types: state.types,
     numberOffersToCompare: state.numberOffersToCompare,
@@ -77,7 +69,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
   selectOffer, 
-  isDetailWindowOpen, 
+  setDetailWindowOpen, 
   setNumberOffersToCompare
  };
 
