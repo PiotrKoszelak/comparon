@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
 import translation from "../translation"
@@ -6,6 +6,7 @@ import DetailTemplate from './Detail_template';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 const useStyles = makeStyles({
@@ -128,6 +129,42 @@ function Compare  ({
 
   const classes = useStyles();
 
+  const [offerInfoDrag, setofferInfoDrag] = useState(null);
+  const [detailsDrag, setdetailsDrag] = useState(null);
+
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
+
+  const onDragEnd = (result) => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+    const items = reorder(
+      offerInfoDrag,
+      result.source.index,
+      result.destination.index
+    );
+    handleDrag(items.map(el => {return el.id}));
+    setofferInfoDrag(items);
+  }
+
+  const getListStyle = isDraggingOver => ({
+    display: 'flex',
+    overflow: 'auto',
+  });
+
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: 'none',
+    background: isDragging ? 'lightgreen' : null,
+    ...draggableStyle,
+  });
+
   if (loading===true){
     return(
       <div className={classes.info} >
@@ -151,7 +188,7 @@ function Compare  ({
     )
   }
   else{
-    if (!offerInfo || !details){
+    if (!offerInfo || !details || offerInfo.length===0 || details.length===0){
       return (<div className={classes.info} >
         <LocalOfferIcon color='secondary' className={classes.icon} />
         <span className={classes.text}>{translation.NONE[language]}</span>
@@ -159,7 +196,9 @@ function Compare  ({
       )
     }
     else{
-                
+      if(!offerInfoDrag || offerInfoDrag.length !== offerInfo.length) setofferInfoDrag(offerInfo);
+      if(!detailsDrag || detailsDrag.length !== details.length) setdetailsDrag(details);
+      if (offerInfoDrag && detailsDrag){
         return(
           <section className={classes.root} >
             <div style={{overflowX: 'none !important'}}>
@@ -168,29 +207,56 @@ function Compare  ({
                             withoutText={true}
                             classes={classes}
                             language={language}
+                            offerInfo={{}}
+                            details={{}}
+                            operators={operators}
+                            periods={periods}
+                            types={types}
                 />
             </div>
-            <div className={classes.rootContent} >
-              {offerInfo.map((el, key) => (
-                      <DetailTemplate
-                          key={key}
-                          enableDelete={true}
-                          withoutIcon={true}
-                          withoutText={false}
-                          details={details[key]}
-                          offerInfo={offerInfo[key]}
-                          language={language}
-                          operators={operators}
-                          periods={periods}
-                          types={types}
-                          classes={classes}
-                          handleDelete={handleDelete}
-                          handleDrag={handleDrag}
-                      />
-                  ))}
-            </div>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="droppable" direction="horizontal">
+                {(provided, snapshot) => (
+                  <div className={classes.rootContent} ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)} {...provided.droppableProps}>
+                    {offerInfoDrag.map((el, key) => (
+                      <Draggable key={el.id} draggableId={el.id} index={key}>
+                        {(provided, snapshot) => (
+                          <div ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}>
+                            <DetailTemplate
+                                key={key}
+                                enableDelete={true}
+                                withoutIcon={true}
+                                withoutText={false}
+                                details={detailsDrag[key]}
+                                offerInfo={el}
+                                language={language}
+                                operators={operators}
+                                periods={periods}
+                                types={types}
+                                classes={classes}
+                                handleDelete={handleDelete}
+                            />
+                            </div>
+                        )}
+                      </Draggable>
+                    ))}
+
+                  {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </section>
-        )
+        )}
+        else{
+          return null;
+        }
     }
   }
 };
@@ -207,6 +273,5 @@ function Compare  ({
   loading: PropTypes.bool,
   isEmpty: PropTypes.bool,
   handleDelete: PropTypes.func,
-  handleDrag: PropTypes.func,
 };
 export default Compare;
