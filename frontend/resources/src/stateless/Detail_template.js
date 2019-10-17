@@ -24,7 +24,9 @@ function DetailTemplate  ({
                   withoutIcon,
                   withoutText,
                   enableDelete,
-                  handleDelete}){
+                  enableButton,
+                  handleDelete,
+                  selectOfferInComparison}){
 
   let operatorValue, periodValue, typeValue, texts;
   if (details && offerInfo && operators && periods && types){
@@ -87,8 +89,8 @@ function DetailTemplate  ({
                     ))}
                     </div>
                     <div className={classes.actions}>
-                        {withoutText ? null : withoutIcon ?
-                            <Button  size="small" variant="contained" color="primary" className={classes.button}>
+                        {enableButton ? 
+                            <Button  size="small" variant="contained" color="primary" className={classes.button} onClick={() => selectOfferInComparison(offerInfo.id)}>
                                     {translation.CHOOSE_OFFER[language]}
                             </Button>
                         : null
@@ -159,6 +161,8 @@ DetailTemplate.propTypes = {
   withoutIcon: PropTypes.bool,
   withoutText: PropTypes.bool,
   enableDelete: PropTypes.bool,
+  enableButton: PropTypes.bool,
   handleDelete: PropTypes.func,
+  selectOfferInComparison: PropTypes.func,
 };
 export default DetailTemplate;

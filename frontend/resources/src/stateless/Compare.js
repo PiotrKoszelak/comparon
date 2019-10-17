@@ -124,7 +124,8 @@ function Compare  ({
                   loading,
                   isEmpty,
                   handleDelete,
-                  handleDrag
+                  handleDrag,
+                  selectOfferInComparison
                   }){
 
   const classes = useStyles();
@@ -205,6 +206,8 @@ function Compare  ({
                 <DetailTemplate
                             withoutIcon={false}
                             withoutText={true}
+                            enableButton={false}
+                            enableDelete={false}
                             classes={classes}
                             language={language}
                             offerInfo={{}}
@@ -233,6 +236,7 @@ function Compare  ({
                                 enableDelete={true}
                                 withoutIcon={true}
                                 withoutText={false}
+                                enableButton={true}
                                 details={detailsDrag[key]}
                                 offerInfo={el}
                                 language={language}
@@ -241,6 +245,7 @@ function Compare  ({
                                 types={types}
                                 classes={classes}
                                 handleDelete={handleDelete}
+                                selectOfferInComparison={selectOfferInComparison}
                             />
                             </div>
                         )}
@@ -273,5 +278,6 @@ function Compare  ({
   loading: PropTypes.bool,
   isEmpty: PropTypes.bool,
   handleDelete: PropTypes.func,
+  selectOfferInComparison: PropTypes.func,
 };
 export default Compare;

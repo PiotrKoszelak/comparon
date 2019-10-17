@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import translation from "../translation"
 import DetailTemplate from './Detail_template';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   title: {
@@ -118,12 +119,15 @@ function Detail  ({
                     withoutIcon={false}
                     withoutText={false}
                     enableDelete={false}
+                    enableButton={false}
                 />
             </DialogContent>
             <DialogActions style={{display: 'flex', justifyContent: 'center'}}>
-              <Button  size="small" variant="contained" color="primary" className={classes.button}>
-                  {translation.CHOOSE_OFFER[language]}
-              </Button>
+              <Link to="/offers/selectedoffer" style={{textDecoration: 'none', color: 'white'}}>
+                <Button  size="small" variant="contained" color="primary" className={classes.button}>
+                    {translation.CHOOSE_OFFER[language]}
+                </Button>
+              </Link>
             </DialogActions>
           </Dialog>
   )};

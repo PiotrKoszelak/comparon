@@ -124,6 +124,11 @@ const translation = {
         pl: 'Wybierz ofertę',
         en: 'Choose the offer'
     },
+    SELECTED_OFFER : {
+        pl: 'Wybrana oferta',
+        en: 'Selected offer'
+    },
+
 };
 
 export default  translation;

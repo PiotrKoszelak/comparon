@@ -8,6 +8,7 @@ import Contact from "./container/Contact";
 import TermsOfUse from "./container/TermsOfUse";
 import PolicyPrivacy from "./container/PolicyPrivacy";
 import Compare from "./container/Compare";
+import SelectedOffer from "./container/SelectedOffer";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -32,7 +33,7 @@ function App ()  {
                                                 <Route exact path='/termsofuse' component={TermsOfUse}/>
                                                 <Route exact path='/policyprivacy' component={PolicyPrivacy}/>
                                                 <Route exact path='/offers/compare' component={Compare}/>
-                                                {/*<Route exact path='/offers/selectedoffer' component={PolicyPrivacy}/>*/}
+                                                <Route exact path='/offers/selectedoffer' component={SelectedOffer}/>
                                         </Switch>
                                 </BrowserRouter>
                         </ThemeProvider>

@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import Compare from '../stateless/Compare'
 import PropTypes from "prop-types";
 import url from '../config.js'
-import {setNumberOffersToCompare} from "../actions";
+import {setNumberOffersToCompare, selectOffer} from "../actions";
+import { withRouter } from "react-router-dom";
 
 export class CompareProvider extends Component {
 
@@ -70,7 +71,6 @@ export class CompareProvider extends Component {
   }
 
   handleDelete = (id) => {
-    console.log('eee')
     const {setNumberOffersToCompare, numberOffersToCompare} = this.props;
     const {offerInfo, details} = this.state;
     this.setState({offerInfo : offerInfo.filter(el => el.id != id), details : details.filter(el => el.id != id)});
@@ -81,6 +81,12 @@ export class CompareProvider extends Component {
   handleDrag = (newDrag) => {
     const {setNumberOffersToCompare} = this.props;
     setNumberOffersToCompare(newDrag);
+  }
+
+  selectOfferInComparison = (id) => {
+    const { history, selectOffer } = this.props;
+    selectOffer(id);
+    history.push('/offers/selectedoffer');
   }
 
   render() {
@@ -100,6 +106,7 @@ export class CompareProvider extends Component {
             isEmpty={isEmpty}
             handleDelete={this.handleDelete}
             handleDrag={this.handleDrag}
+            selectOfferInComparison={this.selectOfferInComparison}
           />
         );
   }
@@ -114,6 +121,6 @@ const mapStateToProps = (state) => {
     numberOffersToCompare: state.numberOffersToCompare,
   }
 };
-const mapDispatchToProps = { setNumberOffersToCompare };
+const mapDispatchToProps = { setNumberOffersToCompare, selectOffer };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompareProvider);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CompareProvider));
