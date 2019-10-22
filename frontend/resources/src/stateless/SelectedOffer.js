@@ -6,6 +6,10 @@ import DetailTemplate from './Detail_template';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import Paper from '@material-ui/core/Paper';
+import PhoneIcon from '@material-ui/icons/Phone';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import TextField from '@material-ui/core/TextField';
 
 
 const useStyles = makeStyles({
@@ -16,10 +20,24 @@ const useStyles = makeStyles({
     left: '5vw',
     width: '90vw',
     position: 'relative',
+    justifyContent: 'space-around',
+    '@media (max-width:600px)' : {
+      top: '3vh',
+      flexDirection: 'column', 
+      alignItems: 'center',
+    }
   },
-  rootContent : {
+  rootContent: {
     display: 'flex',
+  },
+  contactContent : {
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'flex-start',
+  },
+  offerContent : {
+    display: 'flex',
+    justifyContent: 'center',
     overflowX: 'auto',
   },
   details: {
@@ -108,6 +126,50 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
+  },
+  phone: {
+    padding: 20,
+    height: 30,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '30vw',
+    '@media (max-width:600px)' : {
+      width: '50vw',
+    }
+  },
+  phoneNumber: {
+    fontFamily: 'Lato',
+    fontSize: 20,
+    '@media (max-width:600px)' : {
+      fontSize: 15,
+    }
+  },
+  email: {
+    marginTop: 30,
+    padding: 20,
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '30vw',
+    flexDirection: 'column',
+    '@media (max-width:600px)' : {
+      width: '50vw',
+    }
+  },
+  emailHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
+  },
+  emailContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    width: '80%',
+  },
+  input : {
   }
 });
 
@@ -126,6 +188,9 @@ function SelectedOffer  ({
                   }){
 
   const classes = useStyles();
+
+  const [userEmail, setUserEmail] = useState('');
+  const [userComment, setuserComment] = useState('');
 
   if (loading===true){
     return(
@@ -153,6 +218,7 @@ function SelectedOffer  ({
     else{
         return(
           <section className={classes.root} >
+            <div className={classes.rootContent}>
                   <div style={{overflowX: 'none !important'}}>
                       <DetailTemplate
                                   withoutIcon={false}
@@ -168,7 +234,7 @@ function SelectedOffer  ({
                                   types={types}
                       />
                   </div>
-                  <div className={classes.rootContent} >
+                  <div className={classes.offerContent} >
                         <DetailTemplate
                             enableDelete={false}
                             withoutIcon={true}
@@ -183,6 +249,44 @@ function SelectedOffer  ({
                             classes={classes}
                         />
                   </div>
+            </div>
+            <div className={classes.contactContent}>
+            <Paper className={classes.phone}>
+              <PhoneIcon />
+                <p className={classes.phoneNumber}>{contact.phone}</p>
+            </Paper>
+            <Paper className={classes.email}>
+              <div className={classes.emailHeader}>
+                  <MailOutlineIcon />
+                  <TextField
+                    disabled
+                    id="standard-disabled"
+                    label={translation.EMAIL_TO[language]}
+                    defaultValue={contact.email}
+                    className={classes.input}
+                    margin="normal"
+                  />
+              </div>
+              < div className={classes.emailContent}>
+                  <TextField
+                    id="standard-disabled"
+                    label={translation.YOUR_EMAIL[language]}
+                    defaultValue={userEmail}
+                    className={classes.input}
+                    margin="normal"
+                  />
+                  <TextField
+                    multiline
+                    id="standard-disabled"
+                    label={translation.COMMENT[language]}
+                    defaultValue={userComment}
+                    className={classes.input}
+                    margin="normal"
+                  />
+              </div>
+            </Paper>
+            </div>
+
           </section>
         )
     }

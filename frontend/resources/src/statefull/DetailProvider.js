@@ -58,7 +58,7 @@ export class DetailProvider extends Component {
   }
 
   render() {
-    const {language, operators, periods, types, selectedOffer} = this.props;
+    const {language, operators, periods, types, selectedOffer, setDetailWindowOpen} = this.props;
     const {loadedDetail, details, loadedOfferInfo, offerInfo} = this.state;
 
     if (loadedDetail===true && loadedOfferInfo===true){
@@ -71,12 +71,18 @@ export class DetailProvider extends Component {
             operators={operators}
             periods={periods}
             types={types}
+            setDetailWindowOpen={setDetailWindowOpen}
           />
         );
     }
     else if (loadedDetail===false || loadedOfferInfo===false){
         return(
-          <Snackbar selectedOffer={selectedOffer} text={translation.DOWNLOAD_ERROR[language]}/>
+          <Snackbar 
+                    selectedOffer={selectedOffer} 
+                    text={translation.DOWNLOAD_ERROR[language]} 
+                    vertical={'bottom'}
+                    horizontal={'center'}
+          />
         )
     }
     else{

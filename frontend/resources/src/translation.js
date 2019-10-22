@@ -128,6 +128,22 @@ const translation = {
         pl: 'Wybrana oferta',
         en: 'Selected offer'
     },
+    DRAGANDDROP : {
+        pl: 'Złap i przesuwaj oferty, aby zmienić ich kolejność',
+        en: 'Drag and drop offers to change their order'
+    },
+    EMAIL_TO : {
+        pl: 'Wyślij do',
+        en: 'Send to'
+    },
+    YOUR_EMAIL : {
+        pl: 'Twój e-mail',
+        en: 'Your e-mail'
+    },
+    COMMENT : {
+        pl: 'Komentarz',
+        en: 'Comment'
+    },
 
 };
 

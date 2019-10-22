@@ -7,6 +7,7 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Snackbar from './Snackbar'
 
 
 const useStyles = makeStyles({
@@ -133,11 +134,14 @@ function Compare  ({
   const [offerInfoDrag, setofferInfoDrag] = useState(null);
   const [detailsDrag, setdetailsDrag] = useState(null);
 
-  const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
+  const reorder = (list, detailList, startIndex, endIndex) => {
+    const resultList = Array.from(list);
+    const [removedFromList] = resultList.splice(startIndex, 1);
+    resultList.splice(endIndex, 0, removedFromList);
+    const resultDetailList = Array.from(detailList);
+    const [removedFromDetailList] = resultDetailList.splice(startIndex, 1);
+    resultDetailList.splice(endIndex, 0, removedFromDetailList);
+    return [resultList,resultDetailList];
   };
 
   const onDragEnd = (result) => {
@@ -147,11 +151,13 @@ function Compare  ({
     }
     const items = reorder(
       offerInfoDrag,
+      detailsDrag,
       result.source.index,
       result.destination.index
     );
-    handleDrag(items.map(el => {return el.id}));
-    setofferInfoDrag(items);
+    handleDrag(items[0].map(el => {return el.id}));
+    setofferInfoDrag(items[0]);
+    setdetailsDrag(items[1]);
   }
 
   const getListStyle = isDraggingOver => ({
@@ -202,6 +208,11 @@ function Compare  ({
       if (offerInfoDrag && detailsDrag){
         return(
           <section className={classes.root} >
+            <Snackbar 
+                    text={translation.DRAGANDDROP[language]} 
+                    vertical={'bottom'}
+                    horizontal={'right'}
+          />
             <div style={{overflowX: 'none !important'}}>
                 <DetailTemplate
                             withoutIcon={false}

@@ -91,7 +91,8 @@ function Detail  ({
                   language, 
                   operators,
                   periods,
-                  types
+                  types,
+                  setDetailWindowOpen
                   }){
 
   const classes = useStyles();
@@ -124,7 +125,7 @@ function Detail  ({
             </DialogContent>
             <DialogActions style={{display: 'flex', justifyContent: 'center'}}>
               <Link to="/offers/selectedoffer" style={{textDecoration: 'none', color: 'white'}}>
-                <Button  size="small" variant="contained" color="primary" className={classes.button}>
+                <Button  size="small" variant="contained" color="primary" className={classes.button} onClick={() => setDetailWindowOpen(false)}>
                     {translation.CHOOSE_OFFER[language]}
                 </Button>
               </Link>

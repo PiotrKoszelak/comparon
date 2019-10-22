@@ -15,11 +15,11 @@ export class SelectedOfferProvider extends Component {
   }
 
   state = {
-    details : [],
+    details : {},
     loadedDetail: false,
-    offerInfo : [],
+    offerInfo : {},
     loadedOfferInfo: false,
-    contact : [],
+    contact : {},
     loadedContact: false,
     loading: true,
     isEmpty: false,
@@ -67,6 +67,7 @@ export class SelectedOfferProvider extends Component {
   render() {
     const {language, operators, periods, types} = this.props;
     const {loadedDetail, details, loadedOfferInfo, offerInfo, loading, contact, loadedContact} = this.state;
+
         return(
           < SelectedOffer
             details={details}
