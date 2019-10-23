@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Snackbar from './Snackbar'
 
 
 const useStyles = makeStyles({
@@ -197,8 +198,9 @@ function SelectedOffer  ({
 
   const [userEmail, setUserEmail] = useState('');
   const [userComment, setuserComment] = useState('');
-  const [emailValidation, setEmailValidation] = useState(true);
-  const [commentNotNull, setCommentNotNull] = useState(true);
+  const [emailValidation, setEmailValidation] = useState(null);
+  const [commentNotNull, setCommentNotNull] = useState(null);
+  const [isSend, setIsSend] = useState(null);
 
   const handleChange = (event) => {
     if (event.target.id === 'email'){
@@ -217,7 +219,6 @@ function SelectedOffer  ({
       setEmailValidation(false);
     }
     else{
-      console.log(emailRegex.test(userEmail));
       emailRegex.test(userEmail) ? setEmailValidation(true) : setEmailValidation(false);
     } 
     if (!userComment){
@@ -225,7 +226,10 @@ function SelectedOffer  ({
     }
     else{
       setCommentNotNull(true);
-    } 
+    }
+    if (emailValidation===true && commentNotNull===true){
+      setIsSend(true);
+    }
   }
 
 
@@ -256,6 +260,22 @@ function SelectedOffer  ({
     else{
         return(
           <section className={classes.root} >
+            {isSend===true ? 
+              <Snackbar 
+                  text={translation.EMAIL_SEND_CORRECTLY[language]} 
+                  vertical={'top'}
+                  horizontal={'center'}
+              />
+              :
+              isSend===false ?
+              <Snackbar 
+                  text={translation.EMAIL_SEND_INCORRECTLY[language]} 
+                  vertical={'top'}
+                  horizontal={'center'}
+              />
+              :
+              null
+            }
             <div className={classes.rootContent}>
                   <div style={{overflowX: 'none !important'}}>
                       <DetailTemplate
@@ -315,7 +335,7 @@ function SelectedOffer  ({
                       margin="normal"
                       onChange={handleChange}
                     />
-                    {emailValidation ? null : <FormHelperText id="my-helper-text-email" className={classes.helper}>{translation.EMAIL_NOT_VALID[language]}</FormHelperText>}
+                    {emailValidation===true ? null : emailValidation===false ? <FormHelperText id="my-helper-text-email" className={classes.helper}>{translation.EMAIL_NOT_VALID[language]}</FormHelperText> : null}
                 </FormControl>
                 <FormControl>
                   <TextField
@@ -327,7 +347,7 @@ function SelectedOffer  ({
                     margin="normal"
                     onChange={handleChange}
                   />
-                  {commentNotNull ? null : <FormHelperText id="my-helper-text-comment" className={classes.helper}>{translation.COMMENT_IS_NULL[language]}</FormHelperText>}
+                  {commentNotNull===true ? null : commentNotNull===false ? <FormHelperText id="my-helper-text-comment" className={classes.helper}>{translation.COMMENT_IS_NULL[language]}</FormHelperText> : null}
                 </FormControl>
               </div>
               <Button  size="small" variant="contained" color="primary" className={classes.button} onClick={() => sendMessage()}>

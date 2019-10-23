@@ -156,6 +156,14 @@ const translation = {
         pl: 'Komentarz nie może być pusty',
         en: 'Comment cannot be empty'
     },
+    EMAIL_SEND_CORRECTLY : {
+        pl: 'Wiadomość wysłana prawidłowo',
+        en: 'Message sent correctly'
+    },
+    EMAIL_SEND_INCORRECTLY : {
+        pl: 'Wiadomość nie została wysłana',
+        en: 'Message was not sent'
+    },
 };
 
 export default  translation;
