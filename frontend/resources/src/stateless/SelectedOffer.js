@@ -10,6 +10,9 @@ import Paper from '@material-ui/core/Paper';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 
 const useStyles = makeStyles({
@@ -169,8 +172,9 @@ const useStyles = makeStyles({
     justifyContent: 'space-around',
     width: '80%',
   },
-  input : {
-  }
+  helper : {
+    color: 'red'
+  },
 });
 
 function SelectedOffer  ({
@@ -189,8 +193,42 @@ function SelectedOffer  ({
 
   const classes = useStyles();
 
+  const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
   const [userEmail, setUserEmail] = useState('');
   const [userComment, setuserComment] = useState('');
+  const [emailValidation, setEmailValidation] = useState(true);
+  const [commentNotNull, setCommentNotNull] = useState(true);
+
+  const handleChange = (event) => {
+    if (event.target.id === 'email'){
+      setUserEmail(event.target.value);
+      if (emailRegex.test(event.target.value)) setEmailValidation(true);
+    }
+    else if (event.target.id === 'comment'){
+      setuserComment(event.target.value);
+      if (event.target.value) setCommentNotNull(true);
+    }
+
+  }
+
+  const sendMessage = () => {
+    if (!userEmail){
+      setEmailValidation(false);
+    }
+    else{
+      console.log(emailRegex.test(userEmail));
+      emailRegex.test(userEmail) ? setEmailValidation(true) : setEmailValidation(false);
+    } 
+    if (!userComment){
+      setCommentNotNull(false);
+    }
+    else{
+      setCommentNotNull(true);
+    } 
+  }
+
+
 
   if (loading===true){
     return(
@@ -268,22 +306,33 @@ function SelectedOffer  ({
                   />
               </div>
               < div className={classes.emailContent}>
-                  <TextField
-                    id="standard-disabled"
-                    label={translation.YOUR_EMAIL[language]}
-                    defaultValue={userEmail}
-                    className={classes.input}
-                    margin="normal"
-                  />
+                <FormControl>
+                    <TextField
+                      id="email"
+                      label={translation.YOUR_EMAIL[language]}
+                      defaultValue={userEmail}
+                      className={classes.input}
+                      margin="normal"
+                      onChange={handleChange}
+                    />
+                    {emailValidation ? null : <FormHelperText id="my-helper-text-email" className={classes.helper}>{translation.EMAIL_NOT_VALID[language]}</FormHelperText>}
+                </FormControl>
+                <FormControl>
                   <TextField
                     multiline
-                    id="standard-disabled"
+                    id="comment"
                     label={translation.COMMENT[language]}
                     defaultValue={userComment}
                     className={classes.input}
                     margin="normal"
+                    onChange={handleChange}
                   />
+                  {commentNotNull ? null : <FormHelperText id="my-helper-text-comment" className={classes.helper}>{translation.COMMENT_IS_NULL[language]}</FormHelperText>}
+                </FormControl>
               </div>
+              <Button  size="small" variant="contained" color="primary" className={classes.button} onClick={() => sendMessage()}>
+                    {translation.SEND[language]}
+              </Button>
             </Paper>
             </div>
 

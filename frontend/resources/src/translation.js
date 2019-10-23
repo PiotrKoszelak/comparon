@@ -144,7 +144,18 @@ const translation = {
         pl: 'Komentarz',
         en: 'Comment'
     },
-
+    SEND : {
+        pl: 'Wyślij',
+        en: 'Send'
+    },
+    EMAIL_NOT_VALID : {
+        pl: 'E-mail jest niepoprawny',
+        en: 'E-mail is incorrect'
+    },
+    COMMENT_IS_NULL : {
+        pl: 'Komentarz nie może być pusty',
+        en: 'Comment cannot be empty'
+    },
 };
 
 export default  translation;
