@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     position: 'relative',
     justifyContent: 'space-around',
     '@media (max-width:600px)' : {
-      top: '3vh',
+      top: '20vh',
       flexDirection: 'column', 
       alignItems: 'center',
     }
@@ -38,6 +38,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
+    '@media (max-width:600px)' : {
+      marginTop: 30,
+    }
   },
   offerContent : {
     display: 'flex',
