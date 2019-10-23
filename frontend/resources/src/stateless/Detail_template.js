@@ -24,123 +24,131 @@ function DetailTemplate  ({
                   withoutIcon,
                   withoutText,
                   enableDelete,
-                  handleDelete}){
+                  enableButton,
+                  handleDelete,
+                  selectOfferInComparison}){
 
-  let operatorValue, periodValue, typeValue;
-  if (details && offerInfo){
-        operatorValue = operators.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
-        periodValue = periods.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
-        typeValue = types.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
-  }
-  else{
-        operatorValue = null;
-        periodValue = null;
-        typeValue = null;
+  let operatorValue, periodValue, typeValue, texts;
+  if (details && offerInfo && operators && periods && types){
+            operatorValue = withoutText ? null : operators.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
+            periodValue = withoutText ? null :periods.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
+            typeValue = withoutText ? null : types.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
+            texts = [
+                {id: 1,
+                    iconText: translation.MONTH_COST[language],
+                    text: withoutText ? null : `${offerInfo.price} zł`,
+                    icon: 'PaymentIcon',
+                },
+                {id: 2,
+                    iconText: translation.OPERATOR[language],
+                    text: withoutText ? null : operatorValue ,
+                    icon: 'PersonIcon',
+                },
+                {id: 3,
+                    iconText: translation.PERIOD[language],
+                    text: withoutText ? null : periodValue ,
+                    icon: 'EventNoteIcon',
+                },
+                {id: 4,
+                    iconText: translation.SPEED[language],
+                    text: withoutText ? null : `${offerInfo.speed} MB/s` ,
+                    icon: 'SpeedIcon',
+                },
+                {id: 5,
+                    iconText: translation.TYPE[language],
+                    text: withoutText ? null : typeValue ,
+                    icon: 'RssFeedIcon',
+                },
+                {id: 6,
+                    iconText: translation.DELIVERY_TIME[language],
+                    text: withoutText ? null : `${details.delivery_time} h`,
+                    icon: 'PaymentIcon',
+                },
+                {id: 7,
+                    iconText: translation.DELIVERY_COST[language],
+                    text: withoutText ? null : `${details.delivery_cost} zł`,
+                    icon: 'LocalShippingIcon',
+                },
+            ];
+
+        return(
+                <div style={{height: '100%',}}>
+                    <div className={classes.details}>
+                    {texts.map(el => (
+                        <div key={el.id} style={{width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+                            <SimpleSection 
+                                classes={classes} 
+                                withoutIcon={withoutIcon}
+                                withoutText={withoutText}
+                                iconText={el.iconText}
+                                text={el.text}
+                                icon={getIcon(el.icon, classes)}
+                            />
+                            <Divider className={classes.divider} />
+                        </div>
+                    ))}
+                    </div>
+                    <div className={classes.actions}>
+                        {enableButton ? 
+                            <Button  size="small" variant="contained" color="primary" className={classes.button} onClick={() => selectOfferInComparison(offerInfo.id)}>
+                                    {translation.CHOOSE_OFFER[language]}
+                            </Button>
+                        : null
+                        }
+                        {enableDelete !== true ? null :
+                                <IconButton aria-label="close" color="secondary" className={classes.closeButton} onClick={() => handleDelete(offerInfo.id)}>
+                                        <CloseIcon />
+                                </IconButton>
+                        }
+                    </div>
+                </div>
+    )}
+    else{
+        return null;
+    }
+};
+
+  export function SimpleSection (props){
+      const { classes, withoutIcon, withoutText, iconText, text, icon } = props;
+      return (
+            <section className={classes.detail} >
+            {withoutIcon ? null :
+                <div className={classes.description} >
+                    {icon}
+                    <span className={classes.text}>{iconText}</span>
+                </div>
+            }
+            {withoutText ? null :
+                <span className={classes.text}>{text}</span>
+            }
+            </section>
+      )
   }
 
-    return(
-            <div style={{height: '100%',}}>
-                <div className={classes.details}>
-                  <section className={classes.detail} >
-                    {withoutIcon ? null :
-                        <div className={classes.description} >
-                            <PaymentIcon className={classes.icon} /> 
-                            <span className={classes.text}>{translation.MONTH_COST[language]}</span>
-                        </div>
-                    }
-                    {withoutText ? null :
-                        <span className={classes.text}>{`${offerInfo.price} zł`}</span>
-                    }
-                  </section>
-                  <Divider className={classes.divider} />
-                  <section className={classes.detail} >
-                    {withoutIcon ? null :
-                        <div className={classes.description} >
-                            <PersonIcon className={classes.icon} /> 
-                            <span className={classes.text}>{translation.OPERATOR[language]}</span>
-                        </div>
-                    }
-                    {withoutText ? null :
-                        <span className={classes.text}>{operatorValue}</span>
-                    }
-                  </section>
-                  <Divider className={classes.divider} />
-                  <section className={classes.detail} >
-                        {withoutIcon ? null :
-                            <div className={classes.description} >
-                                <EventNoteIcon className={classes.icon} />
-                                <span className={classes.text}>{translation.PERIOD[language]}</span>
-                            </div>
-                        }
-                        {withoutText ? null :
-                            <span className={classes.text}>{periodValue} </span>
-                        }
-                  </section>
-                  <Divider className={classes.divider} />
-                  <section className={classes.detail} >
-                        {withoutIcon ? null :
-                            <div className={classes.description} >
-                                <SpeedIcon className={classes.icon} />
-                                <span className={classes.text}>{translation.SPEED[language]}</span>
-                            </div>
-                        }
-                        {withoutText ? null :
-                            <span className={classes.text}>{`${offerInfo.speed} MB/s`}</span>
-                        }
-                  </section>
-                  <Divider className={classes.divider} />
-                  <section className={classes.detail} >
-                        {withoutIcon ? null :
-                            <div className={classes.description} >
-                                <RssFeedIcon className={classes.icon} />
-                                <span className={classes.text}>{translation.TYPE[language]}</span>
-                            </div>
-                        }
-                        {withoutText ? null :
-                            <span className={classes.text}>{typeValue}</span>
-                        }
-                  </section>
-                  <Divider className={classes.divider} />
-                  <section className={classes.detail} >
-                        {withoutIcon ? null :
-                            <div className={classes.description} >
-                                <LocalShippingIcon className={classes.icon} />
-                                <span className={classes.text}>{translation.DELIVERY_TIME[language]}</span>
-                            </div>
-                        }
-                        {withoutText ? null :
-                            <span className={classes.text}>{`${details.delivery_time} h`}</span>
-                        }
-                  </section>
-                  <Divider className={classes.divider} />
-                  <section className={classes.detail} >
-                        {withoutIcon ? null :
-                            <div className={classes.description} >
-                                <LocalShippingIcon className={classes.icon} />
-                                <span className={classes.text}>{translation.DELIVERY_COST[language]}</span>
-                            </div>
-                        }
-                        {withoutText ? null :
-                            <span className={classes.text}>{`${details.delivery_cost} zł`} </span>
-                        }
-                  </section>
-                  <Divider className={classes.divider} />
-                </div>
-                <div className={classes.actions}>
-                    {withoutText ? null : withoutIcon ?
-                        <Button  size="small" variant="contained" color="primary" className={classes.button}>
-                                {translation.CHOOSE_OFFER[language]}
-                        </Button>
-                    : null
-                    }
-                    {enableDelete !== true ? null :
-                            <IconButton aria-label="close" color="secondary" className={classes.closeButton} onClick={() => handleDelete(offerInfo.id)}>
-                                    <CloseIcon />
-                            </IconButton>
-                    }
-                </div>
-            </div>
-  )};
+  export function getIcon (icon, classes){
+
+    switch (icon){
+        case 'PaymentIcon':
+            return <PaymentIcon className={classes.icon} />
+            break;
+        case 'PersonIcon':
+            return <PersonIcon className={classes.icon} />
+            break;
+        case 'EventNoteIcon':
+            return <EventNoteIcon className={classes.icon} />
+            break;
+        case 'SpeedIcon':
+            return <SpeedIcon className={classes.icon} />
+            break;
+        case 'RssFeedIcon':
+            return <RssFeedIcon className={classes.icon} />
+            break;
+        case 'LocalShippingIcon':
+            return <LocalShippingIcon className={classes.icon} />
+            break;
+        return null;
+    }
+}
 
 DetailTemplate.propTypes = {
   offerInfo: PropTypes.object,
@@ -153,6 +161,8 @@ DetailTemplate.propTypes = {
   withoutIcon: PropTypes.bool,
   withoutText: PropTypes.bool,
   enableDelete: PropTypes.bool,
+  enableButton: PropTypes.bool,
   handleDelete: PropTypes.func,
+  selectOfferInComparison: PropTypes.func,
 };
 export default DetailTemplate;

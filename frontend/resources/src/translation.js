@@ -124,6 +124,46 @@ const translation = {
         pl: 'Wybierz ofertę',
         en: 'Choose the offer'
     },
+    SELECTED_OFFER : {
+        pl: 'Wybrana oferta',
+        en: 'Selected offer'
+    },
+    DRAGANDDROP : {
+        pl: 'Złap i przesuwaj oferty, aby zmienić ich kolejność',
+        en: 'Drag and drop offers to change their order'
+    },
+    EMAIL_TO : {
+        pl: 'Wyślij do',
+        en: 'Send to'
+    },
+    YOUR_EMAIL : {
+        pl: 'Twój e-mail',
+        en: 'Your e-mail'
+    },
+    COMMENT : {
+        pl: 'Komentarz',
+        en: 'Comment'
+    },
+    SEND : {
+        pl: 'Wyślij',
+        en: 'Send'
+    },
+    EMAIL_NOT_VALID : {
+        pl: 'E-mail jest niepoprawny',
+        en: 'E-mail is incorrect'
+    },
+    COMMENT_IS_NULL : {
+        pl: 'Komentarz nie może być pusty',
+        en: 'Comment cannot be empty'
+    },
+    EMAIL_SEND_CORRECTLY : {
+        pl: 'Wiadomość wysłana prawidłowo',
+        en: 'Message sent correctly'
+    },
+    EMAIL_SEND_INCORRECTLY : {
+        pl: 'Wiadomość nie została wysłana',
+        en: 'Message was not sent'
+    },
 };
 
 export default  translation;

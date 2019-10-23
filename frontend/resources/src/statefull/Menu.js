@@ -53,6 +53,7 @@ class Menu extends Component {
                     {title==='TermsOfUse' ? translation.TERMS_OF_USE[language] : null}
                     {title==='PolicyPrivacy' ? translation.POLICY_PRIVACY[language] : null}
                     {title==='Compare' ? translation.COMPARE[language] : null}
+                    {title==='SelectedOffer' ? translation.SELECTED_OFFER[language] : null}
                 </Typography>
             </span>
             <span>
