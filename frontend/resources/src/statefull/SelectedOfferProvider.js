@@ -64,6 +64,15 @@ export class SelectedOfferProvider extends Component {
     load(); 
   }
 
+  sendMessageToServer= async () => {
+      const response  = await fetch(`${url}/api/offer/sendmessage`, {
+        method: "post",
+        body: "name=Marcin&surname=Nowak"
+      });
+      const json = await response.json();
+      return json.success;
+  }
+
   render() {
     const {language, operators, periods, types} = this.props;
     const {loadedDetail, details, loadedOfferInfo, offerInfo, loading, contact, loadedContact} = this.state;
@@ -81,6 +90,7 @@ export class SelectedOfferProvider extends Component {
             loading={loading}
             contact={contact}
             loadedContact={loadedContact}
+            sendMessageToServer={this.sendMessageToServer}
           />
         );
   }

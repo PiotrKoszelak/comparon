@@ -193,6 +193,7 @@ function SelectedOffer  ({
                   loading,
                   contact,
                   loadedContact,
+                  sendMessageToServer
                   }){
 
   const classes = useStyles();
@@ -231,7 +232,8 @@ function SelectedOffer  ({
       setCommentNotNull(true);
     }
     if (emailValidation===true && commentNotNull===true){
-      setIsSend(true);
+      sendMessageToServer()
+        .then(res => {res==='true' ? setIsSend(true) : setIsSend(false)})
     }
   }
 
@@ -377,5 +379,6 @@ SelectedOffer.propTypes = {
   loading: PropTypes.bool,
   contact: PropTypes.object,
   loadedContact: PropTypes.bool,
+  sendMessageToServer: PropTypes.func,
 };
 export default SelectedOffer;

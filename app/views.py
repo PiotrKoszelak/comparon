@@ -2,6 +2,10 @@ from django.shortcuts import render
 from app.models import Offers, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters
 from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer, ParametersSerializer
 from rest_framework import generics
+from rest_framework.views import APIView
+from django.core.mail import send_mail
+from rest_framework.response import Response
+from rest_framework import status
 
 # list of offers
 class OfferListCreate(generics.ListCreateAPIView):
@@ -57,3 +61,23 @@ class SimpleOffer(generics.RetrieveUpdateDestroyAPIView):
 class ParametersListCreate(generics.ListCreateAPIView):
     queryset = Parameters.objects.all()
     serializer_class = ParametersSerializer
+
+
+class SendMessage(APIView):
+
+    def post(self, request, format=None):
+        print (request)
+        try:
+            '''
+            send_mail(
+                'Subject here',
+                'Here is the message.',
+                'peter.bejlisz@gmail.com',
+                ['koszelak.piotr@gmail.com'],
+                fail_silently=False,
+            )
+            '''
+            
+            return Response({'success': 'true'}, status=status.HTTP_201_CREATED)
+        except:
+            return Response({'success': 'false'}, status=status.HTTP_400_BAD_REQUEST)
