@@ -233,7 +233,7 @@ function SelectedOffer  ({
     }
     if (emailValidation===true && commentNotNull===true){
       sendMessageToServer()
-        .then(res => {res==='true' ? setIsSend(true) : setIsSend(false)})
+        .then(res => {setIsSend(res)})
     }
   }
 

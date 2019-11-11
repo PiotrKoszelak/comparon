@@ -68,7 +68,7 @@ class SendMessage(APIView):
     def post(self, request, format=None):
         print (request)
         try:
-            '''
+            
             send_mail(
                 'Subject here',
                 'Here is the message.',
@@ -76,8 +76,8 @@ class SendMessage(APIView):
                 ['koszelak.piotr@gmail.com'],
                 fail_silently=False,
             )
-            '''
             
-            return Response({'success': 'true'}, status=status.HTTP_201_CREATED)
+            
+            return Response({'success': True}, status=status.HTTP_201_CREATED)
         except:
-            return Response({'success': 'false'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)
