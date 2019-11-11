@@ -17,34 +17,35 @@ class SelectType extends React.Component {
   }
 
     state = {
-      loaded: false,
+      isLoaded: false,
     };
 
   handleChange = (event) => {
+    const { selectType } = this.props;
     const typ = event.target.value;
-    this.props.selectType(typ);
+    selectType(typ);
   }
 
   componentDidMount() {
+    const { typesFetched } = this.props;
     fetch(`${url}/api/type/`)
       .then(response => {
         if (response.status === 200) {
-          this.setState({loaded: true });
+          this.setState({isLoaded: true });
           return response.json();
         }
         else{
           return []
         }})
-      .then(data => this.props.typesFetched(data))
-      .catch();
+      .then(data => typesFetched(data))
   }
     
     render(){
-        const {loaded} = this.state;
+        const {isLoaded} = this.state;
         const {types, selectedType, language} = this.props;
         return (
               <MultipleSelect 
-                loaded={loaded} 
+                isLoaded={isLoaded} 
                 label={translation.TYPE[language]} 
                 data={types} 
                 value={selectedType} 

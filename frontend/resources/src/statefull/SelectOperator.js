@@ -18,34 +18,36 @@ class SelectOperator extends React.Component {
   }
 
     state = {
-      loaded: false,
+      isLoaded: false,
     };
 
   handleChange = (event) => {
+    const { selectOperator } = this.props;
     const operator = event.target.value;
-    this.props.selectOperator(operator);
+    selectOperator(operator);
   }
 
   componentDidMount() {
+    const { operatorsFetched } = this.props;
     fetch(`${url}/api/operator/`)
     .then(response => {
       if (response.status === 200) {
-        this.setState({loaded: true });
+        this.setState({isLoaded: true });
         return response.json();
       }
       else{
         return []
       }})
-    .then(data => this.props.operatorsFetched(data))
+    .then(data => operatorsFetched(data))
     .catch();
   }
     
     render(){
-        const {loaded} = this.state;
+        const {isLoaded} = this.state;
         const {operators, selectedOperator, language} = this.props;
         return (
               <MultipleSelect 
-                loaded={loaded} 
+                isLoaded={isLoaded} 
                 label={translation.OPERATOR[language]} 
                 data={operators} 
                 value={selectedOperator} 

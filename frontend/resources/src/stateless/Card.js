@@ -91,7 +91,7 @@ function MyCard ({ operator,
                    operators,
                    periods,
                    types,
-                   numberOffersToCompare}){
+                   offersToCompare}){
 
   const classes = useStyles();
   let operatorValue = operators ? operators.filter((el) => {return el.id===operator})[0] ? operators.filter((el) => {return el.id===operator})[0][`value_${language}`] : null : null;
@@ -109,7 +109,7 @@ function MyCard ({ operator,
                 <FormGroup onChange={() =>selectToCompare(id)} row >
                     <FormControlLabel
                         className={classes.compare}
-                        control={<Checkbox checked={numberOffersToCompare.includes(id) ? true : false} color="secondary" />}
+                        control={<Checkbox checked={offersToCompare.includes(id) ? true : false} color="secondary" />}
                         label={translation.COMPARE[language]}
                         labelPlacement="start"
                     />

@@ -17,34 +17,35 @@ class SelectPeriod extends React.Component {
   }
 
     state = {
-      loaded: false,
+      isLoaded: false,
     };
 
   handleChange = (event) => {
+    const { selectPeriod } = this.props;
     const period = event.target.value;
-    this.props.selectPeriod(period);
+    selectPeriod(period);
   }
 
   componentDidMount() {
+    const { periodsFetched } = this.props;
     fetch(`${url}/api/period/`)
     .then(response => {
       if (response.status === 200) {
-        this.setState({loaded: true });
+        this.setState({isLoaded: true });
         return response.json();
       }
       else{
         return []
       }})
-    .then(data => this.props.periodsFetched(data))
-    .catch();
+    .then(data => periodsFetched(data))
   }
     
     render(){
-        const {loaded} = this.state;
+        const {isLoaded} = this.state;
         const {periods, selectedPeriod, language} = this.props;
         return (
               <MultipleSelect 
-                loaded={loaded} 
+                isLoaded={isLoaded} 
                 label={translation.PERIOD[language]} 
                 data={periods} 
                 value={selectedPeriod} 

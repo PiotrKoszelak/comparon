@@ -51,7 +51,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Offers  ({ loaded, 
+function Offers  ({ isLoaded, 
                     loading,
                     data, 
                     selectedOperator, 
@@ -66,12 +66,12 @@ function Offers  ({ loaded,
 
   const classes = useStyles();
 
-  if (loading===true && loaded === false){
+  if (loading===true && isLoaded === false){
     return(
       <CircularProgress className={classes.progress} color="secondary" disableShrink />
     )
   }
-  else if (loaded === false && loading === false){
+  else if (isLoaded === false && loading === false){
     return(
       <div className={classes.error}>
           <ErrorOutlineIcon color='secondary' className={classes.icon} />
@@ -86,101 +86,61 @@ function Offers  ({ loaded,
     }
     else{
       // filtering
-      let dataNew = [];
-      // if empty then show all offers
-      if (selectedOperator.length === 0 && 
-        selectedCity.length === 0 && 
-        selectedType.length === 0 && 
-        selectedPeriod.length === 0 &&
-        selectedPrice===0 &&
-        selectedSpeed===0 ) {dataNew = [...data]}
-      else{
-        let withOperator;
-        let withCity;
-        let withPeriod;
-        let withType;
-        let withSpeed;
-        let withPrice;
-        // operator filtering
-        if (selectedOperator.length !== 0){
-          withOperator = data.filter(function(el) {
-                return selectedOperator.includes(el.operator)
-            })
+      let filteredData = [...data];
+      const parametersFromSelect = [selectedOperator, selectedCity, selectedType, selectedPeriod];
+      const parametersFromSlider = [selectedPrice, selectedSpeed];
+      parametersFromSelect.map((el, key) => {
+          if (el.length !== 0){
+            switch (key){
+              case 0:
+                  filteredData = filteredData.filter(elem => el.includes(elem.operator));
+                  break
+              case 1:
+                  filteredData = filteredData.filter(elem => el.includes(elem.city));
+                  break
+              case 2:
+                  filteredData = filteredData.filter(elem => el.includes(elem.types));
+                  break
+              case 3:
+                  filteredData = filteredData.filter(elem => el.includes(elem.period));
+                  break
+            }
           }
-          else{
-            withOperator = [...data];
-          };
-        // city filtering
-        if (selectedCity.length !== 0){
-          withCity = withOperator.filter(function(el) {
-                return selectedCity.includes(el.city)
-            })
+      });
+      parametersFromSlider.map((el, key) => {
+          if (el !== 0){
+              switch (key){
+                case 0:
+                    filteredData = filteredData.filter(elem => elem.price <= el);
+                    break
+                case 1:
+                    filteredData = filteredData.filter(elem => elem.speed <= el);
+                    break
+              }
           }
-          else{
-            withCity = [...withOperator];
-          };
-          // period filtering
-        if (selectedPeriod.length !== 0){
-          withPeriod = withCity.filter(function(el) {
-                return selectedPeriod.includes(el.period)
-            })
-          }
-          else{
-            withPeriod = [...withCity];
-          };
-          // type filtering
-        if (selectedType.length !== 0){
-          withType = withPeriod.filter(function(el) {
-                return selectedType.includes(el.types)
-            })
-          }
-          else{
-            withType = [...withPeriod];
-          };
-          // price filtering
-        if (selectedPrice !== 0){
-          withPrice = withType.filter(function(el) {
-                return el.price <= selectedPrice
-            })
-          }
-          else{
-            withPrice = [...withType];
-          };
-          // speed filtering
-        if (selectedSpeed !== 0){
-          withSpeed = withPrice.filter(function(el) {
-                return el.speed <= selectedSpeed
-            })
-          }
-          else{
-            withSpeed = [...withPrice];
-          };
+      })
 
-          dataNew = [...withSpeed]
-      };
-
-      //sort
-      let dataNewSorted = [];
+      //sorting
       if (sortType===1)
-        dataNewSorted = dataNew.sort((a,b) => {
+          filteredData = filteredData.sort((a,b) => {
           return a.price - b.price
       })
       else if (sortType===2)
-        dataNewSorted = dataNew.sort((a,b) => {
+          filteredData = filteredData.sort((a,b) => {
           return b.price - a.price
       })
       else if (sortType===3)
-        dataNewSorted = dataNew.sort((a,b) => {
+          filteredData = filteredData.sort((a,b) => {
           return a.speed - b.speed
       })
       else if (sortType===4)
-        dataNewSorted = dataNew.sort((a,b) => {
+          filteredData = filteredData.sort((a,b) => {
           return b.speed - a.speed
       })
 
-      setNumberSelectedOffers(JSON.stringify(dataNew.length));
+      setNumberSelectedOffers(JSON.stringify(filteredData.length));
 
-      if (dataNew.length === 0){
+      if (filteredData.length === 0){
         return (<div className={classes.error} >
               <LocalOfferIcon color='secondary' className={classes.icon} />
               <span className={classes.text}>{translation.NONE[language]}</span>
@@ -188,7 +148,7 @@ function Offers  ({ loaded,
       }
         return(
             <section className={classes.offer} >
-            {dataNewSorted.map(el => (
+            {filteredData.map(el => (
                     < CardProvider
                         key={el.id}
                         id={el.id}
@@ -201,12 +161,12 @@ function Offers  ({ loaded,
                 ))}
             </section>
       )}
-    }
+  };
 };
 
 Offers.propTypes = {
   data: PropTypes.array,
-  loaded: PropTypes.bool.isRequired,
+  isLoaded: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   selectedOperator: PropTypes.array.isRequired,
   selectedCity: PropTypes.array.isRequired,

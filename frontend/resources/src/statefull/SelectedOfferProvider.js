@@ -16,13 +16,12 @@ export class SelectedOfferProvider extends Component {
 
   state = {
     details : {},
-    loadedDetail: false,
+    isLoadedDetail: false,
     offerInfo : {},
-    loadedOfferInfo: false,
+    isLoadedOfferInfo: false,
     contact : {},
-    loadedContact: false,
+    isLoadedContact: false,
     loading: true,
-    isEmpty: false,
   };
 
   componentDidMount() {
@@ -55,7 +54,7 @@ export class SelectedOfferProvider extends Component {
           await loadContact()
       ])
       .then(data => {
-          that.setState({details: data[0], offerInfo: data[1], contact: data[2], loadedContact: true, loadedDetail: true, loadedOfferInfo: true, loading: false});
+          that.setState({details: data[0], offerInfo: data[1], contact: data[2], isLoadedContact: true, isLoadedDetail: true, isLoadedOfferInfo: true, loading: false});
       })
       .catch((error) => {
           that.setState({loading : false});
@@ -75,7 +74,7 @@ export class SelectedOfferProvider extends Component {
 
   render() {
     const {language, operators, periods, types} = this.props;
-    const {loadedDetail, details, loadedOfferInfo, offerInfo, loading, contact, loadedContact} = this.state;
+    const {isLoadedDetail, details, isLoadedOfferInfo, offerInfo, loading, contact, isLoadedContact} = this.state;
 
         return(
           < SelectedOffer
@@ -85,11 +84,11 @@ export class SelectedOfferProvider extends Component {
             operators={operators}
             periods={periods}
             types={types}
-            loadedDetail={loadedDetail}
-            loadedOfferInfo={loadedOfferInfo}
+            isLoadedDetail={isLoadedDetail}
+            isLoadedOfferInfo={isLoadedOfferInfo}
             loading={loading}
             contact={contact}
-            loadedContact={loadedContact}
+            isLoadedContact={isLoadedContact}
             sendMessageToServer={this.sendMessageToServer}
           />
         );

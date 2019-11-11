@@ -23,7 +23,7 @@ class OffersProvider extends Component {
   }
 
   state = {
-    loaded: false,
+    isLoaded: false,
     loading: true,
   };
 
@@ -31,7 +31,7 @@ class OffersProvider extends Component {
     fetch(`${url}/api/offers/`)
     .then(response => {
       if (response.status === 200) {
-        this.setState({loaded: true, loading: false});
+        this.setState({isLoaded: true, loading: false});
         return response.json();
       }
       else{
@@ -43,7 +43,7 @@ class OffersProvider extends Component {
   }
   
   render() {
-    const {loaded, loading} = this.state;
+    const {isLoaded, loading} = this.state;
     const { offers, 
             selectedOperator, 
             selectedCity, 
@@ -58,7 +58,7 @@ class OffersProvider extends Component {
     return(
         <div>
             <Offers 
-              loaded={loaded} 
+              isLoaded={isLoaded} 
               selectedOperator={selectedOperator}
               selectedCity={selectedCity}
               data={offers} 

@@ -17,34 +17,36 @@ class SelectCity extends React.Component {
   }
 
     state = {
-      loaded: false,
+      isLoaded: false,
     };
 
   handleChange = (event) => {
+    const { selectCity } = this.props;
     const city = event.target.value;
-    this.props.selectCity(city);
+    selectCity(city);
   }
 
   componentDidMount() {
+    const { citiesFetched } = this.props;
     fetch(`${url}/api/city/`)
     .then(response => {
       if (response.status === 200) {
-        this.setState({loaded: true });
+        this.setState({isLoaded: true });
         return response.json();
       }
       else{
         return []
       }})
-    .then(data => this.props.citiesFetched(data))
+    .then(data => citiesFetched(data))
     .catch();
   }
     
     render(){
-        const {loaded} = this.state;
+        const {isLoaded} = this.state;
         const {cities, selectedCity, language} = this.props;
         return (
               <MultipleSelect 
-                loaded={loaded} 
+                isLoaded={isLoaded} 
                 label={translation.CITY[language]}
                 data={cities} 
                 value={selectedCity} 

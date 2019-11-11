@@ -19,10 +19,10 @@ const useStyles = makeStyles({
 });
 
 
-export function MultipleSelect ({label, value, handleChange, data, loaded, language}){
+export function MultipleSelect ({label, value, handleChange, data, isLoaded, language}){
 
   const classes = useStyles();
-  if (loaded === false){
+  if (isLoaded === false){
     return(<FormControl className={classes.formControl}>
               <InputLabel >{label}</InputLabel>
               <Select
@@ -60,10 +60,10 @@ export function MultipleSelect ({label, value, handleChange, data, loaded, langu
 };
 
 
-export function SingleSelect ({label, value, handleChange, data, loaded, language}){
+export function SingleSelect ({label, value, handleChange, data, isLoaded, language}){
 
   const classes = useStyles();
-  if (loaded === false){
+  if (isLoaded === false){
     return(<FormControl className={classes.formControl}>
               <InputLabel >{label}</InputLabel>
               <Select
@@ -97,7 +97,7 @@ MultipleSelect.propTypes = {
   data: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  loaded: PropTypes.bool.isRequired,
+  isLoaded: PropTypes.bool.isRequired,
   value: PropTypes.array,
 };
 
@@ -105,6 +105,6 @@ SingleSelect.propTypes = {
   data: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  loaded: PropTypes.bool.isRequired,
+  isLoaded: PropTypes.bool.isRequired,
   value: PropTypes.array,
 };

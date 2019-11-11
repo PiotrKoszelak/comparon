@@ -1,7 +1,7 @@
 import { citiesFetched, selectCity } from "./offers/city";
 import { setDetailWindowOpen} from "./offers/detail";
 import { maxParamFetched } from "./offers/maxParam";
-import { offersFetched,  selectOffer, setNumberSelectedOffers, setNumberOffersToCompare, setSortType} from "./offers/offer";
+import { offersFetched,  selectOffer, setNumberSelectedOffers, setOffersToCompare, setSortType} from "./offers/offer";
 import { operatorsFetched,  selectOperator} from "./offers/operator";
 import { periodsFetched,  selectPeriod} from "./offers/period";
 import { selectPrice} from "./offers/price";
@@ -17,7 +17,7 @@ export {
   offersFetched,
   selectOffer, 
   setNumberSelectedOffers,
-  setNumberOffersToCompare,
+  setOffersToCompare,
   operatorsFetched,
   selectOperator,
   periodsFetched,

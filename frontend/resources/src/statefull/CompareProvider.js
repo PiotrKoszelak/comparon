@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import Compare from '../stateless/Compare'
 import PropTypes from "prop-types";
 import url from '../config.js'
-import {setNumberOffersToCompare, selectOffer} from "../actions";
+import {setOffersToCompare, selectOffer} from "../actions";
 import { withRouter } from "react-router-dom";
 
 export class CompareProvider extends Component {
 
   static propTypes = {
-    numberOffersToCompare: PropTypes.array.isRequired,
+    offersToCompare: PropTypes.array.isRequired,
     language: PropTypes.string.isRequired,
     operators: PropTypes.array.isRequired,
     periods: PropTypes.array.isRequired,
@@ -26,29 +26,29 @@ export class CompareProvider extends Component {
   };
 
   componentDidMount() {
-      const {numberOffersToCompare} = this.props;
+      const {offersToCompare} = this.props;
       let detailsArray = [];
       let offersArray = [];
-      if (numberOffersToCompare.length === 0){
+      if (offersToCompare.length === 0){
         this.setState({isEmpty: true, loading: false});
       }
       else{
               async function loadDetails() {
-                  for (let el of numberOffersToCompare){
+                  for (let el of offersToCompare){
                     const response  = await fetch(`${url}/api/offerdetail/${el}`)
                     const json = await response.json();
                     detailsArray.push(json);
-                    if (numberOffersToCompare.length===detailsArray.length){
+                    if (offersToCompare.length===detailsArray.length){
                       return detailsArray;
                     }
                   };
               }
               async function loadOffer() {
-                    for (let el of numberOffersToCompare){
+                    for (let el of offersToCompare){
                       const response  = await fetch(`${url}/api/offer/${el}`)
                       const json = await response.json();
                       offersArray.push(json);
-                      if (numberOffersToCompare.length===offersArray.length){
+                      if (offersToCompare.length===offersArray.length){
                         return offersArray;
                       }
                     };
@@ -71,16 +71,16 @@ export class CompareProvider extends Component {
   }
 
   handleDelete = (id) => {
-    const {setNumberOffersToCompare, numberOffersToCompare} = this.props;
+    const {setOffersToCompare, offersToCompare} = this.props;
     const {offerInfo, details} = this.state;
     this.setState({offerInfo : offerInfo.filter(el => el.id != id), details : details.filter(el => el.id != id)});
-    const newNumberOffersToCompare = [...numberOffersToCompare].filter(el => el != id);
-    setNumberOffersToCompare(newNumberOffersToCompare);
+    const newOffersToCompare = [...offersToCompare].filter(el => el != id);
+    setOffersToCompare(newOffersToCompare);
   }
 
   handleDrag = (newDrag) => {
-    const {setNumberOffersToCompare} = this.props;
-    setNumberOffersToCompare(newDrag);
+    const {setOffersToCompare} = this.props;
+    setOffersToCompare(newDrag);
   }
 
   selectOfferInComparison = (id) => {
@@ -118,9 +118,9 @@ const mapStateToProps = (state) => {
     operators: state.operators,
     periods: state.periods,
     types: state.types,
-    numberOffersToCompare: state.numberOffersToCompare,
+    offersToCompare: state.offersToCompare,
   }
 };
-const mapDispatchToProps = { setNumberOffersToCompare, selectOffer };
+const mapDispatchToProps = { setOffersToCompare, selectOffer };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CompareProvider));

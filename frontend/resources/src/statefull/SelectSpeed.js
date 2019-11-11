@@ -20,13 +20,15 @@ class SelectSpeed extends React.Component {
   }
 
   handleChange = (event) => {
+    const { selectSpeed } = this.props;
     const speed = event.target.value;
     const {maxSpeed} = this.state;
-    speed<0 ? this.props.selectSpeed(0) : speed>maxSpeed ? this.props.selectSpeed(maxSpeed) : this.props.selectSpeed(parseInt(speed));
+    speed<0 ? selectSpeed(0) : speed>maxSpeed ? selectSpeed(maxSpeed) : selectSpeed(parseInt(speed));
   }
 
   handleSliderChange = (val) => {
-    this.props.selectSpeed(val);
+    const { selectSpeed } = this.props;
+    selectSpeed(val);
   }
 
   componentDidUpdate = (prevProps) => {

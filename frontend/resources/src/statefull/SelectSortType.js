@@ -22,7 +22,7 @@ class SelectSortType extends React.Component {
                       ]
         return (
               <SingleSelect 
-                loaded={true} 
+                isLoaded={true} 
                 placeholder={''}
                 label= {translation.SORT_BY[language]}
                 data={types} 

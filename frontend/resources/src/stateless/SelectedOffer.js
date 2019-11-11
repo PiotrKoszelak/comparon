@@ -188,11 +188,11 @@ function SelectedOffer  ({
                   operators,
                   periods,
                   types,
-                  loadedDetail,
-                  loadedOfferInfo,
+                  isLoadedDetail,
+                  isLoadedOfferInfo,
                   loading,
                   contact,
-                  loadedContact,
+                  isLoadedContact,
                   sendMessageToServer
                   }){
 
@@ -246,7 +246,7 @@ function SelectedOffer  ({
       </div>
     )
   }
-  else if ((loadedDetail === false || loadedOfferInfo === false || loadedContact === false) && loading===false){
+  else if ((isLoadedDetail === false || isLoadedOfferInfo === false || isLoadedContact === false) && loading===false){
     return(
       <div className={classes.info}>
           <ErrorOutlineIcon color='secondary' className={classes.icon} />
@@ -374,11 +374,11 @@ SelectedOffer.propTypes = {
   operators: PropTypes.array,
   periods: PropTypes.array,
   types: PropTypes.array,
-  loadedDetail: PropTypes.bool,
-  loadedOfferInfo: PropTypes.bool,
+  isLoadedDetail: PropTypes.bool,
+  isLoadedOfferInfo: PropTypes.bool,
   loading: PropTypes.bool,
   contact: PropTypes.object,
-  loadedContact: PropTypes.bool,
+  isLoadedContact: PropTypes.bool,
   sendMessageToServer: PropTypes.func,
 };
 export default SelectedOffer;
