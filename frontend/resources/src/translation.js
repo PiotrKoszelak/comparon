@@ -164,6 +164,10 @@ const translation = {
         pl: 'Wiadomość nie została wysłana',
         en: 'Message was not sent'
     },
+    LOADING : {
+        pl: 'Ładuję',
+        en: 'Loading'
+    },
 };
 
 export default  translation;

@@ -1,24 +1,19 @@
 import React from "react";
 import { MultipleSelect } from "../stateless/Select";
-import { periodsFetched, selectPeriod } from "../actions";
+import { fetchDataPeriods, selectPeriod } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import url from '../config.js'
 import translation from "../translation"
 
 class SelectPeriod extends React.Component {
 
   static propTypes = {
-    periods: PropTypes.array.isRequired,
+    periods: PropTypes.object.isRequired,
     selectedPeriod: PropTypes.array.isRequired,
-    periodsFetched: PropTypes.func.isRequired,
+    fetchDataPeriods: PropTypes.func.isRequired,
     selectPeriod: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
   }
-
-    state = {
-      isLoaded: false,
-    };
 
   handleChange = (event) => {
     const { selectPeriod } = this.props;
@@ -27,25 +22,14 @@ class SelectPeriod extends React.Component {
   }
 
   componentDidMount() {
-    const { periodsFetched } = this.props;
-    fetch(`${url}/api/period/`)
-    .then(response => {
-      if (response.status === 200) {
-        this.setState({isLoaded: true });
-        return response.json();
-      }
-      else{
-        return []
-      }})
-    .then(data => periodsFetched(data))
+    const { fetchDataPeriods } = this.props;
+    fetchDataPeriods();
   }
     
     render(){
-        const {isLoaded} = this.state;
         const {periods, selectedPeriod, language} = this.props;
         return (
               <MultipleSelect 
-                isLoaded={isLoaded} 
                 label={translation.PERIOD[language]} 
                 data={periods} 
                 value={selectedPeriod} 
@@ -63,6 +47,6 @@ const mapStateToProps = (state) => {
     language: state.language,
   }
 };
-const mapDispatchToProps = { periodsFetched, selectPeriod };
+const mapDispatchToProps = { fetchDataPeriods, selectPeriod };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectPeriod);

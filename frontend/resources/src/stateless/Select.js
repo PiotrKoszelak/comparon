@@ -19,11 +19,27 @@ const useStyles = makeStyles({
 });
 
 
-export function MultipleSelect ({label, value, handleChange, data, isLoaded, language}){
+export function MultipleSelect ({label, value, handleChange, data, language}){
 
   const classes = useStyles();
-  if (isLoaded === false){
-    return(<FormControl className={classes.formControl}>
+
+  if (data.isLoading === true){
+    return(
+          <FormControl className={classes.formControl}>
+            <InputLabel >{label}</InputLabel>
+            <Select
+            value={-1}
+            >
+                <MenuItem key={-1} value={-1}>
+                    <ListItemText primary={translation.LOADING[language]} />
+                </MenuItem>
+            </Select>     
+          </FormControl>
+    )
+  }
+  else if (data.success === false){
+    return(
+          <FormControl className={classes.formControl}>
               <InputLabel >{label}</InputLabel>
               <Select
               value={-1}
@@ -32,10 +48,12 @@ export function MultipleSelect ({label, value, handleChange, data, isLoaded, lan
                       <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
                   </MenuItem>
               </Select>     
-          </FormControl>)
+          </FormControl>
+    )
   }  
-  else {
-      return ( <FormControl className={classes.formControl}>
+  else if (data.success === true){
+      return ( 
+          <FormControl className={classes.formControl}>
                       <InputLabel >{label}</InputLabel>
                       <Select
                         multiple
@@ -43,39 +61,61 @@ export function MultipleSelect ({label, value, handleChange, data, isLoaded, lan
                         onChange= {handleChange}
                         renderValue={selected => {
                           let selectedValue = [];
-                          for (let el of (data.filter((el) => {return selected.includes(el.id)}))){
+                          for (let el of (data.data.filter((el) => {return selected.includes(el.id)}))){
                             selectedValue.push(el[`value_${language}`]);
                           };
                           return selectedValue.join(', ');
                         }}
                       >
-                        {data.map(el => (
+                        {data.data.map(el => (
                           <MenuItem key={el.id} value={el.id}>
                               <Checkbox checked={value.indexOf(el.id) > -1} />
                               <ListItemText primary={el[`value_${language}`]} />
                           </MenuItem>
                         ))}
                       </Select>     
-          </FormControl> )}
-};
+          </FormControl> 
+      )
+  }
+  else{
+    return ( null )
+  }
+}
 
 
-export function SingleSelect ({label, value, handleChange, data, isLoaded, language}){
+export function SingleSelect ({label, value, handleChange, data, language}){
 
   const classes = useStyles();
-  if (isLoaded === false){
-    return(<FormControl className={classes.formControl}>
+
+  if (data.isLoading === true){
+    return(
+          <FormControl className={classes.formControl}>
               <InputLabel >{label}</InputLabel>
               <Select
               value={-1}
               >
                   <MenuItem key={-1} value={-1}>
-                      <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
+                      <ListItemText primary={translation.LOADING[language]} />
                   </MenuItem>
               </Select>     
-          </FormControl>)
+          </FormControl>
+    )
+  }
+  else if (data.success === false){
+    return(
+      <FormControl className={classes.formControl}>
+          <InputLabel >{label}</InputLabel>
+          <Select
+          value={-1}
+          >
+              <MenuItem key={-1} value={-1}>
+                  <ListItemText primary={translation.DOWNLOAD_ERROR[language]} />
+              </MenuItem>
+          </Select>     
+      </FormControl>
+  )
   }  
-  else {
+  else if (data.success === true){
     return ( 
       <FormControl className={classes.formControlBig}>
         <InputLabel >{label}</InputLabel>
@@ -83,28 +123,31 @@ export function SingleSelect ({label, value, handleChange, data, isLoaded, langu
           value={value}
           onChange= {handleChange}
         >
-          {data.map(el => (
+          {data.data.map(el => (
             <MenuItem key={el.id} value={el.id}>
                 <ListItemText primary={el.value} />
             </MenuItem>
           ))}
         </Select>     
-      </FormControl> )}
+      </FormControl> 
+    )
+  }
+  else{
+    return (null)
+  }
 };
 
 
 MultipleSelect.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  isLoaded: PropTypes.bool.isRequired,
   value: PropTypes.array,
 };
 
 SingleSelect.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object,
   handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  isLoaded: PropTypes.bool.isRequired,
   value: PropTypes.array,
 };

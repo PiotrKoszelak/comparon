@@ -94,9 +94,9 @@ function MyCard ({ operator,
                    offersToCompare}){
 
   const classes = useStyles();
-  let operatorValue = operators ? operators.filter((el) => {return el.id===operator})[0] ? operators.filter((el) => {return el.id===operator})[0][`value_${language}`] : null : null;
-  let periodValue = periods ? periods.filter((el) => {return el.id===period})[0] ? periods.filter((el) => {return el.id===period})[0][`value_${language}`] : null : null;
-  let typeValue = types ? types.filter((el) => {return el.id===type})[0] ? types.filter((el) => {return el.id===type})[0][`value_${language}`] : null : null;
+  let operatorValue = operators.data ? operators.data.filter((el) => {return el.id===operator})[0] ? operators.data.filter((el) => {return el.id===operator})[0][`value_${language}`] : null : null;
+  let periodValue = periods.data ? periods.data.filter((el) => {return el.id===period})[0] ? periods.data.filter((el) => {return el.id===period})[0][`value_${language}`] : null : null;
+  let typeValue = types.data ? types.data.filter((el) => {return el.id===type})[0] ? types.data.filter((el) => {return el.id===type})[0][`value_${language}`] : null : null;
   
   return(
           <Card className={classes.card}>
