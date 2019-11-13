@@ -1,8 +1,26 @@
+import url from '../../config.js'
+
 // fetch offers data
-export const offersFetched = (offers) => ({
-  type: 'FETCH_OFFERS_SUCCESS',
-  offers
+const dataFetchStarted = () => ({
+  type: "FETCH_OFFERS_STARTED"
 });
+
+const dataFetchSucceeded = data => ({
+  type: "FETCH_OFFERS_SUCCESS",
+  data: data
+});
+
+const dataFetchErrored = error => ({
+  type: "FETCH_OFFERS_ERROR",
+  error: error
+});
+export const fetchOffersData = () => (dispatch, getState) => {
+  dispatch(dataFetchStarted());
+  fetch(`${url}/api/offers/`)
+    .then(res => res.json())
+    .then(json => dispatch(dataFetchSucceeded(json)))
+    .catch(err => dispatch(dataFetchErrored(err)))
+};
 
 // selected offer
 export const selectOffer = (selectedOffer) => ({

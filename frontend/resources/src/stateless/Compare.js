@@ -120,13 +120,13 @@ function Compare  ({
                   operators,
                   periods,
                   types,
-                  loadedDetail,
-                  loadedOfferInfo,
-                  loading,
+                  isLoading,
                   isEmpty,
                   handleDelete,
                   handleDrag,
-                  selectOfferInComparison
+                  selectOfferInComparison,
+                  success,
+                  error
                   }){
 
   const classes = useStyles();
@@ -171,8 +171,10 @@ function Compare  ({
     background: isDragging ? 'lightgreen' : null,
     ...draggableStyle,
   });
-
-  if (loading===true){
+  if (isLoading===null){
+    return null;
+  }
+  else if (isLoading===true){
     return(
       <div className={classes.info} >
           <CircularProgress className={classes.progress} color="secondary" disableShrink />
@@ -186,7 +188,7 @@ function Compare  ({
       </div>
     )
   }
-  else if ((loadedDetail === false || loadedOfferInfo === false) && loading===false){
+  else if (error===true){
     return(
       <div className={classes.info}>
           <ErrorOutlineIcon color='secondary' className={classes.icon} />
@@ -195,7 +197,8 @@ function Compare  ({
     )
   }
   else{
-    if (!offerInfo || !details || offerInfo.length===0 || details.length===0){
+    if (success===true & (offerInfo ? offerInfo.length===0 : false && details ? details.length===0 : false)){
+      console.log('ooo');
       return (<div className={classes.info} >
         <LocalOfferIcon color='secondary' className={classes.icon} />
         <span className={classes.text}>{translation.NONE[language]}</span>
@@ -281,12 +284,10 @@ function Compare  ({
   details: PropTypes.array,
   offerInfo: PropTypes.array,
   language: PropTypes.string,
-  operators: PropTypes.array,
-  periods: PropTypes.array,
-  types: PropTypes.array,
-  loadedDetail: PropTypes.bool,
-  loadedOfferInfo: PropTypes.bool,
-  loading: PropTypes.bool,
+  operators: PropTypes.object,
+  periods: PropTypes.object,
+  types: PropTypes.object,
+  isLoading: PropTypes.bool,
   isEmpty: PropTypes.bool,
   handleDelete: PropTypes.func,
   selectOfferInComparison: PropTypes.func,

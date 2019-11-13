@@ -138,8 +138,8 @@ Detail.propTypes = {
   offerInfo: PropTypes.object,
   details: PropTypes.object,
   language: PropTypes.string,
-  operators: PropTypes.array,
-  periods: PropTypes.array,
-  types: PropTypes.array,
+  operators: PropTypes.object,
+  periods: PropTypes.object,
+  types: PropTypes.object,
 };
 export default Detail;

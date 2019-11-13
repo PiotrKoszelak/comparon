@@ -10,7 +10,7 @@ class SelectPrice extends React.Component {
 
   static propTypes = {
     selectedPrice: PropTypes.number.isRequired,
-    maxParam: PropTypes.array.isRequired,
+    maxParam: PropTypes.object.isRequired,
     selectPrice: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
   }
@@ -30,14 +30,12 @@ class SelectPrice extends React.Component {
 
     render(){
         const {selectedPrice, maxParam, language} = this.props;
-        let maxPrice = {value: 0};
-        if (maxParam.length !== 0){
-              maxPrice = Object.assign({}, maxParam.find(function(el) {
-                return el.name === 'max_price'
-              }));
+        const maxPrice = {value: 0};
+        if (maxParam.success === true){
+              maxPrice.value = maxParam.data.find(({name}) => name === 'max_price').value;
         }
-        else if (maxParam.length === 0){
-              maxPrice = {value: 300};
+        else{
+              maxPrice.value = 300;
         }
               return (
                 <MySlider 

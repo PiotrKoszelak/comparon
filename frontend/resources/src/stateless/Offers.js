@@ -41,6 +41,7 @@ const useStyles = makeStyles({
   },
   text : {
     fontSize: 20,
+    fontFamily: "Lato",
     '@media (max-width:600px)' : {
         fontSize: 15,
     }
@@ -51,9 +52,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Offers  ({ isLoaded, 
-                    loading,
-                    data, 
+function Offers  ({ offers, 
                     selectedOperator, 
                     selectedCity, 
                     selectedPeriod, 
@@ -66,108 +65,99 @@ function Offers  ({ isLoaded,
 
   const classes = useStyles();
 
-  if (loading===true && isLoaded === false){
+  if (offers.isLoading === true){
     return(
       <CircularProgress className={classes.progress} color="secondary" disableShrink />
     )
   }
-  else if (isLoaded === false && loading === false){
+  else if (offers.success !== true){
     return(
       <div className={classes.error}>
           <ErrorOutlineIcon color='secondary' className={classes.icon} />
           <span className={classes.text}>{translation.DOWNLOAD_ERROR[language]}</span>
       </div>)
   }  
-  else {
-    if (!data){
-      return(
-        <CircularProgress className={classes.progress} color="secondary" disableShrink />
-      )
-    }
-    else{
-      // filtering
-      let filteredData = [...data];
-      const parametersFromSelect = [selectedOperator, selectedCity, selectedType, selectedPeriod];
-      const parametersFromSlider = [selectedPrice, selectedSpeed];
-      parametersFromSelect.map((el, key) => {
-          if (el.length !== 0){
+  else{
+    // filtering
+    let filteredData = [...offers.data];
+    const parametersFromSelect = [selectedOperator, selectedCity, selectedType, selectedPeriod];
+    const parametersFromSlider = [selectedPrice, selectedSpeed];
+    parametersFromSelect.map((el, key) => {
+        if (el.length !== 0){
+          switch (key){
+            case 0:
+                filteredData = filteredData.filter(elem => el.includes(elem.operator));
+                break
+            case 1:
+                filteredData = filteredData.filter(elem => el.includes(elem.city));
+                break
+            case 2:
+                filteredData = filteredData.filter(elem => el.includes(elem.types));
+                break
+            case 3:
+                filteredData = filteredData.filter(elem => el.includes(elem.period));
+                break
+          }
+        }
+    });
+    parametersFromSlider.map((el, key) => {
+        if (el !== 0){
             switch (key){
               case 0:
-                  filteredData = filteredData.filter(elem => el.includes(elem.operator));
+                  filteredData = filteredData.filter(elem => elem.price <= el);
                   break
               case 1:
-                  filteredData = filteredData.filter(elem => el.includes(elem.city));
-                  break
-              case 2:
-                  filteredData = filteredData.filter(elem => el.includes(elem.types));
-                  break
-              case 3:
-                  filteredData = filteredData.filter(elem => el.includes(elem.period));
+                  filteredData = filteredData.filter(elem => elem.speed <= el);
                   break
             }
-          }
-      });
-      parametersFromSlider.map((el, key) => {
-          if (el !== 0){
-              switch (key){
-                case 0:
-                    filteredData = filteredData.filter(elem => elem.price <= el);
-                    break
-                case 1:
-                    filteredData = filteredData.filter(elem => elem.speed <= el);
-                    break
-              }
-          }
-      })
+        }
+    })
 
-      //sorting
-      if (sortType===1)
-          filteredData = filteredData.sort((a,b) => {
-          return a.price - b.price
-      })
-      else if (sortType===2)
-          filteredData = filteredData.sort((a,b) => {
-          return b.price - a.price
-      })
-      else if (sortType===3)
-          filteredData = filteredData.sort((a,b) => {
-          return a.speed - b.speed
-      })
-      else if (sortType===4)
-          filteredData = filteredData.sort((a,b) => {
-          return b.speed - a.speed
-      })
+    //sorting
+    if (sortType===1)
+        filteredData = filteredData.sort((a,b) => {
+        return a.price - b.price
+    })
+    else if (sortType===2)
+        filteredData = filteredData.sort((a,b) => {
+        return b.price - a.price
+    })
+    else if (sortType===3)
+        filteredData = filteredData.sort((a,b) => {
+        return a.speed - b.speed
+    })
+    else if (sortType===4)
+        filteredData = filteredData.sort((a,b) => {
+        return b.speed - a.speed
+    })
 
-      setNumberSelectedOffers(JSON.stringify(filteredData.length));
+    setNumberSelectedOffers(JSON.stringify(filteredData.length));
 
-      if (filteredData.length === 0){
-        return (<div className={classes.error} >
-              <LocalOfferIcon color='secondary' className={classes.icon} />
-              <span className={classes.text}>{translation.NONE[language]}</span>
-          </div>)
-      }
-        return(
-            <section className={classes.offer} >
-            {filteredData.map(el => (
-                    < CardProvider
-                        key={el.id}
-                        id={el.id}
-                        operator={el.operator}
-                        period={el.period}
-                        price={el.price}
-                        speed={el.speed}
-                        type={el.types}
-                    />
-                ))}
-            </section>
-      )}
-  };
+    if (filteredData.length === 0){
+      return (<div className={classes.error} >
+            <LocalOfferIcon color='secondary' className={classes.icon} />
+            <span className={classes.text}>{translation.NONE[language]}</span>
+        </div>)
+    }
+      return(
+          <section className={classes.offer} >
+          {filteredData.map(el => (
+                  < CardProvider
+                      key={el.id}
+                      id={el.id}
+                      operator={el.operator}
+                      period={el.period}
+                      price={el.price}
+                      speed={el.speed}
+                      type={el.types}
+                  />
+              ))}
+          </section>
+    )}
 };
 
 Offers.propTypes = {
-  data: PropTypes.array,
-  isLoaded: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
+  offers: PropTypes.object,
   selectedOperator: PropTypes.array.isRequired,
   selectedCity: PropTypes.array.isRequired,
   selectedPeriod: PropTypes.array.isRequired,

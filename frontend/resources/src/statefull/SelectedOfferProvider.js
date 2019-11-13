@@ -9,58 +9,40 @@ export class SelectedOfferProvider extends Component {
   static propTypes = {
     selectedOffer: PropTypes.number.isRequired,
     language: PropTypes.string.isRequired,
-    operators: PropTypes.array.isRequired,
-    periods: PropTypes.array.isRequired,
-    types: PropTypes.array.isRequired,
+    operators: PropTypes.object.isRequired,
+    periods: PropTypes.object.isRequired,
+    types: PropTypes.object.isRequired,
   }
 
   state = {
-    details : {},
-    isLoadedDetail: false,
-    offerInfo : {},
-    isLoadedOfferInfo: false,
-    contact : {},
-    isLoadedContact: false,
-    loading: true,
+    details : null,
+    offerInfo : null,
+    contact : null,
+    isLoading: null,
+    success: null,
   };
 
   componentDidMount() {
       const {selectedOffer} = this.props;
-
-      let operatorId;
-
-      async function loadDetails() {
-            const response  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
-            const json = await response.json();
-            return json;
+      this.setState({isLoading : true});
+      const loadData = async () => {
+            const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
+            const jsonDetail = await responseDetail.json();
+            const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
+            const jsonOffer = await responseOffer.json();
+            const operatorId = await jsonOffer.operator;
+            const responseContact  = await fetch(`${url}/api/contact/${operatorId}`)
+            const jsonContact = await responseContact.json();
+            return [jsonDetail, jsonOffer, jsonContact]
       }
-      async function loadOffer() {
-              const response  = await fetch(`${url}/api/offer/${selectedOffer}`)
-              const json = await response.json();
-              operatorId = json.operator;
-              return json;
-
-      }
-      async function loadContact() {
-          const response  = await fetch(`${url}/api/contact/${operatorId}`)
-          const json = await response.json();
-          return json;
-    }
-    const that = this;
-    async function load() {
-      Promise.all([
-          await loadDetails(),
-          await loadOffer(),
-          await loadContact()
-      ])
+    loadData()
       .then(data => {
-          that.setState({details: data[0], offerInfo: data[1], contact: data[2], isLoadedContact: true, isLoadedDetail: true, isLoadedOfferInfo: true, loading: false});
+          this.setState({details: data[0], offerInfo: data[1], contact: data[2], success: true, isLoading: false});
       })
       .catch((error) => {
-          that.setState({loading : false});
+          this.setState({isLoading : false, success: false});
       })
-    }
-    load(); 
+      
   }
 
   sendMessageToServer= async () => {
@@ -73,9 +55,8 @@ export class SelectedOfferProvider extends Component {
   }
 
   render() {
-    const {language, operators, periods, types} = this.props;
-    const {isLoadedDetail, details, isLoadedOfferInfo, offerInfo, loading, contact, isLoadedContact} = this.state;
-
+    const {language, operators, periods, types, selectedOffer} = this.props;
+    const {success, details, offerInfo, isLoading, contact} = this.state;
         return(
           < SelectedOffer
             details={details}
@@ -84,12 +65,10 @@ export class SelectedOfferProvider extends Component {
             operators={operators}
             periods={periods}
             types={types}
-            isLoadedDetail={isLoadedDetail}
-            isLoadedOfferInfo={isLoadedOfferInfo}
-            loading={loading}
+            isLoading={isLoading}
             contact={contact}
-            isLoadedContact={isLoadedContact}
             sendMessageToServer={this.sendMessageToServer}
+            success={success}
           />
         );
   }

@@ -188,12 +188,10 @@ function SelectedOffer  ({
                   operators,
                   periods,
                   types,
-                  isLoadedDetail,
-                  isLoadedOfferInfo,
-                  loading,
+                  isLoading,
                   contact,
-                  isLoadedContact,
-                  sendMessageToServer
+                  sendMessageToServer,
+                  success
                   }){
 
   const classes = useStyles();
@@ -239,14 +237,14 @@ function SelectedOffer  ({
 
 
 
-  if (loading===true){
+  if (isLoading===true){
     return(
       <div className={classes.info} >
           <CircularProgress className={classes.progress} color="secondary" disableShrink />
       </div>
     )
   }
-  else if ((isLoadedDetail === false || isLoadedOfferInfo === false || isLoadedContact === false) && loading===false){
+  else if (success!==true){
     return(
       <div className={classes.info}>
           <ErrorOutlineIcon color='secondary' className={classes.icon} />
@@ -255,7 +253,7 @@ function SelectedOffer  ({
     )
   }
   else{
-    if (!offerInfo || !details || !contact || offerInfo.length===0 || details.length===0 || contact.length===0){
+    if (!offerInfo || !details || !contact ){
       return (<div className={classes.info} >
         <LocalOfferIcon color='secondary' className={classes.icon} />
         <span className={classes.text}>{translation.NONE[language]}</span>
@@ -371,12 +369,12 @@ SelectedOffer.propTypes = {
   details: PropTypes.object,
   offerInfo: PropTypes.object,
   language: PropTypes.string,
-  operators: PropTypes.array,
-  periods: PropTypes.array,
-  types: PropTypes.array,
+  operators: PropTypes.object,
+  periods: PropTypes.object,
+  types: PropTypes.object,
   isLoadedDetail: PropTypes.bool,
   isLoadedOfferInfo: PropTypes.bool,
-  loading: PropTypes.bool,
+  isLoading: PropTypes.bool,
   contact: PropTypes.object,
   isLoadedContact: PropTypes.bool,
   sendMessageToServer: PropTypes.func,

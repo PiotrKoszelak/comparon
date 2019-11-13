@@ -20,19 +20,21 @@ class CardProvider extends React.Component {
   }
 
   selectOffer = (id) => {
-    this.props.selectOffer(id);
-    this.props.setDetailWindowOpen(true);
+    const { selectOffer, setDetailWindowOpen } = this.props;
+    selectOffer(id);
+    setDetailWindowOpen(true);
   }
 
   selectToCompare = (id) => {
-    let newTable = [...this.props.offersToCompare];
+    const { offersToCompare, setOffersToCompare } = this.props;
+    let newTable = [...offersToCompare];
     if (newTable.includes(id)){
         newTable.splice(newTable.indexOf(id), 1);
     }
     else{
       newTable.push(id);
     }
-    this.props.setOffersToCompare(newTable);
+    setOffersToCompare(newTable);
   }
 
     render(){

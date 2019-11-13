@@ -29,10 +29,11 @@ function DetailTemplate  ({
                   selectOfferInComparison}){
 
   let operatorValue, periodValue, typeValue, texts;
-  if (details && offerInfo && operators && periods && types){
-            operatorValue = withoutText ? null : operators.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
-            periodValue = withoutText ? null :periods.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
-            typeValue = withoutText ? null : types.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
+  if (details && offerInfo && operators.success===true && periods.success===true && types.success===true){
+
+            operatorValue = withoutText ? null : operators.data.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
+            periodValue = withoutText ? null :periods.data.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
+            typeValue = withoutText ? null : types.data.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
             texts = [
                 {id: 1,
                     iconText: translation.MONTH_COST[language],
@@ -155,9 +156,9 @@ DetailTemplate.propTypes = {
   details: PropTypes.object,
   language: PropTypes.string,
   classes: PropTypes.object,
-  operators: PropTypes.array,
-  periods: PropTypes.array,
-  types: PropTypes.array,
+  operators: PropTypes.object,
+  periods: PropTypes.object,
+  types: PropTypes.object,
   withoutIcon: PropTypes.bool,
   withoutText: PropTypes.bool,
   enableDelete: PropTypes.bool,
