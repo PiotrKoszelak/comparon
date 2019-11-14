@@ -133,6 +133,7 @@ function Compare  ({
 
   const [offerInfoDrag, setofferInfoDrag] = useState(null);
   const [detailsDrag, setdetailsDrag] = useState(null);
+  const [isSnackbar, setIsSnackbar] = useState(false);
 
   const reorder = (list, detailList, startIndex, endIndex) => {
     const resultList = Array.from(list);
@@ -175,6 +176,7 @@ function Compare  ({
     return null;
   }
   else if (isLoading===true){
+    if (!isSnackbar) setIsSnackbar(true);
     return(
       <div className={classes.info} >
           <CircularProgress className={classes.progress} color="secondary" disableShrink />
@@ -198,7 +200,6 @@ function Compare  ({
   }
   else{
     if (success===true & (offerInfo ? offerInfo.length===0 : false && details ? details.length===0 : false)){
-      console.log('ooo');
       return (<div className={classes.info} >
         <LocalOfferIcon color='secondary' className={classes.icon} />
         <span className={classes.text}>{translation.NONE[language]}</span>
@@ -215,6 +216,8 @@ function Compare  ({
                     text={translation.DRAGANDDROP[language]} 
                     vertical={'bottom'}
                     horizontal={'right'}
+                    isOpen={isSnackbar}
+                    close={setIsSnackbar}
           />
             <div style={{overflowX: 'none !important'}}>
                 <DetailTemplate
