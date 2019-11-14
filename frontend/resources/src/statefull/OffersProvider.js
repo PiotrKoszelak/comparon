@@ -3,7 +3,6 @@ import Offers from "../stateless/Offers";
 import { connect } from "react-redux";
 import { fetchOffersData, setNumberSelectedOffers} from "../actions";
 import PropTypes from "prop-types";
-import url from '../config.js';
 import DetailProvider from './DetailProvider';
 
 class OffersProvider extends Component {
