@@ -21,7 +21,7 @@ The documentation is under development.
 
 ## License
 
-This project is released under the MIT Licence.
+It is forbidden to use this code for commercial use.
 
 ---
 
