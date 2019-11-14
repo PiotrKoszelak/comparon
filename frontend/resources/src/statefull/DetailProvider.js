@@ -23,6 +23,7 @@ export class DetailProvider extends Component {
     offerInfo : null,
     isLoading: null,
     success: null,
+    isSnackbar: false,
   };
 
   componentDidMount() {
@@ -40,7 +41,7 @@ export class DetailProvider extends Component {
           this.setState({details: data[0], offerInfo: data[1], success: true, isLoading: false});
       })
       .catch((error) => {
-          this.setState({isLoading : false, success: false});
+          this.setState({isLoading : false, success: false, isSnackbar: true});
       })
   }
 
@@ -48,10 +49,14 @@ export class DetailProvider extends Component {
     this.props.setDetailWindowOpen(false);
   }
 
-  render() {
-    const {language, operators, periods, types, selectedOffer, setDetailWindowOpen} = this.props;
-    const {success, details, offerInfo} = this.state;
+  handleIsSnackbar = (is) => {
+    this.setState({isSnackbar: is});
+    this.props.setDetailWindowOpen(false);
+  }
 
+  render() {
+    const {language, operators, periods, types, setDetailWindowOpen, isDetailOpen} = this.props;
+    const {success, details, offerInfo, isSnackbar} = this.state;
     if (success===true){
         return(
           < Detail
@@ -69,7 +74,8 @@ export class DetailProvider extends Component {
     else if (success===false){
         return(
           <Snackbar 
-                    selectedOffer={selectedOffer} 
+                    isOpen={isSnackbar}
+                    close={this.handleIsSnackbar}
                     text={translation.DOWNLOAD_ERROR[language]} 
                     vertical={'bottom'}
                     horizontal={'center'}
@@ -91,6 +97,7 @@ const mapStateToProps = (state) => {
     periods: state.periods,
     types: state.types,
     selectedOffer: state.selectedOffer,
+    isDetailOpen : state.isDetailOpen,
   }
 };
 const mapDispatchToProps = { setDetailWindowOpen };

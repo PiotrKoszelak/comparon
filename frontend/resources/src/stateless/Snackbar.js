@@ -6,33 +6,23 @@ import IconButton from '@material-ui/core/IconButton';
 
 export default class PositionedSnackbar extends React.Component {
 
-  state = {
-    open: true,
-  }
-
-  componentDidUpdate(prevProps) {
-    const {selectedOffer} = this.props;
-    if (selectedOffer){
-      if (selectedOffer !== prevProps.selectedOffer){
-        this.setState({open: true});
-      }
+  handleClose = (event, reason) => {
+    const {close} = this.props;
+    if (reason === 'clickaway') {
+      return;
     }
-  }
-
-  handleClose = () => {
-    this.setState({open: false });
+    close(false);
   };
 
 
     render(){
-        const {open} = this.state;
-        const {text, vertical, horizontal} = this.props;
+        const {text, vertical, horizontal, isOpen} = this.props;
        
         return (
               <Snackbar
                   anchorOrigin={{ vertical, horizontal }}
                   key={`${vertical},${horizontal}`}
-                  open={open}
+                  open={isOpen}
                   onClose={this.handleClose}
                   ContentProps={{
                     'aria-describedby': 'message-id',

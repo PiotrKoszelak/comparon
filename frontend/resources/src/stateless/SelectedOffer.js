@@ -13,7 +13,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import Snackbar from './Snackbar'
+import Snackbar from './Snackbar';
+import Modal from '@material-ui/core/Modal';
 
 
 const useStyles = makeStyles({
@@ -109,10 +110,6 @@ const useStyles = makeStyles({
       left: 'calc(50vw - 40px)',
     }
   },
-  progress: {
-    position: 'relative',
-    top: 100,
-  },
   divider: {
     width: '90%',
   },
@@ -179,6 +176,14 @@ const useStyles = makeStyles({
   helper : {
     color: 'red'
   },
+  progress: {
+    outline: 'none',
+  },
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 function SelectedOffer  ({
@@ -203,6 +208,8 @@ function SelectedOffer  ({
   const [emailValidation, setEmailValidation] = useState(null);
   const [commentNotNull, setCommentNotNull] = useState(null);
   const [isSend, setIsSend] = useState(null);
+  const [isSnackbar, setIsSnackbar] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleChange = (event) => {
     if (event.target.id === 'email'){
@@ -230,8 +237,13 @@ function SelectedOffer  ({
       setCommentNotNull(true);
     }
     if (emailValidation===true && commentNotNull===true){
+      setModalOpen(true);
       sendMessageToServer()
-        .then(res => {setIsSend(res)})
+        .then(res => {
+          setModalOpen(false);
+          setIsSnackbar(true);
+          setIsSend(res);
+        })
     }
   }
 
@@ -268,6 +280,8 @@ function SelectedOffer  ({
                   text={translation.EMAIL_SEND_CORRECTLY[language]} 
                   vertical={'top'}
                   horizontal={'center'}
+                  isOpen={isSnackbar}
+                  close={setIsSnackbar}
               />
               :
               isSend===false ?
@@ -275,10 +289,20 @@ function SelectedOffer  ({
                   text={translation.EMAIL_SEND_INCORRECTLY[language]} 
                   vertical={'top'}
                   horizontal={'center'}
+                  isOpen={isSnackbar}
+                  close={setIsSnackbar}
               />
               :
               null
             }
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              className={classes.modal}
+              open={isModalOpen}
+            >
+              <CircularProgress className={classes.progress} color="secondary" disableShrink />
+            </Modal>
             <div className={classes.rootContent}>
                   <div style={{overflowX: 'none !important'}}>
                       <DetailTemplate
