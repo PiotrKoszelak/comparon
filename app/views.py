@@ -6,6 +6,9 @@ from rest_framework.views import APIView
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework import status
+import json
+
+
 
 # list of offers
 class OfferListCreate(generics.ListCreateAPIView):
@@ -66,18 +69,17 @@ class ParametersListCreate(generics.ListCreateAPIView):
 class SendMessage(APIView):
 
     def post(self, request, format=None):
-        print (request)
+        email = json.loads(request.body.decode("utf-8"))["email"]
+        comment = json.loads(request.body.decode("utf-8"))["comment"]
+        emailTo = json.loads(request.body.decode("utf-8"))["emailTo"]
         try:
-            
             send_mail(
-                'Subject here',
-                'Here is the message.',
-                'peter.bejlisz@gmail.com',
-                ['koszelak.piotr@gmail.com'],
+                'COMPARON',
+                comment,
+                email,
+                [emailTo],
                 fail_silently=False,
             )
-            
-            
             return Response({'success': True}, status=status.HTTP_201_CREATED)
         except:
             return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)

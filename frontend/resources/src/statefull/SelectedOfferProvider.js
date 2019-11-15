@@ -45,10 +45,10 @@ export class SelectedOfferProvider extends Component {
       
   }
 
-  sendMessageToServer= async () => {
+  sendMessageToServer= async (email, comment, emailTo) => {
       const response  = await fetch(`${url}/api/offer/sendmessage`, {
         method: "post",
-        body: "name=Marcin&surname=Nowak"
+        body: `{"email" : "${email}", "comment" : "${comment}", "emailTo" : "${emailTo}"}`
       });
       const json = await response.json();
       return json.success;

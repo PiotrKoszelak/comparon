@@ -137,7 +137,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '30vw',
+    width: '40vw',
     '@media (max-width:600px)' : {
       width: '50vw',
     }
@@ -155,7 +155,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '30vw',
+    width: '40vw',
     flexDirection: 'column',
     '@media (max-width:600px)' : {
       width: '50vw',
@@ -171,7 +171,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    width: '80%',
+    width: '90%',
   },
   helper : {
     color: 'red'
@@ -183,6 +183,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  emailTo: {
+    width: '70%',
   }
 });
 
@@ -238,7 +241,7 @@ function SelectedOffer  ({
     }
     if (emailValidation===true && commentNotNull===true){
       setModalOpen(true);
-      sendMessageToServer()
+      sendMessageToServer(userEmail, userComment, contact.email)
         .then(res => {
           setModalOpen(false);
           setIsSnackbar(true);
@@ -348,7 +351,7 @@ function SelectedOffer  ({
                     id="standard-disabled"
                     label={translation.EMAIL_TO[language]}
                     defaultValue={contact.email}
-                    className={classes.input}
+                    className={classes.emailTo}
                     margin="normal"
                   />
               </div>
