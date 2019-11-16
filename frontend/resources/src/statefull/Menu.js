@@ -9,6 +9,7 @@ import Fab from '@material-ui/core/Fab';
 import MenuList from '../stateless/MenuList';
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
+import CookiesInfo from '../stateless/cookies'
 
 class MenuBottomButtons extends Component {
   
@@ -44,6 +45,7 @@ class Menu extends Component {
     const {classes, title, language, offersToCompare} = this.props;
     return(
         <span className={classes.toolbar} >
+            <CookiesInfo language={language} />
             <span style={{display: 'flex', alignItems: 'center'}}>
                 <MenuList classes={classes} language={language} />
                 <Typography variant="subtitle2" className={classes.title}>

@@ -168,6 +168,14 @@ const translation = {
         pl: 'Ładuję',
         en: 'Loading'
     },
+    UNDERSTAND : {
+        pl: 'Rozumiem',
+        en: 'Understand'
+    },
+    THIS_WEBSITE_USES_COOKIES : {
+        pl: 'Ta strona wykorzystuje ciasteczka',
+        en: 'This website uses cookies'
+    },
 };
 
 export default  translation;
