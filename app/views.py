@@ -74,19 +74,32 @@ class SendMessage(APIView):
             email = json.loads(body)["email"]
             comment = json.loads(body)["comment"]
             commentArray = comment.split(' | ')
-            emailTo = json.loads(body)["emailTo"]
-            offerId = json.loads(body)["offerId"]
-            htmlMessage = f'''<h3>Id oferty: {offerId}<h3><h4>Wiadomość: </h4>'''
-            for i in commentArray:
-                htmlMessage+=f'<p>{i}</p>'
-            # normal email
-            msg = EmailMessage('COMPARON', htmlMessage, email, [emailTo])
-            msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
-            # admin email
-            msg = EmailMessage('COMPARON ADMIN', htmlMessage, email, ['koszelak.piotr@gmail.com'])
-            msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
+            option = json.loads(body)["option"]
+
+            if (option=='offer'):
+                emailTo = json.loads(body)["emailTo"]
+                offerId = json.loads(body)["offerId"]
+                htmlMessage = f'<h3>Id oferty: {offerId}<h3><h4>Wiadomość: </h4>'
+                for i in commentArray:
+                    htmlMessage+=f'<p>{i}</p>'
+                # normal email
+                msg = EmailMessage('COMPARON', htmlMessage, email, [emailTo])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+                # admin email
+                msg = EmailMessage('COMPARON ADMIN', htmlMessage, email, ['koszelak.piotr@gmail.com'])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+
+            elif (option=='contact'):
+                htmlMessage = f'<h4>Wiadomość: </h4>'
+                for i in commentArray:
+                    htmlMessage+=f'<p>{i}</p>'
+                # normal email
+                msg = EmailMessage('COMPARON CONTACT', htmlMessage, email, ['koszelak.piotr@gmail.com'])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+
             return Response({'success': True}, status=status.HTTP_201_CREATED)
         except:
             return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)

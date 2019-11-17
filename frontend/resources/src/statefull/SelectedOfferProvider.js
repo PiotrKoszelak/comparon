@@ -4,6 +4,16 @@ import SelectedOffer from '../stateless/SelectedOffer'
 import PropTypes from "prop-types";
 import url from '../config.js'
 
+
+export const sendMessageToServer= async (option, email, comment, emailTo, offerId) => {
+  const response  = await fetch(`${url}/api/offer/sendmessage`, {
+    method: "post",
+    body: `{"option" : "${option}", "email" : "${email}", "comment" : "${comment.split("\n").join(" | ")}", "emailTo" : "${emailTo}", "offerId" : "${offerId}"}`
+  });
+  const json = await response.json();
+  return json.success;
+}
+
 export class SelectedOfferProvider extends Component {
 
   static propTypes = {
@@ -45,17 +55,8 @@ export class SelectedOfferProvider extends Component {
       
   }
 
-  sendMessageToServer= async (email, comment, emailTo, offerId) => {
-      const response  = await fetch(`${url}/api/offer/sendmessage`, {
-        method: "post",
-        body: `{"email" : "${email}", "comment" : "${comment.split("\n").join(" | ")}", "emailTo" : "${emailTo}", "offerId" : "${offerId}"}`
-      });
-      const json = await response.json();
-      return json.success;
-  }
-
   render() {
-    const {language, operators, periods, types, selectedOffer} = this.props;
+    const {language, operators, periods, types} = this.props;
     const {success, details, offerInfo, isLoading, contact} = this.state;
         return(
           < SelectedOffer
@@ -67,7 +68,7 @@ export class SelectedOfferProvider extends Component {
             types={types}
             isLoading={isLoading}
             contact={contact}
-            sendMessageToServer={this.sendMessageToServer}
+            sendMessageToServer={sendMessageToServer}
             success={success}
           />
         );

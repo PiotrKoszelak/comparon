@@ -117,20 +117,6 @@ const useStyles = makeStyles({
     display: 'flex', 
     alignItems: 'center',
   },
-  closeButton: {
-    padding: 0,
-    width: 25,
-    height: 25,
-    '@media (max-width:600px)' : {
-      width: 10,
-      height: 10,
-    }
-  },
-  actions: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
   phone: {
     padding: 20,
     height: 30,
@@ -240,8 +226,9 @@ function SelectedOffer  ({
       setCommentNotNull(true);
     }
     if (emailValidation===true && commentNotNull===true){
+      setIsSnackbar(false);
       setModalOpen(true);
-      sendMessageToServer(userEmail, userComment, contact.email, offerInfo.id)
+      sendMessageToServer('offer', userEmail, userComment, contact.email, offerInfo.id)
         .then(res => {
           setModalOpen(false);
           setIsSnackbar(true);
