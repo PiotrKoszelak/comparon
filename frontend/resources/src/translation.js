@@ -101,8 +101,8 @@ const translation = {
         en: 'Policy privacy'
     },
     ABOUT : {
-        pl: 'O projekcie',
-        en: 'About project'
+        pl: 'O nas',
+        en: 'About'
     },
     LOGIN : {
         pl: 'Zaloguj',
@@ -176,6 +176,19 @@ const translation = {
         pl: 'Ta strona wykorzystuje ciasteczka',
         en: 'This website uses cookies'
     },
+    FAST : {
+        pl: 'Szybkie',
+        en: 'Fast'
+    },
+    INTUITIVE : {
+        pl: 'Intuicyjne',
+        en: 'intuitive'
+    },
+    FREE : {
+        pl: 'Bezpłatne',
+        en: 'Free'
+    },
+
 };
 
 export default  translation;
