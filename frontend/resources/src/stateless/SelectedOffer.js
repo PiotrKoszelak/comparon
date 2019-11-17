@@ -13,7 +13,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import Snackbar from './Snackbar'
+import Snackbar from './Snackbar';
+import Modal from '@material-ui/core/Modal';
 
 
 const useStyles = makeStyles({
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
     position: 'relative',
     justifyContent: 'space-around',
     '@media (max-width:600px)' : {
-      top: '20vh',
+      top: 200,
       flexDirection: 'column', 
       alignItems: 'center',
     }
@@ -109,29 +110,11 @@ const useStyles = makeStyles({
       left: 'calc(50vw - 40px)',
     }
   },
-  progress: {
-    position: 'relative',
-    top: 100,
-  },
   divider: {
     width: '90%',
   },
   description: {
     display: 'flex', 
-    alignItems: 'center',
-  },
-  closeButton: {
-    padding: 0,
-    width: 25,
-    height: 25,
-    '@media (max-width:600px)' : {
-      width: 10,
-      height: 10,
-    }
-  },
-  actions: {
-    display: 'flex',
-    justifyContent: 'space-around',
     alignItems: 'center',
   },
   phone: {
@@ -140,7 +123,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '30vw',
+    width: '40vw',
     '@media (max-width:600px)' : {
       width: '50vw',
     }
@@ -158,7 +141,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '30vw',
+    width: '40vw',
     flexDirection: 'column',
     '@media (max-width:600px)' : {
       width: '50vw',
@@ -174,11 +157,22 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    width: '80%',
+    width: '90%',
   },
   helper : {
     color: 'red'
   },
+  progress: {
+    outline: 'none',
+  },
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emailTo: {
+    width: '70%',
+  }
 });
 
 function SelectedOffer  ({
@@ -188,11 +182,10 @@ function SelectedOffer  ({
                   operators,
                   periods,
                   types,
-                  loadedDetail,
-                  loadedOfferInfo,
-                  loading,
+                  isLoading,
                   contact,
-                  loadedContact,
+                  sendMessageToServer,
+                  success
                   }){
 
   const classes = useStyles();
@@ -200,10 +193,12 @@ function SelectedOffer  ({
   const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
   const [userEmail, setUserEmail] = useState('');
-  const [userComment, setuserComment] = useState('');
+  const [userComment, setUserComment] = useState('');
   const [emailValidation, setEmailValidation] = useState(null);
   const [commentNotNull, setCommentNotNull] = useState(null);
   const [isSend, setIsSend] = useState(null);
+  const [isSnackbar, setIsSnackbar] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleChange = (event) => {
     if (event.target.id === 'email'){
@@ -211,7 +206,7 @@ function SelectedOffer  ({
       if (emailRegex.test(event.target.value)) setEmailValidation(true);
     }
     else if (event.target.id === 'comment'){
-      setuserComment(event.target.value);
+      setUserComment(event.target.value);
       if (event.target.value) setCommentNotNull(true);
     }
 
@@ -231,20 +226,27 @@ function SelectedOffer  ({
       setCommentNotNull(true);
     }
     if (emailValidation===true && commentNotNull===true){
-      setIsSend(true);
+      setIsSnackbar(false);
+      setModalOpen(true);
+      sendMessageToServer('offer', userEmail, userComment, contact.email, offerInfo.id)
+        .then(res => {
+          setModalOpen(false);
+          setIsSnackbar(true);
+          setIsSend(res);
+        })
     }
   }
 
 
 
-  if (loading===true){
+  if (isLoading===true){
     return(
       <div className={classes.info} >
           <CircularProgress className={classes.progress} color="secondary" disableShrink />
       </div>
     )
   }
-  else if ((loadedDetail === false || loadedOfferInfo === false || loadedContact === false) && loading===false){
+  else if (success!==true){
     return(
       <div className={classes.info}>
           <ErrorOutlineIcon color='secondary' className={classes.icon} />
@@ -253,7 +255,7 @@ function SelectedOffer  ({
     )
   }
   else{
-    if (!offerInfo || !details || !contact || offerInfo.length===0 || details.length===0 || contact.length===0){
+    if (!offerInfo || !details || !contact ){
       return (<div className={classes.info} >
         <LocalOfferIcon color='secondary' className={classes.icon} />
         <span className={classes.text}>{translation.NONE[language]}</span>
@@ -268,6 +270,8 @@ function SelectedOffer  ({
                   text={translation.EMAIL_SEND_CORRECTLY[language]} 
                   vertical={'top'}
                   horizontal={'center'}
+                  isOpen={isSnackbar}
+                  close={setIsSnackbar}
               />
               :
               isSend===false ?
@@ -275,10 +279,20 @@ function SelectedOffer  ({
                   text={translation.EMAIL_SEND_INCORRECTLY[language]} 
                   vertical={'top'}
                   horizontal={'center'}
+                  isOpen={isSnackbar}
+                  close={setIsSnackbar}
               />
               :
               null
             }
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              className={classes.modal}
+              open={isModalOpen}
+            >
+              <CircularProgress className={classes.progress} color="secondary" disableShrink />
+            </Modal>
             <div className={classes.rootContent}>
                   <div style={{overflowX: 'none !important'}}>
                       <DetailTemplate
@@ -324,7 +338,7 @@ function SelectedOffer  ({
                     id="standard-disabled"
                     label={translation.EMAIL_TO[language]}
                     defaultValue={contact.email}
-                    className={classes.input}
+                    className={classes.emailTo}
                     margin="normal"
                   />
               </div>
@@ -369,13 +383,14 @@ SelectedOffer.propTypes = {
   details: PropTypes.object,
   offerInfo: PropTypes.object,
   language: PropTypes.string,
-  operators: PropTypes.array,
-  periods: PropTypes.array,
-  types: PropTypes.array,
-  loadedDetail: PropTypes.bool,
-  loadedOfferInfo: PropTypes.bool,
-  loading: PropTypes.bool,
+  operators: PropTypes.object,
+  periods: PropTypes.object,
+  types: PropTypes.object,
+  isLoadedDetail: PropTypes.bool,
+  isLoadedOfferInfo: PropTypes.bool,
+  isLoading: PropTypes.bool,
   contact: PropTypes.object,
-  loadedContact: PropTypes.bool,
+  isLoadedContact: PropTypes.bool,
+  sendMessageToServer: PropTypes.func,
 };
 export default SelectedOffer;

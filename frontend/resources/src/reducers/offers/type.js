@@ -1,15 +1,8 @@
+import { asyncReducerFactory } from '../HigherOrderReducer'
 
 //types
-export const types = (state = [], action) => { 
-        switch (action.type) { 
-          case 'FETCH_TYPES_SUCCESS':
-            return [
-              ...action.types
-            ]
-          default:
-            return state
-        }
-      }
+export const types = asyncReducerFactory('TYPES');
+
 
 //selected types
 export const selectedType = (state = [], action) => { 

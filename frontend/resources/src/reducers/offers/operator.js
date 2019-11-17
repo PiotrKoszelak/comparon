@@ -1,15 +1,6 @@
-
+import { asyncReducerFactory } from '../HigherOrderReducer'
 //operators
-export const operators = (state = [], action) => { 
-        switch (action.type) { 
-          case 'FETCH_OPERATORS_SUCCESS':
-            return [
-              ...action.operators
-            ]
-          default:
-            return state
-        }
-      }
+export const operators = asyncReducerFactory('OPERATORS');
 
 //selected operator
 export const selectedOperator = (state = [], action) => { 

@@ -14,18 +14,16 @@ class SelectSortType extends React.Component {
     
     render(){
         const {language, sortType} = this.props;
-        const types = [
+        const sortTypes = {isLoading: false, success: true, error: null, data: [
                        {id: 1, value: translation.PRICE_FROM_LOWEST[language]},
                        {id: 2, value: translation.PRICE_FROM_HIGHEST[language]},
                        {id: 3, value: translation.SPEED_FROM_LOWEST[language]},
                        {id: 4, value: translation.SPEED_FROM_HIGHEST[language]}
-                      ]
+                      ]};
         return (
               <SingleSelect 
-                loaded={true} 
-                placeholder={''}
                 label= {translation.SORT_BY[language]}
-                data={types} 
+                data={sortTypes} 
                 value={[sortType]} 
                 handleChange={this.handleChange} 
                 language={language}

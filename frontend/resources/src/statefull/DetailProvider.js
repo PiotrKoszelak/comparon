@@ -13,55 +13,51 @@ export class DetailProvider extends Component {
     selectedOffer: PropTypes.number.isRequired,
     setDetailWindowOpen: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
-    operators: PropTypes.array.isRequired,
-    periods: PropTypes.array.isRequired,
-    types: PropTypes.array.isRequired,
+    operators: PropTypes.object.isRequired,
+    periods: PropTypes.object.isRequired,
+    types: PropTypes.object.isRequired,
   }
 
   state = {
-    details : {},
-    loadedDetail: null,
-    offerInfo : {},
-    loadedOfferInfo: null,
+    details : null,
+    offerInfo : null,
+    isLoading: null,
+    success: null,
+    isSnackbar: false,
   };
 
   componentDidMount() {
-        fetch(`${url}/api/offerdetail/${this.props.selectedOffer}`)
-          .then(response => {
-              if (response.ok) {
-                return response.json()
-              } else 
-              {
-                return Promise.reject()
-              }
-          })
-          .then(data => this.setState({loadedDetail: true, details: data}))
-          .catch(() => this.setState({loadedDetail: false}));
-
-          
-        fetch(`${url}/api/offer/${this.props.selectedOffer}`)
-          .then(response => {
-                if (response.ok) {
-                  return response.json()
-                } else 
-                {
-                  return Promise.reject()
-                }
-          })
-          .then(data => this.setState({loadedOfferInfo: true, offerInfo: data}))
-          .catch(() => this.setState({loadedOfferInfo: false}));
+    const {selectedOffer} = this.props;
+      this.setState({isLoading : true});
+      const loadData = async () => {
+            const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
+            const jsonDetail = await responseDetail.json();
+            const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
+            const jsonOffer = await responseOffer.json();
+            return [jsonDetail, jsonOffer]
+      }
+    loadData()
+      .then(data => {
+          this.setState({details: data[0], offerInfo: data[1], success: true, isLoading: false});
+      })
+      .catch((error) => {
+          this.setState({isLoading : false, success: false, isSnackbar: true});
+      })
   }
-
 
   closeDetailWindow = () => {
     this.props.setDetailWindowOpen(false);
   }
 
-  render() {
-    const {language, operators, periods, types, selectedOffer, setDetailWindowOpen} = this.props;
-    const {loadedDetail, details, loadedOfferInfo, offerInfo} = this.state;
+  handleIsSnackbar = (is) => {
+    this.setState({isSnackbar: is});
+    this.props.setDetailWindowOpen(false);
+  }
 
-    if (loadedDetail===true && loadedOfferInfo===true){
+  render() {
+    const {language, operators, periods, types, setDetailWindowOpen, isDetailOpen} = this.props;
+    const {success, details, offerInfo, isSnackbar} = this.state;
+    if (success===true){
         return(
           < Detail
             details={details}
@@ -75,10 +71,11 @@ export class DetailProvider extends Component {
           />
         );
     }
-    else if (loadedDetail===false || loadedOfferInfo===false){
+    else if (success===false){
         return(
           <Snackbar 
-                    selectedOffer={selectedOffer} 
+                    isOpen={isSnackbar}
+                    close={this.handleIsSnackbar}
                     text={translation.DOWNLOAD_ERROR[language]} 
                     vertical={'bottom'}
                     horizontal={'center'}
@@ -100,6 +97,7 @@ const mapStateToProps = (state) => {
     periods: state.periods,
     types: state.types,
     selectedOffer: state.selectedOffer,
+    isDetailOpen : state.isDetailOpen,
   }
 };
 const mapDispatchToProps = { setDetailWindowOpen };

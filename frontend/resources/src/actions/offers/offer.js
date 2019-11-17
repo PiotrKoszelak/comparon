@@ -1,8 +1,26 @@
+import url from '../../config.js'
+
 // fetch offers data
-export const offersFetched = (offers) => ({
-  type: 'FETCH_OFFERS_SUCCESS',
-  offers
+const dataFetchStarted = () => ({
+  type: "FETCH_OFFERS_STARTED"
 });
+
+const dataFetchSucceeded = data => ({
+  type: "FETCH_OFFERS_SUCCESS",
+  data: data
+});
+
+const dataFetchErrored = error => ({
+  type: "FETCH_OFFERS_ERROR",
+  error: error
+});
+export const fetchOffersData = () => (dispatch, getState) => {
+  dispatch(dataFetchStarted());
+  fetch(`${url}/api/offers/`)
+    .then(res => res.json())
+    .then(json => dispatch(dataFetchSucceeded(json)))
+    .catch(err => dispatch(dataFetchErrored(err)))
+};
 
 // selected offer
 export const selectOffer = (selectedOffer) => ({
@@ -17,9 +35,9 @@ export const setNumberSelectedOffers = (numberSelectedOffers) => ({
 });
 
 // number of offers to compare
-export const setNumberOffersToCompare= (numberOffersToCompare) => ({
-  type: 'SET_NUMBER_OFFERS_TO_COMPARE',
-  numberOffersToCompare
+export const setOffersToCompare= (offersToCompare) => ({
+  type: 'SET_OFFERS_TO_COMPARE',
+  offersToCompare
 });
 
 // selected sort type

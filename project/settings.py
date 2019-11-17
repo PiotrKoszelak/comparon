@@ -65,7 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-with open('C:/Users/Admin/Desktop/PK/Key/password.txt') as pas:
+with open('C:/Users/Admin/Desktop/PK/Key/db_password.txt') as pas:
     PASSWORD = pas.read().strip()
 
 DATABASES = {
@@ -109,3 +109,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/resources'),
 ]
+
+with open('C:/Users/Admin/Desktop/PK/Key/email_key.txt') as key:
+    MYKEY = key.read().strip()
+
+SENDGRID_API_KEY = MYKEY
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

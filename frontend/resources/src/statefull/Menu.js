@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import Button from '@material-ui/core/Button';
 import translation from "../translation"
 import Typography from '@material-ui/core/Typography';
-import NumberOfOffersToCompare from "./NumberOfOffersToCompare"; 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fab from '@material-ui/core/Fab';
 import MenuList from '../stateless/MenuList';
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
+import CookiesInfo from '../stateless/cookies'
 
 class MenuBottomButtons extends Component {
   
@@ -38,12 +38,14 @@ class Menu extends Component {
   
   static propTypes = {
     language: PropTypes.string.isRequired,
+    offersToCompare: PropTypes.array,
   }
 
   render() {
-    const {classes, title, language} = this.props;
+    const {classes, title, language, offersToCompare} = this.props;
     return(
         <span className={classes.toolbar} >
+            <CookiesInfo language={language} />
             <span style={{display: 'flex', alignItems: 'center'}}>
                 <MenuList classes={classes} language={language} />
                 <Typography variant="subtitle2" className={classes.title}>
@@ -57,7 +59,7 @@ class Menu extends Component {
                 </Typography>
             </span>
             <span>
-                <Badge color="secondary" style={{marginRight: 10}} badgeContent={<NumberOfOffersToCompare />} >
+                <Badge color="secondary" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
                     <Link to="/offers/compare" style={{textDecoration: 'none', color: 'white'}}>
                         <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]}`}</Button>
                     </Link>
@@ -100,6 +102,7 @@ class ShowCriteriaLabel extends Component {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
+    offersToCompare: state.offersToCompare,
   }
 };
 const mapDispatchToProps = {};

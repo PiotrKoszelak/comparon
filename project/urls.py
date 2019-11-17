@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, re_path
-from app.views import OfferListCreate, OperatorListCreate, CityListCreate, PeriodListCreate, TypeListCreate, Contact, OfferDetail, ParametersListCreate, SimpleOffer
+from app.views import OfferListCreate, OperatorListCreate, CityListCreate, PeriodListCreate, TypeListCreate, Contact, OfferDetail, ParametersListCreate, SimpleOffer, SendMessage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/contact/<int:pk>/', Contact.as_view() ),
     path('api/offerdetail/<int:pk>/', OfferDetail.as_view() ),
     path('api/offer/<int:pk>/', SimpleOffer.as_view() ),
+    path('api/offer/sendmessage', SendMessage.as_view() ),
     # for production only
     # path('', main),
     # path('about', main),

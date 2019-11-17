@@ -101,8 +101,8 @@ const translation = {
         en: 'Policy privacy'
     },
     ABOUT : {
-        pl: 'O projekcie',
-        en: 'About project'
+        pl: 'O nas',
+        en: 'About'
     },
     LOGIN : {
         pl: 'Zaloguj',
@@ -157,13 +157,38 @@ const translation = {
         en: 'Comment cannot be empty'
     },
     EMAIL_SEND_CORRECTLY : {
-        pl: 'Wiadomość wysłana prawidłowo',
-        en: 'Message sent correctly'
+        pl: 'Wiadomość wysłana prawidłowo. Odpowiedź nastąpi w ciągu 48h na wskazany adres e-mail',
+        en: 'Message sent correctly. Answer will come toYour e-mail within 48 hours '
     },
     EMAIL_SEND_INCORRECTLY : {
         pl: 'Wiadomość nie została wysłana',
         en: 'Message was not sent'
     },
+    LOADING : {
+        pl: 'Ładuję',
+        en: 'Loading'
+    },
+    UNDERSTAND : {
+        pl: 'Rozumiem',
+        en: 'Understand'
+    },
+    THIS_WEBSITE_USES_COOKIES : {
+        pl: 'Ta strona wykorzystuje ciasteczka',
+        en: 'This website uses cookies'
+    },
+    FAST : {
+        pl: 'Szybkie',
+        en: 'Fast'
+    },
+    INTUITIVE : {
+        pl: 'Intuicyjne',
+        en: 'Intuitive'
+    },
+    FREE : {
+        pl: 'Bezpłatne',
+        en: 'Free'
+    },
+
 };
 
 export default  translation;

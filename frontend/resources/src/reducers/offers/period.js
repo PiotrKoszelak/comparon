@@ -1,15 +1,7 @@
+import { asyncReducerFactory } from '../HigherOrderReducer'
 
 //periods
-export const periods = (state = [], action) => { 
-        switch (action.type) { 
-          case 'FETCH_PERIODS_SUCCESS':
-            return [
-              ...action.periods
-            ]
-          default:
-            return state
-        }
-      }
+export const periods = asyncReducerFactory('PERIODS');
 
 //selected period
 export const selectedPeriod = (state = [], action) => { 

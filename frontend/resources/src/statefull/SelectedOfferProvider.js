@@ -4,70 +4,60 @@ import SelectedOffer from '../stateless/SelectedOffer'
 import PropTypes from "prop-types";
 import url from '../config.js'
 
+
+export const sendMessageToServer= async (option, email, comment, emailTo, offerId) => {
+  const response  = await fetch(`${url}/api/offer/sendmessage`, {
+    method: "post",
+    body: `{"option" : "${option}", "email" : "${email}", "comment" : "${comment.split("\n").join(" | ")}", "emailTo" : "${emailTo}", "offerId" : "${offerId}"}`
+  });
+  const json = await response.json();
+  return json.success;
+}
+
 export class SelectedOfferProvider extends Component {
 
   static propTypes = {
     selectedOffer: PropTypes.number.isRequired,
     language: PropTypes.string.isRequired,
-    operators: PropTypes.array.isRequired,
-    periods: PropTypes.array.isRequired,
-    types: PropTypes.array.isRequired,
+    operators: PropTypes.object.isRequired,
+    periods: PropTypes.object.isRequired,
+    types: PropTypes.object.isRequired,
   }
 
   state = {
-    details : {},
-    loadedDetail: false,
-    offerInfo : {},
-    loadedOfferInfo: false,
-    contact : {},
-    loadedContact: false,
-    loading: true,
-    isEmpty: false,
+    details : null,
+    offerInfo : null,
+    contact : null,
+    isLoading: null,
+    success: null,
   };
 
   componentDidMount() {
       const {selectedOffer} = this.props;
-
-      let operatorId;
-
-      async function loadDetails() {
-            const response  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
-            const json = await response.json();
-            return json;
+      this.setState({isLoading : true});
+      const loadData = async () => {
+            const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
+            const jsonDetail = await responseDetail.json();
+            const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
+            const jsonOffer = await responseOffer.json();
+            const operatorId = await jsonOffer.operator;
+            const responseContact  = await fetch(`${url}/api/contact/${operatorId}`)
+            const jsonContact = await responseContact.json();
+            return [jsonDetail, jsonOffer, jsonContact]
       }
-      async function loadOffer() {
-              const response  = await fetch(`${url}/api/offer/${selectedOffer}`)
-              const json = await response.json();
-              operatorId = json.operator;
-              return json;
-
-      }
-      async function loadContact() {
-          const response  = await fetch(`${url}/api/contact/${operatorId}`)
-          const json = await response.json();
-          return json;
-    }
-    const that = this;
-    async function load() {
-      Promise.all([
-          await loadDetails(),
-          await loadOffer(),
-          await loadContact()
-      ])
+    loadData()
       .then(data => {
-          that.setState({details: data[0], offerInfo: data[1], contact: data[2], loadedContact: true, loadedDetail: true, loadedOfferInfo: true, loading: false});
+          this.setState({details: data[0], offerInfo: data[1], contact: data[2], success: true, isLoading: false});
       })
       .catch((error) => {
-          that.setState({loading : false});
+          this.setState({isLoading : false, success: false});
       })
-    }
-    load(); 
+      
   }
 
   render() {
     const {language, operators, periods, types} = this.props;
-    const {loadedDetail, details, loadedOfferInfo, offerInfo, loading, contact, loadedContact} = this.state;
-
+    const {success, details, offerInfo, isLoading, contact} = this.state;
         return(
           < SelectedOffer
             details={details}
@@ -76,11 +66,10 @@ export class SelectedOfferProvider extends Component {
             operators={operators}
             periods={periods}
             types={types}
-            loadedDetail={loadedDetail}
-            loadedOfferInfo={loadedOfferInfo}
-            loading={loading}
+            isLoading={isLoading}
             contact={contact}
-            loadedContact={loadedContact}
+            sendMessageToServer={sendMessageToServer}
+            success={success}
           />
         );
   }

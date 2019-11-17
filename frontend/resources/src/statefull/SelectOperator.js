@@ -1,51 +1,36 @@
 import React from "react";
 import { MultipleSelect } from "../stateless/Select";
-import { operatorsFetched, selectOperator } from "../actions";
+import { fetchDataOperators, selectOperator } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import url from '../config.js'
 import translation from "../translation"
 
 
 class SelectOperator extends React.Component {
 
   static propTypes = {
-    operators: PropTypes.array.isRequired,
+    operators: PropTypes.object.isRequired,
     selectedOperator: PropTypes.array.isRequired,
-    operatorsFetched: PropTypes.func.isRequired,
+    fetchDataOperators: PropTypes.func.isRequired,
     selectOperator: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
   }
 
-    state = {
-      loaded: false,
-    };
-
   handleChange = (event) => {
+    const { selectOperator } = this.props;
     const operator = event.target.value;
-    this.props.selectOperator(operator);
+    selectOperator(operator);
   }
 
   componentDidMount() {
-    fetch(`${url}/api/operator/`)
-    .then(response => {
-      if (response.status === 200) {
-        this.setState({loaded: true });
-        return response.json();
-      }
-      else{
-        return []
-      }})
-    .then(data => this.props.operatorsFetched(data))
-    .catch();
+    const { fetchDataOperators } = this.props;
+    fetchDataOperators();
   }
     
     render(){
-        const {loaded} = this.state;
         const {operators, selectedOperator, language} = this.props;
         return (
               <MultipleSelect 
-                loaded={loaded} 
                 label={translation.OPERATOR[language]} 
                 data={operators} 
                 value={selectedOperator} 
@@ -63,6 +48,6 @@ const mapStateToProps = (state) => {
     language: state.language,
   }
 };
-const mapDispatchToProps = { operatorsFetched, selectOperator };
+const mapDispatchToProps = { fetchDataOperators, selectOperator };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectOperator);
