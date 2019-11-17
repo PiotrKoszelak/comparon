@@ -207,7 +207,7 @@ function SelectedOffer  ({
   const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
   const [userEmail, setUserEmail] = useState('');
-  const [userComment, setuserComment] = useState('');
+  const [userComment, setUserComment] = useState('');
   const [emailValidation, setEmailValidation] = useState(null);
   const [commentNotNull, setCommentNotNull] = useState(null);
   const [isSend, setIsSend] = useState(null);
@@ -220,7 +220,7 @@ function SelectedOffer  ({
       if (emailRegex.test(event.target.value)) setEmailValidation(true);
     }
     else if (event.target.id === 'comment'){
-      setuserComment(event.target.value);
+      setUserComment(event.target.value);
       if (event.target.value) setCommentNotNull(true);
     }
 
@@ -241,7 +241,7 @@ function SelectedOffer  ({
     }
     if (emailValidation===true && commentNotNull===true){
       setModalOpen(true);
-      sendMessageToServer(userEmail, userComment, contact.email)
+      sendMessageToServer(userEmail, userComment, contact.email, offerInfo.id)
         .then(res => {
           setModalOpen(false);
           setIsSnackbar(true);

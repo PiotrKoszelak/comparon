@@ -3,10 +3,10 @@ from app.models import Offers, Operators, Cities, Periods, Types, Contacts, Offe
 from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer, ParametersSerializer
 from rest_framework import generics
 from rest_framework.views import APIView
-from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework import status
 import json
+from django.core.mail import EmailMessage
 
 
 
@@ -69,17 +69,24 @@ class ParametersListCreate(generics.ListCreateAPIView):
 class SendMessage(APIView):
 
     def post(self, request, format=None):
-        email = json.loads(request.body.decode("utf-8"))["email"]
-        comment = json.loads(request.body.decode("utf-8"))["comment"]
-        emailTo = json.loads(request.body.decode("utf-8"))["emailTo"]
         try:
-            send_mail(
-                'COMPARON',
-                comment,
-                email,
-                [emailTo],
-                fail_silently=False,
-            )
+            body = request.body.decode("utf-8")
+            email = json.loads(body)["email"]
+            comment = json.loads(body)["comment"]
+            commentArray = comment.split(' | ')
+            emailTo = json.loads(body)["emailTo"]
+            offerId = json.loads(body)["offerId"]
+            htmlMessage = f'''<h3>Id oferty: {offerId}<h3><h4>Wiadomość: </h4>'''
+            for i in commentArray:
+                htmlMessage+=f'<p>{i}</p>'
+            # normal email
+            msg = EmailMessage('COMPARON', htmlMessage, email, [emailTo])
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
+            # admin email
+            msg = EmailMessage('COMPARON ADMIN', htmlMessage, email, ['koszelak.piotr@gmail.com'])
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
             return Response({'success': True}, status=status.HTTP_201_CREATED)
         except:
             return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)

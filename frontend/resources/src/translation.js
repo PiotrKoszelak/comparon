@@ -157,8 +157,8 @@ const translation = {
         en: 'Comment cannot be empty'
     },
     EMAIL_SEND_CORRECTLY : {
-        pl: 'Wiadomość wysłana prawidłowo',
-        en: 'Message sent correctly'
+        pl: 'Wiadomość wysłana prawidłowo. Odpowiedź nastąpi w ciągu 48h na wskazany adres e-mail',
+        en: 'Message sent correctly. Answer will come toYour e-mail within 48 hours '
     },
     EMAIL_SEND_INCORRECTLY : {
         pl: 'Wiadomość nie została wysłana',
