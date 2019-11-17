@@ -182,7 +182,7 @@ const translation = {
     },
     INTUITIVE : {
         pl: 'Intuicyjne',
-        en: 'intuitive'
+        en: 'Intuitive'
     },
     FREE : {
         pl: 'Bezpłatne',
