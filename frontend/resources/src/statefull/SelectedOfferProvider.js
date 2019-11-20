@@ -17,7 +17,7 @@ export const sendMessageToServer= async (option, email, comment, emailTo, offerI
 export class SelectedOfferProvider extends Component {
 
   static propTypes = {
-    selectedOffer: PropTypes.number.isRequired,
+    selectedOffer: PropTypes.number,
     language: PropTypes.string.isRequired,
     operators: PropTypes.object.isRequired,
     periods: PropTypes.object.isRequired,
@@ -30,34 +30,39 @@ export class SelectedOfferProvider extends Component {
     contact : null,
     isLoading: null,
     success: null,
+    isEmpty: null,
   };
 
   componentDidMount() {
       const {selectedOffer} = this.props;
-      this.setState({isLoading : true});
-      const loadData = async () => {
-            const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
-            const jsonDetail = await responseDetail.json();
-            const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
-            const jsonOffer = await responseOffer.json();
-            const operatorId = await jsonOffer.operator;
-            const responseContact  = await fetch(`${url}/api/contact/${operatorId}`)
-            const jsonContact = await responseContact.json();
-            return [jsonDetail, jsonOffer, jsonContact]
+      if (!selectedOffer){
+        this.setState({isEmpty: true, isLoading : false});
       }
-    loadData()
-      .then(data => {
-          this.setState({details: data[0], offerInfo: data[1], contact: data[2], success: true, isLoading: false});
-      })
-      .catch((error) => {
-          this.setState({isLoading : false, success: false});
-      })
-      
+      else{
+          this.setState({isLoading : true});
+          const loadData = async () => {
+                const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
+                const jsonDetail = await responseDetail.json();
+                const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
+                const jsonOffer = await responseOffer.json();
+                const operatorId = await jsonOffer.operator;
+                const responseContact  = await fetch(`${url}/api/contact/${operatorId}`)
+                const jsonContact = await responseContact.json();
+                return [jsonDetail, jsonOffer, jsonContact]
+          }
+        loadData()
+          .then(data => {
+              this.setState({details: data[0], offerInfo: data[1], contact: data[2], success: true, isLoading: false});
+          })
+          .catch((error) => {
+              this.setState({isLoading : false, success: false});
+          })
+      }
   }
 
   render() {
     const {language, operators, periods, types} = this.props;
-    const {success, details, offerInfo, isLoading, contact} = this.state;
+    const {success, details, offerInfo, isLoading, contact, isEmpty} = this.state;
         return(
           < SelectedOffer
             details={details}
@@ -70,6 +75,7 @@ export class SelectedOfferProvider extends Component {
             contact={contact}
             sendMessageToServer={sendMessageToServer}
             success={success}
+            isEmpty={isEmpty}
           />
         );
   }

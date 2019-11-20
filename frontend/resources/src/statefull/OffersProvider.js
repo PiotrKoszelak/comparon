@@ -17,7 +17,7 @@ class OffersProvider extends Component {
     selectedSpeed: PropTypes.number.isRequired,
     fetchOffersData: PropTypes.func.isRequired,
     setNumberSelectedOffers: PropTypes.func.isRequired,
-    numberSelectedOffers: PropTypes.string.isRequired,
+    numberSelectedOffers: PropTypes.string,
     language: PropTypes.string.isRequired,
   }
 

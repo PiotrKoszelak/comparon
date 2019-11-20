@@ -185,7 +185,8 @@ function SelectedOffer  ({
                   isLoading,
                   contact,
                   sendMessageToServer,
-                  success
+                  success,
+                  isEmpty
                   }){
 
   const classes = useStyles();
@@ -246,6 +247,14 @@ function SelectedOffer  ({
       </div>
     )
   }
+  else if (isEmpty===true){
+    return (
+      <div className={classes.info} >
+        <LocalOfferIcon color='secondary' className={classes.icon} />
+        <span className={classes.text}>{translation.NONE[language]}</span>
+      </div>
+    )
+  }
   else if (success!==true){
     return(
       <div className={classes.info}>
@@ -256,9 +265,10 @@ function SelectedOffer  ({
   }
   else{
     if (!offerInfo || !details || !contact ){
-      return (<div className={classes.info} >
-        <LocalOfferIcon color='secondary' className={classes.icon} />
-        <span className={classes.text}>{translation.NONE[language]}</span>
+      return (
+        <div className={classes.info} >
+          <LocalOfferIcon color='secondary' className={classes.icon} />
+          <span className={classes.text}>{translation.NONE[language]}</span>
         </div>
       )
     }
@@ -372,7 +382,6 @@ function SelectedOffer  ({
               </Button>
             </Paper>
             </div>
-
           </section>
         )
     }
@@ -389,6 +398,7 @@ SelectedOffer.propTypes = {
   isLoadedDetail: PropTypes.bool,
   isLoadedOfferInfo: PropTypes.bool,
   isLoading: PropTypes.bool,
+  isEmpty: PropTypes.bool,
   contact: PropTypes.object,
   isLoadedContact: PropTypes.bool,
   sendMessageToServer: PropTypes.func,

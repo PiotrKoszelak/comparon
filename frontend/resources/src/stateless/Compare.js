@@ -199,7 +199,7 @@ function Compare  ({
     )
   }
   else{
-    if (success===true & (offerInfo ? offerInfo.length===0 : false && details ? details.length===0 : false)){
+    if (success===true && (offerInfo ? offerInfo.length===0 : false && details ? details.length===0 : false)){
       return (<div className={classes.info} >
         <LocalOfferIcon color='secondary' className={classes.icon} />
         <span className={classes.text}>{translation.NONE[language]}</span>
