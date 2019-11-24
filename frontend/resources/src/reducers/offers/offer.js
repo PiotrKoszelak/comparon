@@ -4,7 +4,7 @@ import { asyncReducerFactory } from '../HigherOrderReducer'
 export const offers = asyncReducerFactory('OFFERS');
 
 //selected offer id
-export const selectedOffer = (state = -1, action) => { 
+export const selectedOffer = (state = null, action) => { 
   switch (action.type) { 
     case 'SELECT_OFFER':
       return action.selectedOffer;
@@ -15,7 +15,7 @@ export const selectedOffer = (state = -1, action) => {
 }
 
 //number of selected offers
-export const numberSelectedOffers = (state = '', action) => { 
+export const numberSelectedOffers = (state = null, action) => { 
   switch (action.type) { 
     case 'SET_NUMBER_SELECTED_OFFERS':
       return action.numberSelectedOffers;

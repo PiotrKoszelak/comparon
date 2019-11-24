@@ -7,7 +7,7 @@ import translation from "../translation"
 class NumberOfOffers extends React.Component {
 
   static propTypes = {
-    numberSelectedOffers: PropTypes.string.isRequired,
+    numberSelectedOffers: PropTypes.string,
   }
 
     render(){

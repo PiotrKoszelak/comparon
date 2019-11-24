@@ -1,4 +1,4 @@
-import url from '../../config.js'
+import { url, key } from '../../config.js'
 
 // fetch cities data
 const dataFetchStarted = () => ({
@@ -18,8 +18,16 @@ const dataFetchErrored = error => ({
 
 export const fetchDataCities = () => (dispatch, getState) => {
   dispatch(dataFetchStarted());
-  fetch(`${url}/api/city/`)
-    .then(res => res.json())
+  fetch(`${url}/api/city/`,{
+    headers: { "Authorization": key },
+  })
+    .then(resp => {
+      if (resp.ok) {
+          return resp.json()
+      } else {
+          return Promise.reject(resp)
+      }
+    })
     .then(json => dispatch(dataFetchSucceeded(json)))
     .catch(err => dispatch(dataFetchErrored(err)))
 };
