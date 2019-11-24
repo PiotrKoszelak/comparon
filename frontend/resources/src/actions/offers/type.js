@@ -1,4 +1,4 @@
-import url from '../../config.js'
+import { url, key } from '../../config.js'
 
 // fetch types data
 const dataFetchStarted = () => ({
@@ -18,8 +18,16 @@ const dataFetchErrored = error => ({
 
 export const fetchDataTypes = () => (dispatch, getState) => {
   dispatch(dataFetchStarted());
-  fetch(`${url}/api/type/`)
-    .then(res => res.json())
+  fetch(`${url}/api/type/`, {
+    headers: { "Authorization": key },
+  })
+    .then(resp => {
+      if (resp.ok) {
+          return resp.json()
+      } else {
+          return Promise.reject(resp)
+      }
+    })
     .then(json => dispatch(dataFetchSucceeded(json)))
     .catch(err => dispatch(dataFetchErrored(err)))
 };

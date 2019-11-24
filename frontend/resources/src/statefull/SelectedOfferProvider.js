@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import SelectedOffer from '../stateless/SelectedOffer'
 import PropTypes from "prop-types";
-import url from '../config.js'
+import { url, key } from '../config.js'
 
 
 export const sendMessageToServer= async (option, email, comment, emailTo, offerId) => {
   const response  = await fetch(`${url}/api/offer/sendmessage`, {
     method: "post",
-    body: `{"option" : "${option}", "email" : "${email}", "comment" : "${comment.split("\n").join(" | ")}", "emailTo" : "${emailTo}", "offerId" : "${offerId}"}`
+    body: `{"option" : "${option}", "email" : "${email}", "comment" : "${comment.split("\n").join(" | ")}", "emailTo" : "${emailTo}", "offerId" : "${offerId}"}`,
+    headers: { "Authorization": key }
   });
   const json = await response.json();
   return json.success;
@@ -41,12 +42,18 @@ export class SelectedOfferProvider extends Component {
       else{
           this.setState({isLoading : true});
           const loadData = async () => {
-                const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
+                const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`, {
+                  headers: { "Authorization": key },
+                })
                 const jsonDetail = await responseDetail.json();
-                const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
+                const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`, {
+                  headers: { "Authorization": key },
+                })
                 const jsonOffer = await responseOffer.json();
                 const operatorId = await jsonOffer.operator;
-                const responseContact  = await fetch(`${url}/api/contact/${operatorId}`)
+                const responseContact  = await fetch(`${url}/api/contact/${operatorId}`, {
+                  headers: { "Authorization": key },
+                })
                 const jsonContact = await responseContact.json();
                 return [jsonDetail, jsonOffer, jsonContact]
           }

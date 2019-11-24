@@ -2,7 +2,7 @@ import React from "react";
 import { fetchParametersData } from "../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import url from '../config.js'
+import { url } from '../config.js'
 
 class OtherData extends React.Component {
 

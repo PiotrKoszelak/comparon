@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Compare from '../stateless/Compare'
 import PropTypes from "prop-types";
-import url from '../config.js'
+import { url, key } from '../config.js'
 import {setOffersToCompare, selectOffer} from "../actions";
 import { withRouter } from "react-router-dom";
 
@@ -38,9 +38,13 @@ export class CompareProvider extends Component {
       const loadDataAll = async () => {
           for (let el of offersToCompare){
               const loadData = async () => {
-                const responseDetail  = await fetch(`${url}/api/offerdetail/${el}`)
+                const responseDetail  = await fetch(`${url}/api/offerdetail/${el}`, {
+                  headers: { "Authorization": key },
+                })
                 const jsonDetail = await responseDetail.json();
-                const responseOffer  = await fetch(`${url}/api/offer/${el}`)
+                const responseOffer  = await fetch(`${url}/api/offer/${el}`, {
+                  headers: { "Authorization": key },
+                })
                 const jsonOffer = await responseOffer.json();
                 return [jsonDetail, jsonOffer]
               }

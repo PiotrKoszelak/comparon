@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Detail from '../stateless/Detail'
 import PropTypes from "prop-types";
-import url from '../config.js'
+import { url, key } from '../config.js'
 import {setDetailWindowOpen} from "../actions";
 import Snackbar from '../stateless/Snackbar'
 import translation from '../translation'
@@ -30,9 +30,13 @@ export class DetailProvider extends Component {
     const {selectedOffer} = this.props;
       this.setState({isLoading : true});
       const loadData = async () => {
-            const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`)
+            const responseDetail  = await fetch(`${url}/api/offerdetail/${selectedOffer}`, {
+              headers: { "Authorization": key },
+            })
             const jsonDetail = await responseDetail.json();
-            const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`)
+            const responseOffer  = await fetch(`${url}/api/offer/${selectedOffer}`, {
+              headers: { "Authorization": key },
+            })
             const jsonOffer = await responseOffer.json();
             return [jsonDetail, jsonOffer]
       }

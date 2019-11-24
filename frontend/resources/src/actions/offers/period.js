@@ -1,4 +1,4 @@
-import url from '../../config.js'
+import { url, key } from '../../config.js'
 
 // fetch periods data
 const dataFetchStarted = () => ({
@@ -18,8 +18,16 @@ const dataFetchErrored = error => ({
 
 export const fetchDataPeriods = () => (dispatch, getState) => {
   dispatch(dataFetchStarted());
-  fetch(`${url}/api/period/`)
-    .then(res => res.json())
+  fetch(`${url}/api/period/`, {
+    headers: { "Authorization": key },
+  })
+    .then(resp => {
+      if (resp.ok) {
+          return resp.json()
+      } else {
+          return Promise.reject(resp)
+      }
+    })
     .then(json => dispatch(dataFetchSucceeded(json)))
     .catch(err => dispatch(dataFetchErrored(err)))
 };
