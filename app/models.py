@@ -75,3 +75,11 @@ class Parameters(models.Model):
 
     class Meta:
         db_table = 'parameters'
+
+class Offers_Cities(models.Model):
+    id = models.AutoField(primary_key=True)
+    idCity = models.IntegerField()
+    idOffer = models.IntegerField()
+
+    class Meta:
+        db_table = 'offers_cities'

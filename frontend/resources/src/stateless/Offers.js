@@ -90,7 +90,7 @@ function Offers  ({ offers,
   else{
     // filtering
     let filteredData = [...offers.data];
-    const parametersFromSelect = [selectedOperator, selectedCity, selectedType, selectedPeriod];
+    const parametersFromSelect = [selectedOperator, selectedType, selectedPeriod];
     const parametersFromSlider = [selectedPrice, selectedSpeed];
     parametersFromSelect.map((el, key) => {
         if (el.length !== 0){
@@ -99,12 +99,9 @@ function Offers  ({ offers,
                 filteredData = filteredData.filter(elem => el.includes(elem.operator));
                 break
             case 1:
-                filteredData = filteredData.filter(elem => el.includes(elem.city));
-                break
-            case 2:
                 filteredData = filteredData.filter(elem => el.includes(elem.types));
                 break
-            case 3:
+            case 2:
                 filteredData = filteredData.filter(elem => el.includes(elem.period));
                 break
           }
