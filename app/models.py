@@ -12,8 +12,8 @@ class Operators(models.Model):
 
 class Cities(models.Model):
     id = models.AutoField(primary_key=True)
-    value_pl = models.CharField(max_length=30)
-    value_en = models.CharField(max_length=30)
+    value = models.CharField(max_length=50)
+    count = models.IntegerField()
 
     class Meta:
         db_table = 'cities'
@@ -75,3 +75,11 @@ class Parameters(models.Model):
 
     class Meta:
         db_table = 'parameters'
+
+class Offers_Cities(models.Model):
+    id = models.AutoField(primary_key=True)
+    idCity = models.IntegerField()
+    idOffer = models.IntegerField()
+
+    class Meta:
+        db_table = 'offers_cities'

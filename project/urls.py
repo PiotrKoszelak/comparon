@@ -4,7 +4,7 @@ from app.views import OfferListCreate, OperatorListCreate, CityListCreate, Perio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/offers/', OfferListCreate.as_view() ),
+    path('api/offers/<int:id>/', OfferListCreate.as_view() ),
     path('api/operator/', OperatorListCreate.as_view() ),
     path('api/city/', CityListCreate.as_view() ),
     path('api/period/', PeriodListCreate.as_view() ),

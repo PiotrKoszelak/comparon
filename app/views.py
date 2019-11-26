@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from app.models import Offers, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters
-from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer, ParametersSerializer
+from app.models import Offers, Operators, Cities, Periods, Types, Contacts, Offer_details, Parameters, Offers_Cities
+from app.serializers import OfferSerializer, OperatorSerializer, CitySerializer, PeriodSerializer, TypeSerializer, ContactSerializer, OfferDetailSerializer, ParametersSerializer, Offers_Cities_Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -13,11 +13,14 @@ with open('C:/Users/Admin/Desktop/PK/Key/authorization.txt') as f:
 # list of offers
 class OfferListCreate(APIView):
     
-    def get(self, request, format=None):
+    def get(self, request, id, format=None):
         if ('HTTP_AUTHORIZATION' in request.META):
             if (key == request.META['HTTP_AUTHORIZATION']):
-                objects = Offers.objects.all()
-                serializer = OfferSerializer(objects, many=True)
+                Offers_Cities_filtered = Offers_Cities.objects.filter(idCity=id)
+                offers = set()
+                for e in Offers_Cities_filtered:
+                    offers.add(Offers.objects.get(id=e.idOffer))
+                serializer = OfferSerializer(offers, many=True)
                 return Response(serializer.data)
             else:
                 return Response(status=status.HTTP_401_UNAUTHORIZED)

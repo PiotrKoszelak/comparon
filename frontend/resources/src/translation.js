@@ -188,6 +188,10 @@ const translation = {
         pl: 'Bezpłatne',
         en: 'Free'
     },
+    CHOOSE_CITY : {
+        pl: 'Wybierz miasto by zobaczyć ofery',
+        en: 'Choose a city in order to see the offers'
+    },
 
 };
 

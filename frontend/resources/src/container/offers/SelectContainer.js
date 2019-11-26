@@ -88,9 +88,9 @@ function SelectContainer () {
                                 onOpen={() => null}
                         >
                                 <div className={`${classes.mobile} ${classes.selects}`} >
+                                        <SelectCity />
                                         <SelectSortType />
                                         <SelectOperator />
-                                        <SelectCity />
                                         <SelectPeriod />
                                         <SelectType />
                                         <SelectPrice />
@@ -104,9 +104,9 @@ function SelectContainer () {
 
                         {/* web */}
                         <Paper className={classes.selects}>
+                                <SelectCity />
                                 <SelectSortType />
                                 <SelectOperator />
-                                <SelectCity />
                                 <SelectPeriod />
                                 <SelectType />
                                 <SelectPrice />

@@ -6,6 +6,7 @@ import translation from "../translation"
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
 
 
 const useStyles = makeStyles({
@@ -23,12 +24,12 @@ const useStyles = makeStyles({
   error : {
     position: 'relative',
     top: 100,
-    width: 150,
+    maxWidth: 150,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     '@media (max-width:600px)' : {
-      width: 80,
+      maxWidth: 200,
     }
   },
   icon : {
@@ -65,6 +66,16 @@ function Offers  ({ offers,
 
   const classes = useStyles();
 
+  if (selectedCity.length === 0){
+    setNumberSelectedOffers('0');
+    return (
+      <div className={classes.error} style={{maxWidth: 400}}>
+          <LocationCityIcon color='secondary' className={classes.icon} />
+          <span className={classes.text}>{translation.CHOOSE_CITY[language]}</span>
+      </div>
+    )
+  }
+
   if (offers.isLoading === true){
     return(
       <CircularProgress className={classes.progress} color="secondary" disableShrink />
@@ -80,7 +91,7 @@ function Offers  ({ offers,
   else{
     // filtering
     let filteredData = [...offers.data];
-    const parametersFromSelect = [selectedOperator, selectedCity, selectedType, selectedPeriod];
+    const parametersFromSelect = [selectedOperator, selectedType, selectedPeriod];
     const parametersFromSlider = [selectedPrice, selectedSpeed];
     parametersFromSelect.map((el, key) => {
         if (el.length !== 0){
@@ -89,12 +100,9 @@ function Offers  ({ offers,
                 filteredData = filteredData.filter(elem => el.includes(elem.operator));
                 break
             case 1:
-                filteredData = filteredData.filter(elem => el.includes(elem.city));
-                break
-            case 2:
                 filteredData = filteredData.filter(elem => el.includes(elem.types));
                 break
-            case 3:
+            case 2:
                 filteredData = filteredData.filter(elem => el.includes(elem.period));
                 break
           }

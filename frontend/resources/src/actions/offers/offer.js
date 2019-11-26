@@ -14,9 +14,9 @@ const dataFetchErrored = error => ({
   type: "FETCH_OFFERS_ERROR",
   error: error
 });
-export const fetchOffersData = () => (dispatch, getState) => {
+export const fetchOffersData = (id) => (dispatch, getState) => {
   dispatch(dataFetchStarted());
-  fetch(`${url}/api/offers/`, {
+  fetch(`${url}/api/offers/${id}`, {
     headers: { "Authorization": key },
   })
     .then(resp => {

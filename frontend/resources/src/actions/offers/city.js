@@ -18,7 +18,7 @@ const dataFetchErrored = error => ({
 
 export const fetchDataCities = () => (dispatch, getState) => {
   dispatch(dataFetchStarted());
-  fetch(`${url}/api/city/`,{
+  fetch(`${url}/api/city`,{
     headers: { "Authorization": key },
   })
     .then(resp => {
