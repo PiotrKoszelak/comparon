@@ -23,8 +23,8 @@ class OffersProvider extends Component {
 
   componentDidUpdate(prevProps) {
     const { fetchOffersData, selectedCity } = this.props;
-    if (selectedCity !== prevProps.selectedCity){
-      fetchOffersData();
+    if (selectedCity !== prevProps.selectedCity && selectedCity.length!==0){
+      fetchOffersData(selectedCity[0]);
     }
   }
   

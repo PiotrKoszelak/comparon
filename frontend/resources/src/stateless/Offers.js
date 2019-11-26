@@ -67,6 +67,7 @@ function Offers  ({ offers,
   const classes = useStyles();
 
   if (selectedCity.length === 0){
+    setNumberSelectedOffers('0');
     return (
       <div className={classes.error} style={{maxWidth: 400}}>
           <LocationCityIcon color='secondary' className={classes.icon} />
