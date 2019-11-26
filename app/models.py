@@ -12,8 +12,8 @@ class Operators(models.Model):
 
 class Cities(models.Model):
     id = models.AutoField(primary_key=True)
-    value_pl = models.CharField(max_length=30)
-    value_en = models.CharField(max_length=30)
+    value = models.CharField(max_length=50)
+    count = models.IntegerField()
 
     class Meta:
         db_table = 'cities'

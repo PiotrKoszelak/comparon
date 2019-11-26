@@ -6,6 +6,7 @@ import translation from "../translation"
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
 
 
 const useStyles = makeStyles({
@@ -23,12 +24,12 @@ const useStyles = makeStyles({
   error : {
     position: 'relative',
     top: 100,
-    width: 150,
+    maxWidth: 150,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     '@media (max-width:600px)' : {
-      width: 80,
+      maxWidth: 200,
     }
   },
   icon : {
@@ -133,27 +134,37 @@ function Offers  ({ offers,
 
     setNumberSelectedOffers(JSON.stringify(filteredData.length));
 
-    if (filteredData.length === 0){
-      return (<div className={classes.error} >
-            <LocalOfferIcon color='secondary' className={classes.icon} />
-            <span className={classes.text}>{translation.NONE[language]}</span>
-        </div>)
+    if (selectedCity.length === 0){
+      return (
+        <div className={classes.error} style={{maxWidth: 400}}>
+            <LocationCityIcon color='secondary' className={classes.icon} />
+            <span className={classes.text}>{translation.CHOOSE_CITY[language]}</span>
+        </div>
+      )
     }
-      return(
-          <section className={classes.offer} >
-          {filteredData.map(el => (
-                  < CardProvider
-                      key={el.id}
-                      id={el.id}
-                      operator={el.operator}
-                      period={el.period}
-                      price={el.price}
-                      speed={el.speed}
-                      type={el.types}
-                  />
-              ))}
-          </section>
-    )}
+    else {
+          if (filteredData.length === 0){
+            return (<div className={classes.error} >
+                  <LocalOfferIcon color='secondary' className={classes.icon} />
+                  <span className={classes.text}>{translation.NONE[language]}</span>
+              </div>)
+          }
+            return(
+                <section className={classes.offer} >
+                {filteredData.map(el => (
+                        < CardProvider
+                            key={el.id}
+                            id={el.id}
+                            operator={el.operator}
+                            period={el.period}
+                            price={el.price}
+                            speed={el.speed}
+                            type={el.types}
+                        />
+                    ))}
+                </section>
+          )}
+    }
 };
 
 Offers.propTypes = {
