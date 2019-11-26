@@ -66,6 +66,15 @@ function Offers  ({ offers,
 
   const classes = useStyles();
 
+  if (selectedCity.length === 0){
+    return (
+      <div className={classes.error} style={{maxWidth: 400}}>
+          <LocationCityIcon color='secondary' className={classes.icon} />
+          <span className={classes.text}>{translation.CHOOSE_CITY[language]}</span>
+      </div>
+    )
+  }
+
   if (offers.isLoading === true){
     return(
       <CircularProgress className={classes.progress} color="secondary" disableShrink />
@@ -134,37 +143,27 @@ function Offers  ({ offers,
 
     setNumberSelectedOffers(JSON.stringify(filteredData.length));
 
-    if (selectedCity.length === 0){
-      return (
-        <div className={classes.error} style={{maxWidth: 400}}>
-            <LocationCityIcon color='secondary' className={classes.icon} />
-            <span className={classes.text}>{translation.CHOOSE_CITY[language]}</span>
-        </div>
-      )
+    if (filteredData.length === 0){
+      return (<div className={classes.error} >
+            <LocalOfferIcon color='secondary' className={classes.icon} />
+            <span className={classes.text}>{translation.NONE[language]}</span>
+        </div>)
     }
-    else {
-          if (filteredData.length === 0){
-            return (<div className={classes.error} >
-                  <LocalOfferIcon color='secondary' className={classes.icon} />
-                  <span className={classes.text}>{translation.NONE[language]}</span>
-              </div>)
-          }
-            return(
-                <section className={classes.offer} >
-                {filteredData.map(el => (
-                        < CardProvider
-                            key={el.id}
-                            id={el.id}
-                            operator={el.operator}
-                            period={el.period}
-                            price={el.price}
-                            speed={el.speed}
-                            type={el.types}
-                        />
-                    ))}
-                </section>
-          )}
-    }
+      return(
+          <section className={classes.offer} >
+          {filteredData.map(el => (
+                  < CardProvider
+                      key={el.id}
+                      id={el.id}
+                      operator={el.operator}
+                      period={el.period}
+                      price={el.price}
+                      speed={el.speed}
+                      type={el.types}
+                  />
+              ))}
+          </section>
+    )}
 };
 
 Offers.propTypes = {

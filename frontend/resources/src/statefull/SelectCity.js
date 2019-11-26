@@ -24,7 +24,6 @@ class SelectCity extends React.Component {
 
   handleChangeInput = (event) => {
     const { selectCity, cities } = this.props;
-    console.log('aa');
     const valueInput = event.target.value;
     let valueCapitalized = '';
     if (valueInput) valueCapitalized = valueInput.charAt(0).toUpperCase() + valueInput.slice(1).toLowerCase();
