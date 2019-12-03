@@ -9,8 +9,7 @@ import SelectSpeed from "../../statefull/SelectSpeed";
 import OtherData from "../../statefull/FetchOtherData"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import { createMuiTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ShowCriteriaLabelComponent } from "../../statefull/Menu";
 import Fab from '@material-ui/core/Fab';
@@ -41,6 +40,8 @@ const useStyles = makeStyles({
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 width: '100%',
+                backgroundColor: '#fafafa',
+                border: '1px solid #d6d6d6',
                 '@media (max-width:600px)' : {
                         display: 'none'
                 }
@@ -48,12 +49,15 @@ const useStyles = makeStyles({
         mobile: {
                 width: 200,
                 '@media (max-width:600px)' : {
-                        display: 'block'
+                        display: 'block',
+                        backgroundColor: 'none',
+                        border: 'none',
                 }
         },
         switch : {
                 position:'relative',
                 left: -30,
+                top: 10,
                 display: 'none',
                 '@media (max-width:600px)' : {
                         display: 'block'
@@ -82,10 +86,9 @@ function SelectContainer () {
                         <div className={classes.switch}>
                                 <ShowCriteriaLabelComponent classes={classes}  handleClick={handleClick} />
                         </div>
-                        <SwipeableDrawer
+                        <Drawer
                                 open={checked}
                                 onClose={() => null}
-                                onOpen={() => null}
                         >
                                 <div className={`${classes.mobile} ${classes.selects}`} >
                                         <SelectCity />
@@ -100,7 +103,7 @@ function SelectContainer () {
                                                 <ChevronLeftIcon />
                                         </Fab>
                                 </div>
-                        </SwipeableDrawer>
+                        </Drawer>
 
                         {/* web */}
                         <Paper className={classes.selects}>

@@ -19,6 +19,8 @@ const useStyles = makeStyles(theme => ({
                 zIndex: 3,
                 paddingRight: 20,
                 paddingLeft: 20,
+                backgroundColor: '#fafafa',
+                border: '1px solid #d6d6d6',
                 '@media (max-width:600px)' : {
                         fontSize: 12,
                         paddingRight: 10,

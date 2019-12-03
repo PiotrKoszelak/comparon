@@ -22,8 +22,8 @@ class SelectPeriod extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchDataPeriods } = this.props;
-    fetchDataPeriods();
+    const { fetchDataPeriods, periods } = this.props;
+    if (!periods.data) fetchDataPeriods();
   }
     
     render(){

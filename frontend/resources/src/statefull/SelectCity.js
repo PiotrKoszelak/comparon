@@ -18,8 +18,8 @@ class SelectCity extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchDataCities } = this.props;
-    fetchDataCities();
+    const { fetchDataCities, selectedCity } = this.props;
+    if (selectedCity.length === 0) fetchDataCities();
   }
 
   handleChangeInput = (event) => {
@@ -27,7 +27,7 @@ class SelectCity extends React.Component {
     const valueInput = event.target.value;
     let valueCapitalized = '';
     if (valueInput) valueCapitalized = valueInput.charAt(0).toUpperCase() + valueInput.slice(1).toLowerCase();
-    const foundCity = cities.data.filter(({value}) => value==valueCapitalized);
+    const foundCity = cities.data.filter(({value}) => value===valueCapitalized);
     if (foundCity.length === 1){
       selectCity([foundCity[0].id]);
     }
@@ -38,7 +38,7 @@ class SelectCity extends React.Component {
 
   handleChange = (event, val) => {
     const { selectCity, cities } = this.props;
-    const foundCity = cities.data.filter(({value}) => value==val);
+    const foundCity = cities.data.filter(({value}) => value===val);
     if (foundCity.length === 1){
       selectCity([foundCity[0].id]);
     }
@@ -50,7 +50,8 @@ class SelectCity extends React.Component {
     
     render(){
         const {cities, selectedCity, language} = this.props;
-
+        const foundCity = cities.data ? cities.data.filter(({id}) => selectedCity[0] === id) : null;
+        const foundCityValue = foundCity ? foundCity[0] ? foundCity[0].value : null : null;
         return (
 
               <Autocomplete
@@ -58,6 +59,7 @@ class SelectCity extends React.Component {
                 options={cities.data ? cities.data.map(option => option.value) : null}
                 style={{width: '100%'}}
                 onChange={(event, value) => this.handleChange(event, value)}
+                value={foundCityValue}
                 renderInput={params => (
                     <TextField 
                       error={selectedCity.length===0 ? true : false}
