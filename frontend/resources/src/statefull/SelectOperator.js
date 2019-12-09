@@ -23,8 +23,8 @@ class SelectOperator extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchDataOperators } = this.props;
-    fetchDataOperators();
+    const { fetchDataOperators, operators } = this.props;
+    if (!operators.data) fetchDataOperators();
   }
     
     render(){

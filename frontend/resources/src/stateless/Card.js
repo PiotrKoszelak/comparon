@@ -23,7 +23,10 @@ const useStyles = makeStyles({
     marginBottom: 30,
     marginLeft: 10,
     marginRight: 10,
-    fontFamily: 'Lato'
+    fontFamily: 'Lato',
+    backgroundColor: '#fafafa',
+    border: '1px solid #d6d6d6',
+    boxShadow: '0px 10px 17px 0px rgba(181,175,181,1)',
   },
   cardTop: {
     position: 'relative',
@@ -39,6 +42,10 @@ const useStyles = makeStyles({
     width: 60,
     border: '1px solid black',
     borderRadius: '50%',
+    '@media (max-width:600px)' : {
+      height: 40,
+      width: 40,
+    }
   },
   content: {
     padding: 0,
@@ -47,11 +54,18 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
+    '@media (max-width:600px)' : {
+      height: 50,
+    }
   },
   details: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    '@media (max-width:600px)' : {
+      paddingTop: 0,
+      paddingBottom: 0,
+    }
   },
   detail : {
     height: 40,
@@ -61,11 +75,17 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-
+    '@media (max-width:600px)' : {
+      margin: 5,
+    }
   },
   icon : {
     height: 40,
     width: 40,
+    '@media (max-width:600px)' : {
+      height: 30,
+      width: 30,
+    }
   },
   button: {
     marginLeft: 'auto',
@@ -116,7 +136,7 @@ function MyCard ({ operator,
                 </FormGroup>
               </section>
               <CardContent className={classes.content}>
-                <Typography gutterBottom variant="h4" >
+                <Typography variant="h4" >
                     {`${price} ${translation.ZLOTY[language]}`}
                 </Typography>
               </CardContent>

@@ -71,8 +71,8 @@ export class CompareProvider extends Component {
   handleDelete = (id) => {
     const {setOffersToCompare, offersToCompare} = this.props;
     const {offerInfo, details} = this.state;
-    this.setState({offerInfo : offerInfo.filter(el => el.id != id), details : details.filter(el => el.id != id)});
-    const newOffersToCompare = [...offersToCompare].filter(el => el != id);
+    this.setState({offerInfo : offerInfo.filter(el => el.id !== id), details : details.filter(el => el.id !== id)});
+    const newOffersToCompare = [...offersToCompare].filter(el => el !== id);
     setOffersToCompare(newOffersToCompare);
   }
 

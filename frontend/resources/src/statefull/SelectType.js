@@ -22,8 +22,8 @@ class SelectType extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchDataTypes } = this.props;
-    fetchDataTypes();
+    const { fetchDataTypes, types } = this.props;
+    if (!types.data) fetchDataTypes();
   }
     
     render(){

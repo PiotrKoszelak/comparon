@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   appBar: {
-    heigt: 80,
+    height: 60,
   },
   menuButton: {
     marginRight: theme.spacing(2),
