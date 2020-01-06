@@ -27,8 +27,8 @@ function App ()  {
                         <ThemeProvider theme={theme}>
                                 <BrowserRouter>
                                         <Switch>
-                                                <Route exact path='/' component={Offers}/>
-                                                <Route exact path='/about' component={About}/>
+                                                <Route exact path='/' component={About}/>
+                                                <Route exact path='/offers' component={Offers}/>
                                                 <Route exact path='/contact' component={Contact}/>
                                                 <Route exact path='/termsofuse' component={TermsOfUse}/>
                                                 <Route exact path='/policyprivacy' component={PolicyPrivacy}/>

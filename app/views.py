@@ -7,7 +7,7 @@ from rest_framework import status
 import json
 from django.core.mail import EmailMessage
 
-with open('C:/Users/Admin/Desktop/PK/Key/authorization.txt') as f:
+with open('C:/Users/Admin/Desktop/comparON/Key/authorization.txt') as f:
     key = f.read().strip()
 
 # list of offers

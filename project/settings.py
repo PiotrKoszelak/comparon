@@ -3,7 +3,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-with open('C:/Users/Admin/Desktop/PK/Key/secret_key.txt') as f:
+with open('C:/Users/Admin/Desktop/comparON/Key/secret_key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 DEBUG = True
@@ -64,7 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-with open('C:/Users/Admin/Desktop/PK/Key/db_password.txt') as pas:
+with open('C:/Users/Admin/Desktop/comparON/Key/db_password.txt') as pas:
     PASSWORD = pas.read().strip()
 
 DATABASES = {
@@ -109,7 +109,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend/resources'),
 ]
 
-with open('C:/Users/Admin/Desktop/PK/Key/email_key.txt') as key:
+with open('C:/Users/Admin/Desktop/comparON/Key/email_key.txt') as key:
     MYKEY = key.read().strip()
 
 SENDGRID_API_KEY = MYKEY
