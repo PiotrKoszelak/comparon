@@ -1,6 +1,11 @@
 # Project title and description
 
-The project is called Comparon. 
+Reference-style: 
+![alt text][logo]
+
+[logo]: https://github.com/PiotrKoszelak/comparon/blob/master/frontend/resources/src/img/logo_comparon.png "compareON logo"
+
+The project is called comparON. 
 It is a solution that allows users compare diffrent Internet offers and choose the best one.
 It makes the way to have the Internet easier and faster than traditional solutions.
 
@@ -10,7 +15,7 @@ It makes the way to have the Internet easier and faster than traditional solutio
 List of features used in the project:
 
 * Python Django
-* ReactJS
+* ReactJS with Redux
 * PostgreSQL
 
 
