@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Button from '@material-ui/core/Button';
 import translation from "../translation"
-import Typography from '@material-ui/core/Typography';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fab from '@material-ui/core/Fab';
 import MenuList from '../stateless/MenuList';
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
 import CookiesInfo from '../stateless/cookies'
+import * as colors from "../style/colors";
 
 class MenuBottomButtons extends Component {
   
@@ -18,16 +17,16 @@ class MenuBottomButtons extends Component {
   }
 
   render() {
-    const {classes, language} = this.props;
+    const {classes, language, title} = this.props;
     return(
-        <span>
-          <Link to="/policyprivacy" style={{textDecoration: 'none', color: 'white'}}>
-            <Button color="inherit" className={classes.button} >{translation.POLICY_PRIVACY[language]}</Button>
+        <div className={classes.buttonContainer} >
+          <Link to="/policyprivacy" className={classes.link} >
+            <div className={classes.button} style={title==='PolicyPrivacy' ? {color: `${colors.primaryColor}`} : {}} >{translation.POLICY_PRIVACY[language]}</div>
           </Link>
-          <Link to="/termsofuse" style={{textDecoration: 'none', color: 'white'}}>
-            <Button color="inherit" className={classes.button} >{translation.TERMS_OF_USE[language]}</Button>
+          <Link to="/termsofuse" className={classes.link} >
+            <div className={classes.button} style={title==='TermsOfUse' ? {color: `${colors.primaryColor}`} : {}} >{translation.TERMS_OF_USE[language]}</div>
           </Link>
-        </span>
+        </div>
     );
   }
 }
@@ -42,32 +41,32 @@ class Menu extends Component {
   }
 
   render() {
-    const {classes, title, language, offersToCompare} = this.props;
+    const {classes, language, title, offersToCompare} = this.props;
     return(
-        <span className={classes.toolbar} >
+        <div className={classes.toolbar} >
             <CookiesInfo language={language} />
-            <span style={{display: 'flex', alignItems: 'center'}}>
-                <MenuList classes={classes} language={language} />
-                <Typography variant="subtitle2" className={classes.title}>
-                    {title==='Offers' ? translation.OFFERS[language] : null}
-                    {title==='About' ? translation.ABOUT[language] : null}
-                    {title==='Contact' ? translation.CONTACT[language] : null}
-                    {title==='TermsOfUse' ? translation.TERMS_OF_USE[language] : null}
-                    {title==='PolicyPrivacy' ? translation.POLICY_PRIVACY[language] : null}
-                    {title==='Compare' ? translation.COMPARE[language] : null}
-                    {title==='SelectedOffer' ? translation.SELECTED_OFFER[language] : null}
-                </Typography>
-            </span>
-            <span>
+            <Link to="/" className={classes.link} >
+                <img className={classes.logo} src={require(`../img/logo_jpg_200x100.jpg`)} alt='home' />
+            </Link>
+            <div className={classes.buttonContainer}>
+                <Link to="/offers" className={classes.link} >
+                        <div className={classes.button} style={title==='Offers' ? {color: `${colors.primaryColor}`} : {}} >{`${translation.OFFERS[language]}`}</div>
+                </Link>
                 <Badge color="secondary" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
-                    <Link to="/offers/compare" style={{textDecoration: 'none', color: 'white'}}>
-                        <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]}`}</Button>
+                    <Link to="/offers/compare" className={classes.link}>
+                        <div className={classes.button} style={title==='Compare' ? {color: `${colors.primaryColor}`} : {}} >{`${translation.COMPARE[language]}`}</div>
                     </Link>
                 </Badge>
-                
-                <Button color="inherit" className={classes.button} >{translation.LOGIN[language]}</Button>
-            </span>
-        </span>
+                <Link to="/contact" className={classes.link} >
+                        <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`} : {}} >{`${translation.CONTACT[language]}`}</div>
+                </Link>
+                <Link className={classes.link} >
+                        <div className={classes.button} >{`${translation.LOGIN[language]}`}</div>
+                </Link>
+            </div>
+            <MenuList classes={classes} language={language} title={title} />
+
+        </div>
     );
   }
 }

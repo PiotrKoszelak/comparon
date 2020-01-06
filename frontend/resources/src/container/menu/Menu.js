@@ -7,31 +7,60 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { MenuComponent } from "../../statefull/Menu";
+import * as colors from "../../style/colors";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
   appBar: {
-    height: 60,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
+    height: 70,
+    position: 'fixed',
+    backgroundColor: `${colors.white}`,
+    boxShadow: 'none',
+    display: 'flex',
+    justifyContent: 'center',
   },
   button: {
-    fontSize: 12,
+    fontSize: 15,
+    fontWeight: 600,
+    fontFamily: 'Lato',
+    color: `${colors.secondaryColor}`,
+    transition: 'color 0.5s ease',
+    '&:hover' : {
+      color: `${colors.primaryColor}`,
+      transition: 'color 0.5s ease',
+    },
     '@media (max-width:600px)' : {
       fontSize: 10,
     },
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: 400,
+    '@media (max-width:600px)' : {
+      display: 'none',
+    },
+  },
+  buttonContainerMobile: {
+    display: 'none',
+    '@media (max-width:600px)' : {
+      display: 'block',
+    },
+  },
+  link: {
+    textDecoration: 'none', 
+    color: 'white',
+    display: 'block',
   },
   toolbar: {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderBottom: `1px solid ${colors.secondaryColor}`,
+  },
+  logo: {
+    height: 60,
   },
   scroll: {
     position: 'fixed',
@@ -73,8 +102,8 @@ function Menu(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar className={classes.appBar} position="fixed" >
+    <div>
+      <AppBar className={classes.appBar} >
         <Toolbar>
             <MenuComponent classes={classes} title={title} />
         </Toolbar>
