@@ -8,9 +8,9 @@ import InfoContent from "../statefull/InfoContent";
 function PolicyPrivacy () {
         return(
                 <section>
-                        <Menu title={'PolicyPrivacy'} />
+                        <Menu />
                         <InfoContent title={'PolicyPrivacy'} />
-                        <MenuBottom />
+                        <MenuBottom title={'PolicyPrivacy'} />
                 </section>
         );
 };
