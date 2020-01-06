@@ -1,9 +1,8 @@
-# Project title and description
-
-Reference-style: 
 ![alt text][logo]
 
-[logo]: https://github.com/PiotrKoszelak/comparon/blob/master/frontend/resources/src/img/logo_comparon.png "compareON logo"
+[logo]: https://github.com/PiotrKoszelak/comparon/blob/dev/frontend/resources/src/img/logo_jpg_200x100.jpg "compareON logo"
+
+# Project title and description
 
 The project is called comparON. 
 It is a solution that allows users compare diffrent Internet offers and choose the best one.
