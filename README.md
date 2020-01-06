@@ -1,6 +1,6 @@
 ![alt text][logo]
 
-[logo]: https://github.com/PiotrKoszelak/comparon/blob/dev/frontend/resources/src/img/logo_jpg_200x100.jpg "compareON logo"
+[logo]: https://github.com/PiotrKoszelak/comparon/blob/dev/frontend/resources/src/img/logo_png.png "compareON logo"
 
 # Project title and description
 
