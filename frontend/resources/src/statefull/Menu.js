@@ -21,10 +21,10 @@ class MenuBottomButtons extends Component {
     return(
         <div className={classes.buttonContainer} >
           <Link to="/policyprivacy" className={classes.link} >
-            <div className={classes.button} style={title==='PolicyPrivacy' ? {color: `${colors.primaryColor}`} : {}} >{translation.POLICY_PRIVACY[language]}</div>
+            <div className={classes.button} style={title==='PolicyPrivacy' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{translation.POLICY_PRIVACY[language]}</div>
           </Link>
           <Link to="/termsofuse" className={classes.link} >
-            <div className={classes.button} style={title==='TermsOfUse' ? {color: `${colors.primaryColor}`} : {}} >{translation.TERMS_OF_USE[language]}</div>
+            <div className={classes.button} style={title==='TermsOfUse' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{translation.TERMS_OF_USE[language]}</div>
           </Link>
         </div>
     );
@@ -50,15 +50,15 @@ class Menu extends Component {
             </Link>
             <div className={classes.buttonContainer}>
                 <Link to="/offers" className={classes.link} >
-                        <div className={classes.button} style={title==='Offers' ? {color: `${colors.primaryColor}`} : {}} >{`${translation.OFFERS[language]}`}</div>
+                        <div className={classes.button} style={title==='Offers' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.OFFERS[language]}`}</div>
                 </Link>
                 <Badge color="secondary" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
                     <Link to="/offers/compare" className={classes.link}>
-                        <div className={classes.button} style={title==='Compare' ? {color: `${colors.primaryColor}`} : {}} >{`${translation.COMPARE[language]}`}</div>
+                        <div className={classes.button} style={title==='Compare' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.COMPARE[language]}`}</div>
                     </Link>
                 </Badge>
                 <Link to="/contact" className={classes.link} >
-                        <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`} : {}} >{`${translation.CONTACT[language]}`}</div>
+                        <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.CONTACT[language]}`}</div>
                 </Link>
                 <Link className={classes.link} >
                         <div className={classes.button} >{`${translation.LOGIN[language]}`}</div>

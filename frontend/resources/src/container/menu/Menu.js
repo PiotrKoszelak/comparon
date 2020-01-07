@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     fontSize: 15,
-    fontWeight: 600,
     fontFamily: 'Lato',
     color: `${colors.secondaryColor}`,
     transition: 'color 0.5s ease',

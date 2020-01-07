@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
     color: `${colors.secondaryColor}`,
     transition: 'color 0.5s ease',
     fontSize: 10,
-    marginTop: 10,
     '&:hover' : {
       color: `${colors.primaryColor}`,
       transition: 'color 0.5s ease',
@@ -43,6 +42,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 200,
+    height: 30,
     '@media (max-width:600px)' : {
       flexDirection: 'column',
       width: 100,

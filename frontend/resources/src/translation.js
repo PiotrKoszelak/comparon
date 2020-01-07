@@ -192,6 +192,10 @@ const translation = {
         pl: 'Wybierz miasto by zobaczyć ofery',
         en: 'Choose a city in order to see the offers'
     },
+    GO_TO_SEARCH : {
+        pl: 'Przejdź do wyszukiwania',
+        en: 'Go to search'
+    },
 
 };
 
