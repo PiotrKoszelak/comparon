@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Loader from 'react-loader-spinner'
+import * as colors from "../style/colors";
 
 
 const useStyles = makeStyles({
   root: {
-    outline: 'none'
+    outline: 'none',
   },
 });
 
@@ -13,7 +14,7 @@ function MyProgress() {
   const classes = useStyles();
 
   return (
-    <CircularProgress className={classes.root} color="secondary" disableShrink />
+    <Loader type="BallTriangle" color={`${colors.primaryColorDark}`} className={classes.root} height={150} width={150} />
   );
 }
 

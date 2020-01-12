@@ -57,6 +57,7 @@ const useStyles = makeStyles({
     color: `${colors.attentionColor}`,
   },
   modal: {
+    position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
