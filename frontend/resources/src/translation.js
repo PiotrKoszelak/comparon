@@ -44,6 +44,10 @@ const translation = {
         pl: 'Numer kontaktowy',
         en: 'Contact number'
     },
+    CONTACT_FORM : {
+        pl: 'Formularz kontaktowy',
+        en: 'Contact form'
+    },
     CLOSE : {
         pl: 'Zamknij',
         en: 'Close'
