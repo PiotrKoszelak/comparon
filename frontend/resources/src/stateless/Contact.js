@@ -36,6 +36,7 @@ const useStyles = makeStyles({
     border: `0.5px solid ${colors.secondaryColor}`,
     borderRadius: 15,
     boxShadow: 'none',
+    background: 'none',
     marginTop: 30,
     padding: 20,
     display: 'flex',
@@ -206,6 +207,7 @@ function ContactContent ({language}){
                 <FormControl>
                   <TextField
                     multiline
+                    rowsMax='10'
                     id="comment"
                     label={translation.COMMENT[language]}
                     defaultValue={userComment}

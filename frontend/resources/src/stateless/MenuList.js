@@ -60,7 +60,6 @@ export default function MenuList({classes, language, title}) {
     <div className={classes.buttonContainerMobile}>
       <IconButton
         edge="start" 
-        color={`${colors.secondaryColor}`}
         aria-label="menu"
         onClick={handleClick}
       >
@@ -97,7 +96,7 @@ export default function MenuList({classes, language, title}) {
             <ListItemText primary={translation.CONTACT[language]}  style={title==='Contact' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
           </StyledMenuItem>
         </Link>
-        <Link style={{textDecoration: 'none'}}>
+        <Link to='' style={{textDecoration: 'none'}}>
           <StyledMenuItem>
             <ListItemIcon>
               <ExitToAppIcon />

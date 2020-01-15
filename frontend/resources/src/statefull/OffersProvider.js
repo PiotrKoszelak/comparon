@@ -3,7 +3,6 @@ import Offers from "../stateless/Offers";
 import { connect } from "react-redux";
 import { fetchOffersData, setNumberSelectedOffers} from "../actions";
 import PropTypes from "prop-types";
-import DetailProvider from './DetailProvider';
 
 class OffersProvider extends Component {
 
@@ -54,7 +53,6 @@ class OffersProvider extends Component {
               language={language}
               sortType={sortType}
             />
-            {isDetailOpen ? <DetailProvider /> : null}
         </div>
     );
   }
@@ -72,7 +70,6 @@ const mapStateToProps = (state) => {
     numberSelectedOffers: state.numberSelectedOffers,
     language: state.language,
     sortType: state.sortType,
-    isDetailOpen : state.isDetailOpen,
   }
 };
 const mapDispatchToProps = { fetchOffersData, setNumberSelectedOffers };

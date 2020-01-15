@@ -8,7 +8,8 @@ const useStyles = makeStyles(theme => ({
                 position: 'relative',
                 left: 250,
                 display: 'flex',
-                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center',
                 marginTop: 70,
                 zIndex: 1,
                 '@media (max-width:600px)' : {

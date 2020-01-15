@@ -200,6 +200,10 @@ const translation = {
         pl: 'Przejdź do wyszukiwania',
         en: 'Go to search'
     },
+    MONTHS : {
+        pl: 'msc',
+        en: 'mos.'
+    }
 
 };
 

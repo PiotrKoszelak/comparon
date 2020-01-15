@@ -52,7 +52,7 @@ class Menu extends Component {
                 <Link to="/offers" className={classes.link} >
                         <div className={classes.button} style={title==='Offers' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.OFFERS[language]}`}</div>
                 </Link>
-                <Badge color="secondary" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
+                <Badge color="error" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
                     <Link to="/offers/compare" className={classes.link}>
                         <div className={classes.button} style={title==='Compare' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.COMPARE[language]}`}</div>
                     </Link>
@@ -60,7 +60,7 @@ class Menu extends Component {
                 <Link to="/contact" className={classes.link} >
                         <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.CONTACT[language]}`}</div>
                 </Link>
-                <Link className={classes.link} >
+                <Link className={classes.link} to='' >
                         <div className={classes.button} >{`${translation.LOGIN[language]}`}</div>
                 </Link>
             </div>
@@ -83,11 +83,9 @@ class ShowCriteriaLabel extends Component {
       <Fab
           variant="extended"
           size="small"
-          color="secondary"
           aria-label="add"
-          className={classes.margin}
+          className={classes.showCriteriaButton}
           onClick={handleClick}
-          style={{fontSize:10, padding:5, paddingRight:10}}
         >
           <ChevronRightIcon className={classes.extendedIcon} />
           {translation.SHOW_CRITERIA[language]}

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { selectOffer, setDetailWindowOpen, setOffersToCompare } from "../actions";
+import { selectOffer, setOffersToCompare } from "../actions";
 import Card from '../stateless/Card';
 
 
@@ -15,14 +15,12 @@ class CardProvider extends React.Component {
         price: PropTypes.number.isRequired,
         speed: PropTypes.number.isRequired,
         selectOffer: PropTypes.func.isRequired,
-        setDetailWindowOpen: PropTypes.func.isRequired,
         language: PropTypes.string.isRequired,
   }
 
   selectOffer = (id) => {
-    const { selectOffer, setDetailWindowOpen } = this.props;
+    const { selectOffer } = this.props;
     selectOffer(id);
-    setDetailWindowOpen(true);
   }
 
   selectToCompare = (id) => {
@@ -39,7 +37,7 @@ class CardProvider extends React.Component {
 
     render(){
         
-        const {id, operator, period, price, speed, type, language, operators, periods, types, offersToCompare} = this.props;
+        const {id, operator, period, price, speed, type, language, operators, periods, types, offersToCompare, selectedOffer} = this.props;
         return (
           <Card
               id={id}
@@ -55,6 +53,7 @@ class CardProvider extends React.Component {
               periods={periods}
               types={types}
               offersToCompare={offersToCompare}
+              selectedOffer={selectedOffer}
           />
         );
     }
@@ -67,11 +66,11 @@ const mapStateToProps = (state) => {
     periods: state.periods,
     types: state.types,
     offersToCompare: state.offersToCompare,
+    selectedOffer: state.selectedOffer,
   }
 };
 const mapDispatchToProps = {
   selectOffer, 
-  setDetailWindowOpen, 
   setOffersToCompare
  };
 

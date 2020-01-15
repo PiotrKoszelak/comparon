@@ -9,6 +9,7 @@ import * as colors from "../../style/colors";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
+    position: 'fixed',
     top: 'auto',
     bottom: 0,
     height: 50,
@@ -57,7 +58,7 @@ function MenuBottom(props) {
 
   return (
     <div>
-      <AppBar className={classes.appBar} position="fixed">
+      <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
           <MenuBottomButtonsComponent classes={classes} title={title} />
           <Language />

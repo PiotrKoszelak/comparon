@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: 15,
     fontFamily: 'Lato',
     color: `${colors.secondaryColor}`,
+    backgroundColor: 'none',
     transition: 'color 0.5s ease',
     '&:hover' : {
       color: `${colors.primaryColor}`,
@@ -50,6 +51,7 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none', 
     color: 'white',
     display: 'block',
+    backgroundColor: 'none',
   },
   toolbar: {
     width: '100%',
@@ -68,6 +70,11 @@ const useStyles = makeStyles(theme => ({
     bottom: 50,
     zIndex: 3,
   },
+  fab: {
+    background: 'none',
+    boxShadow: 'none',
+    border: `2px solid ${colors.primaryColor}`,
+  }
 }));
 
 function ScrollTop(props) {
@@ -109,7 +116,7 @@ function Menu(props) {
       </AppBar>
       <div id="back-to-top-anchor"></div>
       <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab className={classes.fab} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

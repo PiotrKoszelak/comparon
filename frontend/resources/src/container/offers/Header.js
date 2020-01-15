@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import NumberOfOffers from "../../statefull/NumberOfOffers";
+import * as colors from "../../style/colors";
 
 const useStyles = makeStyles(theme => ({
         subtitle: {
@@ -11,6 +12,7 @@ const useStyles = makeStyles(theme => ({
                 left: 'auto',
                 right: 0,
                 display: 'flex',
+                boxShadow: 'none',
                 alignItems: 'center',
                 justifyContent: 'center',
                 top: 80,
@@ -19,8 +21,11 @@ const useStyles = makeStyles(theme => ({
                 zIndex: 3,
                 paddingRight: 20,
                 paddingLeft: 20,
-                backgroundColor: '#fafafa',
-                border: '1px solid #d6d6d6',
+                border: `0.5px solid ${colors.secondaryColor}`,
+                borderRight: 'none',
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                color: `${colors.secondaryColorDark}`,
                 '@media (max-width:600px)' : {
                         fontSize: 12,
                         paddingRight: 10,

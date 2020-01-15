@@ -1,21 +1,28 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { withStyles } from '@material-ui/core/styles';
 import Loader from 'react-loader-spinner'
 import * as colors from "../style/colors";
 
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     outline: 'none',
+    position: 'absolute',
+    top: 'calc(40vh - 75px)',
+    left: 'calc(50% - 75px)',
   },
-});
+};
 
-function MyProgress() {
-  const classes = useStyles();
+class MyProgress extends Component {
 
-  return (
-    <Loader type="BallTriangle" color={`${colors.primaryColorDark}`} className={classes.root} height={150} width={150} />
-  );
+  render(){
+    
+    const {classes} = this.props;
+
+    return (
+      <Loader type="BallTriangle" color={`${colors.primaryColor}`} className={classes.root} height={150} width={150} />
+    );
+  }
 }
 
-export default MyProgress;
+export default withStyles(styles)(MyProgress);
