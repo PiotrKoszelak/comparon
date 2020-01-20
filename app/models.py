@@ -38,7 +38,6 @@ class Types(models.Model):
 
 class Offers(models.Model):
     id = models.AutoField(primary_key=True)
-    city = models.ForeignKey(Cities, on_delete=models.CASCADE)
     operator = models.ForeignKey(Operators, on_delete=models.CASCADE)
     period = models.ForeignKey(Periods, on_delete=models.CASCADE)
     price = models.FloatField()
@@ -63,6 +62,7 @@ class Offer_details(models.Model):
     offer = models.ForeignKey(Offers, on_delete=models.CASCADE)
     delivery_time = models.IntegerField()
     delivery_cost = models.IntegerField()
+    equipment = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'offer_details'

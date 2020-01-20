@@ -261,7 +261,6 @@ function MyCard ({ operator,
                     <div className={classes.columnLast}>
                           <FormGroup onChange={() =>selectToCompare(id)} row onClick={event => event.stopPropagation()} >
                                 <FormControlLabel
-                                    disableTypography
                                     className={classes.compare}
                                     control={<YellowCheckbox checked={offersToCompare.includes(id) ? true : false} />}
                                     label={translation.COMPARE[language]}
