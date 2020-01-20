@@ -10,25 +10,29 @@ import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 function Detail  ({
                   language,
                   details, 
-                  classes
+                  classes,
+                  isLoading
                   }){
 
+      let classForDetails;
+      isLoading ? classForDetails=classes.detailsInvisible : classForDetails=classes.detailsVisible;
+
       return(
-          <ExpansionPanelDetails className={classes.details}>
+          <ExpansionPanelDetails className={classForDetails}>
                 <div className={classes.column} />
                 <div className={classes.column}>
                   <Chip label="Barbados" onDelete={() => {}} />
                 </div>
                 <div className={clsx(classes.column, classes.helper)}>
                       <PaymentIcon className={classes.icon} />
-                      <Typography variant="subtitle1">
-                      {`${details.delivery_time} h`} 
+                      <Typography className={classes.desc}>
+                      {!isLoading ? `${details.delivery_time} h` : null}
                       </Typography>
                 </div>
                 <div className={classes.column}>
                       <LocalShippingIcon className={classes.icon} />
-                      <Typography variant="subtitle1">
-                      {`${details.delivery_cost} zł`} 
+                      <Typography className={classes.desc} >
+                      {!isLoading ? `${details.delivery_cost} zł` : null} 
                       </Typography>
                 </div>
           </ExpansionPanelDetails>

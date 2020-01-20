@@ -51,13 +51,14 @@ export class DetailProvider extends Component {
 
   render() {
     const {language, classes} = this.props;
-    const {success, details, isSnackbar} = this.state;
-    if (success===true){
+    const {success, details, isSnackbar, isLoading} = this.state;
+    if (success===true || isLoading===true){
         return(
           < Detail
             classes={classes}
             details={details}
             language={language}
+            isLoading={isLoading}
           />
         );
     }
@@ -67,7 +68,7 @@ export class DetailProvider extends Component {
                     isOpen={isSnackbar}
                     close={this.handleIsSnackbar}
                     text={translation.DOWNLOAD_ERROR[language]} 
-                    vertical={'bottom'}
+                    vertical={'top'}
                     horizontal={'center'}
           />
         )

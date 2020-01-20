@@ -47,13 +47,13 @@ const useStyles = makeStyles({
                 borderLeft: 'none',
                 borderTopRightRadius: 15,
                 borderBottomRightRadius: 15,
-                '@media (max-width:600px)' : {
+                '@media (max-width:800px)' : {
                         display: 'none'
                 }
         },
         mobile: {
                 width: 200,
-                '@media (max-width:600px)' : {
+                '@media (max-width:800px)' : {
                         display: 'block',
                         backgroundColor: 'none',
                         border: 'none',
@@ -64,7 +64,7 @@ const useStyles = makeStyles({
                 left: -30,
                 top: 10,
                 display: 'none',
-                '@media (max-width:600px)' : {
+                '@media (max-width:800px)' : {
                         display: 'block'
                 }
         },

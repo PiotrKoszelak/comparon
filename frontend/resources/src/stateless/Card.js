@@ -24,67 +24,99 @@ import DetailProvider from '../statefull/DetailProvider';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '95%',
+    width: '100%',
     border: `1px solid ${colors.secondaryColor}`,
     borderRadius: 10,
     margin: '15px 0px',
+    padding: 0,
+  },
+  summaryPanel: {
+    '@media (max-width:450px)' : {
+      flexDirection: 'column',
+      marginBottom: 0,
+    }
+  },
+  panel: {
+    padding: 0,
+    minHeight: 100,
+    display: 'flex',
+    width: '100%',
+    '@media (max-width:450px)' : {
+      marginTop: 30,
+      alignContent: 'space-between',
+      flexDirection: 'column',
+      minHeight: 100,
+      width: '60vw',
+    }
+  },
+  panelFirst: {
+    display: 'flex', 
+    flexBasis: '30%'
+  },
+  panelSecond: {
+    display: 'flex', 
+    flexBasis: '70%',
   },
   media: {
     height: 80,
     width: 80,
     border: `1px solid ${colors.secondaryColor}`,
     borderRadius: 10,
+    '@media (max-width:1000px)' : {
+      height: 50,
+      width: 50,
+    },
     '@media (max-width:600px)' : {
-      height: 40,
-      width: 40,
+      height: 30,
+      width: 30,
     }
   },
   column: {
-    flexBasis: '16.6%',
+    flexBasis: '33%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     color: `${colors.secondaryColor}`,
     fontFamily: 'Lato',
     padding: '0 10',
+    '@media (max-width:600px)' : {
+      flexDirection: 'column',
+    }
   },
   icon : {
     height: 30,
     width: 30,
     marginRight: 10,
+    '@media (max-width:1000px)' : {
+      height: 20,
+      width: 20,
+    },
     '@media (max-width:600px)' : {
-      height: 30,
-      width: 30,
+      height: 15,
+      width: 15,
     }
   },
   compare: {
     position: 'absolute',
     left: 'auto',
-    right: 15,
+    right: 0,
     margin: 0,
     top: -3,
-    fontSize: 10,
-  },
-  content: {
-    padding: 0,
-    marginTop: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 100,
-    '@media (max-width:600px)' : {
-      height: 50,
+    fontSize: `10px !important`,
+    '@media (max-width:1000px)' : {
+      fontSize: 6,
     }
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-  details: {
+  detailsInvisible: {
     alignItems: 'center',
+    visibility: 'hidden',
+    opacity: 0,
+  },
+  detailsVisible: {
+    alignItems: 'center',
+    visibility: 'visible',
+    opacity: 1,
+    transition: 'opacity 2s ease',
   },
   helper: {
     borderLeft: `2px solid ${colors.secondaryColor}`,
@@ -117,11 +149,30 @@ const useStyles = makeStyles(theme => ({
     '@media (max-width:600px)' : {
       fontSize: 10,
       width: 50,
+      margin: 0,
     },
     input: {
       color: `${colors.secondaryColor}`,
     }
   },
+  price: {
+    fontSize: 30,
+    '@media (max-width:1000px)' : {
+      fontSize: 25,
+    },
+    '@media (max-width:600px)' : {
+      fontSize: 18,
+    }
+  },
+  desc: {
+    fontSize: 16,
+    '@media (max-width:1000px)' : {
+      fontSize: 14,
+    },
+    '@media (max-width:600px)' : {
+      fontSize: 12,
+    }
+  }
 }));
 
 const YellowCheckbox = withStyles({
@@ -166,51 +217,59 @@ function MyCard ({ operator,
 
   return(
      <div className={classes.root}>
-      <ExpansionPanel expanded={selectedOffer===id} onChange={handleChange(id)}>
+      <ExpansionPanel expanded={selectedOffer===id} onChange={handleChange(id)} >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
           id="panel1c-header"
+          className={classes.summaryPanel}
         >
-          <div className={classes.column}>
-            <CardMedia
-                  className={classes.media}
-                  image =  {operatorValue ? require(`../img/${operatorValue}.png`) : require(`../img/default.png`)}
-                  title={operatorValue}
-            />
-          </div>
-          <div className={classes.column}>
-                <Typography variant="h4" >
-                    {`${price} ${translation.ZLOTY[language]}`}
-                </Typography>
-          </div>
-          <div className={classes.column}>
-                <SpeedIcon className={classes.icon} />
-                <Typography variant="subtitle1">
-                {` ${speed} MB/s`}
-                </Typography>
-          </div>
-          <div className={classes.column}>
-                <EventNoteIcon className={classes.icon} />
-                <Typography variant="subtitle1">
-                {`${periodValue} ${translation.MONTHS[language]}`}
-                </Typography>
-          </div>
-          <div className={classes.column}>
-                <RssFeedIcon className={classes.icon} />
-                <Typography variant="subtitle1">
-                {`${typeValue}`} 
-                </Typography>
-          </div>
-          <div className={classes.columnLast}>
-                <FormGroup onChange={() =>selectToCompare(id)} row onClick={event => event.stopPropagation()} >
-                    <FormControlLabel
-                        className={classes.compare}
-                        control={<YellowCheckbox checked={offersToCompare.includes(id) ? true : false} />}
-                        label={translation.COMPARE[language]}
-                        labelPlacement="start"
-                    />
-                </FormGroup>
+          <div className={classes.panel}>
+              <div className={classes.panelFirst}>
+                    <div className={classes.column} style={{flexBasis: '50%'}}>
+                      <CardMedia
+                            className={classes.media}
+                            image =  {operatorValue ? require(`../img/${operatorValue}.png`) : require(`../img/default.png`)}
+                            title={operatorValue}
+                      />
+                    </div>
+                    <div className={classes.column} style={{flexBasis: '50%'}}>
+                          <Typography className={classes.price} >
+                              {`${price} ${translation.ZLOTY[language]}`}
+                          </Typography>
+                    </div>
+              </div>
+              <div className={classes.panelSecond} >
+                    <div className={classes.column}>
+                          <SpeedIcon className={classes.icon} />
+                          <Typography className={classes.desc} >
+                          {` ${speed} MB/s`}
+                          </Typography>
+                    </div>
+                    <div className={classes.column}>
+                          <EventNoteIcon className={classes.icon} />
+                          <Typography className={classes.desc} >
+                          {`${periodValue} ${translation.MONTHS[language]}`}
+                          </Typography>
+                    </div>
+                    <div className={classes.column}>
+                          <RssFeedIcon className={classes.icon} />
+                          <Typography className={classes.desc} >
+                          {`${typeValue}`} 
+                          </Typography>
+                    </div>
+                    <div className={classes.columnLast}>
+                          <FormGroup onChange={() =>selectToCompare(id)} row onClick={event => event.stopPropagation()} >
+                                <FormControlLabel
+                                    disableTypography
+                                    className={classes.compare}
+                                    control={<YellowCheckbox checked={offersToCompare.includes(id) ? true : false} />}
+                                    label={translation.COMPARE[language]}
+                                    labelPlacement="start"
+                                />
+                          </FormGroup>
+                    </div>
+              </div>
           </div>
         </ExpansionPanelSummary>
         {selectedOffer===id ? <DetailProvider classes={classes} /> : null}
