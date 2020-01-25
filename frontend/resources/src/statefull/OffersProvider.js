@@ -37,8 +37,7 @@ class OffersProvider extends Component {
             selectedSpeed, 
             setNumberSelectedOffers, 
             language,
-            sortType, 
-            isDetailOpen} = this.props;
+            sortType} = this.props;
     return(
         <div>
             <Offers 

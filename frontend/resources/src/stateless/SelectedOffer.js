@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
 import translation from "../translation"
-import DetailTemplate from './Detail_template';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
@@ -305,6 +304,7 @@ function SelectedOffer  ({
             </Modal>
             <div className={classes.rootContent}>
                   <div style={{overflowX: 'none !important'}}>
+                    {/*
                       <DetailTemplate
                                   withoutIcon={false}
                                   withoutText={true}
@@ -333,6 +333,7 @@ function SelectedOffer  ({
                             types={types}
                             classes={classes}
                         />
+                    */}
                   </div>
             </div>
             <div className={classes.contactContent}>

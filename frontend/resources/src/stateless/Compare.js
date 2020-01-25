@@ -2,66 +2,67 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
 import translation from "../translation"
-import DetailTemplate from './Detail_template';
+import OfferTemplate from './Offer_template';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import MyProgress from '../stateless/Progress';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Snackbar from './Snackbar'
+import * as colors from "../style/colors";
 
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
-    height: '80vh',
-    top: '15vh',
+    top: 80,
     left: '5vw',
     width: '90vw',
-    position: 'relative',
+    position: 'absolute',
+    marginBottom: 50,
   },
   rootContent : {
     display: 'flex',
-    justifyContent: 'flex-start',
-    overflowX: 'auto',
-  },
-  details: {
-    fontFamily: "Lato",
-    display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    width: '100%',
   },
-  detail : {
-    height: 45,
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    width: 150,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  rootPanel: {
+    border: `1px solid ${colors.secondaryColor}`,
+    borderRadius: 10,
+    margin: '15px 0px',
+    padding: 0,
+    boxShadow: 'none',
+    width: '96%',
+    position: 'relative',
+    left: '2%',
+  },
+  iconInfo : {
+    width: 50,
+    height: 50,
+    marginRight: 20,
     '@media (max-width:600px)' : {
-      height: 20,
-      width: 90,  
+        width: 30,
+        height: 30,
+    }
+  },
+  expansionPanelSummary: {
+    padding: 5, 
+    width: '98%',
+    '@media (max-width:600px)' : {
+      position: 'relative',
+      left: '2%',
+      width: '96%'
     }
   },
   icon : {
-    height: 45,
-    width: 40,
-    marginRight: 15,
-    '@media (max-width:600px)' : {
+    height: 30,
+    width: 30,
+    marginRight: 10,
+    '@media (max-width:1000px)' : {
       height: 20,
       width: 20,
-      marginRight: 10,  
-    }
-  },
-  button: {
-    marginTop: 20,
-    backgroundColor: '#bda3f0',
-    marginBottom: 20,
-    display: 'block',
+    },
     '@media (max-width:600px)' : {
-      fontSize: 9,  
+      height: 15,
+      width: 15,
     }
   },
   text : {
@@ -74,43 +75,146 @@ const useStyles = makeStyles({
     }
   },
   info : {
-    position: 'relative',
-    top: 100,
-    width: 150,
-    left: 'calc(50vw - 75px)',
+    position: 'absolute',
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: 150,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     '@media (max-width:600px)' : {
-      width: 80,
-      left: 'calc(50vw - 40px)',
+      maxWidth: 200,
     }
   },
-  progress: {
-    position: 'relative',
-    top: 100,
-  },
-  divider: {
-    width: '90%',
-  },
-  description: {
-    display: 'flex', 
-    alignItems: 'center',
-  },
-  closeButton: {
+  panel: {
     padding: 0,
-    width: 25,
-    height: 25,
-    '@media (max-width:600px)' : {
-      width: 10,
-      height: 10,
+    minHeight: 80,
+    display: 'flex',
+    width: '100%',
+    '@media (max-width:700px)' : {
+      alignContent: 'space-between',
+      flexDirection: 'column',
     }
+  },
+  panelFirst: {
+    display: 'flex', 
+    flexBasis: '25%',
+    '@media (max-width:700px)' : {
+      flexBasis: '100%',
+    }
+  },
+  panelSecond: {
+    display: 'flex', 
+    flexBasis: '65%',
+    '@media (max-width:700px)' : {
+      marginTop: 15,
+      flexBasis: '90%',
+    }
+  },
+  panelThird: {
+    display: 'flex', 
+    flexDirection: 'column',
+    flexBasis: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '@media (max-width:700px)' : {
+      marginTop: 15,
+      flexDirection: 'row',
+      flexBasis: '100%',
+      justifyContent: 'space-around',
+    }
+  },
+  media: {
+    height: 80,
+    width: 80,
+    border: `1px solid ${colors.secondaryColor}`,
+    borderRadius: 10,
+    '@media (max-width:1000px)' : {
+      height: 60,
+      width: 60,
+    },
+  },
+  column: {
+    flexBasis: '33%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: `${colors.secondaryColor}`,
+    fontFamily: 'Lato',
+    padding: '0 10',
+    '@media (max-width:1100px)' : {
+      flexDirection: 'column',
+    }
+  },
+  helper: {
+    borderLeft: `1px solid ${colors.secondaryColor}`,
   },
   actions: {
     display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  }
+    justifyContent: 'center',
+    padding: 0,
+  },
+  button: {
+    fontFamily: 'Lato',
+    marginTop: 5,
+    marginBottom: 5,
+    display: 'block',
+    padding: '5px 20px',
+    color: `${colors.secondaryColor}`,
+    cursor: 'pointer',
+    width: 80,
+    textAlign: 'center',
+    backgroundColor: `${colors.white}`,
+    transition: 'color 0.5s ease, background-color 0.5s ease',
+    '&:hover' : {
+      backgroundColor: `${colors.primaryColor}`,
+      color: `${colors.white}`,
+      transition: 'color 0.5s ease, background-color 0.5s ease',
+    },
+    border: `1.5px solid ${colors.primaryColor}`,
+    borderRadius: 10,
+    fontSize: 12,
+    '@media (max-width:600px)' : {
+      fontSize: 10,
+      width: 50,
+      margin: 0,
+    },
+    input: {
+      color: `${colors.secondaryColor}`,
+    }
+  },
+  buttonError: {
+    border: `1.5px solid ${colors.attentionColor}`,
+    transition: 'color 0.5s ease, background-color 0.5s ease',
+    '&:hover' : {
+      backgroundColor: `${colors.attentionColor}`,
+      color: `${colors.white}`,
+      transition: 'color 0.5s ease, background-color 0.5s ease',
+    },
+  },
+  price: {
+    fontSize: 30,
+    '@media (max-width:1000px)' : {
+      fontSize: 25,
+    },
+    '@media (max-width:600px)' : {
+      fontSize: 18,
+    }
+  },
+  desc: {
+    fontSize: 16,
+    '@media (max-width:1000px)' : {
+      fontSize: 14,
+    },
+    '@media (max-width:600px)' : {
+      fontSize: 12,
+    }
+  },
+  equipment: {
+    width: '80%',
+    height: 'auto',
+  },
 });
 
 function Compare  ({
@@ -124,7 +228,7 @@ function Compare  ({
                   isEmpty,
                   handleDelete,
                   handleDrag,
-                  selectOfferInComparison,
+                  selectOffer,
                   success,
                   error
                   }){
@@ -163,13 +267,13 @@ function Compare  ({
 
   const getListStyle = isDraggingOver => ({
     display: 'flex',
-    overflow: 'auto',
+    flexDirection: 'column',
   });
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    background: isDragging ? 'lightgreen' : null,
+    background: isDragging ? colors.secondaryColor : null,
     ...draggableStyle,
   });
   if (isLoading===null){
@@ -178,22 +282,20 @@ function Compare  ({
   else if (isLoading===true){
     if (!isSnackbar) setIsSnackbar(true);
     return(
-      <div className={classes.info} >
-          <CircularProgress className={classes.progress} color="secondary" disableShrink />
-      </div>
+      <MyProgress />
     )
   }
   else if (isEmpty===true){
     return (<div className={classes.info} >
-      <LocalOfferIcon color='secondary' className={classes.icon} />
-      <span className={classes.text}>{translation.NONE[language]}</span>
+        <img className={classes.iconInfo} src={require(`../img/none.jpg`)} alt='none' />
+        <span className={classes.text}>{translation.NONE[language]}</span>
       </div>
     )
   }
   else if (error===true){
     return(
       <div className={classes.info}>
-          <ErrorOutlineIcon color='secondary' className={classes.icon} />
+          <ErrorOutlineIcon color='secondary' className={classes.iconInfo} />
           <span className={classes.text}>{translation.DOWNLOAD_ERROR[language]}</span>
       </div>
     )
@@ -201,8 +303,8 @@ function Compare  ({
   else{
     if (success===true && (offerInfo ? offerInfo.length===0 : false && details ? details.length===0 : false)){
       return (<div className={classes.info} >
-        <LocalOfferIcon color='secondary' className={classes.icon} />
-        <span className={classes.text}>{translation.NONE[language]}</span>
+            <img className={classes.iconInfo} src={require(`../img/none.jpg`)} alt='none' />
+            <span className={classes.text}>{translation.NONE[language]}</span>
         </div>
       )
     }
@@ -219,23 +321,8 @@ function Compare  ({
                     isOpen={isSnackbar}
                     close={setIsSnackbar}
           />
-            <div style={{overflowX: 'none !important'}}>
-                <DetailTemplate
-                            withoutIcon={false}
-                            withoutText={true}
-                            enableButton={false}
-                            enableDelete={false}
-                            classes={classes}
-                            language={language}
-                            offerInfo={{}}
-                            details={{}}
-                            operators={operators}
-                            periods={periods}
-                            types={types}
-                />
-            </div>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="droppable" direction="horizontal">
+              <Droppable droppableId="droppable" direction="vertical">
                 {(provided, snapshot) => (
                   <div className={classes.rootContent} ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)} {...provided.droppableProps}>
                     {offerInfoDrag.map((el, key) => (
@@ -248,12 +335,8 @@ function Compare  ({
                             snapshot.isDragging,
                             provided.draggableProps.style
                           )}>
-                            <DetailTemplate
+                            <OfferTemplate
                                 key={key}
-                                enableDelete={true}
-                                withoutIcon={true}
-                                withoutText={false}
-                                enableButton={true}
                                 details={detailsDrag[key]}
                                 offerInfo={el}
                                 language={language}
@@ -262,7 +345,7 @@ function Compare  ({
                                 types={types}
                                 classes={classes}
                                 handleDelete={handleDelete}
-                                selectOfferInComparison={selectOfferInComparison}
+                                selectOffer={selectOffer}
                             />
                             </div>
                         )}
@@ -293,6 +376,6 @@ function Compare  ({
   isLoading: PropTypes.bool,
   isEmpty: PropTypes.bool,
   handleDelete: PropTypes.func,
-  selectOfferInComparison: PropTypes.func,
+  selectOffer: PropTypes.func,
 };
 export default Compare;

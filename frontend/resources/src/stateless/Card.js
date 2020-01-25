@@ -24,11 +24,14 @@ import DetailProvider from '../statefull/DetailProvider';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    width: 'calc(100vw - 320px)',
     border: `1px solid ${colors.secondaryColor}`,
     borderRadius: 10,
     margin: '15px 0px',
     padding: 0,
+    '@media (max-width:800px)' : {
+      width: 'calc(100vw - 60px)',
+    }
   },
   summaryPanel: {
     '@media (max-width:450px)' : {
@@ -38,14 +41,13 @@ const useStyles = makeStyles(theme => ({
   },
   panel: {
     padding: 0,
-    minHeight: 100,
+    minHeight: 80,
     display: 'flex',
     width: '100%',
     '@media (max-width:450px)' : {
       marginTop: 30,
       alignContent: 'space-between',
       flexDirection: 'column',
-      minHeight: 100,
       width: '60vw',
     }
   },
@@ -56,6 +58,9 @@ const useStyles = makeStyles(theme => ({
   panelSecond: {
     display: 'flex', 
     flexBasis: '70%',
+    '@media (max-width:600px)' : {
+      marginTop: 15,
+    }
   },
   media: {
     height: 80,
@@ -67,8 +72,8 @@ const useStyles = makeStyles(theme => ({
       width: 50,
     },
     '@media (max-width:600px)' : {
-      height: 30,
-      width: 30,
+      height: 40,
+      width: 40,
     }
   },
   column: {
@@ -108,23 +113,26 @@ const useStyles = makeStyles(theme => ({
     }
   },
   detailsInvisible: {
+    justifyContent: 'center',
     alignItems: 'center',
     visibility: 'hidden',
     opacity: 0,
   },
   detailsVisible: {
-    alignItems: 'center',
+    padding: 0,
+    alignItems: 'stretch',
     visibility: 'visible',
     opacity: 1,
     transition: 'opacity 2s ease',
+    justifyContent: 'center'
   },
   helper: {
-    borderLeft: `2px solid ${colors.secondaryColor}`,
-    padding: theme.spacing(1, 2),
+    borderRight: `1px solid ${colors.secondaryColor}`,
   },
   actions: {
     display: 'flex',
     justifyContent: 'center',
+    padding: 0,
   },
   button: {
     fontFamily: 'Lato',
@@ -172,7 +180,17 @@ const useStyles = makeStyles(theme => ({
     '@media (max-width:600px)' : {
       fontSize: 12,
     }
-  }
+  },
+  equipment: {
+    width: '80%',
+    height: 'auto',
+  },
+  popover: {
+    pointerEvents: 'none',
+  },
+  paper: {
+    padding: theme.spacing(1),
+  },
 }));
 
 const YellowCheckbox = withStyles({
@@ -229,7 +247,7 @@ function MyCard ({ operator,
                     <div className={classes.column} style={{flexBasis: '50%'}}>
                       <CardMedia
                             className={classes.media}
-                            image =  {operatorValue ? require(`../img/${operatorValue}.png`) : require(`../img/default.png`)}
+                            image =  {operatorValue ? require(`../img/${operatorValue}.jpg`) : require(`../img/default.png`)}
                             title={operatorValue}
                       />
                     </div>
@@ -272,7 +290,7 @@ function MyCard ({ operator,
           </div>
         </ExpansionPanelSummary>
         {selectedOffer===id ? <DetailProvider classes={classes} /> : null}
-        <Divider />
+        <Divider style={{marginTop: 15}} />
         <ExpansionPanelActions className={classes.actions}>
           <Link to="/offers/selectedoffer" style={{textDecoration: 'none', color: 'white'}}>
             <div className={classes.button} >
