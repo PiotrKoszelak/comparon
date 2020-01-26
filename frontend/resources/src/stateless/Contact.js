@@ -196,7 +196,7 @@ function ContactContent ({language}){
                 <FormControl>
                     <TextField
                       id="email"
-                      label={translation.YOUR_EMAIL[language]}
+                      label={translation.EMAIL[language]}
                       defaultValue={userEmail}
                       className={classes.input}
                       margin="normal"

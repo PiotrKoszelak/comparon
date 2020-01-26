@@ -335,7 +335,7 @@ function SelectedOffer  ({
     if (emailValidation===true && userAddress && userComment && userLastname && userName && userPhone){
       setIsSnackbar(false);
       setModalOpen(true);
-      sendMessageToServer('offer', userEmail, userComment, contact.email, offerInfo.id)
+      sendMessageToServer('offer', userEmail, userComment, contact.email, offerInfo.id, userName, userLastname, userPhone, userAddress)
         .then(res => {
           setModalOpen(false);
           setIsSnackbar(true);
