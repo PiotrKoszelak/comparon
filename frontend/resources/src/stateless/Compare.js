@@ -12,7 +12,6 @@ import * as colors from "../style/colors";
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex',
     top: 80,
     left: '5vw',
     width: '90vw',

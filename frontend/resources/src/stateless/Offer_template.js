@@ -8,8 +8,6 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link } from 'react-router-dom'
 import PaymentIcon from '@material-ui/icons/Payment';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import clsx from 'clsx';
@@ -26,14 +24,12 @@ function OfferTemplate  ({
                   handleDelete,
                   selectOffer}){
 
-  let operatorValue, periodValue, typeValue, texts;
-  if (details && offerInfo && operators.success===true && periods.success===true && types.success===true){
+      let operatorValue, periodValue, typeValue, texts;
+      if (details && offerInfo && operators.success===true && periods.success===true && types.success===true){
 
-            operatorValue = operators.data.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
-            periodValue = periods.data.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
-            typeValue = types.data.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
-           
-            console.log(offerInfo, details)
+      operatorValue = operators.data.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
+      periodValue = periods.data.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
+      typeValue = types.data.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
 
         return(
             <ExpansionPanel className={classes.rootPanel} >
@@ -93,14 +89,12 @@ function OfferTemplate  ({
                         </div>
                   </div>
                   <div className={classes.panelThird}>
-                        <Link to="/offers/selectedoffer" style={{textDecoration: 'none', color: 'white'}} onClick={() => selectOffer(offerInfo.id)} >
-                              <div className={classes.button} >
-                              {translation.CHOOSE_OFFER[language]}
-                              </div>
-                        </Link>
-                              <div className={clsx(classes.button, classes.buttonError)} onClick={() => handleDelete(offerInfo.id)}>
-                              {translation.DELETE_FROM_LIST[language]}
-                              </div>
+                        <div className={classes.button} onClick={() => selectOffer(offerInfo.id)} >
+                        {translation.CHOOSE_OFFER[language]}
+                        </div>
+                        <div className={clsx(classes.button, classes.buttonError)} onClick={() => handleDelete(offerInfo.id)}>
+                        {translation.DELETE_FROM_LIST[language]}
+                        </div>
                   </div>
               </div>
             </ExpansionPanelSummary>
