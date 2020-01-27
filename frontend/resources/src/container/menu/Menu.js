@@ -74,6 +74,29 @@ const useStyles = makeStyles(theme => ({
     background: 'none',
     boxShadow: 'none',
     border: `2px solid ${colors.primaryColor}`,
+  },
+  '@keyframes blinker': {
+    '0%': {opacity: 0},
+    '50%': {opacity: 1},
+    '100%': {opacity: 0, right: 250}
+  },
+  addToCompare: {
+    display: 'block',
+    position: 'absolute',
+    top: 15,
+    right: 0,
+    width: 20,
+    height: 20,
+    borderRadius: '50%',
+    backgroundColor: 'red',
+    animationName: '$blinker',
+    animationDuration: '2s',
+    animationDirection: 'forwards',
+    animationTimingFunction: 'ease',
+    opacity: 0,
+    '@media (max-width:600px)' : {
+      display: 'none',
+    },
   }
 }));
 

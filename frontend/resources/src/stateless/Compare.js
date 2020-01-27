@@ -32,6 +32,19 @@ const useStyles = makeStyles({
     width: '96%',
     position: 'relative',
     left: '2%',
+    opacity: 1,
+  },
+  rootPanelInvisible: {
+    border: `1px solid ${colors.secondaryColor}`,
+    borderRadius: 10,
+    margin: '15px 0px',
+    padding: 0,
+    boxShadow: 'none',
+    width: '96%',
+    position: 'relative',
+    left: '2%',
+    opacity: 0,
+    transition: 'opacity 1s ease',
   },
   iconInfo : {
     width: 50,
@@ -179,7 +192,7 @@ const useStyles = makeStyles({
       width: 50,
       margin: 0,
     },
-    input: {
+  input: {
       color: `${colors.secondaryColor}`,
     }
   },
@@ -214,6 +227,9 @@ const useStyles = makeStyles({
     width: '80%',
     height: 'auto',
   },
+  invisible: {
+
+  }
 });
 
 function Compare  ({

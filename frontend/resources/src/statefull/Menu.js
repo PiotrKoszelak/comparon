@@ -40,19 +40,43 @@ class Menu extends Component {
     offersToCompare: PropTypes.array,
   }
 
+  state = { classForAddToCompare : {display: 'none'},
+            numberOfOffersToCompare: 0,
+          }
+
+  componentDidMount(){
+    const {offersToCompare}  = this.props;
+    this.setState({numberOfOffersToCompare: offersToCompare.length})
+  }
+
+  componentDidUpdate(prevProps){
+    const {offersToCompare, classes}  = this.props;
+    const {classForAddToCompare} = this.state;
+
+    if (offersToCompare.length > prevProps.offersToCompare.length){
+      this.setState({classForAddToCompare: classes.addToCompare})
+      setTimeout(() => {this.setState({numberOfOffersToCompare: offersToCompare.length, classForAddToCompare: {display: 'none'}})}, 2000);
+    }
+    else if (offersToCompare.length < prevProps.offersToCompare.length){
+      this.setState({numberOfOffersToCompare: offersToCompare.length});
+    }
+  }
+
   render() {
-    const {classes, language, title, offersToCompare} = this.props;
+    const {classes, language, title} = this.props;
+    const {classForAddToCompare, numberOfOffersToCompare} = this.state;
     return(
         <div className={classes.toolbar} >
             <CookiesInfo language={language} />
             <Link to="/" className={classes.link} >
                 <img className={classes.logo} src={require(`../img/logo_jpg_200x100.jpg`)} alt='home' />
             </Link>
+            <div className={classForAddToCompare}></div>
             <div className={classes.buttonContainer}>
                 <Link to="/offers" className={classes.link} >
                         <div className={classes.button} style={title==='Offers' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.OFFERS[language]}`}</div>
                 </Link>
-                <Badge color="error" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
+                <Badge color="error" style={{marginRight: 10}} badgeContent={numberOfOffersToCompare} >
                     <Link to="/offers/compare" className={classes.link}>
                         <div className={classes.button} style={title==='Compare' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.COMPARE[language]}`}</div>
                     </Link>

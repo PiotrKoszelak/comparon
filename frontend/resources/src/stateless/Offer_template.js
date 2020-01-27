@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -24,15 +24,24 @@ function OfferTemplate  ({
                   handleDelete,
                   selectOffer}){
 
-      let operatorValue, periodValue, typeValue, texts;
+      let operatorValue, periodValue, typeValue;
+      const [invisible, setInvisible] = useState(null);
+
       if (details && offerInfo && operators.success===true && periods.success===true && types.success===true){
 
       operatorValue = operators.data.filter((el) => {return el.id===offerInfo.operator})[0][`value_${language}`];
       periodValue = periods.data.filter((el) => {return el.id===offerInfo.period})[0][`value_${language}`];
       typeValue = types.data.filter((el) => {return el.id===offerInfo.types})[0][`value_${language}`];
 
-        return(
-            <ExpansionPanel className={classes.rootPanel} >
+      const handleDeleteFromList = (id) => {
+            setInvisible(id);
+            setTimeout(() => {handleDelete(id)}, 1000);
+      }
+
+      const classForRoot = invisible===offerInfo.id ? classes.rootPanelInvisible : classes.rootPanel;
+
+      return(
+            <ExpansionPanel className={classForRoot}>
             <ExpansionPanelSummary
               aria-controls="panel1c-content"
               id="panel1c-header"
@@ -92,7 +101,7 @@ function OfferTemplate  ({
                         <div className={classes.button} onClick={() => selectOffer(offerInfo.id)} >
                         {translation.CHOOSE_OFFER[language]}
                         </div>
-                        <div className={clsx(classes.button, classes.buttonError)} onClick={() => handleDelete(offerInfo.id)}>
+                        <div className={clsx(classes.button, classes.buttonError)} onClick={() => handleDeleteFromList(offerInfo.id)}>
                         {translation.DELETE_FROM_LIST[language]}
                         </div>
                   </div>
