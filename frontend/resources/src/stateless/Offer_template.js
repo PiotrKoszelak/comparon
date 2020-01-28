@@ -41,7 +41,7 @@ function OfferTemplate  ({
       const classForRoot = invisible===offerInfo.id ? classes.rootPanelInvisible : classes.rootPanel;
 
       return(
-            <ExpansionPanel className={classForRoot}>
+            <ExpansionPanel className={classForRoot} expanded={false}>
             <ExpansionPanelSummary
               aria-controls="panel1c-content"
               id="panel1c-header"
