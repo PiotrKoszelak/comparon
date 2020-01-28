@@ -24,7 +24,6 @@ const useStyles = makeStyles({
       alignItems: 'center',
       height: '20vh',
     },
-    border: '2px solid green',
   },
   header: {
     fontSize: 20,
@@ -32,6 +31,9 @@ const useStyles = makeStyles({
     '@media (max-width:1000px)' : {
       fontSize: 15,
       textAlign: 'center',
+    },
+    '@media (max-width:600px)' : {
+      marginTop: 30,
     }
   },
   button: {
@@ -50,23 +52,35 @@ const useStyles = makeStyles({
     borderRadius: 10,
     fontSize: 15,
     '@media (max-width:600px)' : {
+      marginTop: 30,
       fontSize: 12,
       padding: '10px 15px',
       width: 150,
     }
   },
-  container: {
+  containerBig: {
     position: 'absolute',
-    border: '2px solid red',
     width: 'calc(83vw - 300px)',
     left: 'calc(12vw + 300px)',
     height: '76vh',
     top: '12vh',
     '@media (max-width:1000px)' : {
+      display: 'none',
+    },
+  },
+  containerMedium: {
+    '@media (min-width:1000px)' : {
+      display: 'none',
+    },
+    '@media (max-width:1000px)' : {
+      position: 'absolute',
       width: '80vw',
       top: 'calc(25vh + 100px)',
       left: '10vw',
-      height: 'calc(60vh - 100px)',
+      height: 'calc(65vh - 100px)',
+    },
+    '@media (max-width:600px)' : {
+      display: 'none',
     },
   },
   picture: {
@@ -76,12 +90,12 @@ const useStyles = makeStyles({
     width: 'auto',
     height: 60,
     transition: 'transform 0.5s ease',
-    animation: '$show 1s linear 4s forwards',
+    animation: '$show 1s linear 1s forwards',
     '&:hover' : {
       transform: 'scale(1.3, 1.3)',
       transition: 'transform 0.5s ease',
     },
-    '@media (max-width:600px)' : {
+    '@media (max-width:1000px)' : {
       height: 30,
     },
   },
@@ -89,20 +103,12 @@ const useStyles = makeStyles({
     position: 'absolute',
     width: 'auto',
     height: 150,
-    top: '50%',
+    top: '60%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    '@media (max-width:600px)' : {
-      height: 60,
+    '@media (max-width:1000px)' : {
+      height: 100,
     },
-  },
-  svgContainer: {
-    position: 'absolute',
-    width: '900px',
-    left: '40vw',
-    height: '100vh',
-    border: '2px solid blue',
-    top: -10,
   },
   svg: {
     position: 'absolute',
@@ -124,10 +130,10 @@ const useStyles = makeStyles({
   },
   line: {
     stroke: `${colors.secondaryColor}`, 
-    strokeWidth:2,
+    strokeWidth: 1,
     strokeDasharray: 300,
     strokeDashoffset: 300,
-    animation: '$dash 4s linear forwards',
+    animation: '$dash 1s linear forwards',
   },
 });
 
@@ -152,57 +158,114 @@ function AboutContent ({language}){
           </Link>
       </div>
 
-      <div className={classes.svgContainer}>
+      <div className={classes.containerBig}>
             <img className={classes.pictureMain} src={require(`../img/main.png`)} alt='compareON' />
             <svg className={classes.svg} >
-              <line x1=" 270px" y1="calc(45vh + 150px)" x2="110px" y2="75vh" className={classes.line} />
+              <line x1="calc(50% - 115px)" y1="calc(60% + 75px)" x2="110px" y2="80%" className={classes.line} />
             </svg>
-            <Picture label='test' name='1' left='0' top='75vh'   />
+            <Picture label='test' name='1' left='0' top='80%'   />
 
             <svg className={classes.svg} >
-              <line x1="270px" y1="calc(45vh + 75px)" x2="calc(75px + 70px)" y2="60vh" className={classes.line} />
+              <line x1="calc(50% - 115px)" y1="60%" x2="calc(6% + 110px)" y2="calc(55% + 30px)" className={classes.line} />
             </svg>
-            <Picture label='test2' name='2' left='75px' top='60vh'   />
+            <Picture label='test2' name='2' left='10%' top='55%'   />
 
             <svg className={classes.svg} >
-              <line x1=" 270px" y1="calc(45vh + 75px)" x2="45px" y2="calc(45vh + 60px)" className={classes.line} />
+                <line x1="calc(50% - 115px)" y1="60%" x2="110px" y2="calc(35% + 30px)" className={classes.line} />
             </svg>
-            <Picture label='test3' name='3' left='-75px' top='45vh'   />
+            <Picture label='test3' name='3' left='0' top='35%'   />
 
             <svg className={classes.svg} >
-              <line x1=" 270px" y1="45vh" x2="225px" y2="calc(35vh + 60px)" className={classes.line} />
+                <line x1="calc(50% - 115px)" y1="calc(60% - 75px)" x2="calc(20% + 55px)" y2="calc(25% + 60px)" className={classes.line} />
             </svg>
-            <Picture label='test4' name='4' left='115px' top='35vh'   />
+            <Picture label='test4' name='4' left='20%' top='25%'   />
 
             <svg className={classes.svg} >
-              <line x1=" 270px" y1="45vh" x2="235px" y2="calc(15vh + 60px)" className={classes.line} />
+                <line x1="calc(50% - 115px)" y1="calc(60% - 75px)" x2="calc(25% + 55px)" y2="calc(5% + 60px)" className={classes.line} />
             </svg>
-            <Picture label='test5' name='5' left='180px' top='15vh'   />
+            <Picture label='test5' name='5' left='20%' top='5%'   />
 
             <svg className={classes.svg} >
-              <line x1="calc( 270px + 120px)" y1="45vh" x2="385px" y2="calc(25vh + 60px)" className={classes.line} />
+                <line x1="50% " y1="calc(60% - 75px)" x2="calc(40% + 55px)" y2="calc(20% + 60px)" className={classes.line} />
             </svg>
-            <Picture label='test6' name='6' left='330px' top='25vh'   />
+            <Picture label='test6' name='6' left='40%' top='20%'   />
 
             <svg className={classes.svg} >
-              <line x1="calc( 270px + 240px)" y1="45vh" x2="580px" y2="calc(13vh + 60px)" className={classes.line} />
+                <line x1="50% " y1="calc(60% - 75px)" x2="calc(55% + 55px)" y2="60px" className={classes.line} />
             </svg>
-            <Picture label='test7' name='7' left='525px' top='13vh'   />
+            <Picture label='test7' name='7' left='55%' top='0'   />
 
             <svg className={classes.svg} >
-              <line x1="calc( 270px + 240px)" y1="45vh" x2="675px" y2="calc(30vh + 60px)" className={classes.line} />
+                <line x1="calc(50% + 110px) " y1="calc(60% - 75px)" x2="calc(80% + 40px)" y2="calc(10% + 60px)" className={classes.line} />
             </svg>
-            <Picture label='test8' name='8' left='675px' top='30vh'   />
+            <Picture label='test8' name='8' left='80%' top='10%'   />
 
             <svg className={classes.svg} >
-              <line x1="calc( 270px + 240px)" y1="calc(45vh + 75px)" x2="750px" y2="calc(50vh + 30px)" className={classes.line} />
+                <line x1="calc(50% + 110px) " y1="calc(60% - 75px)" x2="calc(95% + 40px)" y2="calc(30% + 30px)" className={classes.line} />
             </svg>
-            <Picture label='test9' name='9' left='750px' top='50vh'   />
+            <Picture label='test9' name='9' left='92%' top='30%'   />
 
             <svg className={classes.svg} >
-              <line x1="calc( 270px + 240px)" y1="calc(45vh + 150px)" x2="600px" y2="70vh" className={classes.line} />
+                <line x1="calc(50% + 110px) " y1="60%" x2="85%" y2="70%" className={classes.line} />
             </svg>
-            <Picture label='test10' name='10' left='600px' top='70vh'   />
+            <Picture label='test10' name='10' left='85%' top='70%'   />
+            
+      </div>
+
+      <div className={classes.containerMedium}>
+          <img className={classes.pictureMain} src={require(`../img/main.png`)} alt='compareON' />
+
+          <svg className={classes.svg} >
+              <line x1="calc(50% - 80px)" y1="calc(60% + 50px)" x2="55px" y2="80%" className={classes.line} />
+            </svg>
+            <Picture label='test' name='1' left='0' top='80%'   />
+
+            <svg className={classes.svg} >
+              <line x1="calc(50% - 80px)" y1="60%" x2="calc(6% + 60px)" y2="calc(55% + 15px)" className={classes.line} />
+            </svg>
+            <Picture label='test2' name='2' left='10%' top='55%'   />
+
+            <svg className={classes.svg} >
+                <line x1="calc(50% - 80px)" y1="60%" x2="55px" y2="calc(35% + 15px)" className={classes.line} />
+            </svg>
+            <Picture label='test3' name='3' left='0' top='35%'   />
+
+            <svg className={classes.svg} >
+                <line x1="calc(50% - 80px)" y1="calc(60% - 50px)" x2="calc(20% + 25px)" y2="calc(25% + 30px)" className={classes.line} />
+            </svg>
+            <Picture label='test4' name='4' left='20%' top='25%'   />
+
+            <svg className={classes.svg} >
+                <line x1="calc(50% - 80px)" y1="calc(60% - 50px)" x2="calc(25% + 25px)" y2="calc(5% + 30px)" className={classes.line} />
+            </svg>
+            <Picture label='test5' name='5' left='20%' top='5%'   />
+
+            <svg className={classes.svg} >
+                <line x1="50% " y1="calc(60% - 50px)" x2="calc(40% + 25px)" y2="calc(20% + 30px)" className={classes.line} />
+            </svg>
+            <Picture label='test6' name='6' left='40%' top='20%'   />
+
+            <svg className={classes.svg} >
+                <line x1="50% " y1="calc(60% - 50px)" x2="calc(55% + 25px)" y2="30px" className={classes.line} />
+            </svg>
+            <Picture label='test7' name='7' left='55%' top='0'   />
+
+            <svg className={classes.svg} >
+                <line x1="calc(50% + 80px) " y1="calc(60% - 50px)" x2="calc(80% + 20px)" y2="calc(10% + 30px)" className={classes.line} />
+            </svg>
+            <Picture label='test8' name='8' left='80%' top='10%'   />
+
+            <svg className={classes.svg} >
+                <line x1="calc(50% + 80px) " y1="calc(60% - 50px)" x2="92%" y2="calc(30% + 15px)" className={classes.line} />
+            </svg>
+            <Picture label='test9' name='9' left='92%' top='30%'   />
+
+            <svg className={classes.svg} >
+                <line x1="calc(50% + 80px) " y1="60%" x2="85%" y2="70%" className={classes.line} />
+            </svg>
+            <Picture label='test10' name='10' left='85%' top='70%'   />
+            
+
       </div>
   </div>
 )};
