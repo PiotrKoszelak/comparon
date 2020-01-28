@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Detail from '../stateless/Detail'
 import PropTypes from "prop-types";
 import { url, key } from '../config.js'
-import {setDetailWindowOpen} from "../actions";
 import Snackbar from '../stateless/Snackbar'
 import translation from '../translation'
 
@@ -11,16 +10,11 @@ export class DetailProvider extends Component {
 
   static propTypes = {
     selectedOffer: PropTypes.number.isRequired,
-    setDetailWindowOpen: PropTypes.func.isRequired,
     language: PropTypes.string.isRequired,
-    operators: PropTypes.object.isRequired,
-    periods: PropTypes.object.isRequired,
-    types: PropTypes.object.isRequired,
   }
 
   state = {
     details : null,
-    offerInfo : null,
     isLoading: null,
     success: null,
     isSnackbar: false,
@@ -49,9 +43,6 @@ export class DetailProvider extends Component {
       })
   }
 
-  closeDetailWindow = () => {
-    this.props.setDetailWindowOpen(false);
-  }
 
   handleIsSnackbar = (is) => {
     this.setState({isSnackbar: is});
@@ -59,19 +50,15 @@ export class DetailProvider extends Component {
   }
 
   render() {
-    const {language, operators, periods, types, setDetailWindowOpen, isDetailOpen} = this.props;
-    const {success, details, offerInfo, isSnackbar} = this.state;
-    if (success===true){
+    const {language, classes} = this.props;
+    const {success, details, isSnackbar, isLoading} = this.state;
+    if (success===true || isLoading===true){
         return(
           < Detail
+            classes={classes}
             details={details}
-            offerInfo={offerInfo}
-            closeDetailWindow={this.closeDetailWindow}
             language={language}
-            operators={operators}
-            periods={periods}
-            types={types}
-            setDetailWindowOpen={setDetailWindowOpen}
+            isLoading={isLoading}
           />
         );
     }
@@ -81,7 +68,7 @@ export class DetailProvider extends Component {
                     isOpen={isSnackbar}
                     close={this.handleIsSnackbar}
                     text={translation.DOWNLOAD_ERROR[language]} 
-                    vertical={'bottom'}
+                    vertical={'top'}
                     horizontal={'center'}
           />
         )
@@ -97,13 +84,8 @@ export class DetailProvider extends Component {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
-    operators: state.operators,
-    periods: state.periods,
-    types: state.types,
     selectedOffer: state.selectedOffer,
-    isDetailOpen : state.isDetailOpen,
   }
 };
-const mapDispatchToProps = { setDetailWindowOpen };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailProvider);
+export default connect(mapStateToProps)(DetailProvider);

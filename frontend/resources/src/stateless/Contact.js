@@ -9,43 +9,44 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Snackbar from './Snackbar';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import MyProgress from '../stateless/Progress';
 import { sendMessageToServer } from '../statefull/SelectedOfferProvider';
+import * as colors from "../style/colors";
 
 const useStyles = makeStyles({
    root: {
-    position: 'relative',
+    position: 'absolute',
     top: 100,
-    left: '10vw',
-    width: '80vw',
+    width: '100vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     fontFamily: 'Lato',
+    height: 'calc(100vh - 100px)',
   },
   header: {
     fontSize: 20,
+    color: `${colors.secondaryColor}`,
     '@media (max-width:600px)' : {
       fontSize: 15,
     }
   },
   email: {
+    zIndex: 2,
+    border: `0.5px solid ${colors.secondaryColor}`,
+    borderRadius: 15,
+    boxShadow: 'none',
+    background: 'none',
     marginTop: 30,
     padding: 20,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '40vw',
+    width: '60%',
     flexDirection: 'column',
     '@media (max-width:600px)' : {
-      width: '50vw',
+      width: '80%',
     }
-  },
-  emailHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '80%',
   },
   emailContent: {
     display: 'flex',
@@ -54,12 +55,10 @@ const useStyles = makeStyles({
     width: '90%',
   },
   helper : {
-    color: 'red'
-  },
-  progress: {
-    outline: 'none',
+    color: `${colors.attentionColor}`,
   },
   modal: {
+    position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -69,13 +68,42 @@ const useStyles = makeStyles({
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#bda3f0',
     marginBottom: 20,
     display: 'block',
+    padding: '5px 20px',
+    color: `${colors.secondaryColor}`,
+    cursor: 'pointer',
+    width: 80,
+    textAlign: 'center',
+    backgroundColor: `${colors.white}`,
+    transition: 'color 0.5s ease, background-color 0.5s ease',
+    '&:hover' : {
+      backgroundColor: `${colors.primaryColor}`,
+      color: `${colors.white}`,
+      transition: 'color 0.5s ease, background-color 0.5s ease',
+    },
+    border: `1.5px solid ${colors.primaryColor}`,
+    borderRadius: 10,
+    fontSize: 12,
     '@media (max-width:600px)' : {
-      fontSize: 9,  
+      fontSize: 10,
+      width: 50,
+    },
+    input: {
+      color: `${colors.secondaryColor}`,
     }
   },
+  decoration: {
+    position: 'absolute',
+    left: 'auto',
+    right: 0,
+    width: '20vw',
+    top: 'auto',
+    bottom: 100,
+    '@media (max-width:600px)' : {
+      display: 'none'
+    },
+  }
 });
 
 
@@ -159,16 +187,16 @@ function ContactContent ({language}){
           className={classes.modal}
           open={isModalOpen}
         >
-          <CircularProgress className={classes.progress} color="secondary" disableShrink />
+          <MyProgress />
         </Modal>
-        <h2 className={classes.header}>{translation.CONTACT[language]}</h2>
+        <h2 className={classes.header}>{translation.CONTACT_FORM[language]}</h2>
         <Paper className={classes.email}>
               < div className={classes.emailContent}>
                 <MailOutlineIcon />
                 <FormControl>
                     <TextField
                       id="email"
-                      label={translation.YOUR_EMAIL[language]}
+                      label={translation.EMAIL[language]}
                       defaultValue={userEmail}
                       className={classes.input}
                       margin="normal"
@@ -179,6 +207,7 @@ function ContactContent ({language}){
                 <FormControl>
                   <TextField
                     multiline
+                    rowsMax='10'
                     id="comment"
                     label={translation.COMMENT[language]}
                     defaultValue={userComment}
@@ -189,10 +218,11 @@ function ContactContent ({language}){
                   {commentNotNull===true ? null : commentNotNull===false ? <FormHelperText id="my-helper-text-comment" className={classes.helper}>{translation.COMMENT_IS_NULL[language]}</FormHelperText> : null}
                 </FormControl>
               </div>
-              <Button  size="small" variant="contained" color="primary" className={classes.button} onClick={() => sendMessage()}>
+              <div  size="small" variant="contained" color="primary" className={classes.button} onClick={() => sendMessage()}>
                     {translation.SEND[language]}
-              </Button>
+              </div>
             </Paper>
+            <img className={classes.decoration} src={require(`../img/decoration_image.jpg`)} alt='decoration' />
       </div>
 )};
 

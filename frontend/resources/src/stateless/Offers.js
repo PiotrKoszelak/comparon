@@ -4,9 +4,8 @@ import CardProvider from "../statefull/CardProvider";
 import { makeStyles } from '@material-ui/core/styles';
 import translation from "../translation"
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LocationCityIcon from '@material-ui/icons/LocationCity';
+import * as colors from "../style/colors";
+import MyProgress from '../stateless/Progress';
 
 
 const useStyles = makeStyles({
@@ -15,7 +14,7 @@ const useStyles = makeStyles({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     position: 'relative',
-    top: 100,
+    top: 60,
     width: '100%',
     '@media (max-width:600px)' : {
         justifyContent: 'center',
@@ -35,6 +34,7 @@ const useStyles = makeStyles({
   icon : {
     width: 50,
     height: 50,
+    marginRight: 20,
     '@media (max-width:600px)' : {
         width: 30,
         height: 30,
@@ -43,14 +43,11 @@ const useStyles = makeStyles({
   text : {
     fontSize: 20,
     fontFamily: "Lato",
+    color: `${colors.secondaryColor}`,
     '@media (max-width:600px)' : {
         fontSize: 15,
     }
   },
-  progress: {
-    position: 'relative',
-    top: 100,
-  }
 });
 
 function Offers  ({ offers, 
@@ -70,7 +67,7 @@ function Offers  ({ offers,
     setNumberSelectedOffers('0');
     return (
       <div className={classes.error} style={{maxWidth: 400}}>
-          <LocationCityIcon color='secondary' className={classes.icon} />
+          <img className={classes.icon} src={require(`../img/city.jpg`)} alt='city' />
           <span className={classes.text}>{translation.CHOOSE_CITY[language]}</span>
       </div>
     )
@@ -78,7 +75,7 @@ function Offers  ({ offers,
 
   if (offers.isLoading === true){
     return(
-      <CircularProgress className={classes.progress} color="secondary" disableShrink />
+      <MyProgress />
     )
   }
   else if (offers.success !== true){
@@ -143,7 +140,7 @@ function Offers  ({ offers,
 
     if (filteredData.length === 0){
       return (<div className={classes.error} >
-            <LocalOfferIcon color='secondary' className={classes.icon} />
+            <img className={classes.icon} src={require(`../img/none.jpg`)} alt='none' />
             <span className={classes.text}>{translation.NONE[language]}</span>
         </div>)
     }

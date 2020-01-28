@@ -8,9 +8,9 @@ import InfoContent from "../statefull/InfoContent";
 function TermsOfUse () {
         return(
                 <section>
-                        <Menu title={'TermsOfUse'} />
+                        <Menu />
                         <InfoContent title={'TermsOfUse'} />
-                        <MenuBottom />
+                        <MenuBottom title={'TermsOfUse'} />
                 </section>
         );
 };

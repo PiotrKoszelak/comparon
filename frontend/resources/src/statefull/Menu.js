@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import Button from '@material-ui/core/Button';
 import translation from "../translation"
-import Typography from '@material-ui/core/Typography';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fab from '@material-ui/core/Fab';
 import MenuList from '../stateless/MenuList';
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
 import CookiesInfo from '../stateless/cookies'
+import * as colors from "../style/colors";
 
 class MenuBottomButtons extends Component {
   
@@ -18,16 +17,16 @@ class MenuBottomButtons extends Component {
   }
 
   render() {
-    const {classes, language} = this.props;
+    const {classes, language, title} = this.props;
     return(
-        <span>
-          <Link to="/policyprivacy" style={{textDecoration: 'none', color: 'white'}}>
-            <Button color="inherit" className={classes.button} >{translation.POLICY_PRIVACY[language]}</Button>
+        <div className={classes.buttonContainer} >
+          <Link to="/policyprivacy" className={classes.link} >
+            <div className={classes.button} style={title==='PolicyPrivacy' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{translation.POLICY_PRIVACY[language]}</div>
           </Link>
-          <Link to="/termsofuse" style={{textDecoration: 'none', color: 'white'}}>
-            <Button color="inherit" className={classes.button} >{translation.TERMS_OF_USE[language]}</Button>
+          <Link to="/termsofuse" className={classes.link} >
+            <div className={classes.button} style={title==='TermsOfUse' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{translation.TERMS_OF_USE[language]}</div>
           </Link>
-        </span>
+        </div>
     );
   }
 }
@@ -41,33 +40,57 @@ class Menu extends Component {
     offersToCompare: PropTypes.array,
   }
 
+  state = { classForAddToCompare : {display: 'none'},
+            numberOfOffersToCompare: 0,
+          }
+
+  componentDidMount(){
+    const {offersToCompare}  = this.props;
+    this.setState({numberOfOffersToCompare: offersToCompare.length})
+  }
+
+  componentDidUpdate(prevProps){
+    const {offersToCompare, classes}  = this.props;
+    const {classForAddToCompare} = this.state;
+
+    if (offersToCompare.length > prevProps.offersToCompare.length){
+      this.setState({classForAddToCompare: classes.addToCompare})
+      setTimeout(() => {this.setState({numberOfOffersToCompare: offersToCompare.length, classForAddToCompare: {display: 'none'}})}, 2000);
+    }
+    else if (offersToCompare.length < prevProps.offersToCompare.length){
+      this.setState({numberOfOffersToCompare: offersToCompare.length});
+    }
+  }
+
   render() {
-    const {classes, title, language, offersToCompare} = this.props;
+    const {classes, language, title} = this.props;
+    const {classForAddToCompare, numberOfOffersToCompare} = this.state;
     return(
-        <span className={classes.toolbar} >
+        <div className={classes.toolbar} >
             <CookiesInfo language={language} />
-            <span style={{display: 'flex', alignItems: 'center'}}>
-                <MenuList classes={classes} language={language} />
-                <Typography variant="subtitle2" className={classes.title}>
-                    {title==='Offers' ? translation.OFFERS[language] : null}
-                    {title==='About' ? translation.ABOUT[language] : null}
-                    {title==='Contact' ? translation.CONTACT[language] : null}
-                    {title==='TermsOfUse' ? translation.TERMS_OF_USE[language] : null}
-                    {title==='PolicyPrivacy' ? translation.POLICY_PRIVACY[language] : null}
-                    {title==='Compare' ? translation.COMPARE[language] : null}
-                    {title==='SelectedOffer' ? translation.SELECTED_OFFER[language] : null}
-                </Typography>
-            </span>
-            <span>
-                <Badge color="secondary" style={{marginRight: 10}} badgeContent={offersToCompare.length} >
-                    <Link to="/offers/compare" style={{textDecoration: 'none', color: 'white'}}>
-                        <Button color="inherit" className={classes.button} >{`${translation.COMPARE[language]}`}</Button>
+            <Link to="/" className={classes.link} >
+                <img className={classes.logo} src={require(`../img/logo_jpg_200x100.jpg`)} alt='home' />
+            </Link>
+            <div className={classForAddToCompare}></div>
+            <div className={classes.buttonContainer}>
+                <Link to="/offers" className={classes.link} >
+                        <div className={classes.button} style={title==='Offers' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.OFFERS[language]}`}</div>
+                </Link>
+                <Badge color="error" style={{marginRight: 10}} badgeContent={numberOfOffersToCompare} >
+                    <Link to="/offers/compare" className={classes.link}>
+                        <div className={classes.button} style={title==='Compare' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.COMPARE[language]}`}</div>
                     </Link>
                 </Badge>
-                
-                <Button color="inherit" className={classes.button} >{translation.LOGIN[language]}</Button>
-            </span>
-        </span>
+                <Link to="/contact" className={classes.link} >
+                        <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.CONTACT[language]}`}</div>
+                </Link>
+                <Link className={classes.link} to='' >
+                        <div className={classes.button} >{`${translation.LOGIN[language]}`}</div>
+                </Link>
+            </div>
+            <MenuList classes={classes} language={language} title={title} />
+
+        </div>
     );
   }
 }
@@ -84,11 +107,9 @@ class ShowCriteriaLabel extends Component {
       <Fab
           variant="extended"
           size="small"
-          color="secondary"
           aria-label="add"
-          className={classes.margin}
+          className={classes.showCriteriaButton}
           onClick={handleClick}
-          style={{fontSize:10, padding:5, paddingRight:10}}
         >
           <ChevronRightIcon className={classes.extendedIcon} />
           {translation.SHOW_CRITERIA[language]}

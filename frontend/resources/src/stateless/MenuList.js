@@ -4,17 +4,19 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InfoIcon from '@material-ui/icons/Info';
-import ContactsIcon from '@material-ui/icons/Contacts';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import CompareArrowsOutlinedIcon from '@material-ui/icons/CompareArrowsOutlined';
+import ContactsOutlinedIcon from '@material-ui/icons/ContactsOutlined';
+import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import IconButton from '@material-ui/core/IconButton';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import translation from "../translation"
 import { Link } from 'react-router-dom'
+import * as colors from "../style/colors";
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
+    border: `1px solid ${colors.secondaryColor}`,
   },
 })(props => (
   <Menu
@@ -32,18 +34,18 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles(theme => ({
+const StyledMenuItem = withStyles(() => ({
   root: {
     '&:focus': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: `${colors.secondaryColor}`,
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
+        color: `${colors.white}`,
       },
     },
   },
 }))(MenuItem);
 
-export default function MenuList({classes, language}) {
+export default function MenuList({classes, language, title}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -55,11 +57,9 @@ export default function MenuList({classes, language}) {
   };
 
   return (
-    <div>
+    <div className={classes.buttonContainerMobile}>
       <IconButton
         edge="start" 
-        className={classes.menuButton} 
-        color="inherit" 
         aria-label="menu"
         onClick={handleClick}
       >
@@ -72,28 +72,36 @@ export default function MenuList({classes, language}) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/" style={{textDecoration: 'none', color: 'black'}}>
+        <Link to="/offers" style={{textDecoration: 'none'}}>
           <StyledMenuItem>
             <ListItemIcon>
-              <LocalOfferIcon />
+              <LocalOfferOutlinedIcon />
             </ListItemIcon>
-            <ListItemText primary={translation.OFFERS[language]} />
+            <ListItemText primary={translation.OFFERS[language]} style={title==='Offers' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
           </StyledMenuItem>
         </Link>
-        <Link to="/about" style={{textDecoration: 'none', color: 'black'}}>
+        <Link to="/offers/compare" style={{textDecoration: 'none'}}>
           <StyledMenuItem>
             <ListItemIcon>
-              <InfoIcon />
+              <CompareArrowsOutlinedIcon />
             </ListItemIcon>
-            <ListItemText primary={translation.ABOUT[language]} />
+            <ListItemText primary={translation.COMPARE[language]} style={title==='Compare' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
           </StyledMenuItem>
         </Link>
-        <Link to="/contact" style={{textDecoration: 'none', color: 'black'}}>
+        <Link to="/contact" style={{textDecoration: 'none'}}>
           <StyledMenuItem>
             <ListItemIcon>
-              <ContactsIcon />
+              <ContactsOutlinedIcon />
             </ListItemIcon>
-            <ListItemText primary={translation.CONTACT[language]}  />
+            <ListItemText primary={translation.CONTACT[language]}  style={title==='Contact' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
+          </StyledMenuItem>
+        </Link>
+        <Link to='' style={{textDecoration: 'none'}}>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={translation.LOGIN[language]}  style={title==='LogIn' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
           </StyledMenuItem>
         </Link>
       </StyledMenu>

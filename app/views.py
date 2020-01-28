@@ -7,7 +7,7 @@ from rest_framework import status
 import json
 from django.core.mail import EmailMessage
 
-with open('C:/Users/Admin/Desktop/PK/Key/authorization.txt') as f:
+with open('C:/Users/Admin/Desktop/comparON/Key/authorization.txt') as f:
     key = f.read().strip()
 
 # list of offers
@@ -165,32 +165,41 @@ class SendMessage(APIView):
             if (key == request.META['HTTP_AUTHORIZATION']):
                 try:
                     body = request.body.decode("utf-8")
-                    email = json.loads(body)["email"]
-                    comment = json.loads(body)["comment"]
-                    commentArray = comment.split(' | ')
+                    userEmail = json.loads(body)["userEmail"]
+                    userComment = json.loads(body)["userComment"]
+                    userName = json.loads(body)["userName"]
+                    userLastname = json.loads(body)["userLastname"]
+                    userPhone = json.loads(body)["userPhone"]
+                    userAddress = json.loads(body)["userAddress"]
+                    commentArray = userComment.split(' | ')
                     option = json.loads(body)["option"]
 
                     if (option=='offer'):
                         emailTo = json.loads(body)["emailTo"]
                         offerId = json.loads(body)["offerId"]
-                        htmlMessage = f'<h3>Id oferty: {offerId}<h3><h4>Wiadomość: </h4>'
+                        htmlMessage = f'''<h3>Id oferty:<h3> {offerId}<h3>
+                                        <h4>Imię: {userName}</h4>
+                                        <h4>Nazwisko: {userLastname}</h4>
+                                        <h4>Telefon: {userPhone}</h4>
+                                        <h4>Adres: {userAddress}</h4>
+                                        <h4>Komentarz: </h4>'''
                         for i in commentArray:
                             htmlMessage+=f'<p>{i}</p>'
                         # normal email
-                        msg = EmailMessage('COMPARON', htmlMessage, email, [emailTo])
+                        msg = EmailMessage('COMPARON', htmlMessage, userEmail, [emailTo])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
                         # admin email
-                        msg = EmailMessage('COMPARON ADMIN', htmlMessage, email, ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('COMPARON ADMIN', htmlMessage, userEmail, ['koszelak.piotr@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 
                     elif (option=='contact'):
-                        htmlMessage = f'<h4>Wiadomość: </h4>'
+                        htmlMessage = f'<h4>Komentarz: </h4>'
                         for i in commentArray:
                             htmlMessage+=f'<p>{i}</p>'
                         # normal email
-                        msg = EmailMessage('COMPARON CONTACT', htmlMessage, email, ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('COMPARON CONTACT', htmlMessage, userEmail, ['koszelak.piotr@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 

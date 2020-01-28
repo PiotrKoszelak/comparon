@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import translation from "../translation"
+import translation from "../translation";
+import * as colors from "../style/colors";
 import CookieConsent from "react-cookie-consent";
 
 const useStyles = makeStyles({
@@ -14,16 +15,20 @@ const useStyles = makeStyles({
     }
   },
   button: {
-    color: "white", 
-    background: "#f5429b", 
-    fontSize: 13, 
+    color: `${colors.secondaryColorDark}`, 
+    background: `${colors.primaryColor}`, 
+    fontSize: 15, 
     borderRadius: 5, 
     fontFamily: 'Lato', 
     cursor: 'pointer',
     border: 'none',
-    padding: 5,
+    marginTop: 10,
+    padding: `5px 10px`,
+    transition: 'background-color 0.5s ease, color 0.5s ease',
     '&:hover' : {
-      background: "#ed66a9", 
+      background: `${colors.primaryColorDark}`, 
+      color: `${colors.white}`, 
+      transition: 'background-color 0.5s ease, color 0.5s ease',
     },
     '@media (max-width:600px)' : {
       fontSize: 10,
@@ -31,20 +36,21 @@ const useStyles = makeStyles({
     }
   },
   root: {
-    background: "#2B373B",
+    background: `${colors.secondaryColor}`,
     boxSizing: 'border-box',
     padding: 20, 
     position: 'absolute', 
-    top: '80vh', 
-    width: '60%',
-    left: '20%', 
+    top: '70vh', 
+    width: '40%',
+    left: '30%', 
     borderRadius: 10,
     display: 'flex',
-    justifyContent: 'space-around',
+    flexDirection: 'column',
+    alignItems: 'center',
     '@media (max-width:600px)' : {
-      flexDirection: 'column',
-      alignItems: 'center',
       top: '70vh',
+      width: '70%',
+      left: '15%',
     }
   }
 });
