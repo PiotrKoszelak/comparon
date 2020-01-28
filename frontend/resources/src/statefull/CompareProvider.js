@@ -82,7 +82,7 @@ export class CompareProvider extends Component {
   }
 
   selectOfferInComparison = (id) => {
-    const { history, selectOffer } = this.props;
+    const {history, selectOffer} = this.props;
     selectOffer(id);
     history.push('/offers/selectedoffer');
   }
@@ -104,7 +104,7 @@ export class CompareProvider extends Component {
             isEmpty={isEmpty}
             handleDelete={this.handleDelete}
             handleDrag={this.handleDrag}
-            selectOfferInComparison={this.selectOfferInComparison}
+            selectOffer={this.selectOfferInComparison}
           />
         );
   }

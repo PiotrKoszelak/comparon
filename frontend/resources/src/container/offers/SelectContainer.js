@@ -13,6 +13,7 @@ import Drawer from '@material-ui/core/Drawer';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ShowCriteriaLabelComponent } from "../../statefull/Menu";
 import Fab from '@material-ui/core/Fab';
+import * as colors from "../../style/colors";
 
 const useStyles = makeStyles({
         root:{
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
                 position: 'fixed',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '200px',
+                width: '220px',
                 zIndex: 3,
         },
         label: {
@@ -33,22 +34,26 @@ const useStyles = makeStyles({
                 position: 'relative',
                 top: 50,
                 padding: 20,
+                paddingRight: 10,
                 height: 'calc(100vh - 250px)',
-                borderRadius: 10,
+                borderRadius: 15,
+                boxShadow: 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 width: '100%',
-                backgroundColor: '#fafafa',
-                border: '1px solid #d6d6d6',
-                '@media (max-width:600px)' : {
+                border: `0.5px solid ${colors.secondaryColor}`,
+                borderLeft: 'none',
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                '@media (max-width:800px)' : {
                         display: 'none'
                 }
         },
         mobile: {
                 width: 200,
-                '@media (max-width:600px)' : {
+                '@media (max-width:800px)' : {
                         display: 'block',
                         backgroundColor: 'none',
                         border: 'none',
@@ -59,14 +64,25 @@ const useStyles = makeStyles({
                 left: -30,
                 top: 10,
                 display: 'none',
-                '@media (max-width:600px)' : {
+                '@media (max-width:800px)' : {
                         display: 'block'
                 }
         },
         fab: {
                 position: 'absolute',
-                left: 190,
+                left: 180,
                 top: -40,
+                background: 'none',
+                boxShadow: 'none',
+                border: `2px solid ${colors.primaryColor}`,
+
+        },
+        showCriteriaButton: {
+                boxShadow: 'none',
+                background: 'none',
+                fontSize:10, 
+                padding:5, 
+                paddingRight:10,
         }
       });
 
@@ -99,7 +115,7 @@ function SelectContainer () {
                                         <SelectPrice />
                                         <SelectSpeed />
                                         <OtherData />
-                                        <Fab size="small" color="secondary" aria-label="add" className={classes.fab} onClick={handleClick}>
+                                        <Fab size="small" className={classes.fab} onClick={handleClick}>
                                                 <ChevronLeftIcon />
                                         </Fab>
                                 </div>

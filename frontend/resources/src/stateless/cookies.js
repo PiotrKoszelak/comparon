@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     boxSizing: 'border-box',
     padding: 20, 
     position: 'absolute', 
-    top: '80vh', 
+    top: '70vh', 
     width: '40%',
     left: '30%', 
     borderRadius: 10,

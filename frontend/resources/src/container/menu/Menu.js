@@ -20,9 +20,9 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     fontSize: 15,
-    fontWeight: 600,
     fontFamily: 'Lato',
     color: `${colors.secondaryColor}`,
+    backgroundColor: 'none',
     transition: 'color 0.5s ease',
     '&:hover' : {
       color: `${colors.primaryColor}`,
@@ -51,6 +51,7 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'none', 
     color: 'white',
     display: 'block',
+    backgroundColor: 'none',
   },
   toolbar: {
     width: '100%',
@@ -69,6 +70,34 @@ const useStyles = makeStyles(theme => ({
     bottom: 50,
     zIndex: 3,
   },
+  fab: {
+    background: 'none',
+    boxShadow: 'none',
+    border: `2px solid ${colors.primaryColor}`,
+  },
+  '@keyframes blinker': {
+    '0%': {opacity: 0},
+    '50%': {opacity: 1},
+    '100%': {opacity: 0, right: 250}
+  },
+  addToCompare: {
+    display: 'block',
+    position: 'absolute',
+    top: 15,
+    right: 0,
+    width: 20,
+    height: 20,
+    borderRadius: '50%',
+    backgroundColor: 'red',
+    animationName: '$blinker',
+    animationDuration: '2s',
+    animationDirection: 'forwards',
+    animationTimingFunction: 'ease',
+    opacity: 0,
+    '@media (max-width:600px)' : {
+      display: 'none',
+    },
+  }
 }));
 
 function ScrollTop(props) {
@@ -110,7 +139,7 @@ function Menu(props) {
       </AppBar>
       <div id="back-to-top-anchor"></div>
       <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab className={classes.fab} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

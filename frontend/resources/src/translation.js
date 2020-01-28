@@ -44,6 +44,14 @@ const translation = {
         pl: 'Numer kontaktowy',
         en: 'Contact number'
     },
+    DELETE_FROM_LIST : {
+        pl: 'Usuń z listy',
+        en: 'Delete from list'
+    },
+    CONTACT_FORM : {
+        pl: 'Formularz kontaktowy',
+        en: 'Contact form'
+    },
     CLOSE : {
         pl: 'Zamknij',
         en: 'Close'
@@ -136,9 +144,9 @@ const translation = {
         pl: 'Wyślij do',
         en: 'Send to'
     },
-    YOUR_EMAIL : {
-        pl: 'Twój e-mail',
-        en: 'Your e-mail'
+    EMAIL : {
+        pl: 'Adres e-mail',
+        en: 'E-mail address'
     },
     COMMENT : {
         pl: 'Komentarz',
@@ -152,9 +160,9 @@ const translation = {
         pl: 'E-mail jest niepoprawny',
         en: 'E-mail is incorrect'
     },
-    COMMENT_IS_NULL : {
-        pl: 'Komentarz nie może być pusty',
-        en: 'Comment cannot be empty'
+    THIS_FIELD_IS_REQUIRED : {
+        pl: 'Pole wymagane',
+        en: 'The field is required'
     },
     EMAIL_SEND_CORRECTLY : {
         pl: 'Wiadomość wysłana prawidłowo. Odpowiedź nastąpi w ciągu 48h na wskazany adres e-mail',
@@ -191,6 +199,34 @@ const translation = {
     CHOOSE_CITY : {
         pl: 'Wybierz miasto by zobaczyć ofery',
         en: 'Choose a city in order to see the offers'
+    },
+    GO_TO_SEARCH : {
+        pl: 'Przejdź do wyszukiwania',
+        en: 'Go to search'
+    },
+    MONTHS : {
+        pl: 'msc',
+        en: 'mos.'
+    },
+    ORDER: {
+        pl: 'Zamów',
+        en: 'Order.'
+    },
+    NAME : {
+        pl: 'Imię',
+        en: 'First name'
+    },
+    LASTNAME : {
+        pl: 'Nazwisko',
+        en: 'Last name'
+    },
+    PHONE : {
+        pl: 'Telefon',
+        en: 'Phone'
+    },
+    ADDRESS : {
+        pl: 'Adres zamieszkania',
+        en: 'Address'
     },
 
 };

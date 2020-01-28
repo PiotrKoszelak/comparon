@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import translation from "../translation"
+import * as colors from "../style/colors";
 
 const useStyles = makeStyles({
    root: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles({
     fontFamily: 'Lato',
   },
   header: {
+    color: `${colors.secondaryColor}`,
     fontSize: 20,
     '@media (max-width:600px)' : {
       fontSize: 15,
