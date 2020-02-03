@@ -14,7 +14,7 @@ It makes the way to have the Internet easier and faster than traditional solutio
 
 # Website
 
-Development version of the application is available under link [comparon.com.pl]: https://comparon.com.pl/
+Development version of the application is available under link https://comparon.com.pl/
 
 
 ## Features
