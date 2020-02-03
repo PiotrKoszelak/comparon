@@ -215,7 +215,7 @@ function ContactContent ({language}){
                     margin="normal"
                     onChange={handleChange}
                   />
-                  {commentNotNull===true ? null : commentNotNull===false ? <FormHelperText id="my-helper-text-comment" className={classes.helper}>{translation.COMMENT_IS_NULL[language]}</FormHelperText> : null}
+                  {commentNotNull===true ? null : commentNotNull===false ? <FormHelperText id="my-helper-text-comment" className={classes.helper}>{translation.THIS_FIELD_IS_REQUIRED[language]}</FormHelperText> : null}
                 </FormControl>
               </div>
               <div  size="small" variant="contained" color="primary" className={classes.button} onClick={() => sendMessage()}>

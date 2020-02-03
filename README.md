@@ -12,6 +12,10 @@ The project is called comparON.
 It is a solution that allows users compare diffrent Internet offers and choose the best one.
 It makes the way to have the Internet easier and faster than traditional solutions.
 
+# Website
+
+Development version of the application is available under link [comparon.com.pl]: https://comparon.com.pl/
+
 
 ## Features
 
