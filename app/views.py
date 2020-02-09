@@ -165,41 +165,58 @@ class SendMessage(APIView):
             if (key == request.META['HTTP_AUTHORIZATION']):
                 try:
                     body = request.body.decode("utf-8")
-                    userEmail = json.loads(body)["userEmail"]
-                    userComment = json.loads(body)["userComment"]
-                    userName = json.loads(body)["userName"]
-                    userLastname = json.loads(body)["userLastname"]
-                    userPhone = json.loads(body)["userPhone"]
-                    userAddress = json.loads(body)["userAddress"]
-                    commentArray = userComment.split(' | ')
+
                     option = json.loads(body)["option"]
+                    userData = json.loads(body)["userData"]
+                    emailTo = json.loads(body)["emailTo"]
+                    userOffer = json.loads(body)["userOffer"]
+                    language = json.loads(body)["language"]
+
+                    comment = ''
+                    for i in userData["comment"].split(' | '):
+                        comment+=f'<p>{i}</p>'
+                    
 
                     if (option=='offer'):
-                        emailTo = json.loads(body)["emailTo"]
-                        offerId = json.loads(body)["offerId"]
-                        htmlMessage = f'''<h3>Id oferty:<h3> {offerId}<h3>
-                                        <h4>Imię: {userName}</h4>
-                                        <h4>Nazwisko: {userLastname}</h4>
-                                        <h4>Telefon: {userPhone}</h4>
-                                        <h4>Adres: {userAddress}</h4>
-                                        <h4>Komentarz: </h4>'''
-                        for i in commentArray:
-                            htmlMessage+=f'<p>{i}</p>'
+                        htmlMessageAdmin = f'''<h3>Id oferty:<h3> {userOffer["id"]}<h3>
+                                        <h4>Imię: {userData["name"]}</h4>
+                                        <h4>Nazwisko: {userData["lastname"]}</h4>
+                                        <h4>Telefon: {userData["phone"]}</h4>
+                                        <h4>Adres: {userData["address"]}</h4>
+                                        <h4>Komentarz: {comment}</h4>'''
+                        
+                        
+                        if language == 'pl':
+                            htmlMessageUser = f'''Dzień dobry
+                                            '''
+                        elif language == 'en':
+                            htmlMessageUser = f'''Hello
+                                            '''
+
+
+                        '''
                         # normal email
-                        msg = EmailMessage('COMPARON', htmlMessage, userEmail, [emailTo])
-                        msg.content_subtype = "html"  # Main content is now text/html
-                        msg.send()
-                        # admin email
-                        msg = EmailMessage('COMPARON ADMIN', htmlMessage, userEmail, ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('COMPARON', htmlMessageAdmin, userData["email"], [emailTo])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 
+                        # admin email
+                        msg = EmailMessage('COMPARON ADMIN', htmlMessageAdmin, userData["email"], ['koszelak.piotr@gmail.com'])
+                        msg.content_subtype = "html"  # Main content is now text/html
+                        msg.send()
+                        '''
+                        
+                        # user email
+                        msg = EmailMessage('TEST', htmlMessageUser, userData["email"], [emailTo])
+                        msg.content_subtype = "html"  # Main content is now text/html
+                        msg.send()
+                        
+                        
+
                     elif (option=='contact'):
-                        htmlMessage = f'<h4>Komentarz: </h4>'
-                        for i in commentArray:
-                            htmlMessage+=f'<p>{i}</p>'
+                        htmlMessage = f'<h4>Komentarz: {comment}</h4>'
                         # normal email
-                        msg = EmailMessage('COMPARON CONTACT', htmlMessage, userEmail, ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('COMPARON CONTACT', htmlMessage, userData["email"], ['koszelak.piotr@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 

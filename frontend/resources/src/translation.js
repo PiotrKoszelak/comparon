@@ -210,7 +210,7 @@ const translation = {
     },
     ORDER: {
         pl: 'Zamów',
-        en: 'Order.'
+        en: 'Order'
     },
     NAME : {
         pl: 'Imię',
