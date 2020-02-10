@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 from django.core.mail import EmailMessage
+from .email_templates import getMessageUserPL, getMessageUserEN, getMessageContact, getMessageAdmin
 
 with open('C:/Users/Admin/Desktop/comparON/Key/authorization.txt') as f:
     key = f.read().strip()
@@ -176,47 +177,38 @@ class SendMessage(APIView):
                     for i in userData["comment"].split(' | '):
                         comment+=f'<p>{i}</p>'
                     
-
+                    
                     if (option=='offer'):
-                        htmlMessageAdmin = f'''<h3>Id oferty:<h3> {userOffer["id"]}<h3>
-                                        <h4>Imię: {userData["name"]}</h4>
-                                        <h4>Nazwisko: {userData["lastname"]}</h4>
-                                        <h4>Telefon: {userData["phone"]}</h4>
-                                        <h4>Adres: {userData["address"]}</h4>
-                                        <h4>Komentarz: {comment}</h4>'''
-                        
+
+                        htmlMessageAdmin = getMessageAdmin(userOffer, userData, comment, language)
                         
                         if language == 'pl':
-                            htmlMessageUser = f'''Dzień dobry
-                                            '''
+                            htmlMessageUser = getMessageUserPL(userOffer)
                         elif language == 'en':
-                            htmlMessageUser = f'''Hello
-                                            '''
+                            htmlMessageUser = getMessageUserEN(userOffer)
 
-
-                        '''
+                        
                         # normal email
-                        msg = EmailMessage('COMPARON', htmlMessageAdmin, userData["email"], [emailTo])
+                        msg = EmailMessage('comparON', htmlMessageAdmin, userData["email"], [emailTo])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 
                         # admin email
-                        msg = EmailMessage('COMPARON ADMIN', htmlMessageAdmin, userData["email"], ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('comparON ADMIN', htmlMessageAdmin, userData["email"], ['koszelak.piotr@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
-                        '''
                         
                         # user email
-                        msg = EmailMessage('TEST', htmlMessageUser, userData["email"], [emailTo])
+                        msg = EmailMessage('comparON', htmlMessageUser, emailTo, [userData["email"]])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
                         
                         
 
                     elif (option=='contact'):
-                        htmlMessage = f'<h4>Komentarz: {comment}</h4>'
+                        htmlMessage = getMessageContact(comment)
                         # normal email
-                        msg = EmailMessage('COMPARON CONTACT', htmlMessage, userData["email"], ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('comparON CONTACT', htmlMessage, userData["email"], ['comparoncompany@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 

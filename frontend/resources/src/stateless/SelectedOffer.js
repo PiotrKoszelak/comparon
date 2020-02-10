@@ -355,7 +355,10 @@ function SelectedOffer  ({
   }
 
   const handleOffer = (el) => {
-    if (!offer) setOffer(el);
+    if (!offer) {
+      setOffer(el)
+    }
+    else if (offer.type !== el.type ) setOffer(el);
   }
 
   if (isLoading===true){
