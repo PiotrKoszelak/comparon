@@ -176,12 +176,12 @@ function AboutContent ({language}){
             <Picture label='test3' name='3' left='0' top='35%'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% - 115px)" y1="calc(60% - 75px)" x2="calc(20% + 55px)" y2="calc(25% + 60px)" className={classes.line} />
+                <line x1="calc(50% - 115px)" y1="calc(60% - 75px)" x2="calc(20% + 55px)" y2="35%" className={classes.line} />
             </svg>
             <Picture label='test4' name='4' left='20%' top='25%'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% - 115px)" y1="calc(60% - 75px)" x2="calc(25% + 55px)" y2="calc(5% + 60px)" className={classes.line} />
+                <line x1="calc(50% - 115px)" y1="calc(60% - 75px)" x2="calc(25% + 55px)" y2="15%" className={classes.line} />
             </svg>
             <Picture label='test5' name='5' left='20%' top='5%'   />
 
@@ -196,12 +196,12 @@ function AboutContent ({language}){
             <Picture label='test7' name='7' left='55%' top='0'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% + 110px) " y1="calc(60% - 75px)" x2="calc(80% + 40px)" y2="calc(10% + 60px)" className={classes.line} />
+                <line x1="calc(50% + 110px) " y1="calc(60% - 75px)" x2="calc(80% + 40px)" y2="20%" className={classes.line} />
             </svg>
             <Picture label='test8' name='8' left='80%' top='10%'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% + 110px) " y1="calc(60% - 75px)" x2="calc(95% + 40px)" y2="calc(30% + 30px)" className={classes.line} />
+                <line x1="calc(50% + 110px) " y1="calc(60% - 75px)" x2="calc(90% + 40px)" y2="35%" className={classes.line} />
             </svg>
             <Picture label='test9' name='9' left='92%' top='30%'   />
 
@@ -231,12 +231,12 @@ function AboutContent ({language}){
             <Picture label='test3' name='3' left='0' top='35%'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% - 80px)" y1="calc(60% - 50px)" x2="calc(20% + 25px)" y2="calc(25% + 30px)" className={classes.line} />
+                <line x1="calc(50% - 80px)" y1="calc(60% - 50px)" x2="calc(20% + 25px)" y2="35%" className={classes.line} />
             </svg>
             <Picture label='test4' name='4' left='20%' top='25%'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% - 80px)" y1="calc(60% - 50px)" x2="calc(25% + 25px)" y2="calc(5% + 30px)" className={classes.line} />
+                <line x1="calc(50% - 80px)" y1="calc(60% - 50px)" x2="calc(25% + 25px)" y2="15%" className={classes.line} />
             </svg>
             <Picture label='test5' name='5' left='20%' top='5%'   />
 
@@ -251,7 +251,7 @@ function AboutContent ({language}){
             <Picture label='test7' name='7' left='55%' top='0'   />
 
             <svg className={classes.svg} >
-                <line x1="calc(50% + 80px) " y1="calc(60% - 50px)" x2="calc(80% + 20px)" y2="calc(10% + 30px)" className={classes.line} />
+                <line x1="calc(50% + 80px) " y1="calc(60% - 50px)" x2="calc(80% + 20px)" y2="15%" className={classes.line} />
             </svg>
             <Picture label='test8' name='8' left='80%' top='10%'   />
 
