@@ -112,10 +112,6 @@ const translation = {
         pl: 'O nas',
         en: 'About'
     },
-    LOGIN : {
-        pl: 'Zaloguj',
-        en: 'Log in'
-    },
     TERMS_OF_USE : {
         pl: 'Regulamin',
         en: 'Terms of use'
@@ -227,6 +223,22 @@ const translation = {
     ADDRESS : {
         pl: 'Adres zamieszkania',
         en: 'Address'
+    },
+    SIGN_IN : {
+        pl: 'Zaloguj',
+        en: 'Sign in'
+    },
+    LOGIN : {
+        pl: 'Login',
+        en: 'Login'
+    },
+    PASSWORD : {
+        pl: 'Hasło',
+        en: 'Password'
+    },
+    CANCEL : {
+        pl: 'Anuluj',
+        en: 'Cancel'
     },
 
 };

@@ -45,7 +45,7 @@ const StyledMenuItem = withStyles(() => ({
   },
 }))(MenuItem);
 
-export default function MenuList({classes, language, title}) {
+export default function MenuList({classes, language, title, openLogin}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -96,14 +96,14 @@ export default function MenuList({classes, language, title}) {
             <ListItemText primary={translation.CONTACT[language]}  style={title==='Contact' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
           </StyledMenuItem>
         </Link>
-        <Link to='' style={{textDecoration: 'none'}}>
-          <StyledMenuItem>
+        <div>
+          <StyledMenuItem onClick={openLogin}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary={translation.LOGIN[language]}  style={title==='LogIn' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
+            <ListItemText primary={translation.SIGN_IN[language]}  style={title==='LogIn' ? {color: `${colors.primaryColor}`} : {color: `${colors.secondaryColor}`}}/>
           </StyledMenuItem>
-        </Link>
+        </div>
       </StyledMenu>
     </div>
   );

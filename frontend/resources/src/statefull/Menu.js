@@ -5,6 +5,7 @@ import translation from "../translation"
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Fab from '@material-ui/core/Fab';
 import MenuList from '../stateless/MenuList';
+import Login from './Login';
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
 import CookiesInfo from '../stateless/cookies'
@@ -42,6 +43,7 @@ class Menu extends Component {
 
   state = { classForAddToCompare : {display: 'none'},
             numberOfOffersToCompare: 0,
+            isLoginOpen: false,
           }
 
   componentDidMount(){
@@ -62,9 +64,14 @@ class Menu extends Component {
     }
   }
 
+  handleLoginWindow = () => {
+    const {isLoginOpen} = this.state;
+    this.setState({isLoginOpen : !isLoginOpen});
+  }
+
   render() {
     const {classes, language, title} = this.props;
-    const {classForAddToCompare, numberOfOffersToCompare} = this.state;
+    const {classForAddToCompare, numberOfOffersToCompare, isLoginOpen} = this.state;
     return(
         <div className={classes.toolbar} >
             <CookiesInfo language={language} />
@@ -84,11 +91,12 @@ class Menu extends Component {
                 <Link to="/contact" className={classes.link} >
                         <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.CONTACT[language]}`}</div>
                 </Link>
-                <Link className={classes.link} to='' >
-                        <div className={classes.button} >{`${translation.LOGIN[language]}`}</div>
-                </Link>
+                <div className={classes.link} onClick={() => this.handleLoginWindow()}>
+                        <div className={classes.button} >{`${translation.SIGN_IN[language]}`}</div>
+                </div>
             </div>
-            <MenuList classes={classes} language={language} title={title} />
+            <MenuList classes={classes} language={language} title={title} openLogin={() => this.handleLoginWindow()} />
+            {isLoginOpen ? <Login isOpen={isLoginOpen} closeLoginWindow={() => this.handleLoginWindow()} language={language} /> : null}
 
         </div>
     );

@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   link: {
+    cursor: 'pointer',
     textDecoration: 'none', 
     color: 'white',
     display: 'block',
