@@ -8,6 +8,7 @@ import { selectedPrice} from "./offers/price";
 import { selectedSpeed } from "./offers/speed";
 import { maxParam } from "./offers/maxParam";
 import { language } from "./general/language";
+import { modeAdmin } from "./general/login";
 
 export default combineReducers({
   offers,
@@ -26,5 +27,6 @@ export default combineReducers({
   offersToCompare,
   maxParam,
   language,
-  sortType
+  sortType,
+  modeAdmin
 });

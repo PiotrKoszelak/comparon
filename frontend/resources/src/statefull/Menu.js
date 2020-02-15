@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
 import CookiesInfo from '../stateless/cookies'
 import * as colors from "../style/colors";
+import { setModeAdmin } from "../actions";
 
 class MenuBottomButtons extends Component {
   
@@ -69,9 +70,15 @@ class Menu extends Component {
     this.setState({isLoginOpen : !isLoginOpen});
   }
 
+  logOut = () => {
+    const {setModeAdmin} = this.props;
+    setModeAdmin(false);
+  }
+
   render() {
-    const {classes, language, title} = this.props;
+    const {classes, language, title, modeAdmin, setModeAdmin} = this.props;
     const {classForAddToCompare, numberOfOffersToCompare, isLoginOpen} = this.state;
+
     return(
         <div className={classes.toolbar} >
             <CookiesInfo language={language} />
@@ -91,12 +98,27 @@ class Menu extends Component {
                 <Link to="/contact" className={classes.link} >
                         <div className={classes.button} style={title==='Contact' ? {color: `${colors.primaryColor}`, fontWeight: 700} : {}} >{`${translation.CONTACT[language]}`}</div>
                 </Link>
-                <div className={classes.link} onClick={() => this.handleLoginWindow()}>
-                        <div className={classes.button} >{`${translation.SIGN_IN[language]}`}</div>
-                </div>
+
+                {modeAdmin===false ? 
+                    <div className={classes.link} onClick={() => this.handleLoginWindow()}>
+                            <div className={classes.button} >{`${translation.SIGN_IN[language]}`}</div>
+                    </div>
+                  :
+                  <div className={classes.link} onClick={() => this.logOut()}>
+                            <div className={classes.button} >{`${translation.SIGN_OUT[language]}`}</div>
+                  </div>
+                }
+                  
             </div>
             <MenuList classes={classes} language={language} title={title} openLogin={() => this.handleLoginWindow()} />
-            {isLoginOpen ? <Login isOpen={isLoginOpen} closeLoginWindow={() => this.handleLoginWindow()} language={language} /> : null}
+            {isLoginOpen ? <Login 
+                              isOpen={isLoginOpen} 
+                              closeLoginWindow={() => this.handleLoginWindow()} 
+                              language={language} 
+                              setModeAdmin={setModeAdmin}
+                              modeAdmin={modeAdmin}
+                              /> 
+            : null}
 
         </div>
     );
@@ -132,9 +154,10 @@ const mapStateToProps = (state) => {
   return {
     language: state.language,
     offersToCompare: state.offersToCompare,
+    modeAdmin: state.modeAdmin,
   }
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { setModeAdmin };
 
 export const MenuBottomButtonsComponent = connect(mapStateToProps, mapDispatchToProps)(MenuBottomButtons);
 export const MenuComponent = connect(mapStateToProps, mapDispatchToProps)(Menu);

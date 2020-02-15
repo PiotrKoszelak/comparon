@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
+import Snackbar from './Snackbar';
 
 
 const useStyles = makeStyles({
@@ -68,16 +69,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function LoginWindow({isOpen, handleClose, language}) {
+export default function LoginWindow({isOpen, handleClose, language, tryToSignIn, success, setIsSnackbar, isSnackbar}) {
 
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
+    login: '',
   });
 
   const handleChange = prop => event => {
+    setIsSnackbar(false);
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -89,22 +92,48 @@ export default function LoginWindow({isOpen, handleClose, language}) {
     event.preventDefault();
   };
 
+  const send = () => {
+    tryToSignIn(values.login, values.password);
+  }
+
   return (
       <Dialog open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" >
+      {     success===true ? 
+              <Snackbar 
+                  text={translation.YOU_ARE_SIGN_IN[language]} 
+                  vertical={'top'}
+                  horizontal={'center'}
+                  isOpen={isSnackbar}
+                  close={setIsSnackbar}
+              />
+              :
+              success===false ?
+              <Snackbar 
+                  text={translation.INCORRECT_DATA_OF_SIGN_IN[language]} 
+                  vertical={'top'}
+                  horizontal={'center'}
+                  isOpen={isSnackbar}
+                  close={setIsSnackbar}
+              />
+              :
+              null
+      }
         <DialogTitle id="form-dialog-title">{translation.SIGN_IN[language]}</DialogTitle>
         <DialogContent className={classes.content}>
           <TextField
             autoFocus
             id="login"
             label={translation.LOGIN[language]}
-            type="email"
+            type="text"
             fullWidth
             variant="outlined"
+            value={values.login}
+            onChange={handleChange('login')}
           />
           <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">{translation.PASSWORD[language]}</InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
+                id="password"
                 type={values.showPassword ? 'text' : 'password'}
                 value={values.password}
                 onChange={handleChange('password')}
@@ -128,7 +157,7 @@ export default function LoginWindow({isOpen, handleClose, language}) {
           <div onClick={handleClose} className={clsx(classes.button, classes.buttonCancel)}>
             {translation.CANCEL[language]}
           </div>
-          <div onClick={handleClose} className={classes.button}>
+          <div onClick={send} className={classes.button}>
             {translation.SIGN_IN[language]}
           </div>
         </DialogActions>

@@ -7,6 +7,8 @@ from rest_framework import status
 import json
 from django.core.mail import EmailMessage
 from .email_templates import getMessageUserPL, getMessageUserEN, getMessageContact, getMessageAdmin
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 with open('C:/Users/Admin/Desktop/comparON/Key/authorization.txt') as f:
     key = f.read().strip()
@@ -215,6 +217,30 @@ class SendMessage(APIView):
                     return Response({'success': True}, status=status.HTTP_201_CREATED)
                 except:
                     return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+# Sign in
+class Login(APIView):
+
+    def post(self, request, format=None):
+        if ('HTTP_AUTHORIZATION' in request.META):
+            if (key == request.META['HTTP_AUTHORIZATION']):
+
+                # create user
+                # user = User.objects.create_user('pk', 'koszelak.piotr@gmail.com', 'pk')
+
+                body = request.body.decode("utf-8")
+                username = json.loads(body)["username"]
+                password = json.loads(body)["password"]
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    return Response(status=status.HTTP_201_CREATED)
+                else:
+                    return Response(status=status.HTTP_401_UNAUTHORIZED)
+
             else:
                 return Response(status=status.HTTP_401_UNAUTHORIZED)
         else:
