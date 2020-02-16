@@ -8,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Snackbar from './Snackbar';
@@ -297,6 +296,7 @@ function SelectedOffer  ({
   const [isSend, setIsSend] = useState(null);
   const [isSnackbar, setIsSnackbar] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [offer, setOffer] = useState(null);
 
   const handleChange = (event) => {
     if (event.target.id === 'email'){
@@ -335,13 +335,30 @@ function SelectedOffer  ({
     if (emailValidation===true && userAddress && userComment && userLastname && userName && userPhone){
       setIsSnackbar(false);
       setModalOpen(true);
-      sendMessageToServer('offer', userEmail, userComment, contact.email, offerInfo.id, userName, userLastname, userPhone, userAddress)
+
+      const userData = {
+        email : userEmail, 
+        comment: userComment.split("\n").join(" | "), 
+        name: userName, 
+        lastname: userLastname, 
+        phone: userPhone, 
+        address: userAddress, 
+      } 
+
+      sendMessageToServer('offer', userData, contact.email, offer, language)
         .then(res => {
           setModalOpen(false);
           setIsSnackbar(true);
           setIsSend(res);
         })
     }
+  }
+
+  const handleOffer = (el) => {
+    if (!offer) {
+      setOffer(el)
+    }
+    else if (offer.type !== el.type ) setOffer(el);
   }
 
   if (isLoading===true){
@@ -413,6 +430,7 @@ function SelectedOffer  ({
                             periods={periods}
                             types={types}
                             classes={classes}
+                            handleOffer={handleOffer}
                         />
                   </div>
             </div>

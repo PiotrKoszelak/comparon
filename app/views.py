@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 import json
 from django.core.mail import EmailMessage
+from .email_templates import getMessageUserPL, getMessageUserEN, getMessageContact, getMessageAdmin
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 with open('C:/Users/Admin/Desktop/comparON/Key/authorization.txt') as f:
     key = f.read().strip()
@@ -165,47 +168,79 @@ class SendMessage(APIView):
             if (key == request.META['HTTP_AUTHORIZATION']):
                 try:
                     body = request.body.decode("utf-8")
-                    userEmail = json.loads(body)["userEmail"]
-                    userComment = json.loads(body)["userComment"]
-                    userName = json.loads(body)["userName"]
-                    userLastname = json.loads(body)["userLastname"]
-                    userPhone = json.loads(body)["userPhone"]
-                    userAddress = json.loads(body)["userAddress"]
-                    commentArray = userComment.split(' | ')
-                    option = json.loads(body)["option"]
 
+                    option = json.loads(body)["option"]
+                    userData = json.loads(body)["userData"]
+                    emailTo = json.loads(body)["emailTo"]
+                    userOffer = json.loads(body)["userOffer"]
+                    language = json.loads(body)["language"]
+
+                    comment = ''
+                    for i in userData["comment"].split(' | '):
+                        comment+=f'<p>{i}</p>'
+                    
+                    
                     if (option=='offer'):
-                        emailTo = json.loads(body)["emailTo"]
-                        offerId = json.loads(body)["offerId"]
-                        htmlMessage = f'''<h3>Id oferty:<h3> {offerId}<h3>
-                                        <h4>Imię: {userName}</h4>
-                                        <h4>Nazwisko: {userLastname}</h4>
-                                        <h4>Telefon: {userPhone}</h4>
-                                        <h4>Adres: {userAddress}</h4>
-                                        <h4>Komentarz: </h4>'''
-                        for i in commentArray:
-                            htmlMessage+=f'<p>{i}</p>'
+
+                        htmlMessageAdmin = getMessageAdmin(userOffer, userData, comment, language)
+                        
+                        if language == 'pl':
+                            htmlMessageUser = getMessageUserPL(userOffer)
+                        elif language == 'en':
+                            htmlMessageUser = getMessageUserEN(userOffer)
+
+                        
                         # normal email
-                        msg = EmailMessage('COMPARON', htmlMessage, userEmail, [emailTo])
+                        msg = EmailMessage('comparON', htmlMessageAdmin, userData["email"], [emailTo])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
+
                         # admin email
-                        msg = EmailMessage('COMPARON ADMIN', htmlMessage, userEmail, ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('comparON ADMIN', htmlMessageAdmin, userData["email"], ['koszelak.piotr@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
+                        
+                        # user email
+                        msg = EmailMessage('comparON', htmlMessageUser, emailTo, [userData["email"]])
+                        msg.content_subtype = "html"  # Main content is now text/html
+                        msg.send()
+                        
+                        
 
                     elif (option=='contact'):
-                        htmlMessage = f'<h4>Komentarz: </h4>'
-                        for i in commentArray:
-                            htmlMessage+=f'<p>{i}</p>'
+                        htmlMessage = getMessageContact(comment)
                         # normal email
-                        msg = EmailMessage('COMPARON CONTACT', htmlMessage, userEmail, ['koszelak.piotr@gmail.com'])
+                        msg = EmailMessage('comparON CONTACT', htmlMessage, userData["email"], ['comparoncompany@gmail.com'])
                         msg.content_subtype = "html"  # Main content is now text/html
                         msg.send()
 
                     return Response({'success': True}, status=status.HTTP_201_CREATED)
                 except:
                     return Response({'success': False}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+# Sign in
+class Login(APIView):
+
+    def post(self, request, format=None):
+        if ('HTTP_AUTHORIZATION' in request.META):
+            if (key == request.META['HTTP_AUTHORIZATION']):
+
+                # create user
+                # user = User.objects.create_user('pk', 'koszelak.piotr@gmail.com', 'pk')
+
+                body = request.body.decode("utf-8")
+                username = json.loads(body)["username"]
+                password = json.loads(body)["password"]
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    return Response(status=status.HTTP_201_CREATED)
+                else:
+                    return Response(status=status.HTTP_401_UNAUTHORIZED)
+
             else:
                 return Response(status=status.HTTP_401_UNAUTHORIZED)
         else:

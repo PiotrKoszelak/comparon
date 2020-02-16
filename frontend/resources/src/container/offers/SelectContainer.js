@@ -6,6 +6,7 @@ import SelectPeriod from "../../statefull/SelectPeriod";
 import SelectType from "../../statefull/SelectType";
 import SelectPrice from "../../statefull/SelectPrice";
 import SelectSpeed from "../../statefull/SelectSpeed";
+import SelectOfferId from "../../statefull/SelectOfferId"
 import OtherData from "../../statefull/FetchOtherData"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -107,6 +108,7 @@ function SelectContainer () {
                                 onClose={() => null}
                         >
                                 <div className={`${classes.mobile} ${classes.selects}`} >
+                                        <SelectOfferId />
                                         <SelectCity />
                                         <SelectSortType />
                                         <SelectOperator />
@@ -123,6 +125,7 @@ function SelectContainer () {
 
                         {/* web */}
                         <Paper className={classes.selects}>
+                                <SelectOfferId />
                                 <SelectCity />
                                 <SelectSortType />
                                 <SelectOperator />

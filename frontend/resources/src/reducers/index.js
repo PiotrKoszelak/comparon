@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { offers, selectedOffer, numberSelectedOffers, offersToCompare, sortType} from "./offers/offer";
+import { offers, selectedOffer, numberSelectedOffers, offersToCompare, sortType, selectedOfferId} from "./offers/offer";
 import { operators, selectedOperator } from "./offers/operator";
 import { cities, selectedCity } from "./offers/city";
 import { periods, selectedPeriod } from "./offers/period";
@@ -8,6 +8,7 @@ import { selectedPrice} from "./offers/price";
 import { selectedSpeed } from "./offers/speed";
 import { maxParam } from "./offers/maxParam";
 import { language } from "./general/language";
+import { modeAdmin } from "./general/login";
 
 export default combineReducers({
   offers,
@@ -26,5 +27,7 @@ export default combineReducers({
   offersToCompare,
   maxParam,
   language,
-  sortType
+  sortType,
+  modeAdmin,
+  selectedOfferId
 });

@@ -112,10 +112,6 @@ const translation = {
         pl: 'O nas',
         en: 'About'
     },
-    LOGIN : {
-        pl: 'Zaloguj',
-        en: 'Log in'
-    },
     TERMS_OF_USE : {
         pl: 'Regulamin',
         en: 'Terms of use'
@@ -210,7 +206,7 @@ const translation = {
     },
     ORDER: {
         pl: 'Zamów',
-        en: 'Order.'
+        en: 'Order'
     },
     NAME : {
         pl: 'Imię',
@@ -227,6 +223,38 @@ const translation = {
     ADDRESS : {
         pl: 'Adres zamieszkania',
         en: 'Address'
+    },
+    SIGN_IN : {
+        pl: 'Zaloguj',
+        en: 'Sign in'
+    },
+    SIGN_OUT : {
+        pl: 'Wyloguj',
+        en: 'Sign out'
+    },
+    LOGIN : {
+        pl: 'Login',
+        en: 'Login'
+    },
+    PASSWORD : {
+        pl: 'Hasło',
+        en: 'Password'
+    },
+    CANCEL : {
+        pl: 'Anuluj',
+        en: 'Cancel'
+    },
+    INCORRECT_DATA_OF_SIGN_IN : {
+        pl: 'Nieprawidłowe dane logowania',
+        en: 'Inncorrect data of sing in'
+    },
+    YOU_ARE_SIGN_IN : {
+        pl: 'Jesteś zalogowany',
+        en: 'You are sing in'
+    },
+    OFFER_ID : {
+        pl: 'Id oferty',
+        en: 'Offer Id'
     },
 
 };

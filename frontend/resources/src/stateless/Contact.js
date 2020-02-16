@@ -128,7 +128,6 @@ function ContactContent ({language}){
       setUserComment(event.target.value);
       if (event.target.value) setCommentNotNull(true);
     }
-
   }
 
   const sendMessage = () => {
@@ -147,7 +146,11 @@ function ContactContent ({language}){
     if (emailValidation===true && commentNotNull===true){
       setIsSnackbar(false);
       setModalOpen(true);
-      sendMessageToServer('contact', userEmail, userComment)
+      const userData = {
+        email: userEmail,
+        comment: userComment.split("\n").join(" | "),
+      }
+      sendMessageToServer('contact', userData, "", "", "")
         .then(res => {
           setModalOpen(false);
           setIsSnackbar(true);

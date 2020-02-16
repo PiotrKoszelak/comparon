@@ -5,18 +5,14 @@ import PropTypes from "prop-types";
 import { url, key } from '../config.js'
 
 
-export const sendMessageToServer= async (option, userEmail, userComment, emailTo, offerId, userName, userLastname, userPhone, userAddress) => {
+export const sendMessageToServer= async (option, userData, emailTo, userOffer, language) => {
   const response  = await fetch(`${url}/api/offer/sendmessage`, {
     method: "post",
     body: `{"option" : "${option}", 
-            "userEmail" : "${userEmail}", 
-            "userComment" : "${userComment.split("\n").join(" | ")}", 
+            "userData" : ${JSON.stringify(userData)}, 
             "emailTo" : "${emailTo}", 
-            "offerId" : "${offerId}",
-            "userName" : "${userName}",
-            "userLastname" : "${userLastname}",
-            "userPhone" : "${userPhone}",
-            "userAddress" : "${userAddress}"}`,
+            "userOffer" : ${JSON.stringify(userOffer)},
+            "language" : "${language}"}`,
     headers: { "Authorization": key }
   });
   const json = await response.json();
