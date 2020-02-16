@@ -37,7 +37,8 @@ class OffersProvider extends Component {
             selectedSpeed, 
             setNumberSelectedOffers, 
             language,
-            sortType} = this.props;
+            sortType,
+            selectedOfferId} = this.props;
     return(
         <div>
             <Offers 
@@ -51,6 +52,7 @@ class OffersProvider extends Component {
               setNumberSelectedOffers={setNumberSelectedOffers}
               language={language}
               sortType={sortType}
+              selectedOfferId={selectedOfferId}
             />
         </div>
     );
@@ -69,6 +71,7 @@ const mapStateToProps = (state) => {
     numberSelectedOffers: state.numberSelectedOffers,
     language: state.language,
     sortType: state.sortType,
+    selectedOfferId: state.selectedOfferId,
   }
 };
 const mapDispatchToProps = { fetchOffersData, setNumberSelectedOffers };

@@ -53,3 +53,9 @@ export const setSortType= (sortType) => ({
   type: 'SET_SORT_TYPE',
   sortType
 });
+
+// selected id
+export const setOfferId= (id) => ({
+  type: 'SET_OFFER_ID',
+  id
+});

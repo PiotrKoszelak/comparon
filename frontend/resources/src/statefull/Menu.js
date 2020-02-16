@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge';
 import CookiesInfo from '../stateless/cookies'
 import * as colors from "../style/colors";
-import { setModeAdmin } from "../actions";
+import { setModeAdmin, setOfferId } from "../actions";
 
 class MenuBottomButtons extends Component {
   
@@ -71,8 +71,11 @@ class Menu extends Component {
   }
 
   logOut = () => {
-    const {setModeAdmin} = this.props;
+    const {setModeAdmin, setOfferId} = this.props;
+    const {isLoginOpen} = this.state;
     setModeAdmin(false);
+    this.setState({isLoginOpen : !isLoginOpen});
+    setOfferId('');
   }
 
   render() {
@@ -157,7 +160,7 @@ const mapStateToProps = (state) => {
     modeAdmin: state.modeAdmin,
   }
 };
-const mapDispatchToProps = { setModeAdmin };
+const mapDispatchToProps = { setModeAdmin, setOfferId};
 
 export const MenuBottomButtonsComponent = connect(mapStateToProps, mapDispatchToProps)(MenuBottomButtons);
 export const MenuComponent = connect(mapStateToProps, mapDispatchToProps)(Menu);

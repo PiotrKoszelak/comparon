@@ -128,7 +128,6 @@ function ContactContent ({language}){
       setUserComment(event.target.value);
       if (event.target.value) setCommentNotNull(true);
     }
-
   }
 
   const sendMessage = () => {

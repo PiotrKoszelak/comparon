@@ -59,9 +59,11 @@ function Offers  ({ offers,
                     selectedSpeed, 
                     setNumberSelectedOffers, 
                     language,
-                    sortType }){
+                    sortType,
+                    selectedOfferId }){
 
   const classes = useStyles();
+
 
   if (selectedCity.length === 0){
     setNumberSelectedOffers('0');
@@ -117,6 +119,7 @@ function Offers  ({ offers,
             }
         }
     })
+    if (selectedOfferId) filteredData = filteredData.filter(({id}) => selectedOfferId==id);
 
     //sorting
     if (sortType===1)

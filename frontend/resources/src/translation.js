@@ -252,6 +252,10 @@ const translation = {
         pl: 'Jesteś zalogowany',
         en: 'You are sing in'
     },
+    OFFER_ID : {
+        pl: 'Id oferty',
+        en: 'Offer Id'
+    },
 
 };
 

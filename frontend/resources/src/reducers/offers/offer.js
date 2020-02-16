@@ -46,3 +46,14 @@ export const sortType = (state = 1, action) => {
       return state
   }
 }
+
+//selected offer id
+export const selectedOfferId = (state = null, action) => { 
+  switch (action.type) { 
+    case 'SET_OFFER_ID':
+      return action.id;
+      
+    default:
+      return state
+  }
+}
