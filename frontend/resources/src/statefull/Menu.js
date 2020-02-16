@@ -74,7 +74,7 @@ class Menu extends Component {
     const {setModeAdmin, setOfferId} = this.props;
     const {isLoginOpen} = this.state;
     setModeAdmin(false);
-    this.setState({isLoginOpen : !isLoginOpen});
+    this.setState({isLoginOpen : false});
     setOfferId('');
   }
 
@@ -113,7 +113,14 @@ class Menu extends Component {
                 }
                   
             </div>
-            <MenuList classes={classes} language={language} title={title} openLogin={() => this.handleLoginWindow()} />
+            <MenuList 
+                classes={classes} 
+                language={language} 
+                title={title} 
+                openLogin={() => this.handleLoginWindow()} 
+                logOut={() => this.logOut()}
+                modeAdmin={modeAdmin}
+            />
             {isLoginOpen ? <Login 
                               isOpen={isLoginOpen} 
                               closeLoginWindow={() => this.handleLoginWindow()} 

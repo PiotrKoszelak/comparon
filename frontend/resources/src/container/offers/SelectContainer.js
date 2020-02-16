@@ -108,6 +108,7 @@ function SelectContainer () {
                                 onClose={() => null}
                         >
                                 <div className={`${classes.mobile} ${classes.selects}`} >
+                                        <SelectOfferId />
                                         <SelectCity />
                                         <SelectSortType />
                                         <SelectOperator />
