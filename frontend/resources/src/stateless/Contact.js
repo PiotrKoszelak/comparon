@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
   email: {
     zIndex: 2,
-    border: `0.5px solid ${colors.secondaryColor}`,
+    border: `2px solid ${colors.secondaryColor}`,
     borderRadius: 15,
     boxShadow: 'none',
     background: 'none',

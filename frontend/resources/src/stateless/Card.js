@@ -25,7 +25,7 @@ import DetailProvider from '../statefull/DetailProvider';
 const useStyles = makeStyles(theme => ({
   root: {
     width: 'calc(100vw - 320px)',
-    border: `1px solid ${colors.secondaryColor}`,
+    border: `2px solid ${colors.secondaryColor}`,
     borderRadius: 10,
     margin: '15px 0px',
     padding: 0,
@@ -127,7 +127,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   },
   helper: {
-    borderRight: `1px solid ${colors.secondaryColor}`,
+    borderRight: `2px solid ${colors.secondaryColor}`,
   },
   actions: {
     display: 'flex',
@@ -290,7 +290,7 @@ function MyCard ({ operator,
           </div>
         </ExpansionPanelSummary>
         {selectedOffer===id ? <DetailProvider classes={classes} /> : null}
-        <Divider style={{marginTop: 15}} />
+        <Divider style={{marginTop: 15, border: '1px solid black'}} />
         <ExpansionPanelActions className={classes.actions}>
           <Link to="/offers/selectedoffer" style={{textDecoration: 'none', color: 'white'}}>
             <div className={classes.button} >

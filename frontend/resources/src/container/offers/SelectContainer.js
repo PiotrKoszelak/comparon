@@ -44,7 +44,7 @@ const useStyles = makeStyles({
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 width: '100%',
-                border: `0.5px solid ${colors.secondaryColor}`,
+                border: `2px solid ${colors.secondaryColor}`,
                 borderLeft: 'none',
                 borderTopRightRadius: 15,
                 borderBottomRightRadius: 15,

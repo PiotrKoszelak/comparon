@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   button: {
     fontSize: 15,
     fontFamily: 'Lato',
+    fontWeight: 600,
     color: `${colors.secondaryColor}`,
     backgroundColor: 'none',
     transition: 'color 0.5s ease',
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottom: `1px solid ${colors.secondaryColor}`,
+    borderBottom: `2px solid ${colors.secondaryColor}`,
   },
   logo: {
     height: 60,
