@@ -40,20 +40,24 @@ function OfferTemplate  ({
       }
 
       const classForRoot = invisible===offerInfo.id ? classes.rootPanelInvisible : classes.rootPanel;
+      
 
-      const offer = {
-            id: offerInfo.id,
-            operator: operatorValue,
-            price: offerInfo.price,
-            speed: offerInfo.speed,
-            period: periodValue,
-            type: typeValue,
-            deliveryCost: details.delivery_cost,
-            deliveryTime: details.delivery_time,
-            equipment: details.equipment,
+      if (handleOffer){
+
+            const offer = {
+                  id: offerInfo.id,
+                  operator: operatorValue,
+                  price: offerInfo.price,
+                  speed: offerInfo.speed,
+                  period: periodValue,
+                  type: typeValue,
+                  deliveryCost: details.delivery_cost,
+                  deliveryTime: details.delivery_time,
+                  equipment: details.equipment,
+            }
+
+            handleOffer(offer);
       }
-
-      handleOffer(offer);
 
       return(
             <ExpansionPanel className={classForRoot} expanded={false}>
