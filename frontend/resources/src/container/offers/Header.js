@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
                 zIndex: 3,
                 paddingRight: 20,
                 paddingLeft: 20,
-                border: `0.5px solid ${colors.secondaryColor}`,
+                border: `2px solid ${colors.secondaryColor}`,
                 borderRight: 'none',
                 borderTopLeftRadius: 15,
                 borderBottomLeftRadius: 15,

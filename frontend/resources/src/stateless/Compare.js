@@ -351,7 +351,6 @@ function Compare  ({
                             provided.draggableProps.style
                           )}>
                             <OfferTemplate
-                                key={key}
                                 details={detailsDrag[key]}
                                 offerInfo={el}
                                 language={language}
@@ -361,6 +360,7 @@ function Compare  ({
                                 classes={classes}
                                 handleDelete={handleDelete}
                                 selectOffer={selectOffer}
+                                handleOffer={null}
                             />
                             </div>
                         )}
